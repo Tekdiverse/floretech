@@ -1,0 +1,175 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap');
+
+* {
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+  padding: 0;
+
+}
+button {
+  cursor: pointer;
+}
+
+a {
+  text-decoration: none;
+}
+
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Helvetica, Arial;
+  color: #fff;
+  background: linear-gradient(to right, #09132E, #0A112B);
+
+}
+
+.header {
+  position: fixed;
+  top:0;
+  margin: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px 20px;
+  background-color: #0E1B45;
+  z-index:2;
+}
+
+.header h1 {
+  font-size: 22px;
+  text-align: right;    
+  
+}
+
+.header-menu {
+  position: relative;
+  z-index: 3;
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  grid-gap: 7px;
+  cursor: pointer;
+}    
+@media screen and (max-width: 720px) {
+  .header-menu {
+    display: flex;
+  }
+}
+.header-menu span {
+  padding: ;
+  margin: 0;
+  width: 35px;
+  height: 2px;
+  background-color: #fff;
+  transition: 0.4s;
+}
+
+.header-menu.active {
+  background: #0E1B45;
+  border-radius: 100%;
+  padding: 10px;
+  height: 40px;
+  width: 40px;
+}
+
+.header-menu.active span:nth-child(1) {
+  transform: rotate(45deg) translate(7px, 5.5px) scale(0.8);
+}
+
+.header-menu.active span:nth-child(2) {
+  opacity: 0;
+}
+
+.header-menu.active span:nth-child(3) {
+  transform: rotate(-45deg) translate(7px, -5.5px) scale(0.8);
+}
+
+.header-nav {
+  z-index: 2;
+  display: flex;
+  grid-gap: 30px;  
+  align-items: center;
+  background-color: ;
+  
+}
+
+@media screen and (max-width: 720px) {
+  .header-nav {
+    display: none;
+  }
+}
+
+.header-nav a {
+  padding: 20px;
+  color: #fff;
+  text-decoration: none;
+
+}
+.header-nav a button{
+  color: #fff;
+  width: 120px;
+  height: 40px;
+  border-radius: 15px;
+  background: linear-gradient(to right, #12226A, #934DEE);
+  border: none;
+  transform: translateX(-10%); 
+  
+}
+.header-nav .appearance{
+    display: flex;
+    align-items: center;  
+}
+
+
+.show {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  grid-gap: 0;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 100%;
+  z-index: 2;
+  background: linear-gradient(to right, #09132E, #0A112B);
+  padding: 10px 20px;
+}
+
+.header-exit {
+  margin: auto;
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background-color: #C871D2;
+  border-radius: 100%;
+  width: 50px;
+  height: 70px;
+  border: none;
+  text-align: center;
+  color: #fff;
+  font-size: 48px;
+  cursor: pointer;
+}
+main{
+    margin: 30px;
+    font-size: 17px;
+}
+main table{
+    margin-top: 150px;
+}
+main table tr{
+ 
+}
+@media screen and (max-width: 720px) {
+  main table{
+    margin-top: 90px;
+  }
+  main{
+    font-size: 14px;
+  }
+}
