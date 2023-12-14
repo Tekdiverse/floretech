@@ -1,1171 +1,679 @@
 {% extends "partials/base.html" %}
 {% load static %}
-{% block content %}
-{% load custom_filters %}
 {% load humanize %}
-  <header class="header" data-header>
-    <div class="container">
+{% block content %}
+    <main>
 
-      <a href="#" class="logo">
-        <img src="{% static 'assets/images/Floretech.png' %}" width="32" height="42" alt="Floretech logo">
-       Floretech 
-      </a>
-
-      <nav class="navbar" data-navbar>
-        <ul class="navbar-list">
-
-          <li class="navbar-item">
-            <a href="#" class="navbar-link active" data-nav-link>Home</a>
-          </li>
-
-          <li class="navbar-item">
-            <a href="#" class="navbar-link" data-nav-link>Buy Crypto</a>
-          </li>
-
-          <li class="navbar-item">
-            <a href="#" class="navbar-link" data-nav-link>Markets</a>
-          </li>
-
-          <li class="navbar-item">
-            <a href="" class="navbar-link" data-nav-link>Blog</a>
-          </li>
-
-          <li class="navbar-item">
-            <a href="#" class="navbar-link" data-nav-link>Sign In</a>
-          </li>
-          
-           <li class="navbar-item">
-            <a href="Signup.html" class="navbar-link" data-nav-link>Sign Up</a>
-          </li>
-
-          
-
-        </ul>
-      </nav>
-
-      <button class="nav-toggle-btn" aria-label="Toggle menu" data-nav-toggler>
-        <span class="line line-1"></span>
-        <span class="line line-2"></span>
-        <span class="line line-3"></span>
-      </button>
-
-      
-
-    </div>
-  </header>
-
-            
-            
-
-
-
-  <main>
-    <article>
-
-      <!-- 
-        - #HERO
-      -->
-
-      <section class="section hero" aria-label="hero" data-section>
-        <div class="container">
-
-          <div class="hero-content">
-
-            <h1 class="h1 hero-title">Buy, Sell & hold Cryptocurrencies on Floretech</h1>
-
-            <p class="hero-text">
-              Trade Bitcoin, Ethereum, Litecoin, and many other cryptocurrencies on the most advanced cryptocurrency exchange.
-            </p>
-
-            <a href="Signup.html" class="btn btn-primary" show>Get started now</a>
-
-          </div>
-
-          <figure class="hero-banner">
-            <img src="{% static 'assets/images/invest.png' %}" width="570" height="448" alt="hero banner" class="w-100">
-          </figure>
-
-        </div>
-      </section>
-
-
-
-
-
-      <!-- 
-        - #TREND
-      -->
-
-      <section class="section trend" aria-label="crypto trend" data-section>
-        <div class="container">
-
-          <div class="trend-tab">
-
-            <ul class="tab-nav">
-
-              <li>
-                <button class="tab-btn active" >Crypto</button>
-              </li>
-
-              <li>
-                <button class="tab-btn">DeFi</button>
-              </li>
-
-              <li>
-                <button class="tab-btn">BSC</button>
-              </li>
-
-              <li>
-                <button class="tab-btn">NFT</button>
-              </li>
-
-              <li>
-                <button class="tab-btn">Metaverse</button>
-              </li>
-
-              <li>
-                <button class="tab-btn">Polkadot</button>
-              </li>
-
-              <li>
-                <button class="tab-btn">Solana</button>
-              </li>
-
-              <li>
-                <button class="tab-btn">Opensea</button>
-              </li>
-
-            </ul>
-
-            <ul class="tab-content">
-
-              <li>
-                <div class="trend-card" show>
-
-                  <div class="card-title-wrapper">
-                    <img src="{% static '/assets/images/coin-1.svg' %}" width="24" height="24" alt="bitcoin logo">
-
-                    <a href="#" class="card-title">
-                      Bitcoin <span class="span">BTC/USD</span>
-                    </a>
-                  </div>
-
-                  <data class="card-value" value="46168.95">USD {{"BTC"|fetch_price|intcomma}}</data>
-
-                  <div class="card-analytics">
-                    <data class="current-price" value="36641.20">{{"BTC"|fetch_price|intcomma}}</data>
-
-                    <div class="badge red">{{"BTC"|fetch_24hr_percent|floatformat:2}}%</div>
-                  </div>
-
+        <!-- banner section -->
+        <section class="banner-saas-area">
+            <img class="shape_img" src="{% static 'img/saas-app/grid.png' %}" alt="">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="saas-banner-content text-center">
+                        <h1 class="wow fadeInUp" data-wow-delay="0.35s">Manage Your <span>Portfolio</span>
+                            With Ease.
+                        </h1>
+                        <p class="wow fadeInUp" data-wow-delay="0.45s">At profitopti, we believe that investing in your future is the best way to achieve your goals and that is why we offer a range of investment options that are tailored to your unique needs and financial situation</p>
+                        <div class="d-flex flex-column flex-sm-row justify-content-center mt-25 subscribe-field">
+                            <a href="loan.html" data-wow-delay="0.5s"
+                                class="wow fadeInUp theme-btn theme-btn-lg mt-50">Create Account
+                                <i class="arrow_right-up"></i>
+                            </a>
+                            <a href="" style="background: transparent; color: ##032251;"class="wow fadeInUp mt-50 theme-btn theme-btn-lg theme-btn-alt"
+                                data-wow-delay="0.5s">Login</a>
+                        </div>
+                    </div>
                 </div>
-              </li>
-
-              <li>
-                <div class="trend-card active" show>
-
-                  <div class="card-title-wrapper">
-                    <img src="{% static 'assets/images/coin-2.svg' %}" width="24" height="24" alt="ethereum logo">
-
-                    <a href="#" class="card-title">
-                      Ethereum <span class="span">ETH/USD</span>
-                    </a>
-                  </div>
-
-                  <data class="card-value" value="3480.04">USD {{"ETH"|fetch_price|intcomma}}</data>
-
-                  <div class="card-analytics">
-                    <data class="current-price" value="36641.20">{{"ETH"|fetch_price|intcomma}}</data>
-
-                    <div class="badge green">{{"ETH"|fetch_24hr_percent|floatformat:2}}%</div>
-                  </div>
-
-                </div>
-              </li>
-
-              <li>
-                <div class="trend-card" show>
-
-                  <div class="card-title-wrapper">
-                    <img src="{% static 'assets/images/coin-3.svg' %}" width="24" height="24" alt="tether logo">
-
-                    <a href="#" class="card-title">
-                      Tether <span class="span">USDT/USD</span>
-                    </a>
-                  </div>
-
-                  <data class="card-value" value="1.00">USD {{"USDT"|fetch_price|intcomma}}</data>
-
-                  <div class="card-analytics">
-                    <data class="current-price" value="36641.20">{{"USDT"|fetch_price|intcomma}}</data>
-
-                    <div class="badge red">{{"USDT"|fetch_24hr_percent|floatformat:2}}%</div>
-                  </div>
-
-                </div>
-              </li>
-
-              <li>
-                <div class="trend-card" show>
-
-                  <div class="card-title-wrapper">
-                    <img src="{% static 'assets/images/coin-4.svg' %}" width="24" height="24" alt="bnb logo">
-
-                    <a href="#" class="card-title">
-                      BNB <span class="span">BNB/USD</span>
-                    </a>
-                  </div>
-
-                  <data class="card-value" value="443.56">USD {{"BNB"|fetch_price|intcomma}}</data>
-
-                  <div class="card-analytics">
-                    <data class="current-price" value="36641.20">{{"BNB"|fetch_price|intcomma}}</data>
-
-                    <div class="badge red">{{"BNB"|fetch_24hr_percent|floatformat:2}}%</div>
-                  </div>
-
-                </div>
-              </li>
-
-            </ul>
-
-          </div>
-
-        </div>
-      </section>
-
-
-
-
-
-      <!-- 
-        - #MARKET
-      -->
-
-      <section class="section market" aria-label="market update" data-section>
-        <div class="container">
-
-          <div class="title-wrapper">
-            <h2 class="h2 section-title">Market Update</h2>
-
-            <a href="#" class="btn-link" >See All Coins</a>
-          </div>
-
-          <div class="market-tab">
-
-            <ul class="tab-nav">
-
-              <li>
-                <button class="tab-btn active">View All</button>
-              </li>
-
-              <li>
-                <button class="tab-btn">Metaverse</button>
-              </li>
-
-              <li>
-                <button class="tab-btn">Entertainment</button>
-              </li>
-
-              <li>
-                <button class="tab-btn">Energy</button>
-              </li>
-
-              <li>
-                <button class="tab-btn">NFT</button>
-              </li>
-
-              <li>
-                <button class="tab-btn">Gaming</button>
-              </li>
-
-              <li>
-                <button class="tab-btn">Music</button>
-              </li>
-
-            </ul>
-
-            <table class="market-table">
-
-              <thead class="table-head">
-
-                <tr class="table-row table-title">
-
-                  <th class="table-heading"></th>
-
-                  <th class="table-heading" scope="col">#</th>
-
-                  <th class="table-heading" scope="col">Name</th>
-
-                  <th class="table-heading" scope="col">Last Price</th>
-
-                  <th class="table-heading" scope="col">24h %</th>
-
-                  <th class="table-heading" scope="col">Market Cap</th>
-
-                  <th class="table-heading" scope="col">Last 7 Days</th>
-
-                  <th class="table-heading"></th>
-
-                </tr>
-
-              </thead>
-
-              <tbody class="table-body">
-
-                <tr class="table-row">
-
-                  <td class="table-data">
-                    <button class="add-to-fav" aria-label="Add to favourite" data-add-to-fav>
-                      <ion-icon name="star-outline" aria-hidden="true" class="icon-outline"></ion-icon>
-                      <ion-icon name="star" aria-hidden="true" class="icon-fill"></ion-icon>
-                    </button>
-                  </td>
-
-                  <th class="table-data rank" scope="row">1</th>
-
-                  <td class="table-data">
-                    <div class="wrapper">
-                      <img src="{% static 'assets/images/coin-1.svg' %}" width="20" height="20" alt="Bitcoin logo" class="img">
-
-                      <h3>
-                        <a href="#" class="coin-name">Bitcoin <span class="span">BTC</span></a>
-                      </h3>
-                    </div>
-                  </td>
-
-                  <td class="table-data last-price">${{"BTC"|fetch_price|intcomma}}</td>
-
-                  <td class="table-data last-update green">{{"BTC"|fetch_24hr_percent|floatformat:2}}%</td>
-
-                  <td class="table-data market-cap">$880,423,640,582</td>
-
-                  <td class="table-data">
-                    <img src="{% static './assets/images/chart-1.svg' %}" width="100" height="40" alt="profit chart" class="chart">
-                  </td>
-
-                  <td class="table-data">
-                    <button class="btn btn-outline">Trade</button>
-                  </td>
-
-                </tr>
-
-                <tr class="table-row">
-
-                  <td class="table-data">
-                    <button class="add-to-fav" aria-label="Add to favourite" data-add-to-fav>
-                      <ion-icon name="star-outline" aria-hidden="true" class="icon-outline"></ion-icon>
-                      <ion-icon name="star" aria-hidden="true" class="icon-fill"></ion-icon>
-                    </button>
-                  </td>
-
-                  <th class="table-data rank" scope="row">2</th>
-
-                  <td class="table-data">
-                    <div class="wrapper">
-                      <img src="{% static 'assets/images/coin-2.svg' %}" width="20" height="20" alt="Ethereum logo" class="img">
-
-                      <h3>
-                        <a href="#" class="coin-name">Ethereum <span class="span">ETH</span></a>
-                      </h3>
-                    </div>
-                  </td>
-
-                  <td class="table-data last-price">${{"ETH"|fetch_price|intcomma}}</td>
-
-                  <td class="table-data last-update red">{{"ETH"|fetch_24hr_percent|floatformat:2}}%</td>
-
-                  <td class="table-data market-cap">$880,423,640,582</td>
-
-                  <td class="table-data">
-                    <img src="{% static './assets/images/chart-2.svg' %}" width="100" height="40" alt="loss chart" class="chart">
-                  </td>
-
-                  <td class="table-data">
-                    <button class="btn btn-outline">Trade</button>
-                  </td>
-
-                </tr>
-
-                <tr class="table-row">
-
-                  <td class="table-data">
-                    <button class="add-to-fav" aria-label="Add to favourite" data-add-to-fav>
-                      <ion-icon name="star-outline" aria-hidden="true" class="icon-outline"></ion-icon>
-                      <ion-icon name="star" aria-hidden="true" class="icon-fill"></ion-icon>
-                    </button>
-                  </td>
-
-                  <th class="table-data rank" scope="row">3</th>
-
-                  <td class="table-data">
-                    <div class="wrapper">
-                      <img src="{% static 'assets/images/coin-3.svg' %}" width="20" height="20" alt="Tether logo" class="img">
-
-                      <h3>
-                        <a href="#" class="coin-name">Tether <span class="span">USDT</span></a>
-                      </h3>
-                    </div>
-                  </td>
-
-                  <td class="table-data last-price">${{"USDT"|fetch_price|intcomma}}</td>
-
-                  <td class="table-data last-update green">{{"USDT"|fetch_24hr_percent|floatformat:2}}%</td>
-
-                  <td class="table-data market-cap">$880,423,640,582</td>
-
-                  <td class="table-data">
-                    <img src="{% static './assets/images/images/chart-1.svg' %}" width="100" height="40" alt="profit chart" class="chart">
-                  </td>
-
-                  <td class="table-data">
-                    <button class="btn btn-outline">Trade</button>
-                  </td>
-
-                </tr>
-                <tr class="table-row">
-
-                  <td class="table-data">
-                    <button class="add-to-fav" aria-label="Add to favourite" data-add-to-fav>
-                      <ion-icon name="star-outline" aria-hidden="true" class="icon-outline"></ion-icon>
-                      <ion-icon name="star" aria-hidden="true" class="icon-fill"></ion-icon>
-                    </button>
-                  </td>
-
-                  <th class="table-data rank" scope="row">4</th>
-
-                  <td class="table-data">
-                    <div class="wrapper">
-                      <img src="{% static 'assets/images/coin-4.svg' %}" width="20" height="20" alt="BNB logo" class="img">
-
-                      <h3>
-                        <a href="#" class="coin-name">BNB <span class="span">BNB</span></a>
-                      </h3>
-                    </div>
-                  </td>
-
-                  <td class="table-data last-price">${{"BNB"|fetch_price|intcomma}}</td>
-
-                  <td class="table-data last-update green">{{"BNB"|fetch_24hr_percent|floatformat:2}}%</td>
-
-                  <td class="table-data market-cap">$880,423,640,582</td>
-
-                  <td class="table-data">
-                    <img src="{% static 'assets/images/chart-1.svg' %}" width="100" height="40" alt="profit chart" class="chart">
-                  </td>
-
-                  <td class="table-data">
-                    <button class="btn btn-outline">Trade</button>
-                  </td>
-
-                </tr>
-                <tr class="table-row">
-
-                  <td class="table-data">
-                    <button class="add-to-fav" aria-label="Add to favourite" data-add-to-fav>
-                      <ion-icon name="star-outline" aria-hidden="true" class="icon-outline"></ion-icon>
-                      <ion-icon name="star" aria-hidden="true" class="icon-fill"></ion-icon>
-                    </button>
-                  </td>
-
-                  <th class="table-data rank" scope="row">5</th>
-
-                  <td class="table-data">
-                    <div class="wrapper">
-                      <img src="{% static 'assets/images/coin-6.svg' %}" width="20" height="20" alt="XRP logo" class="img">
-
-                      <h3>
-                        <a href="#" class="coin-name">XRP <span class="span">XRP</span></a>
-                      </h3>
-                    </div>
-                  </td>
-
-                  <td class="table-data last-price">${{"XRP"|fetch_price|intcomma}}</td>
-
-                  <td class="table-data last-update green">{{"XRP"|fetch_24hr_percent|floatformat:2}}%</td>
-
-                  <td class="table-data market-cap">$880,423,640,582</td>
-
-                  <td class="table-data">
-                    <img src="{% static 'assets/images/chart-1.svg' %}" width="100" height="40" alt="profit chart" class="chart">
-                  </td>
-
-                  <td class="table-data">
-                    <button class="btn btn-outline">Trade</button>
-                  </td>
-
-                </tr>
-                <tr class="table-row">
-
-                  <td class="table-data">
-                    <button class="add-to-fav" aria-label="Add to favourite" data-add-to-fav>
-                      <ion-icon name="star-outline" aria-hidden="true" class="icon-outline"></ion-icon>
-                      <ion-icon name="star" aria-hidden="true" class="icon-fill"></ion-icon>
-                    </button>
-                  </td>
-
-                  <th class="table-data rank" scope="row">6</th>
-
-                  <td class="table-data">
-                    <div class="wrapper">
-                      <img src="{% static 'assets/images/coin-5.svg' %}" width="20" height="20" alt="Solana logo" class="img">
-
-                      <h3>
-                        <a href="#" class="coin-name">Solana <span class="span">SOL</span></a>
-                      </h3>
-                    </div>
-                  </td>
-
-                  <td class="table-data last-price">${{"SOL"|fetch_price|intcomma}}</td>
-
-                  <td class="table-data last-update green">{{"SOL"|fetch_24hr_percent|floatformat:2}}%</td>
-
-                  <td class="table-data market-cap">$880,423,640,582</td>
-
-                  <td class="table-data">
-                    <img src="{% static 'assets/imageschart-1.svg' %}" width="100" height="40" alt="profit chart" class="chart">
-                  </td>
-
-                  <td class="table-data">
-                    <button class="btn btn-outline">Trade</button>
-                  </td>
-
-                </tr>
-                <tr class="table-row">
-
-                  <td class="table-data">
-                    <button class="add-to-fav" aria-label="Add to favourite" data-add-to-fav>
-                      <ion-icon name="star-outline" aria-hidden="true" class="icon-outline"></ion-icon>
-                      <ion-icon name="star" aria-hidden="true" class="icon-fill"></ion-icon>
-                    </button>
-                  </td>
-
-                  <th class="table-data rank" scope="row">7</th>
-
-                  <td class="table-data">
-                    <div class="wrapper">
-                      <img src="{% static 'assets/images/usdc.png' %}" width="20" height="20" alt="USDC logo" class="img">
-
-                      <h3>
-                        <a href="#" class="coin-name">USDC <span class="span">USDC</span></a>
-                      </h3>
-                    </div>
-                  </td>
-
-                  <td class="table-data last-price">${{"USDC"|fetch_price|intcomma}}</td>
-
-                  <td class="table-data last-update green">{{"USDC"|fetch_24hr_percent|floatformat:2}}%</td>
-
-                  <td class="table-data market-cap">$880,423,640,582</td>
-
-                  <td class="table-data">
-                    <img src="{% static 'assets/images/chart-1.svg' %}" width="100" height="40" alt="profit chart" class="chart">
-                  </td>
-
-                  <td class="table-data">
-                    <button class="btn btn-outline">Trade</button>
-                  </td>
-
-                </tr>
-                <tr class="table-row">
-
-                  <td class="table-data">
-                    <button class="add-to-fav" aria-label="Add to favourite" data-add-to-fav>
-                      <ion-icon name="star-outline" aria-hidden="true" class="icon-outline"></ion-icon>
-                      <ion-icon name="star" aria-hidden="true" class="icon-fill"></ion-icon>
-                    </button>
-                  </td>
-
-                  <th class="table-data rank" scope="row">8</th>
-
-                  <td class="table-data">
-                    <div class="wrapper">
-                      <img src="{% static 'assets/images/coin-7.svg' %}" width="20" height="20" alt="Cardano logo" class="img">
-
-                      <h3>
-                        <a href="#" class="coin-name">Cardano <span class="span">ADA</span></a>
-                      </h3>
-                    </div>
-                  </td>
-
-                  <td class="table-data last-price">${{"ADA"|fetch_price|intcomma}}</td>
-
-                  <td class="table-data last-update green">{{"ADA"|fetch_24hr_percent|floatformat:2}}%</td>
-
-                  <td class="table-data market-cap">$880,423,640,582</td>
-
-                  <td class="table-data">
-                    <img src="{% static './assets/images/chart-1.svg' %}" width="100" height="40" alt="profit chart" class="chart">
-                  </td>
-
-                  <td class="table-data">
-                    <button class="btn btn-outline">Trade</button>
-                  </td>
-
-                </tr>
-                <tr class="table-row">
-
-                  <td class="table-data">
-                    <button class="add-to-fav" aria-label="Add to favourite" data-add-to-fav>
-                      <ion-icon name="star-outline" aria-hidden="true" class="icon-outline"></ion-icon>
-                      <ion-icon name="star" aria-hidden="true" class="icon-fill"></ion-icon>
-                    </button>
-                  </td>
-
-                  <th class="table-data rank" scope="row">9</th>
-
-                  <td class="table-data">
-                    <div class="wrapper">
-                      <img src="{% static 'assets/images/coin-1.svg' %}" width="20" height="20" alt="Dogecoin logo" class="img">
-
-                      <h3>
-                        <a href="#" class="coin-name">Dogecoin <span class="span">DOGE</span></a>
-                      </h3>
-                    </div>
-                  </td>
-
-                  <td class="table-data last-price">${{"DOGE"|fetch_price|intcomma}}</td>
-
-                  <td class="table-data last-update green">{{"DOGE"|fetch_24hr_percent|floatformat:2}}%</td>
-
-                  <td class="table-data market-cap">$880,423,640,582</td>
-
-                  <td class="table-data">
-                    <img src="{% static './assets/images/images/chart-1.svg' %}" width="100" height="40" alt="profit chart" class="chart">
-                  </td>
-
-                  <td class="table-data">
-                    <button class="btn btn-outline">Trade</button>
-                  </td>
-
-                </tr>
-                <tr class="table-row">
-
-                  <td class="table-data">
-                    <button class="add-to-fav" aria-label="Add to favourite" data-add-to-fav>
-                      <ion-icon name="star-outline" aria-hidden="true" class="icon-outline"></ion-icon>
-                      <ion-icon name="star" aria-hidden="true" class="icon-fill"></ion-icon>
-                    </button>
-                  </td>
-
-                  <th class="table-data rank" scope="row">10</th>
-
-                  <td class="table-data">
-                    <div class="wrapper">
-                      <img src="{% static 'assets/images/coin-8.svg' %}" width="20" height="20" alt="Avalanche logo" class="img">
-
-                      <h3>
-                        <a href="#" class="coin-name">Avalanche <span class="span">Avax</span></a>
-                      </h3>
-                    </div>
-                  </td>
-
-                  <td class="table-data last-price">${{"AVAX"|fetch_price|intcomma}}</td>
-
-                  <td class="table-data last-update green">{{"AVAX"|fetch_24hr_percent|floatformat:2}}%</td>
-
-                  <td class="table-data market-cap">$880,423,640,582</td>
-
-                  <td class="table-data">
-                    <img src="{% static './assets/images/chart-1.svg' %}" width="100" height="40" alt="profit chart" class="chart">
-                  </td>
-
-                  <td class="table-data">
-                    <button class="btn btn-outline">Trade</button>
-                  </td>
-
-                </tr>
-
-
-
-              </tbody>
-
-            </table>
-
-          </div>
-
-        </div>
-      </section>
-
-
-
-
-
-      <!-- 
-        - #INSTRUCTION
-      -->
-
-      <section class="section instruction" aria-label="instruction" data-section>
-        <div class="container">
-
-          <h2 class="h2 section-title">Easy Payment</h2>
-
-          <p class="section-text">
-            Our platform is designed to be user-friendly and intuitive, so you can get started quickly and easily.
-          </p>
-
-          <ul class="instruction-list">
-
-            <li>
-              <div class="instruction-card" see>
-
-                <figure class="card-banner">
-                  <img src="{% static 'assets/images/handshake.png' %}" width="96" height="96" loading="lazy" alt="Step 1"
-                    class="img">
-                </figure>
-
-                <p class="card-subtitle">Step 1</p>
-
-                <h3 class="h3 card-title">Sign Up</h3>
-
-                <p class="card-text">
-                  Stacks Is A Production-Ready Library Of Stackable Content Blocks Built In React Native.
-                </p>
-
-              </div>
-            </li>
-
-            <li>
-              <div class="instruction-card" see>
-
-                <figure class="card-banner">
-                  <img src="{% static 'assets/images/wallet.png' %}" width="96" height="96" loading="lazy" alt="Step 2"
-                    class="img">
-                </figure>
-
-                <p class="card-subtitle">Step 2</p>
-
-                <h3 class="h3 card-title">Connect Wallet</h3>
-
-                <p class="card-text">
-                  Stacks Is A Production-Ready Library Of Stackable Content Blocks Built In React Native.
-                </p>
-
-              </div>
-            </li>
-
-            <li>
-              <div class="instruction-card" see>
-
-                <figure class="card-banner">
-                  <img src="{% static 'assets/images/Handphone.png' %}" width="96" height="96" loading="lazy" alt="Step 3"
-                    class="img">
-                </figure>
-
-                <p class="card-subtitle">Step 3</p>
-
-                <h3 class="h3 card-title">Start Trading</h3>
-
-                <p class="card-text">
-                  Stacks Is A Production-Ready Library Of Stackable Content Blocks Built In React Native.
-                </p>
-
-              </div>
-            </li>
-
-            <li>
-              <div class="instruction-card" see>
-
-                <figure class="card-banner">
-                  <img src="{% static 'assets/images/cryptopot.png' %}" width="96" height="96" loading="lazy" alt="Step 4"
-                    class="img">
-                </figure>
-
-                <p class="card-subtitle">Step 4</p>
-
-                <h3 class="h3 card-title">Earn Money</h3>
-
-                <p class="card-text">
-                  Stacks Is A Production-Ready Library Of Stackable Content Blocks Built In React Native.
-                </p>
-
-              </div>
-            </li>
-
-          </ul>
-
-        </div>
-      </section>
-
-
-
-
-
-      <!-- 
-        - #ABOUT
-      -->
-
-      <section class="section about" aria-label="about" data-section>
-        <div class="container">
-
-          <figure class="about-banner">
-            <img src="{% static 'assets/images/undraw_secure_login_pdn4.svg' %}" width="748" height="436" loading="lazy" alt="about banner"
-              class="w-100" show>
-          </figure>
-
-          <div class="about-content">
-
-            <h2 class="h2 section-title">What Is Floretech</h2>
-
-            <p class="section-text">
-              Experience a variety of trading on Bitcost. You can use various types of coin transactions such as Spot
-              Trade, Futures
-              Trade, P2P, Staking, Mining, and margin.
-            </p>
-
-            <ul class="section-list">
-
-              <li class="section-item">
-                <div class="title-wrapper">
-                  <ion-icon name="checkmark-circle" aria-hidden="true"></ion-icon>
-
-                  <h3 class="h3 list-title">View real-time cryptocurrency prices</h3>
-                </div>
-
-                <p class="item-text">
-                  Experience a variety of trading on Bitcost. You can use various types of coin transactions such as
-                  Spot Trade, Futures
-                  Trade, P2P, Staking, Mining, and margin.
-                </p>
-              </li>
-
-              <li class="section-item">
-                <div class="title-wrapper">
-                  <ion-icon name="checkmark-circle" aria-hidden="true"></ion-icon>
-
-                  <h3 class="h3 list-title">Buy and sell BTC, ETH, XRP, OKB, Etc...</h3>
-                </div>
-
-                <p class="item-text">
-                  Experience a variety of trading on Bitcost. You can use various types of coin transactions such as
-                  Spot Trade, Futures
-                  Trade, P2P, Staking, Mining, and margin.
-                </p>
-              </li>
-
-            </ul>
-
-            <a href="#" class="btn btn-primary" show>Explore More</a>
-
-          </div>
-
-        </div>
-      </section>
-
-
-
-
-
-      <!-- 
-        - #APP
-      -->
-
-      <section class="section app" aria-label="app" data-section>
-        <div class="container">
-
-          <div class="app-content">
-
-            <h2 class="h2 section-title">Free Your Money & Invest With Confident</h2>
-
-            <p class="section-text" >
-              With Crypto Trade, you can be sure your trading skills are matched
-            </p>
-
-            <ul class="section-list">
-
-              <li class="section-item">
-                <div class="title-wrapper">
-                  <ion-icon name="checkmark-circle" aria-hidden="true"></ion-icon>
-
-                  <h3 class="h3 item-title">Buy, Sell, And Trade On The Go</h3>
-                </div>
-
-                <p class="item-text">
-                  Manage Your Holdings From Your Mobile Device
-                </p>
-              </li>
-
-              <li class="section-item">
-                <div class="title-wrapper">
-                  <ion-icon name="checkmark-circle" aria-hidden="true"></ion-icon>
-
-                  <h3 class="h3 item-title">Take Control Of Your Wealth</h3>
-                </div>
-
-                <p class="item-text">
-                  Rest Assured You (And Only You) Have Access To Your Funds
-                </p>
-              </li>
-
-            </ul>
-
-            <div class="app-wrapper">
-              <a href="#">
-                <img src="{% static 'assets/images/googleplay.png' %}" width="135" height="40" loading="lazy"
-                  alt="get it on google play">
-              </a>
-
-              <a href="#">
-                <img src="{% static 'assets/images/appstore.png' %}" width="120" height="40" loading="lazy"
-                  alt="download on the app store">
-              </a>
             </div>
-
-          </div>
-
-          <div class="app-banner">
-            <img src="{% static 'assets/images/undraw_mobile_app_re_catg.svg' %}" width="618" height="526" loading="lazy" alt="app banner"
-              class="w-100" show>
-
-            <span class="span">Scan To Download</span>
-          </div>
-
-        </div>
-      </section>
-
-    </article>
-  </main>
-
-
-
-
-
-  <!-- 
-    - #FOOTER
-  -->
-
-  <footer class="footer">
-
-    <div class="footer-top" data-section>
-      <div class="container">
-
-        <div class="footer-brand">
-
-          <a href="#" class="logo">
-            <img src="{% static 'assets/images/Floretech.png' %}" width="50" height="50">
-            Floretech 
-          </a>
-
-          <h2 class="footer-title">Contact Us </h2>
-
-          <a href="tel:+123456789101" class="footer-contact-link">+12 345 678 9101</a>
-
-          <a href="mailto:hello.floretech@gmail.com" class="footer-contact-link">hello.floretech@gmail.com</a>
-
-          <address class="footer-contact-link">
-            Dorothy 711-2880 Takeshi St. Winners Lagos 96522
-          </address>
-
-        </div>
-
-        <ul class="footer-list">
-
-          <li>
-            <p class="footer-list-title">Products</p>
-          </li>
-
-          <li>
-            <a href="#" class="footer-link">Spot</a>
-          </li>
-
-          <li>
-            <a href="#" class="footer-link">Inverse Perpetual</a>
-          </li>
-
-          <li>
-            <a href="#" class="footer-link">USDT Perpetual</a>
-          </li>
-
-          <li>
-            <a href="#" class="footer-link">Exchange</a>
-          </li>
-
-          <li>
-            <a href="#" class="footer-link">Launchpad</a>
-          </li>
-
-          <li>
-            <a href="#" class="footer-link">Binance Pay</a>
-          </li>
-
-        </ul>
-
-        <ul class="footer-list">
-
-          <li>
-            <p class="footer-list-title">Services</p>
-          </li>
-
-          <li>
-            <a href="#" class="footer-link">Buy Crypto</a>
-          </li>
-
-          <li>
-            <a href="#" class="footer-link">Markets</a>
-          </li>
-
-          <li>
-            <a href="#" class="footer-link">Trading Fee</a>
-          </li>
-
-          <li>
-            <a href="#" class="footer-link">Affiliate Program</a>
-          </li>
-
-          <li>
-            <a href="#" class="footer-link">Referral Program</a>
-          </li>
-
-          <li>
-            <a href="#" class="footer-link">API</a>
-          </li>
-
-        </ul>
-
-        <ul class="footer-list">
-
-          <li>
-            <p class="footer-list-title">Support</p>
-          </li>
-
-  
-
-          <li>
-            <a href="#" class="footer-link">Help Center</a>
-          </li>
-
-          <li>
-            <a href="#" class="footer-link">User Feedback</a>
-          </li>
-
-          <li>
-            <a href="#" class="footer-link">Submit a request</a>
-          </li>
-
-          <li>
-            <a href="#" class="footer-link">API Documentation</a>
-          </li>
-
-          <li>
-            <a href="#" class="footer-link">Trading Rules</a>
-          </li>
-
-        </ul>
-
-        <ul class="footer-list">
-
-          <li>
-            <p class="footer-list-title">About Us</p>
-          </li>
-
-
-          <li>
-            <a href="#" class="footer-link">Authenticity Check</a>
-          </li>
-
-          <li>
-            <a href="#" class="footer-link">Careers</a>
-          </li>
-
-
-          <li>
-            <a href="#" class="footer-link">Blog</a>
-          </li>
-
-        </ul>
-
-      </div>
-    </div>
-
-    <div class="footer-bottom">
-      <div class="container">
-
-        <p class="copyright">
-          &copy; 2022 Floretech All Rights Reserved by <a href="#" class="copyright-link">Floretech</a>
-        </p>
-
-        <ul class="social-list">
-
-          <li>
-            <a href="#" class="social-link">
-              <ion-icon name="logo-facebook"></ion-icon>
-            </a>
-          </li>
-
-          <li>
-            <a href="#" class="social-link">
-              <ion-icon name="logo-twitter"></ion-icon>
-            </a>
-          </li>
-
-          <li>
-            <a href="#" class="social-link">
-              <ion-icon name="logo-instagram"></ion-icon>
-            </a>
-          </li>
-
-          <li>
-            <a href="#" class="social-link">
-              <ion-icon name="logo-linkedin"></ion-icon>
-            </a>
-          </li>
-
-        </ul>
-
-      </div>
-    </div>
-
-  </footer>
-
-
-
-
-
-  <!-- 
-    - custom js link
-  -->
-  <script src="{% static 'assets/js/main.js' %}" defer></script>
-
-  <!-- 
-    - ionicon link
-  -->
-  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
-  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
-<script>
-    // JavaScript code to hide the preloader when the page finishes loading
-    window.addEventListener('load', function () {
-      var preloader = document.querySelector('.loader');
-      preloader.style.display = 'none';
-    });
-  </script>
-  <script>
-    // Function to fetch the 24hr percent for multiple cryptocurrencies
-    function fetchAndDisplayPercent() {
-      // Get all elements with the class "percentDisplay"
-      var percentElements = document.querySelectorAll('.percentDisplay');
-  
-      // Loop through each element
-      percentElements.forEach(function (element) {
-        var cryptoSymbol = element.dataset.crypto;
-  
-        // Use fetch_24hr_percent filter to get the 24hr percent
-        var percentValue = {{ cryptoSymbol|fetch_24hr_percent }};
-  
-        // Update the element content
-        element.innerHTML = percentValue + '%';
+        </section>
+        <style>
+          .feature-card-widget-8 {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                text-align: center; /* Optional: Align text to the center */
+                margin: 0 auto; /* Optional: Center the entire div horizontally */
+            }
+            
+        </style>
+        <section class="saas-features-card-area bg-white" style="margin-top: 70px;">
+            <div class="container">
+                <div class="saas-section-title text-center mb-60">
+                    <h2>Our <span>Services</span></h2>
+                    <p>We offer a range of services to help you manage your finance and investments with our 21st century digital technology tools.</p>
+                </div>
+                <div class="row" style="">
+                    <div class="col-lg-4" >
+                        <div class="feature-card-widget-8 saas-feature-card wow fadeInUp" data-wow-delay="0.1s">
+                            <div class="card-img">
+                                <img src="{% static 'img/saas-app/clap.svg' %}" alt="feature svg">
+                            </div>
+                            <h4>Manage Portfolio</h4>
+                            <p style="font-size: 12px; font-weight: 400;">At PROFITOPIT, we understand that managing your portfolio can be a daunting task and that’s why we have designed our platform to make it easy to track investments and make adjustments as needed. Whether you are just starting out or an experienced investor, our platform will help you stay on top of your portfolio.
+                            </p>
+                            <a href="" style="border-radius: 30px; width: 220px; margin-top: 20px; background: grey; color: #fff;" class="price_btn theme-btn theme-btn-alt">Choose Plan</a>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="feature-card-widget-8 saas-feature-card wow fadeInUp" data-wow-delay="0.3s">
+                            <div class="card-img">
+                                <img src="{% static 'img/saas-app/hand.svg' %}" alt="feature svg">
+                            </div>
+                            <h4>Investment Decisions</h4>
+                            <p style="font-size: 12px; font-weight: 400;">Making investment decisions in the world of cryptocurrency can be challenging, but it can also be highly rewarding. With the right right approach and a clear understanding of the market, we will help you make smart decisions that will help you reach your financial goals and curate a very profitable portfolio record for you l.
+                            </p>
+                            <a href="" style="border-radius: 30px; width: 220px; margin-top: 20px; background: grey; color: #fff;" class="price_btn theme-btn theme-btn-alt">Choose Plan</a>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="feature-card-widget-8 saas-feature-card wow fadeInUp" data-wow-delay="0.6s">
+                            <div class="card-img">
+                                <img src="{% static 'img/saas-app/house.svg' %}" alt="feature svg">
+                            </div>
+                            <h4>Profit Making</h4>
+                            <p style="font-size: 12px; font-weight: 400;">After helping you make the right investment decision ad helping you understand the risks and rewards involved, We then set out on a profit making venture for you through our diverse investment plans that are well curated and optimised for full user satisfaction and a good ROI. PROFITOPIT is always here for you .
+                            </p>
+                            <a href="" style="border-radius: 30px; width: 220px; margin-top: 20px; background: grey; color: #fff;" class="price_btn theme-btn theme-btn-alt">Choose Plan</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- banner section end-->
+        <!-- Pricing area  -->
+        <section class="saas-pricing-area bg-white">
+            <div class="container">
+                <div class="saas-section-title text-center mb-60 wow fadeInUp" data-wow-delay="0.2s">
+                    <h2>Our <span>Investment</span> plans</h2>
+                    <p>Our investment plans is specially curated and tailored to accommodate your budget and make you enjoy the benefits of investment in a large scale.</p>
+                </div>
+                <style>
+                    .price_item, .example-comment {
+                        display: flex;
+                        flex-direction: column;
+                        align-items: center;
+                        text-align: center; /* Optional: Align text to the center */
+                        margin: 0 auto; /* Optional: Center the entire div horizontally */
+                    }
+                    
+                </style>
+                <div class="pricing_inner" >
+                    <div class="price_items month" >
+                        <div class="row justify-content-center" >
+                            <div class="col-xl-4 col-md-6" >
+                                <div class="price_item wow fadeInUp" >
+                                    <div style="font-size: 35px;"><i class="ri-copper-diamond-line"></i></div>
+                                    <div class="price_header">
+                                        <h6>Basic Plan</h6>
+                                        <p  style="margin-bottom: 20px; background: #373503; width: 180px; font-weight: 500px; border-radius: 5px;">1210 Users on this plan</p>
+                                    </div>
+                                    {% comment %} <div class="price">$15<sub>/month</sub></div> {% endcomment %}
+                                    <ul class="service_list list-unstyled">
+                                        <li><i class="icon_check_alt"></i>Minimum: $100</li>
+                                        <li><i class="icon_check_alt"></i>Maximum: $50,000</li>
+                                        <li><i class="icon_check_alt"></i>Interest Rate: 2.3% Daily</li>
+                                        <li><i class="icon_check_alt"></i>Referral Bonus: 10%</li>
+                                        <li><i class="icon_check_alt"></i>Contract Agreement: 7 Days</li>
+                                    </ul>
+                                    <a href="" class="price_btn theme-btn theme-btn-alt">Activate Plan</a>
+                                </div>
+                            </div>
+                            <div class="col-xl-4 col-md-6">
+                                <div class="price_item wow fadeInUp">
+                                    <div style="font-size: 35px;"><i class="ri-copper-diamond-line"></i></div>
+
+                                    <div class="price_header">
+                                        <h6>Premium Plan</h6>
+                                        <p  style="margin-bottom: 20px; background: #373503; width: 180px; font-weight: 500px; border-radius: 5px;">1750 Users on this plan</p>
+                                    </div>
+                                    {% comment %} <div class="price">$25<sub>/month</sub></div> {% endcomment %}
+                                    <ul class="service_list list-unstyled">
+                                        <li><i class="icon_check_alt"></i>Minimum: $100</li>
+                                        <li><i class="icon_check_alt"></i>Maximum: $50,000</li>
+                                        <li><i class="icon_check_alt"></i>Interest Rate: 2.3% Daily</li>
+                                        <li><i class="icon_check_alt"></i>Referral Bonus: 10%</li>
+                                        <li><i class="icon_check_alt"></i>Contract Agreement: 7 Days</li>
+                                    </ul>
+                                    <a href="" class="price_btn theme-btn theme-btn-alt">Activate Plan</a>
+                                </div>
+                            </div>
+                            <div class="col-xl-4 col-md-6">
+                                <div class="price_item wow fadeInUp">
+                                    <div style="font-size: 35px;"><i class="ri-copper-diamond-line"></i>
+                                    <div class="price_header">
+                                        <h6>Business Plan</h6>
+                                        <p style="margin-bottom: 20px; background: #373503; width: 180px; font-weight: 500px; border-radius: 5px;" class="example-comment">550 users on this plan</p>
+                                    </div>
+                                    {% comment %} <div class="price">$45<sub>/month</sub></div> {% endcomment %}
+                                    <ul class="service_list list-unstyled">
+                                        <li><i class="icon_check_alt"></i>Minimum: $100</li>
+                                        <li><i class="icon_check_alt"></i>Maximum: $50,000</li>
+                                        <li><i class="icon_check_alt"></i>Interest Rate: 2.3% Daily</li>
+                                        <li><i class="icon_check_alt"></i>Referral Bonus: 10%</li>
+                                        <li><i class="icon_check_alt"></i>Contract Agreement: 7 Days</li>
+                                    </ul>
+                                    <a href="" class="price_btn theme-btn theme-btn-alt">Activate Plan</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+        <!-- Pricing area  -->
+
+        <!-- saas-clients-logo start-->
+        {% comment %} <section class="saas-clients-logo bg-white pt-90 pb-85">
+            <div class="container">
+                <p class="wow fadeInUp clients-logo-title" data-wow-delay="0.3s">
+                    Trusted by over <span>10,000+</span> clients wordwide</p>
+
+            </div>
+        </section> {% endcomment %}
+        <!-- saas-clients-logo end-->
+
+        <!-- saas features area  -->
+        {% comment %} <section class="saas-features-card-area bg-white">
+            <div class="container">
+                <div class="saas-section-title text-center mb-60">
+                    <h2>3 easy to follow <span>process</span></h2>
+                    <p>There are many variations of passages of Lorem Ipsum available but them<br> majority have
+                        suffered alteration form injected.</p>
+                </div>
+                <div class="row">
+                    <div class="col-lg-4">
+                        <div class="feature-card-widget-8 saas-feature-card wow fadeInUp" data-wow-delay="0.1s">
+                            <div class="card-img">
+                                <img src="{% static 'img/saas-app/clap.svg' %}" alt="feature svg">
+                            </div>
+                            <h4>Making genuine loans</h4>
+                            <p>There are many variations in passage lorem Ipsum available of them will.
+                            </p>
+                            <a href="#" class="text-btn">Learn More</a>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="feature-card-widget-8 saas-feature-card wow fadeInUp" data-wow-delay="0.3s">
+                            <div class="card-img">
+                                <img src="{% static 'img/saas-app/hand.svg' %}" alt="feature svg">
+                            </div>
+                            <h4>Almost limitless amount</h4>
+                            <p>There are many variations in passage lorem Ipsum available of them will.
+                            </p>
+                            <a href="#" class="text-btn">Learn More</a>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="feature-card-widget-8 saas-feature-card wow fadeInUp" data-wow-delay="0.6s">
+                            <div class="card-img">
+                                <img src="{% static 'img/saas-app/house.svg' %}" alt="feature svg">
+                            </div>
+                            <h4>Safe & secure banking</h4>
+                            <p>There are many variations in passage lorem Ipsum available of them will.
+                            </p>
+                            <a href="#" class="text-btn">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section> {% endcomment %}
+        <!-- saas features card area  -->
+
+        <!-- saas features area  -->
+        <section class="saas-features-area bg-white">
+            <div class="container">
+                <div class="saas-section-title text-center mb-60 wow fadeInUp">
+                    <h2>Why <span>Choose</span> Us</h2>
+                    <p>With a reputable force in the world of Investment portfolio management , Risk <br>management and Investment Decision, Here is why you must choose us...</p>
+                </div>
+                <style>
+                    @media only screen and (max-width: 600px) {
+                        /* Styles specific to small screens */
+                    
+                        /* For example, you can adjust the size of your image */
+                        .small-img {
+                            width: 100%; /* Make the image fill the width of the screen */
+                            height: auto; /* Maintain the aspect ratio */
+                        }
+                    
+                        /* Additional styles for small screens can be added here */
+                    }
+                </style>
+                <div class="saas-features-item row align-items-center">
+                    <div class="col-lg-6">
+                        <div class="mb-5" >
+                            <img class="wow fadeInRight small-img" data-wow-delay="0.1s" src="{% static 'img/saas-app/features_img_one.png' %}"
+                                alt="" style="width:100%;" height="630">
+                        </div>
+                    </div>
+                    <style>
+                        .svg-inline {
+                            display: inline-block;
+                            vertical-align: middle;
+                        }
+                        .h5-inline {
+                            display: inline-block;
+                            vertical-align: middle;
+                        }
+                    </style>
+                    <div class="col-lg-6">
+                        <div class="saas-features-content">
+                            <div class="saas-section-title mb-20">
+                                <span ><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check-circle" style="color:#1d6bca;"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></svg><h6 class="h5-inline" style="margin-bottom: 1px;">SECURE STORAGE</h6><br>We store the vast majority of the digital assets in secure offline storage with experienced professionals monitoring it 24/7</span><br><br>
+                                <span><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check-circle svg-inline" style="color:#1d6bca"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></svg><h6 class="h5-inline" style="margin-bottom: 1px;">INVESTMENTS SECURED BY INSURANCE</h6><br>Our customer’s investment funds are fully secured and covered by FDIC insurance, up to a maximum of $250,000.</span><br><br>
+                                <span><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check-circle svg-inline" style="color:#1d6bca;"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></svg><h6 class="h5-inline" style="margin-bottom: 1px;">INDUSTRY BEST PRACTICES</h6><br>PROFITOPIT offers the best industry practice when it comes to managing and safeguarding client’s investment portfolio</span><br><br>
+                                <span><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check-circle svg-inline" style="color: #1d6bca;"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></svg><h6 class="h5-inline" style="margin-bottom: 1px;">24/7 CUSTOMER SUPPORT</h6><br>Our customer representative are the best in handling customer complaints and making sure that our customers enjoy the best of servicess.</span><br><br>
+                                <span><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check-circle svg-inline" style="color: #1d6bca;"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></svg><h6 class="h5-inline" style="margin-bottom: 1px;">AUTOMATIC WITHDRAWAL AND PAYOUT</h6><br>Our withdrawal and payout system is automated using 21st century technology integrations and connections.</span><br><br>
+                                <span ><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check-circle svg-inline" style="color: #1d6bca;"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></svg><h6 class="h5-inline" style="margin-bottom: 1px;">GREAT REFERRAL BONUS</h6><br>Our referral bonus is structured to give our esteemed users the benefits of being a part of our platform and other bonuses attached to it.</span>
+                                
+                            </div>
+                            <div class="d-flex">
+                                <div class="features-icon-box wow fadeInUp" data-wow-delay="0.2s" style="margin-bottom: -10px; margin-right: 10px;" >
+                                    {% comment %} <div class="round_icon"><img src="{% static 'img/saas-app/hand.png' %}" alt=""></div> {% endcomment %}
+                            
+                                        <a class="theme-btn theme-btn-lg" style="width: 100%;">Join Us Now</a>
+                                
+                                </div>
+                                <div class="features-icon-box wow fadeInUp" data-wow-delay="0.4s" style="margin-top: -50px; " >
+                                    {% comment %} <div class="round_icon"><img src="{% static 'img/saas-app/travel_explore.png' %}" alt=""></div> {% endcomment %}
+                                
+                                        <a class="theme-btn theme-btn-alt theme-btn-lg  mt-50" style="border: 1px solid #1d6bca; width: 100%;">Get Certificate</a>
         
-        // Set the class based on the value
-        if (percentValue < 0) {
-          element.classList.add('red');
-        } else {
-          element.classList.add('green');
-        }
-      });
-    }
-  
-    // Call the function when the page loads or whenever needed
-    fetchAndDisplayPercent();
-  </script>
-</body>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+        </section>
+        <!-- saas features area  -->
+        <!-- app showcase start -->
+        <section class="app-showcase-area">
+            <img class="shape_img" src="{% static 'img/saas-app/grid-two.png' %}" alt="">
+            <div class="container">
+                <div class="saas-section-title text-center mb-60 wow fadeInUp" data-wow-delay="0.2s">
+                    <h2><span>Customer’s </span>Testimonials</h2>
+                    <p>Check out some of the feedbacks we get from our esteemed users all over the world who <br>have entrusted their investment portfolio into our hands.</p>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="app-showcase-item">
+                            <div class="round wow floatingBubbles" data-wow-delay="0.3s"></div>
+                            
+                            <p class="wow fadeInUp" data-wow-delay="0.7s">PROFITOPIT is a very good and reputable company that upholds professionalism to the core . They handle all my investment portfolio and i have never been more happier. I highly recommend them to any entrepreneur that wants a well balanced and curated portfolio..</p>
+                            <div style="text-align: center; color: #0752C1;">
+                                <p class="wow fadeInUp mb-0" style="color: #0752C1;" data-wow-delay="0.6s">John Hopkins</p>
+                                <span class="wow fadeInUp" style="margin-bottom: 10px;">(CEO) Pakins company</span><br>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="app-showcase-item box-two">
+                            <div class="round wow floatingBubbles" data-wow-delay="0.3s"></div>
+                            
+                            <p class="wow fadeInUp" data-wow-delay="0.7s">PROFITOPIT is a very good and reputable company that upholds professionalism to the core . They handle all my investment portfolio and i have never been more happier. I highly recommend them to any entrepreneur that wants a well balanced and curated portfolio..</p>
+                            <div style="text-align: center; color: #0752C1;">
+                                <p class="wow fadeInUp mb-0" style="color: #0752C1;" data-wow-delay="0.6s">John Hopkins</p>
+                                <span class="wow fadeInUp" style="margin-bottom: 10px;">(CEO) Pakins company</span><br>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- app showcase end-->
 
-{% endblock content %}
+        <!-- Pricing area  -->
+
+        <!-- Pricing area  -->
+
+        <!-- Faq section -->
+        {% comment %} <section class="saas-faq-area bg-white">
+            <div class="container">
+                <div class="saas-section-title text-center mb-60 wow fadeInUp" data-wow-delay="0.2s">
+                    <h2>Frequently asked <span>questions</span></h2>
+                    <p>There are many variations of passages of Lorem Ipsum available but them<br> majority have
+                        suffered alteration form injected.</p>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="accordion" id="accordionExample">
+                            <div class="faq_item wow fadeInUp" data-wow-delay="0.3s">
+                                <div class="faq-header" id="headingOne">
+                                    <h6 class="mb-0" data-bs-toggle="collapse" data-bs-target="#collapseOne"
+                                        aria-expanded="true" aria-controls="collapseOne">
+                                        How do I reset my password?<i class="icon_plus"></i><i
+                                            class="icon_minus-06"></i>
+                                    </h6>
+                                </div>
+                                <div id="collapseOne" class="collapse show" aria-labelledby="headingOne"
+                                    data-bs-parent="#accordionExample">
+                                    <div class="faq-body">
+                                        <p> To reset your password, go to the login page and click on the "Forgot
+                                            Password" link. You will be prompted to enter your email address and a reset
+                                            link will be sent to you.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="faq_item wow fadeInUp" data-wow-delay="0.5s">
+                                <div class="faq-header" id="headingTwo">
+                                    <h6 class="mb-0 collapsed" data-bs-toggle="collapse" data-bs-target="#collapseTwo"
+                                        aria-expanded="true" aria-controls="collapseTwo">
+                                        What payment methods do you accept and how do I track my purchase order?<i
+                                            class="icon_plus"></i><i class="icon_minus-06"></i>
+                                    </h6>
+                                </div>
+                                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo"
+                                    data-bs-parent="#accordionExample">
+                                    <div class="faq-body">
+                                        <p> To reset your password, go to the login page and click on the "Forgot
+                                            Password" link. You will be prompted to enter your email address and a reset
+                                            link will be sent to you.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="faq_item wow fadeInUp" data-wow-delay="0.7s">
+                                <div class="faq-header" id="headingThree">
+                                    <h6 class="mb-0 collapsed" data-bs-toggle="collapse" data-bs-target="#collapseThree"
+                                        aria-expanded="true" aria-controls="collapseThree">
+                                        What is your return policy and how do I contact
+                                        support incase of said event ?<i class="icon_plus"></i><i
+                                            class="icon_minus-06"></i>
+                                    </h6>
+                                </div>
+                                <div id="collapseThree" class="collapse" aria-labelledby="headingThree"
+                                    data-bs-parent="#accordionExample">
+                                    <div class="faq-body">
+                                        <p> To reset your password, go to the login page and click on the "Forgot
+                                            Password" link. You will be prompted to enter your email address and a reset
+                                            link will be sent to you.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="accordion" id="accordionExample2">
+                            <div class="faq_item wow fadeInUp" data-wow-delay="0.3s">
+                                <div class="faq-header" id="headingFour">
+                                    <h6 class="mb-0" data-bs-toggle="collapse" data-bs-target="#collapseFour"
+                                        aria-expanded="true" aria-controls="collapseFour">
+                                        What is a mutual fund and how does compound interest builds up ?<i
+                                            class="icon_plus"></i><i class="icon_minus-06"></i>
+                                    </h6>
+                                </div>
+                                <div id="collapseFour" class="collapse show" aria-labelledby="headingFour"
+                                    data-bs-parent="#accordionExample2">
+                                    <div class="faq-body">
+                                        <p> To reset your password, go to the login page and click on the "Forgot
+                                            Password" link. You will be prompted to enter your email address and a reset
+                                            link will be sent to you.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="faq_item wow fadeInUp" data-wow-delay="0.5s">
+                                <div class="faq-header" id="headingFive">
+                                    <h6 class="mb-0 collapsed" data-bs-toggle="collapse" data-bs-target="#collapseFive"
+                                        aria-expanded="true" aria-controls="collapseFive">
+                                        What budget is a financial plan that outlines your expected income and expenses
+                                        ?<i class="icon_plus"></i><i class="icon_minus-06"></i>
+                                    </h6>
+                                </div>
+                                <div id="collapseFive" class="collapse" aria-labelledby="headingFive"
+                                    data-bs-parent="#accordionExample2">
+                                    <div class="faq-body">
+                                        <p> To reset your password, go to the login page and click on the "Forgot
+                                            Password" link. You will be prompted to enter your email address and a reset
+                                            link will be sent to you.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="faq_item wow fadeInUp" data-wow-delay="0.7s">
+                                <div class="faq-header" id="headingSix">
+                                    <h6 class="mb-0 collapsed" data-bs-toggle="collapse" data-bs-target="#collapseSix"
+                                        aria-expanded="true" aria-controls="collapseSix">
+                                        What is a strategy of spreading your investment across different asset classes
+                                        ?<i class="icon_plus"></i><i class="icon_minus-06"></i>
+                                    </h6>
+                                </div>
+                                <div id="collapseSix" class="collapse" aria-labelledby="headingSix"
+                                    data-bs-parent="#accordionExample2">
+                                    <div class="faq-body">
+                                        <p> To reset your password, go to the login page and click on the "Forgot
+                                            Password" link. You will be prompted to enter your email address and a reset
+                                            link will be sent to you.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="saas-features-item row align-items-center flex-row-reverse">
+                
+                    <div class="col-lg-4">
+                        <div class="saas-features-content">
+                            
+                            <div class="d-flex">
+                                <div class="features-icon-box feedback d-flex wow fadeInUp" data-wow-delay="0.4s">
+                                    <div class="text">
+                                        <h4>500+</h4>
+                                        <p>Active customers use our application</p>
+                                    </div>
+                                </div>
+                              
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="saas-features-content">
+                          
+                            <div class="d-flex">
+                                
+                                <div class="features-icon-box feedback d-flex wow fadeInUp" data-wow-delay="0.5s">
+                                    <div class="text">
+                                        <h4>$105k</h4>
+                                        <p>Loans given out in the last few months</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="saas-features-content">
+                            
+                            <div class="d-flex">
+                                <div class="features-icon-box feedback d-flex wow fadeInUp" data-wow-delay="0.4s">
+                                    <div class="text">
+                                        <h4>500+</h4>
+                                        <p>Active customers use our application</p>
+                                    </div>
+                                </div>
+                        
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </section> {% endcomment %}
+        <!-- Faq end section -->
+        <style>
+            @media only screen and (max-width: 600px) {
+                /* Styles specific to small screens */
+            
+                /* For example, you can adjust the size of your image */
+                .small-img {
+                    width: 100%; /* Make the image fill the width of the screen */
+                    height: auto; /* Maintain the aspect ratio */
+                }
+            
+                /* Additional styles for small screens can be added here */
+            }
+        </style>
+        <style>
+            .close-container {
+
+                width: 100px;
+                height: 100px;
+     
+                border: none;
+                border-radius: 50%; /* Make the container round */
+                padding: 2px; /* Add some padding for spacing */
+            }
+        </style>
+        <section class="saas-subscribe-area cta-4" style="background-image: url(static/img/saas-app/bg-image.png); ">
+            <div class="container" style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
+                <div class="cta-content wow fadeInUp" data-wow-delay="0.4s" >
+                    <a href="#" id="playButton">
+                        <div style="color: #fff; background: red; border-radius: 50%; display: flex; align-items: center; justify-content: center; width: 130px;" >
+                            <div style="font-size: 80px;"><i class="ri-play-fill"></i></div>
+                        </div>
+                    </a>
+                </div>
+                
+            </div>
+            <div id="videoOverlay" class="overlay">
+                <div id="videoContainer">
+                    <button id="closeButton" class="close-button">&times</button>
+                    <iframe id="youtubeVideo" width="560" height="315" src="https://www.youtube.com/embed/YOUR_VIDEO_ID" frameborder="0" allowfullscreen></iframe>
+                    
+                </div>
+            </div>
+            <style>
+                #playButton {
+                    position: relative;
+                    z-index: 1;
+                }
+                
+                .overlay {
+                    display: none;
+                    position: fixed;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    z-index: 5;
+                    background: rgba(0, 0, 0, 0.8);
+                }
+                
+                #videoContainer {
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                }
+                .close-button {
+                    position: absolute;
+                    top: 10px;
+                    right: 10px;
+                    background-color: #fff;
+                    color: #000;
+                    border: none;
+                    padding: 10px;
+                    cursor: pointer;
+                    font-size: 16px;
+                    display: none; /* Hide by default */
+                }
+                
+            </style>
+            <script>
+                document.addEventListener('DOMContentLoaded', function () {
+                    var playButton = document.getElementById('playButton');
+                    var videoOverlay = document.getElementById('videoOverlay');
+                    var closeButton = document.getElementById('closeButton');
+                    var youtubeVideo = document.getElementById('youtubeVideo');
+                    function closeOverlay() {
+                        videoOverlay.style.display = 'none';
+                        youtubeVideo.src = youtubeVideo.src.replace('&autoplay=1', ''); // Stop video when overlay is closed
+                        playButton.style.zIndex = '1'; // Reset z-index to bring the play button to the front
+                    }
+                    playButton.addEventListener('click', function (event) {
+                        event.preventDefault(); // Prevent the default behavior of the link
+                        videoOverlay.style.display = 'block';
+                        youtubeVideo.src += '&autoplay=1'; // Autoplay the video when the overlay is shown
+                        playButton.style.zIndex = '0'; // Set z-index to move the play button behind the video
+                    });
+            
+                    closeButton.addEventListener('click', function () {
+                        videoOverlay.style.display = 'none';
+                        youtubeVideo.src = youtubeVideo.src.replace('&autoplay=1', ''); // Stop video when overlay is closed
+                        playButton.style.zIndex = '1'; // Reset z-index to bring the play button to the front
+                    });
+                    function closeOverlay() {
+                        videoOverlay.style.display = 'none';
+                        youtubeVideo.src = youtubeVideo.src.replace('&autoplay=1', ''); // Stop video when overlay is closed
+                        playButton.style.zIndex = '1'; // Reset z-index to bring the play button to the front
+                    }
+            
+                    videoOverlay.addEventListener('mouseleave', function () {
+                        closeOverlay();
+                    });
+            
+                   
+                });
+            </script>
+            
+            
+        </section>
+        <section class="saas-faq-area mt-5">
+            <div class="container">
+            
+                <div class="saas-features-item row align-items-center flex-row-reverse">
+                
+                    <div class="col-lg-4 mb-5">
+                        <div class="saas-features-content">
+                            
+                            <div class="d-flex">
+                                <div class="features-icon-box feedback d-flex wow fadeInUp" data-wow-delay="0.4s">
+                                    <div class="text">
+                                        <h4>$47.6M</h4>
+                                        <p>Revenue Generated</p>
+                                    </div>
+                                </div>
+                              
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 mb-5">
+                        <div class="saas-features-content">
+                          
+                            <div class="d-flex">
+                                
+                                <div class="features-icon-box feedback d-flex wow fadeInUp" data-wow-delay="0.5s">
+                                    <div class="text">
+                                        <h4>1.4k+</h4>
+                                        <p>Experienced Professional Investment Managers</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 mb-5">
+                        <div class="saas-features-content">
+                            
+                            <div class="d-flex">
+                                <div class="features-icon-box feedback d-flex wow fadeInUp" data-wow-delay="0.4s">
+                                    <div class="text">
+                                        <h4>13k+</h4>
+                                        <p>Happy Customers</p>
+                                    </div>
+                                </div>
+                        
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </section>
+        <!-- footer start -->
+	</main>
+    <script src="https://cdn.jsdelivr.net/npm/lucide@0.295.0/dist/cjs/lucide.min.js"></script>
+    {% endblock content %}
