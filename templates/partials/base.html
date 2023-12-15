@@ -35,13 +35,13 @@
 
 <body>
     <!-- Preloader -->
-    <div id="preloader">
-        <div id="ctn-preloader" class="ctn-preloader">
-            <div class="round_spinner">
+    <div id="preloader" >
+        <div id="ctn-preloader"  class="ctn-preloader">
+            <div class="round_spinner" style="height: 120px; width: 120px;">
                 <div class="spinner"></div>
                 <div class="text">
                     {% comment %} <img src="{% static 'img/logo/Logo-2.png' %}" alt=""> {% endcomment %}
-                    <h1>Protopit</h1>
+                    <h3>Protopit</h3>
                 </div>
             </div>
             
@@ -53,7 +53,7 @@
             
             <nav class="navbar navbar-expand-lg ">
                 <div class="container">
-                    <a class="navbar-brand" href="index.html">
+                    <a class="navbar-brand" href="/">
                         <img src="{% static 'img/logo/Logo-2.png' %}" srcset="img/logo/Logo-2@2x.png 2x" alt="logo">
                     </a>
                     <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse"
@@ -75,13 +75,13 @@
                     <div class="collapse navbar-collapse" id="navbarSupportedContent" >
                         <ul class="navbar-nav menu ms-5 me-auto">
                             <li class="nav-item dropdown submenu " >
-                                <a href="/" class="nav-link dropdown-toggle active"
+                                <a href="/" class="nav-link dropdown-toggle active" style="color: #8085a9;"
                                       >Home</a>
                               
                             
                             </li>
                             <li class="nav-item dropdown submenu">
-                                <a class="nav-link dropdown-toggle" href="loan.html" role="button"
+                                <a class="nav-link dropdown-toggle" style="color: #8085a9;" href="" role="button"
                                     data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     Company
                                 </a>
@@ -89,20 +89,14 @@
                                     data-bs-toggle="dropdown"></i>
 
                                 <ul class="dropdown-menu">
-                                    <li class="nav-item"><a class="nav-link" href="loan.html">Get loan</a></li>
-                                    <li class="nav-item"><a class="nav-link" href="#" role="button"
-                                            data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Loan
-                                            Application</a>
-                                        <i class="arrow_carrot-down_alt2 mobile_dropdown_icon" aria-hidden="false"
-                                            data-bs-toggle="dropdown"></i>
-
+                                    <li class="nav-item"><a class="nav-link" href="">Invest</a></li>
                                         
-                                    </li>
+                                    
 
                                 </ul>
                             </li>
                             <li class="nav-item dropdown submenu">
-                                <a class="nav-link dropdown-toggle" href="" role="button"
+                                <a class="nav-link dropdown-toggle" style="color: #8085a9;" href="" role="button"
                                     data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     FAQs
                                 </a>
@@ -110,15 +104,12 @@
                                     data-bs-toggle="dropdown"></i>
                                 <ul class="dropdown-menu">
                                     <li class="nav-item"><a class="nav-link" href="career.html">Career</a></li>
-                                    <li class="nav-item"><a class="nav-link" href="job-post.html">Jobs</a>
-                                    </li>
-                                    <li class="nav-item"><a class="nav-link" href="job-application.html">Job
-                                            Application</a>
+                               
                                     </li>
                                 </ul>
                             </li>
                             <li class="nav-item dropdown submenu">
-                                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                                <a class="nav-link dropdown-toggle" style="color: #8085a9;" href="#" role="button" data-bs-toggle="dropdown"
                                     aria-haspopup="true" aria-expanded="false">
                                     Investment Plans
                                 </a>
@@ -128,13 +119,24 @@
                                     <li class="nav-item"><a class="nav-link" href="card.html">Cards</a></li>
                                     <li class="nav-item"><a class="nav-link" href="about.html">About Us</a></li>
                                     <li class="nav-item"><a class="nav-link" href="contact.html">Contact Us</a></li>
-                                    <li class="nav-item"><a class="nav-link" href="error.html">404 Error</a></li>
+                                   
                                 </ul>
                             </li>
 
                         </ul>
-                        <div id="google_translate_element" class="theme-btn"></div>
-                        <div class="px-4 js-darkmode-btn" style="width: 30px;" title="Toggle dark mode">
+                        <style>
+                            @media only screen and (max-width: 600px) {
+                                .google_t {
+                                    transform: translateX(50px); 
+                                    
+                                }
+                                
+                            
+                               
+                            }
+                        </style>
+                        <div id="google_translate_element" class="theme-btn theme-btn-alt google_t" style="background: #f0f4fc;"></div>
+                        <div class="px-4 js-darkmode-btn mb-2 google_ta" style="width: 30px;" title="Toggle dark mode">
                             <label for="something" class="tab-btn tab-btns">
                                 <ion-icon name="moon-outline"></ion-icon>
                             </label>
