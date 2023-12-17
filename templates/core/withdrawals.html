@@ -1,0 +1,388 @@
+{% extends "partials/appbase.html" %}
+{% load static %}
+{% block content %}
+{% load humanize %}
+{% load custom_filters %}
+<!-- removeNotificationModal -->
+<div id="removeNotificationModal" class="modal fade zoomIn" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                    id="NotificationModalbtn-close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="mt-2 text-center">
+                    <lord-icon src="https://cdn.lordicon.com/gsqxdxog.json" trigger="loop"
+                        colors="primary:#f7b84b,secondary:#f06548" style="width:100px;height:100px"></lord-icon>
+                    <div class="mt-4 pt-2 fs-15 mx-4 mx-sm-5">
+                        <h4>Are you sure ?</h4>
+                        <p class="text-muted mx-4 mb-0">Are you sure you want to remove this Notification ?</p>
+                    </div>
+                </div>
+                <div class="d-flex gap-2 justify-content-center mt-4 mb-2">
+                    <button type="button" class="btn w-sm btn-light" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn w-sm btn-danger" id="delete-notification">Yes, Delete It!</button>
+                </div>
+            </div>
+
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<!-- removeNotificationModal -->
+<div id="logoutNotificationModal" class="modal fade zoomIn" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                    id="NotificationModalbtn-close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="mt-2 text-center">
+                    <lord-icon src="https://cdn.lordicon.com/wtnrotmp.json" trigger="loop"
+                        colors="primary:#f7b84b,secondary:#de000b" style="width:100px;height:100px"></lord-icon>
+                    </lord-icon>
+                    <div class="mt-4 pt-2 fs-15 mx-4 mx-sm-5">
+                        <h4>Are you sure ?</h4>
+                        <p class="text-muted mx-4 mb-0">Are you sure you want to Logout ?</p>
+                    </div>
+                </div>
+                <div class="d-flex gap-2 justify-content-center mt-4 mb-2">
+                    <button type="button" class="btn w-sm btn-light" data-bs-dismiss="modal">Close</button>
+                    <a type="button" href="{% url "userauths:logout"%}" class="btn w-sm btn-danger"
+                        id="delete-notification">Yes, Logout!</a>
+                </div>
+            </div>
+
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+<!-- ========== App Menu ========== -->
+<div class="app-menu navbar-menu">
+    <!-- LOGO -->
+    <div class="navbar-brand-box">
+        <!-- Dark Logo-->
+        <a href="index.html" class="logo logo-dark">
+            <span class="logo-sm">
+                <img src="{% static 'asset/images/logo-sm.png' %}" alt="" height="22">
+            </span>
+            <span class="logo-lg">
+                <img src="{% static 'asset/images/logo-dark.png' %}" alt="" height="17">
+            </span>
+        </a>
+        <!-- Light Logo-->
+        <a href="/" class="logo logo-light">
+            <span class="logo-sm">
+                <img src="{% static 'asset/images/logo-sm.png' %}" alt="" height="22">
+            </span>
+            <span class="logo-lg">
+                <img src="{% static 'asset/images/site_icon.svg' %}" alt="" height="18">
+            </span>
+        </a>
+        <button type="button" class="btn btn-sm p-0 fs-20 header-item float-end btn-vertical-sm-hover"
+            id="vertical-hover">
+            <i class="ri-record-circle-line"></i>
+        </button>
+    </div>
+
+    <div id="scrollbar">
+        <div class="container-fluid">
+
+            <div id="two-column-menu">
+            </div>
+            <ul class="navbar-nav" id="navbar-nav">
+
+                <li class="nav-item">
+                    <a href="{% url "core:profile" %}" class="nav-link menu-link"  aria-controls="sidebarPages" >
+                        <i class="ri-account-circle-line"></i>
+                        <span data-key="t-pages">My Account</span>
+                    </a>
+                  
+                </li>
+                
+                <li class="nav-item">
+                    <a href="{% url "core:deposit" %}" class="nav-link menu-link"  aria-controls="sidebarPages" >
+                        <i class="ri-bank-fill"></i>
+                        <span data-key="t-pages">Deposit</span>
+                    </a>
+                  
+                </li>
+                <li class="nav-item">
+                    <a href="{% url "core:withdraw" %}" class="nav-link menu-link"  aria-controls="sidebarPages" >
+                        <i class="ri-arrow-left-down-line"></i>
+                        <span data-key="t-pages">Withdraw</span>
+                    </a>
+                  
+                </li>
+                <li class="nav-item">
+                    <a href="{% url "core:deposits" %}" class="nav-link menu-link"  aria-controls="sidebarPages" >
+                        <i class="ri-exchange-fill"></i>
+                        <span data-key="t-pages">Deposits</span>
+                    </a>
+                  
+                </li>
+                <li class="nav-item">
+                    <a href="{% url "core:withdrawals" %}" class="nav-link menu-link"  aria-controls="sidebarPages" >
+                        <i class="ri-money-dollar-circle-line"></i>
+                        <span data-key="t-pages">Withdrawals</span>
+                    </a>
+                  
+                </li>
+                <li class="nav-item">
+                    <a href="{% url "core:plans" %}" class="nav-link menu-link"  aria-controls="sidebarPages" >
+                        <i class="ri-line-chart-fill"></i>
+                        <span data-key="t-pages">Investment Plans</span>
+                    </a>
+                  
+                </li>
+                <li class="nav-item">
+                    <a href="{% url "core:transactions" %}" class="nav-link menu-link"  aria-controls="sidebarPages" >
+                        <i class="ri-history-fill"></i>
+                        <span data-key="t-pages">Transaction History</span>
+                    </a>
+                  
+                </li>
+                <li class="nav-item">
+                    <a href="{% url "core:profile" %}" class="nav-link menu-link"  aria-controls="sidebarPages" >
+                        <i class="ri-settings-3-fill"></i>
+                        <span data-key="t-pages">Settings</span>
+                    </a>
+                  
+                </li>
+                <li class="nav-item">
+                    <a href="{% url "core:profile-settings" %}" class="nav-link menu-link"  aria-controls="sidebarPages" >
+                        <i class="ri-user-fill"></i>
+                        <span data-key="t-pages">Personal Details</span>
+                    </a>
+                  
+                </li>
+
+                <li class="nav-item">
+                    <a href="{% url "userauths:lockscreen"%}" class="nav-link menu-link" aria-controls="sidebarPages" >
+                        <i class="ri-lock-fill"></i>
+                        <span data-key="t-pages">Lock Screen</span>
+                    </a>
+
+                </li>
+
+                <a class="nav-link menu-link" href="#" onclick="history.back()" aria-controls="sidebarPages">
+                    <i class="las la-arrow-left"></i> <span data-key="t-pages">Back</span>
+                </a>
+                
+               
+
+            </ul>
+        </div>
+        <!-- Sidebar -->
+    </div>
+
+
+
+    <div class="sidebar-background"></div>
+</div>
+<!-- Left Sidebar End -->
+<!-- Vertical Overlay-->
+<div class="vertical-overlay"></div>
+
+<!-- ============================================================== -->
+<!-- Start right Content here -->
+<!-- ============================================================== -->
+<div class="main-content">
+
+    <div class="page-content">
+        <div class="container-fluid">
+
+            <!-- start page title -->
+            <div class="row">
+                <div class="col-12">
+                    <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+                        <h4 class="mb-sm-0">Profitopit</h4>
+
+                        <div class="page-title-right">
+                            <ol class="breadcrumb m-0">
+                                <li class="breadcrumb-item"><a href="javascript: void(0);">Dashboard</a></li>
+                                <li class="breadcrumb-item active">withdrawals</li>
+                            </ol>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <!-- end page title -->
+
+            <div class="row">
+
+
+                <div class="col-xxl-9 order-xxl-0 order-first">
+                    <div class="d-flex flex-column h-100">
+                        <div class="row h-100">
+
+                            <div class="card" id="contactList">
+                                <div class="card-header">
+                                    <div class="row align-items-center g-3">
+                                        <div class="col-md-3">
+                                            <h5 class="card-title mb-0">All Withdrawals</h5>
+                                        </div>
+                                        <!--end col-->
+                                  
+                                        <!--end col-->
+                                    </div>
+                                    <!--end row-->
+                                </div>
+                                <!--end card-header-->
+                                <div class="card-body">
+                                    <div class="table-responsive table-card">
+                                        {% if user_withdrawals %}
+                                        <table class="table align-middle table-nowrap" id="customerTable">
+                                            <thead class="table-light text-muted">
+                                                <tr>
+                                                    <th  data-sort="name" scope="col" style="width: 60px;"></th>
+                                                    <th  data-sort="date" scope="col">Timestamp</th>
+                                               
+                                  
+                                                    <th  data-sort="details" scope="col">Address</th>
+                                                    <th  data-sort="transaction_id" scope="col">Transaction ID</th>
+                                                
+                                                    <th  data-sort="amount" scope="col">Amount</th>
+                                                    <th  data-sort="status" scope="col">Status</th>
+                                                </tr>
+                                                <!--end tr-->
+                                            </thead>
+                                            <tbody class="list form-check-all">
+                                                {% for t in user_withdrawals %}
+                                                <tr>
+                                                    <td class="id" style="display:none;"><a href="javascript:void(0);" class="fw-medium link-primary">#VZ001</a></td>
+                                                    <td>
+                                                        <div class="avatar-xs">
+                                                            <div class="avatar-title bg-warning-subtle text-warning rounded-circle fs-16">
+                                                                <i class="ri-arrow-left-down-line"></i>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    <td class="date">{{t.timestamp|date:"d M, Y"}}</td>
+                                                 
+                                             
+                                                    <td class="details">{{t.wallet_address|truncatechars:15}}</td>
+                                                    <td class="transaction_id">{{t.transaction_id}}</td>
+                                            
+                                                    <td>
+                                                        
+                                                        <p class="text-muted mb-0">${{t.amount}}</p>
+                                                    </td>
+                                                    
+                                                    <td class="status">
+                                                        <span class="badge bg-warning-subtle text-warning fs-11"><i class="ri-time-line align-bottom"></i>Pending</span>
+                                                    </td>
+
+                                                 
+                                                </tr>
+                                                {% endfor %}
+                                                <!--end tr-->
+
+                                                <!--end tr-->
+
+                                            </tbody>
+                                        </table>
+                                        <!--end table-->
+                                        {% else %}
+                                        <div class="noresult">
+                                            <div class="text-center">
+                                                <script src="https://cdn.lordicon.com/lordicon.js"></script>
+                                                <lord-icon src="https://cdn.lordicon.com/msoeawqm.json" trigger="hover" colors="primary:#405189,secondary:#0ab39c" style="width:75px;height:75px"></lord-icon>
+                                                <h5 class="mt-2">No Withdrawal Found</h5>
+                                                <p class="text-muted mb-0">We did not find any Withdrawals.</p>
+                                            </div>
+                                        </div>
+                                        {% endif %}
+                                    </div>
+                              
+                                </div>
+                                <!--end card-body-->
+                            </div>
+                        </div><!-- end row -->
+
+
+
+                        <!--end row-->
+                        {% comment %} <div class="row">
+                            <div class="col-xl-12">
+                                <div class="card card-height-100">
+                                    <div class="card-header align-items-center d-flex">
+                                        <h4 class="card-title mb-0 flex-grow-1">Investment Plans</h4>
+                                        <div class="flex-shrink-0">
+                                            <button class="btn btn-soft-primary btn-sm">ALL</button>
+                                        </div>
+                            
+                                    </div><!-- end card header -->
+                                    <div class="card-body">
+                                        <div class="table-responsive table-card">
+                                            <table
+                                                class="table table-hover table-borderless table-centered align-middle table-nowrap mb-0">
+                                                <thead class="text-muted bg-light-subtle">
+                                                    <tr>
+                                                        <th>Plan Name</th>
+                                                        <th>Least Amount</th>
+                                                        <th>Max Amount</th>
+                                                        <th>Percentage</th>
+                                                        <th>Trading Interval</th>
+                                                      
+                                                        <th>Actions</th>
+                                                    </tr>
+                                                </thead><!-- end thead -->
+                                                <tbody>
+                                                    {% for p in plans %}
+                                                    <tr>
+                                                        <td>
+                                                            <div class="d-flex align-items-center">
+                                                                <div class="me-2">
+                                                                  
+                                                           
+                                                                    <img src="{% static "images/dollar.png" %}"
+                                                                        alt="" class="avatar-xxs">
+                                                                  
+                                                                </div>
+                                                                <div>
+                                                                    <h6 class="fs-14 mb-0">{{p.title}}</h6>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                        <td>${{p.least_amount|floatformat:2|intcomma}}</td>
+                                                        <td>${{p.max_amount|floatformat:2|intcomma}}</td>
+                                                        <td>
+                                                            <h6 class="text-success fs-13 mb-0"><i
+                                                                    class="mdi mdi-trending-up align-middle me-1"></i>{{p.percentage_return|floatformat:1}} </h6>
+                                                        </td>
+                                                        <td>{{p.interval|capfirst}}</td>
+                                    
+                                                        <td><a href="{% url "core:plan-detail" p.pid %}"
+                                                                class="btn btn-sm btn-soft-secondary">Invest</a></td>
+                                                    </tr><!-- end -->
+                                                    {% endfor %}
+                                                </tbody><!-- end tbody -->
+                                            </table><!-- end table -->
+                                        </div><!-- end tbody -->
+                                    </div><!-- end cardbody -->
+                                </div><!-- end card -->
+                            </div><!-- end col -->
+            
+             
+                        </div><!-- end row --> {% endcomment %}
+
+                        
+                    </div>
+                </div><!-- end col -->
+            </div><!-- end row -->
+
+
+
+
+
+
+
+        </div>
+        <!-- container-fluid -->
+    </div>
+    <!-- End Page-content -->
+
+    {% endblock content %}

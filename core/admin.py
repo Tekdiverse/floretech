@@ -3,6 +3,17 @@ from .models import Plan, UserComplaints
 from userauths.models import Deposit
 # Register your models here.
 
+
+
+from django.contrib.auth.models import Group
+
+# Unregister the default GroupAdmin
+admin.site.unregister(Group)
+
+
+
+
+
 class PlanAdmin(admin.ModelAdmin):
     list_display = ['title', 'pid','invested_amount','percentage_return','least_amount','max_amount']
 admin.site.register(Plan, PlanAdmin)

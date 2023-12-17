@@ -20,7 +20,8 @@ class User(AbstractUser):
     total_balance = models.DecimalField(max_digits=1000, decimal_places=2, default="0.00")
     total_invested = models.DecimalField(max_digits=1000, decimal_places=2, default="0.00")
     total_deposit = models.DecimalField(max_digits=1000, decimal_places=2, default="0.00")
-
+    referral_code = ShortUUIDField(unique=True, length=10, max_length=20, prefix="meta", alphabet="abcdefgh12345")
+    referred = models.CharField(max_length=20, blank=True)
     contact = models.CharField(max_length=20, blank=True)
     address = models.CharField(max_length=100, null=True, blank=True)
     USERNAME_FIELD = "email"

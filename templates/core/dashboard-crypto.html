@@ -1,0 +1,638 @@
+{% extends "partials/appbase.html" %}
+{% load static %}
+{% block content %}
+{% load humanize %}
+{% load custom_filters %}
+<!-- removeNotificationModal -->
+<div id="removeNotificationModal" class="modal fade zoomIn" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                    id="NotificationModalbtn-close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="mt-2 text-center">
+                    <lord-icon src="https://cdn.lordicon.com/gsqxdxog.json" trigger="loop"
+                        colors="primary:#f7b84b,secondary:#f06548" style="width:100px;height:100px"></lord-icon>
+                    <div class="mt-4 pt-2 fs-15 mx-4 mx-sm-5">
+                        <h4>Are you sure ?</h4>
+                        <p class="text-muted mx-4 mb-0">Are you sure you want to remove this Notification ?</p>
+                    </div>
+                </div>
+                <div class="d-flex gap-2 justify-content-center mt-4 mb-2">
+                    <button type="button" class="btn w-sm btn-light" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn w-sm btn-danger" id="delete-notification">Yes, Delete It!</button>
+                </div>
+            </div>
+
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<!-- removeNotificationModal -->
+<div id="logoutNotificationModal" class="modal fade zoomIn" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                    id="NotificationModalbtn-close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="mt-2 text-center">
+                    <lord-icon src="https://cdn.lordicon.com/wtnrotmp.json" trigger="loop"
+                        colors="primary:#f7b84b,secondary:#de000b" style="width:100px;height:100px"></lord-icon>
+                    </lord-icon>
+                    <div class="mt-4 pt-2 fs-15 mx-4 mx-sm-5">
+                        <h4>Are you sure ?</h4>
+                        <p class="text-muted mx-4 mb-0">Are you sure you want to Logout ?</p>
+                    </div>
+                </div>
+                <div class="d-flex gap-2 justify-content-center mt-4 mb-2">
+                    <button type="button" class="btn w-sm btn-light" data-bs-dismiss="modal">Close</button>
+                    <a type="button" href="{% url "userauths:logout"%}" class="btn w-sm btn-danger"
+                        id="delete-notification">Yes, Logout!</a>
+                </div>
+            </div>
+
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+<!-- ========== App Menu ========== -->
+<div class="app-menu navbar-menu">
+    <!-- LOGO -->
+    <div class="navbar-brand-box">
+        <!-- Dark Logo-->
+        <a href="index.html" class="logo logo-dark">
+            <span class="logo-sm">
+                <img src="{% static 'images/logo.png' %}" alt="" height="22">
+            </span>
+            <span class="logo-lg">
+                <img src="{% static 'images/logo.png' %}" alt="" height="17">
+            </span>
+        </a>
+        <!-- Light Logo-->
+        <a href="/" class="logo logo-light">
+            <span class="logo-sm">
+                <img src="{% static 'images/logo.png' %}" alt="" height="22">
+            </span>
+            <span class="logo-lg">
+                <img src="{% static 'images/logo.png' %}" alt="" height="18">
+            </span>
+        </a>
+        <button type="button" class="btn btn-sm p-0 fs-20 header-item float-end btn-vertical-sm-hover"
+            id="vertical-hover">
+            <i class="ri-record-circle-line"></i>
+        </button>
+    </div>
+
+    <div id="scrollbar">
+        <div class="container-fluid">
+
+            <div id="two-column-menu">
+            </div>
+            <ul class="navbar-nav" id="navbar-nav">
+
+                <li class="nav-item">
+                    <a href="{% url "core:profile" %}" class="nav-link menu-link"  aria-controls="sidebarPages" >
+                        <i class="ri-account-circle-line"></i>
+                        <span data-key="t-pages">My Account</span>
+                    </a>
+                  
+                </li>
+                
+                <li class="nav-item">
+                    <a href="{% url "core:deposit" %}" class="nav-link menu-link"  aria-controls="sidebarPages" >
+                        <i class="ri-bank-fill"></i>
+                        <span data-key="t-pages">Deposit</span>
+                    </a>
+                  
+                </li>
+                <li class="nav-item">
+                    <a href="{% url "core:withdraw" %}" class="nav-link menu-link"  aria-controls="sidebarPages" >
+                        <i class="ri-arrow-left-down-line"></i>
+                        <span data-key="t-pages">Withdraw</span>
+                    </a>
+                  
+                </li>
+                <li class="nav-item">
+                    <a href="{% url "core:deposits" %}" class="nav-link menu-link"  aria-controls="sidebarPages" >
+                        <i class="ri-exchange-fill"></i>
+                        <span data-key="t-pages">Deposits</span>
+                    </a>
+                  
+                </li>
+                <li class="nav-item">
+                    <a href="{% url "core:withdrawals" %}" class="nav-link menu-link"  aria-controls="sidebarPages" >
+                        <i class="ri-money-dollar-circle-line"></i>
+                        <span data-key="t-pages">Withdrawals</span>
+                    </a>
+                  
+                </li>
+                <li class="nav-item">
+                    <a href="{% url "core:plans" %}" class="nav-link menu-link"  aria-controls="sidebarPages" >
+                        <i class="ri-line-chart-fill"></i>
+                        <span data-key="t-pages">Investment Plans</span>
+                    </a>
+                  
+                </li>
+                <li class="nav-item">
+                    <a href="{% url "core:transactions" %}" class="nav-link menu-link"  aria-controls="sidebarPages" >
+                        <i class="ri-history-fill"></i>
+                        <span data-key="t-pages">Transaction History</span>
+                    </a>
+                  
+                </li>
+                <li class="nav-item">
+                    <a href="{% url "core:profile" %}" class="nav-link menu-link"  aria-controls="sidebarPages" >
+                        <i class="ri-settings-3-fill"></i>
+                        <span data-key="t-pages">Settings</span>
+                    </a>
+                  
+                </li>
+                <li class="nav-item">
+                    <a href="{% url "core:profile-settings" %}" class="nav-link menu-link"  aria-controls="sidebarPages" >
+                        <i class="ri-user-fill"></i>
+                        <span data-key="t-pages">Personal Details</span>
+                    </a>
+                  
+                </li>
+
+                <li class="nav-item">
+                    <a href="{% url "userauths:lockscreen"%}" class="nav-link menu-link" aria-controls="sidebarPages" >
+                        <i class="ri-lock-fill"></i>
+                        <span data-key="t-pages">Lock Screen</span>
+                    </a>
+
+                </li>
+
+                <a class="nav-link menu-link" href="#" onclick="history.back()" aria-controls="sidebarPages">
+                    <i class="las la-arrow-left"></i> <span data-key="t-pages">Back</span>
+                </a>
+                
+               
+
+            </ul>
+        </div>
+        <!-- Sidebar -->
+    </div>
+
+
+
+    <div class="sidebar-background"></div>
+</div>
+<!-- Left Sidebar End -->
+<!-- Vertical Overlay-->
+<div class="vertical-overlay"></div>
+
+<!-- ============================================================== -->
+<!-- Start right Content here -->
+<!-- ============================================================== -->
+<div class="main-content">
+
+    <div class="page-content">
+        <div class="container-fluid">
+
+            <!-- start page title -->
+            <div class="row">
+                <div class="col-12">
+                    <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+                        <h4 class="mb-sm-0">Profitopit</h4>
+
+                        <div class="page-title-right">
+                            <ol class="breadcrumb m-0">
+                                <li class="breadcrumb-item"><a href="javascript: void(0);">Dashboard</a></li>
+                                <li class="breadcrumb-item active">Profitopit</li>
+                            </ol>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <!-- end page title -->
+
+            <div class="row">
+                <div class="col-xxl-3">
+                    <div class="card card-height-100">
+                        <div class="card-header border-0 align-items-center d-flex">
+                            <h4 class="card-title mb-0 flex-grow-1">My Portfolio</h4>
+                            <div>
+                                <div class="dropdown">
+                                    <button class="btn btn-soft-primary btn-sm" data-bs-toggle="dropdown"
+                                        aria-haspopup="true" aria-expanded="false">
+                                        <span class="text-uppercase">All Plans<i
+                                                class="mdi mdi-chevron-down align-middle ms-1"></i></span>
+                                    </button>
+                                    <div class="dropdown-menu dropdown-menu-end">
+                                        {% for p in plans %}
+                                        <a class="dropdown-item" href="{% url "core:plan-detail" p.pid %}">{{p.title}}</a>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div><!-- end cardheader -->
+
+                    </div><!-- end card -->
+                </div><!-- end col -->
+
+                <div class="col-xxl-9 order-xxl-0 order-first">
+                    <div class="d-flex flex-column h-100">
+                        <div class="row h-100">
+                            <div class="col-lg-4 col-md-6">
+                                <div class="card" style="box-shadow: rgba(3, 102, 214, 0.3) 0px 0px 0px 3px;">
+                                    <div class="card-body">
+                                        <div class="d-flex align-items-center">
+                                            <div class="avatar-sm flex-shrink-0">
+                                                <span class="avatar-title bg-light text-primary rounded-circle fs-3">
+                                                    <image src="{% static "images/invest.png" %}" height="50">
+                                                </span>
+                                            </div>
+                                            <div class="flex-grow-1 ms-3">
+                                                <p class="text-uppercase fw-semibold fs-12 text-muted mb-1"> Total
+                                                    Invested</p>
+                                                <h4 class=" mb-0">$<span 
+                                                        >{{request.user.total_invested|floatformat:2|intcomma}}</span></h4>
+                                            </div>
+                                            <div class="flex-shrink-0 align-self-end">
+                                                <span class="badge bg-success-subtle text-success"><i
+                                                        class="ri-arrow-up-s-fill align-middle me-1"></i>6.24 %<span>
+                                                    </span></span>
+                                            </div>
+                                        </div>
+                                    </div><!-- end card body -->
+                                </div><!-- end card -->
+                            </div><!-- end col -->
+                            <div class="col-lg-4 col-md-6">
+                                <div class="card" style="box-shadow: rgba(3, 102, 214, 0.3) 0px 0px 0px 3px;">
+                                    <div class="card-body">
+                                        <div class="d-flex align-items-center">
+                                            <div class="avatar-sm flex-shrink-0">
+                                                <span class="avatar-title bg-light text-primary rounded-circle fs-3">
+                                                    <image src="{% static "images/balance.png" %}" height="50">
+                                                </span>
+                                            </div>
+                                            <div class="flex-grow-1 ms-3">
+                                                <p class="text-uppercase fw-semibold fs-12 text-muted mb-1"> Estimated
+                                                    Balance</p>
+                                                    <h4 class=" mb-0">$<span 
+                                                        >{{request.user.total_balance|floatformat:2|intcomma}}</span></h4>
+                                            </div>
+                                            <div class="flex-shrink-0 align-self-end">
+                                                <span class="badge bg-success-subtle text-success"><i
+                                                        class="ri-arrow-up-s-fill align-middle me-1"></i>3.67 %<span>
+                                                    </span></span>
+                                            </div>
+                                        </div>
+                                    </div><!-- end card body -->
+                                </div><!-- end card -->
+                            </div><!-- end col -->
+                            <div class="col-lg-4 col-md-6">
+                                <div class="card" style="box-shadow: rgba(3, 102, 214, 0.3) 0px 0px 0px 3px;">
+                                    <div class="card-body">
+                                        <div class="d-flex align-items-center">
+                                            <div class="avatar-sm flex-shrink-0">
+                                                <span class="avatar-title bg-light text-primary rounded-circle fs-3">
+                                                    <image src="{% static "images/wallet.png" %}" height="50">
+                                                </span>
+                                            </div>
+                                            <div class="flex-grow-1 ms-3">
+                                                <p class="text-uppercase fw-semibold fs-12 text-muted mb-1">Total Deposit
+                                                </p>
+                                                <h4 class=" mb-0">$<span 
+                                                        >{{request.user.total_deposit|floatformat:2|intcomma}}</span></h4>
+                                            </div>
+                                            <div class="flex-shrink-0 align-self-end">
+                                                <span class="badge bg-danger-subtle text-danger"><i
+                                                        class="ri-arrow-down-s-fill align-middle me-1"></i>4.80 %<span>
+                                                    </span></span>
+                                            </div>
+                                        </div>
+                                    </div><!-- end card body -->
+                                </div><!-- end card -->
+                            </div><!-- end col -->
+                        </div><!-- end row -->
+
+
+                        {% if request.user.is_authenticated %}
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="card" id="btcKeyList">
+                                    <div class="card-header d-flex align-items-center">
+
+                                    </div>
+                                    <div class="card-body">
+                                        <div>
+                                            <div class="table-responsive table-card mb-3">
+                                                <table class="table align-middle table-nowrap mb-0">
+                                                    <thead class="table-light">
+                                                        <tr>
+
+                                                            <th data-sort="name" scope="col">Name</th>
+                                                           
+                                        
+                                                           
+                                                            <th data-sort="apikey" scope="col">Deposit</th>
+                                                           
+                                                            <th data-sort="status" scope="col">Status</th>
+                                                            
+
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody class="list form-check-all">
+                                                        <tr>
+
+
+                                                            <td class="name">{{user.username|capfirst|truncatechars:15}}</td>
+                                                        
+                                                    
+                                                           
+                                                            <td class="btckey">
+                                                                <a href="{% url "core:deposit" %}"><button
+                                                                        type="submit"
+                                                                        class="btn btn-primary">Deposit</button></a>
+                                                            </td>
+                                        
+                                                            {% if user.total_deposit >= 100 %}
+                                                            <td class="status"><span
+                                                                    class="badge bg-success-subtle text-success">Active</span>
+                                                            </td>
+                                                            {% else %}
+                                                            <td class="status"><span
+                                                                    class="badge bg-danger-subtle text-danger">Deposit</span>
+                                                            </td>
+                                                            {% endif %}
+                                                            
+                                                            </td>
+
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <!-- end card body -->
+                                </div>
+                                <!-- end card -->
+                            </div>
+                            <!-- end col -->
+                            <div style="height:40px; padding:0px; margin:0px; width: 100%;"><iframe
+                                src="https://widget.coinlib.io/widget?type=horizontal_v2&theme=light&pref_coin_id=1505&invert_hover=no"
+                                width="100%" height="36px" scrolling="auto" marginwidth="0" marginheight="0" frameborder="0" border="0"
+                                style="border:0;margin:0;padding:0;"></iframe></div>
+                        <div
+                            style="color: #626B7F; line-height: 14px; font-weight: 400; font-size: 11px; box-sizing: border-box; padding: 2px 6px; width: 100%; display:none; font-family: Verdana, Tahoma, Arial, sans-serif;">
+                            <a href="https://coinlib.io" target="_blank"
+                                style="font-weight: 500; color: #232734; text-decoration:none; font-size:11px; display:none;">Cryptocurrency
+                                Prices</a>&nbsp;by Coinlib
+                        </div>
+                        </div>
+                        {% endif %}
+                        <div class="row">
+                            <div class="col-xxl-3 col-md-12">
+                                {% for p in plans %}
+                                <div class="card mb-2" >
+                                    <div class="card-body">
+                                        <div class="d-flex mb-3">
+                                            <div class="flex-shrink-0 avatar-sm">
+                                                <div class="avatar-title bg-light rounded">
+                                                    <img src="{% static "images/dollar.png" %}" alt="" class="avatar-xxs" />
+                                                </div>
+                                            </div>
+                                            <div class="flex-grow-1 ms-3">
+                                                <a href="{% url "core:plan-detail" p.pid %}"><h5 class="fs-15 mb-1 fw-bold">{{p.title}}</h5></a>
+                                                <p class="text-muted mb-2 fw-medium">{{p.initial}}</p>
+                                            </div>
+                                            <div >
+                                                <a href="{% url "core:plan-detail" p.pid %}"  class="badge fs-16 bg-primary-subtle text-primary">Invest<i class="ri-arrow-right-up-line align-bottom"></i></a>
+                                            </div>
+                                        </div>
+                                        <h5 class="text-muted mb-0 fw-semibold">${{p.least_amount|floatformat:2|intcomma}} - ${{p.max_amount|floatformat:2|intcomma}} </h5>
+                                    </div>
+                                    <div class="card-body border-top border-top-dashed">
+                                        <div class="d-flex">
+                                            <div class="flex-grow-1">
+                                                <h5><span class="badge bg-success-subtle text-success"><i
+                                                    class="ri-arrow-up-s-fill align-middle me-1"></i>{{p.percentage_return|floatformat:2}}%</span></h5>
+                                            </div>
+                                            <h6 class="flex-shrink-0 text-success mb-0"> {{p.interval|capfirst}} <i class="ri-time-line align-bottom"></i></h6>
+                                        </div>
+                                    </div>
+                                </div>
+                                {% endfor %}
+                            </div>
+                            <!--end col-->
+
+                            <!--end col-->
+    
+            
+                            <!--end col-->
+    
+
+                            <!--end col-->
+                        </div>
+                        <!--end row-->
+                        {% comment %} <div class="row">
+                            <div class="col-xl-12">
+                                <div class="card card-height-100">
+                                    <div class="card-header align-items-center d-flex">
+                                        <h4 class="card-title mb-0 flex-grow-1">Investment Plans</h4>
+                                        <div class="flex-shrink-0">
+                                            <button class="btn btn-soft-primary btn-sm">ALL</button>
+                                        </div>
+                            
+                                    </div><!-- end card header -->
+                                    <div class="card-body">
+                                        <div class="table-responsive table-card">
+                                            <table
+                                                class="table table-hover table-borderless table-centered align-middle table-nowrap mb-0">
+                                                <thead class="text-muted bg-light-subtle">
+                                                    <tr>
+                                                        <th>Plan Name</th>
+                                                        <th>Least Amount</th>
+                                                        <th>Max Amount</th>
+                                                        <th>Percentage</th>
+                                                        <th>Trading Interval</th>
+                                                      
+                                                        <th>Actions</th>
+                                                    </tr>
+                                                </thead><!-- end thead -->
+                                                <tbody>
+                                                    {% for p in plans %}
+                                                    <tr>
+                                                        <td>
+                                                            <div class="d-flex align-items-center">
+                                                                <div class="me-2">
+                                                                  
+                                                           
+                                                                    <img src="{% static "images/dollar.png" %}"
+                                                                        alt="" class="avatar-xxs">
+                                                                  
+                                                                </div>
+                                                                <div>
+                                                                    <h6 class="fs-14 mb-0">{{p.title}}</h6>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                        <td>${{p.least_amount|floatformat:2|intcomma}}</td>
+                                                        <td>${{p.max_amount|floatformat:2|intcomma}}</td>
+                                                        <td>
+                                                            <h6 class="text-success fs-13 mb-0"><i
+                                                                    class="mdi mdi-trending-up align-middle me-1"></i>{{p.percentage_return|floatformat:1}} </h6>
+                                                        </td>
+                                                        <td>{{p.interval|capfirst}}</td>
+                                    
+                                                        <td><a href="{% url "core:plan-detail" p.pid %}"
+                                                                class="btn btn-sm btn-soft-secondary">Invest</a></td>
+                                                    </tr><!-- end -->
+                                                    {% endfor %}
+                                                </tbody><!-- end tbody -->
+                                            </table><!-- end table -->
+                                        </div><!-- end tbody -->
+                                    </div><!-- end cardbody -->
+                                </div><!-- end card -->
+                            </div><!-- end col -->
+            
+             
+                        </div><!-- end row --> {% endcomment %}
+
+                        <div class="row">
+                            <div class="col-xl-12">
+                                <div class="card">
+                                    <div class="card-header border-0 align-items-center d-flex">
+                                        <h4 class="card-title mb-0 flex-grow-1">Market Graph</h4>
+
+                                    </div><!-- end card header -->
+
+                                    <div class="card-body p-0 pb-3">
+                                        {% comment %} <div id="Market_chart"
+                                            data-colors='["--vz-success", "--vz-danger"]' class="apex-charts" dir="ltr">
+                                        </div> {% endcomment %}
+                                        <div style="height:560px; background-color: #1D2330; overflow:hidden; box-sizing: border-box; border: 1px solid #282E3B; border-radius: 4px; text-align: right; line-height:14px; font-size: 12px; font-feature-settings: normal; text-size-adjust: 100%; box-shadow: inset 0 -20px 0 0 #262B38;padding:1px;padding: 0px; margin: 0px; width: 100%;"><div style="height:540px; padding:0px; margin:0px; width: 100%;"><iframe src="https://widget.coinlib.io/widget?type=chart&theme=dark&coin_id=859&pref_coin_id=1505" width="100%" height="536px" scrolling="auto" marginwidth="0" marginheight="0" frameborder="0" border="0" style="border:0;margin:0;padding:0;line-height:14px;"></iframe></div><div style=" display: none; color: #626B7F; line-height: 14px; font-weight: 400; font-size: 11px; box-sizing: border-box; padding: 2px 6px; width: 100%; font-family: Verdana, Tahoma, Arial, sans-serif;"><a href="https://coinlib.io"  target="_blank" style="font-weight: 500; display: none; color: #626B7F; text-decoration:none; font-size:11px">Cryptocurrency Prices</a>&nbsp;by Coinlib</div></div>
+                                    </div><!-- end cardbody -->
+                                </div><!-- end card -->
+                            </div><!-- end col -->
+                        </div><!-- end row -->
+                    </div>
+                </div><!-- end col -->
+            </div><!-- end row -->
+
+
+
+
+
+            <div class="row">
+
+{% comment %} 
+                <div class="col-xl-12">
+                    <div class="card">
+                        <div class="card-header border-0 align-items-center d-flex">
+                            <h4 class="card-title mb-0 flex-grow-1">Cryptocurrencies</h4>
+
+                        </div><!-- end card header -->
+                        <div class="card-body p-0">
+                            <ul class="list-group list-group-flush border-dashed mb-0">
+                                <li class="list-group-item d-flex align-items-center">
+                                    <div class="flex-shrink-0">
+                                        <img src="{% static 'asset/images/svg/crypto-icons/btc.svg' %}"
+                                            class="avatar-xs" alt="">
+                                    </div>
+                                    <div class="flex-grow-1 ms-3">
+                                        <h6 class="fs-14 mb-1">Bitcoin</h6>
+                                        <p class="text-muted mb-0">$18.7 Billions</p>
+                                    </div>
+                                    <div class="flex-shrink-0 text-end">
+                                        <h6 class="fs-14 mb-1">${{'BTC'|fetch_price }}</h6>
+                                    </div>
+                                </li><!-- end -->
+                                <li class="list-group-item d-flex align-items-center">
+                                    <div class="flex-shrink-0">
+                                        <img src="{% static 'asset/images/svg/crypto-icons/eth.svg' %}"
+                                            class="avatar-xs" alt="">
+                                    </div>
+                                    <div class="flex-grow-1 ms-3">
+                                        <h6 class="fs-14 mb-1">Ethereum</h6>
+                                        <p class="text-muted mb-0">$27.4 Billions</p>
+                                    </div>
+                                    <div class="flex-shrink-0 text-end">
+                                        <h6 class="fs-14 mb-1">${{'ETH'|fetch_price }}</h6>
+                                    </div>
+                                </li><!-- end -->
+                                <li class="list-group-item d-flex align-items-center">
+                                    <div class="flex-shrink-0">
+                                        <img src="{% static 'asset/images/svg/crypto-icons/bnb.svg' %}"
+                                            class="avatar-xs" alt="">
+                                    </div>
+                                    <div class="flex-grow-1 ms-3">
+                                        <h6 class="fs-14 mb-1">Binance</h6>
+                                        <p class="text-muted mb-0">$14.2 Billions</p>
+                                    </div>
+                                    <div class="flex-shrink-0 text-end">
+                                        <h6 class="fs-14 mb-1">${{'BNB'|fetch_price }}</h6>
+                                    </div>
+                                </li><!-- end -->
+                                <li class="list-group-item d-flex align-items-center">
+                                    <div class="flex-shrink-0">
+                                        <img src="{% static 'asset/images/svg/crypto-icons/ltc.svg' %}"
+                                            class="avatar-xs" alt="">
+                                    </div>
+                                    <div class="flex-grow-1 ms-3">
+                                        <h6 class="fs-14 mb-1">Litecoin</h6>
+                                        <p class="text-muted mb-0">$09.5 Billions</p>
+                                    </div>
+                                    <div class="flex-shrink-0 text-end">
+                                        <h6 class="fs-14 mb-1">${{'LTC'|fetch_price }}</h6>
+                                    </div>
+                                </li><!-- end -->
+                                <li class="list-group-item d-flex align-items-center">
+                                    <div class="flex-shrink-0">
+                                        <img src="{% static 'asset/images/svg/crypto-icons/aave.svg' %}"
+                                            class="avatar-xs" alt="">
+                                    </div>
+                                    <div class="flex-grow-1 ms-3">
+                                        <h6 class="fs-14 mb-1">Avalanche</h6>
+                                        <p class="text-muted mb-0">$12.9 Billions</p>
+                                    </div>
+                                    <div class="flex-shrink-0 text-end">
+                                        <h6 class="fs-14 mb-1">${{'AVAX'|fetch_price }}</h6>
+                                    </div>
+                                </li><!-- end -->
+                                <li class="list-group-item d-flex align-items-center">
+                                    <div class="flex-shrink-0">
+                                        <img src="{% static 'asset/images/svg/crypto-icons/doge.svg' %}"
+                                            class="avatar-xs" alt="">
+                                    </div>
+                                    <div class="flex-grow-1 ms-3">
+                                        <h6 class="fs-14 mb-1">Dogecoin</h6>
+                                        <p class="text-muted mb-0">$09.5 Billions</p>
+                                    </div>
+                                    <div class="flex-shrink-0 text-end">
+                                        <h6 class="fs-14 mb-1">${{'DOGE'|fetch_price }}</h6>
+                                    </div>
+                                </li><!-- end -->
+
+  
+                            </ul><!-- end ul -->
+                        </div><!-- end card body -->
+                    </div><!-- end card -->
+                </div><!-- end col --> {% endcomment %}
+
+                <div class="col-xxl-4">
+                    <div class="card card-height-100">
+                        <div class="card-header align-items-center d-flex">
+                            <h4 class="card-title mb-0 flex-grow-1">News Feed</h4>
+
+                        </div><!-- end card-header -->
+
+                        <div class="cryptohopper-web-widget" data-id="5" data-news_count="4" data-news_length="20">
+                        </div>
+                    </div><!-- end card -->
+                </div><!-- end col -->
+            </div><!-- end row -->
+
+        </div>
+        <!-- container-fluid -->
+    </div>
+    <!-- End Page-content -->
+
+    {% endblock content %}

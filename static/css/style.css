@@ -9626,12 +9626,8 @@ blockquote .author span {
   border-color: #fff;
   color: var(--brand_color);
 }
-.pricing_inner .price_item:hover {
-  background: var(--brand_color);
-}
-.pricing_inner .price_item:hover .price_header h6, .pricing_inner .price_item:hover .price_header p, .pricing_inner .price_item:hover .price, .pricing_inner .price_item:hover .price sub, .pricing_inner .price_item:hover .service_list li, .pricing_inner .price_item:hover .service_list li i {
-  color: #fff;
-}
+
+
 .pricing_inner.active .price_items.month {
   display: none;
 }
@@ -10328,9 +10324,7 @@ body.body_dark .feature-job-description, body.body_dark .feature-card-widget-8, 
 body.body_dark .calculator-widget-2 .calculator-result-widget, body.body_dark .pricing_inner .price_item, body.body_dark .loan-details-widget .dropzone {
   background: var(--bs-white);
 }
-body.body_dark .pricing_inner .price_item:hover {
-  background: var(--brand_color);
-}
+
 body.body_dark .banner-saas-area .shape_img, body.body_dark .app-showcase-area .shape_img {
   opacity: 0.3;
 }

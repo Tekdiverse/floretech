@@ -9,10 +9,13 @@
     <meta charset="UTF-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <title>protopit </title>
+    <title>Profitopit </title>
     <link rel="shortcut icon" href="img/favicon.png" type="image/x-icon">
 
     <!-- CSS here -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/3.7.0/remixicon.css" integrity="sha512-vgK7iuWG4Uq4GJHovntONntOoSduelAYImQTT3f0mvdUcI95qQgSmf4ldDhn/FNl3g/xouqOtsm/NxFqaTnxbA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}"/>
     <link rel="stylesheet" type="text/css" href="{% static 'css/elegant-icons.min.css' %}"/>
@@ -31,9 +34,17 @@
     <link rel="stylesheet" type="text/css" href="{% static 'css/flaticon.css' %}"/>
     <link rel="stylesheet" type="text/css" href="{% static 'css/ionicons.css' %}"/>
     <link rel="stylesheet" type="text/css" href="{% static 'css/responsive.css' %}"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
 </head>
 
 <body>
+    <style>
+        body{
+          font-family: 'Poppins', sans-serif;
+        }
+      </style>
     <!-- Preloader -->
     <div id="preloader" >
         <div id="ctn-preloader"  class="ctn-preloader">
@@ -41,7 +52,7 @@
                 <div class="spinner"></div>
                 <div class="text">
                     {% comment %} <img src="{% static 'img/logo/Logo-2.png' %}" alt=""> {% endcomment %}
-                    <h3>Protopit</h3>
+                    <h3>Profitopit</h3>
                 </div>
             </div>
             
@@ -54,24 +65,37 @@
             <nav class="navbar navbar-expand-lg ">
                 <div class="container">
                     <a class="navbar-brand" href="/">
-                        <img src="{% static 'img/logo/Logo-2.png' %}" srcset="img/logo/Logo-2@2x.png 2x" alt="logo">
+                        <img src="{% static 'img/logo-single-dark.png' %}" height="40" alt="logo">
                     </a>
-                    <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse"
+                    <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" 
                         data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="menu_toggle">
-                            <span class="hamburger">
-                                <span></span>
-                                <span></span>
-                                <span></span>
+                        <span class="menu_toggle" style="color: #fff;">
+                            <span class="hamburger" style="color: #fff;">
+                                <span style="background: #fff;"></span>
+                                <span style="background: #fff;"></span>
+                                <span style="background: #fff;"></span>
                             </span>
-                            <span class="hamburger-cross">
-                                <span></span>
-                                <span></span>
+                            <span class="hamburger-cross" style="color: #fff;">
+                                <span style="background: #fff;"></span>
+                                <span style="background: #fff;"></span>
                             </span>
                         </span>
                     </button>
-
+                    <style>
+                        @media only screen and (max-width: 767px) {
+                            .navbar-collapse{
+                                background: #03000b;
+                            }
+                        }
+                        
+                        /* Media query for devices with a minimum width of 768 pixels and a maximum width of 991 pixels (typically tablets) */
+                        @media only screen and (min-width: 768px) and (max-width: 991px) {
+                            .navbar-collapse{
+                                background: #03000b;
+                            }
+                        }
+                    </style>
                     <div class="collapse navbar-collapse" id="navbarSupportedContent" >
                         <ul class="navbar-nav menu ms-5 me-auto">
                             <li class="nav-item dropdown submenu " >
@@ -116,14 +140,57 @@
                                 <i class="arrow_carrot-down_alt2 mobile_dropdown_icon" aria-hidden="false"
                                     data-bs-toggle="dropdown"></i>
                                 <ul class="dropdown-menu ">
-                                    <li class="nav-item"><a class="nav-link" href="card.html">Cards</a></li>
-                                    <li class="nav-item"><a class="nav-link" href="about.html">About Us</a></li>
-                                    <li class="nav-item"><a class="nav-link" href="contact.html">Contact Us</a></li>
+                                    
+                                    <li class="nav-item"><a class="nav-link" href="">About Us</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="">Contact Us</a></li>
                                    
                                 </ul>
                             </li>
+                            <li class="nav-item"> <span id="google_translate_element" class="google_t"></span></li>
 
                         </ul>
+                        <script>
+                            // Function to determine if the page is in dark mode
+                            function isDarkMode() {
+                                // You can customize this logic based on your template or specific requirements
+                                // Here, I'm checking the background color of the body for simplicity
+                                var bodyBackgroundColor = window.getComputedStyle(document.body).backgroundColor;
+                                var rgbBackgroundColor = hexToRgb(bodyBackgroundColor);
+                                return isDarkColor(rgbBackgroundColor);
+                            }
+
+                            // Function to convert hex color to RGB
+                            function hexToRgb(hex) {
+                                hex = hex.replace(/^#/, '');
+                                var bigint = parseInt(hex, 16);
+                                var r = (bigint >> 16) & 255;
+                                var g = (bigint >> 8) & 255;
+                                var b = bigint & 255;
+                                return { r, g, b };
+                            }
+
+                            // Function to check if a color is dark
+                            function isDarkColor(color) {
+                                var luminance = 0.299 * color.r + 0.587 * color.g + 0.114 * color.b;
+                                return luminance < 128;
+                            }
+
+                            // Check if it's dark mode
+                            if (isDarkMode()) {
+                                // If in dark mode, add a class to the .goog-te-combo element
+                                var googTeCombo = document.querySelector('.goog-te-combo');
+                                if (googTeCombo) {
+                                    googTeCombo.classList.add('dark-mode');
+                                }
+                            } else {
+                                // If not in dark mode, you may want to remove the class (optional)
+                                var googTeCombo = document.querySelector('.goog-te-combo');
+                                if (googTeCombo) {
+                                    googTeCombo.classList.remove('dark-mode');
+                                }
+                            }
+
+                        </script>
                         <style>
                             @media only screen and (max-width: 600px) {
                                 .google_t {
@@ -134,9 +201,27 @@
                             
                                
                             }
+                            .VIpgJd-ZVi9od-l4eHX-hSRGPd{
+                                display: none;
+                            }
+                            
+                            .VIpgJd-ZVi9od-ORHb-OEVmcd.skiptranslate{
+                                
+                            }
+                            .goog-te-combo {
+                              height: 25px; 
+                              border: 1px solid #0b244b;
+                              border-radius: 1px;
+                              font-family: 'Poppins', sans-serif;
+                            }
+                            .js-darkmode-btn{
+                                transform: translateX(45px);
+                            }
                         </style>
-                        <div id="google_translate_element" class="theme-btn theme-btn-alt google_t" style="background: #f0f4fc;"></div>
-                        <div class="px-4 js-darkmode-btn mb-2 google_ta" style="width: 30px;" title="Toggle dark mode">
+
+                       
+                      
+                        <div class="px-4 js-darkmode-btn mb-2" style="width: 30px;" title="Toggle dark mode">
                             <label for="something" class="tab-btn tab-btns">
                                 <ion-icon name="moon-outline"></ion-icon>
                             </label>
@@ -164,7 +249,7 @@
             <div class="row">
                 <div class="col-lg-4 col-sm-6">
                     <div class="f-widget about-widget">
-                        <h4 class="f-widget-title" style="color: #fff;"><img src="" alt="logo"/></h4>
+                        <h4 class="f-widget-title" style="color: #fff;"><img src="{% static "img/logo-dark.png" %}" height="100" alt="logo"/></h4>
                         <div class="d-flex">
                             <div class="f-social" style="color: #fff;">
                                 <a href="#"><i class="social_facebook"></i></a>
@@ -182,9 +267,9 @@
                         <h4 class="f-widget-title" style="color: #fff;">Quick Links </h4>
                         <ul class="footer-link">
                             <li><a href="#">FAQs</a></li>
-                            <li><a href="#">Login</a></li>
+                            <li><a href="{% url "userauths:sign-in" %}">Login</a></li>
                             <li><a href="#">Contact Support</a></li>
-                            <li><a href="#">Create an account</a></li>
+                            <li><a href="{% url "userauths:sign-up" %}">Create an account</a></li>
                             <li><a href="#">Company Certification</a></li>
                         </ul>
                     </div>
@@ -195,7 +280,7 @@
                         <ul class="list-unstyled">
                             <li>214 Cleo Street Suite 832 <br>Botswana</li>
                             <li><a href="tel:235684154">+23 572-904-6013</a></li>
-                            <li><a href="mailto:protopit.support@webmail.com">protopit.support@webmail.com</a></li>
+                            <li><a href="mailto:Profitopit.support@webmail.com">Profitopit.support@webmail.com</a></li>
                         </ul>
                     </div>
                 </div>
@@ -209,7 +294,7 @@
                 <div class="col-lg-7 col-md-6">
                     <div class="d-flex">
                         
-                        <p>2023 <a href="#" style="color: #fff;">protopit</a>. All rights reserved</p>
+                        <p>2023 <a href="#" style="color: #fff;">Profitopit</a>. All rights reserved</p>
                     </div>
                 </div>
             
@@ -251,6 +336,6 @@
 </body>
 
 
-<!-- Mirrored from html-template.spider-themes.net/protopit/index-finance.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 12 Dec 2023 19:05:56 GMT -->
+<!-- Mirrored from html-template.spider-themes.net/Profitopit/index-finance.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 12 Dec 2023 19:05:56 GMT -->
 
 </html>
