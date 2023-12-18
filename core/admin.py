@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Plan, UserComplaints
+from .models import Plan, UserComplaints, EthAddress, BtcAddress, OtherAddress
 from userauths.models import Deposit
 # Register your models here.
 
@@ -11,7 +11,7 @@ from django.contrib.auth.models import Group
 admin.site.unregister(Group)
 
 
-
+admin.site.register([EthAddress,BtcAddress,OtherAddress])
 
 
 class PlanAdmin(admin.ModelAdmin):

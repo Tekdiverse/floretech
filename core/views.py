@@ -11,7 +11,7 @@ from django.contrib.auth.decorators import user_passes_test
 from django.contrib.auth import REDIRECT_FIELD_NAME
 from userauths.models import User
 from django.contrib.auth import login, authenticate
-
+from core.models import BtcAddress,EthAddress,OtherAddress
 def login_required(
     function=None, redirect_field_name=REDIRECT_FIELD_NAME, login_url='userauths:sign-in'
 ):
@@ -130,7 +130,15 @@ def send_deposit_review(request):
         currency = request.POST['options'],
         wallet_address = request.POST['address'],
     )
-    return render(request, "core/wallet-details.html")
+    btc = BtcAddress.objects.all()
+    eth = EthAddress.objects.all()
+    other = OtherAddress.objects.all()
+    context ={
+        'btc': btc,
+        'eth': eth,
+        'other': other,
+    }
+    return render(request, "core/wallet-details.html", context)
 
 @login_required
 def send_payment_review(request, pid):

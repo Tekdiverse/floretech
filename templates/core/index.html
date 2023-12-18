@@ -1,13 +1,37 @@
 {% extends "partials/base.html" %}
 {% load static %}
 {% load humanize %}
-{% block title %}Profitopit - Home{% endblock title %}
+{% block title %}Profitopit - Investing in your future{% endblock title %}
 {% block content %}
     <main>
 
         <!-- banner section -->
+        <style>
+            @media only screen and (max-width: 600px) {
+                /* Styles specific to small screens */
+            
+                /* For example, you can adjust the size of your image */
+                .shape_img {
+                    display: none;
+                }
+                #shape_img {
+                    display: block;
+                }
+            
+            }
+            @media only screen and (min-width: 600px) {
+                /* Styles specific to small screens */
+            
+                /* For example, you can adjust the size of your image */
+                #shape_img {
+                    display: none;
+                }
+            
+            }
+        </style>
         <section class="banner-saas-area" style="transform: translateY(-50px);">
             <img class="shape_img" src="{% static 'img/globe.jpeg' %}" alt="">
+            <img class="shape_img" id="shape_img" src="{% static 'img/globe2.jpg' %}" alt="">
             <div class="container">
                 <div class="row justify-content-center">
                     <div class="saas-banner-content text-center" style=" margin-bottom: 50px;">
@@ -110,34 +134,53 @@
         </section>
         <!-- banner section end-->
         <!-- Pricing area  -->
-        <section class="saas-pricing-area bg-white">
+        <style>
+            .price_item, .example-comment {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                text-align: center; /* Optional: Align text to the center */
+                margin: 0 auto; /* Optional: Center the entire div horizontally */
+            }
+            
+        </style>
+        <style>
+                                    
+            .list-unstyled li span{
+                color: #0050b2;
+            }
+            .resize-button {
+                transition: all 0.3s ease; /* Smooth transition for size change */
+            }
+            
+        
+            /* Define styles for the button on hover */
+            .resize-button:hover {
+                transform: scale(0.9); /* Scale down to 90% of the original size */
+            }
+    
+            /* Define styles for the button when pressed */
+            .resize-button:active {
+                transform: scale(0.9); /* Scale down to 80% of the original size */
+            }
+        </style>
+
+        <section class="loan-slider-area bg-white pb-130 pt-120">
             <div class="container">
                 <div class="saas-section-title text-center mb-60">
                     <h2>Our <span>Investment</span> plans</h2>
                     <p style="font-family: 'Poppins', sans-serif  !important;">Our investment plans is specially curated and tailored to accommodate your budget <br> and make you enjoy the benefits of investment in a large scale.</p>
                 </div>
-                <style>
-                    .price_item, .example-comment {
-                        display: flex;
-                        flex-direction: column;
-                        align-items: center;
-                        text-align: center; /* Optional: Align text to the center */
-                        margin: 0 auto; /* Optional: Center the entire div horizontally */
-                    }
-                    
-                </style>
-                <div class="pricing_inner" style="font-family: 'Poppins', sans-serif  !important;">
-                    <div class="price_items month" >
-                        <div class="row justify-content-center" >
-                            {% for p in plan %}
-                            <div class="col-xl-4 col-md-6" >
+                <div class="loan-slider pt-80">
+                    {% for p in plan %}
+                            <div class="single-slide" >
                                 <div class="price_item" >
                                     <div style="font-size: 35px;"><i class="ri-copper-diamond-line"></i></div>
                                     <div class="price_header">
                                         <h6>{{p.title}}</h6>
-                                        <p  style="margin-bottom: 20px; background: #373503; width: 180px; font-weight: 500px; border-radius: 5px;">1210 Users on this plan</p>
+                                        <p  style="margin-bottom: 20px; font-size: 16px; background: #373503; width: 180px; font-weight: 500px; padding: 5px; border-radius: 5px; color: #f6f6f6;">{{p.user_count}} Users on this plan</p>
                                     </div>
-                                    {% comment %} <div class="price">$15<sub>/month</sub></div> {% endcomment %}
+                            
                                     <style>
                                     
                                         .list-unstyled li span{
@@ -146,9 +189,7 @@
                                         .resize-button {
                                             transition: all 0.3s ease; /* Smooth transition for size change */
                                         }
-                                        .price_item{
-                                            pointer-events: none;
-                                        }
+                                        
                                     
                                         /* Define styles for the button on hover */
                                         .resize-button:hover {
@@ -161,56 +202,16 @@
                                         }
                                     </style>
                                     <ul class="service_list list-unstyled" style="font-family: 'Poppins', sans-serif  !important;">
-                                        <li style="font-family: 'Poppins', sans-serif  !important;">Minimum: <span>$100</span></li>
-                                        <li style="font-family: 'Poppins', sans-serif  !important;">Maximum: <span>$50,000</span></li>
-                                        <li style="font-family: 'Poppins', sans-serif  !important;">Interest Rate: <span>2.3% Daily</span></li>
-                                        <li style="font-family: 'Poppins', sans-serif  !important;">Referral Bonus: <span>10%</span></li>
-                                        <li style="font-family: 'Poppins', sans-serif  !important;">Contract Agreement: <span>7 Days</span></li>
+                                        <li style="font-family: 'Poppins', sans-serif  !important; margin-bottom: 17px;">Minimum: <span>${{p.least_amount|floatformat:2|intcomma}}</span></li>
+                                        <li style="font-family: 'Poppins', sans-serif  !important;  margin-bottom: 17px;">Maximum: <span>${{p.max_amount|floatformat:2|intcomma}}</span></li>
+                                        <li style="font-family: 'Poppins', sans-serif  !important;  margin-bottom: 17px;">Interest Rate: <span>{{p.percentage_return|floatformat:2}}% {{p.interval}}</span></li>
+                                        <li style="font-family: 'Poppins', sans-serif  !important;  margin-bottom: 17px;">Referral Bonus: <span>10%</span></li>
+                                        <li style="font-family: 'Poppins', sans-serif  !important;  margin-bottom: 17px;">Contract Agreement: <span>{{p.interval|capfirst}}</span></li>
                                     </ul>
-                                    <a href="" class="resize-button theme-btn theme-btn-alt" style="background: #0050b2; color: #fff; cursor: pointer;">Activate Plan</a>
+                                    <a href="{% url  "core:plan-detail" p.pid  %}" class="resize-button theme-btn theme-btn-alt" style="background: #0050b2; color: #fff; cursor: pointer;">Activate Plan</a>
                                 </div>
                             </div>
-                            {% endfor %}
-                            <!-- <div class="col-xl-4 col-md-6">
-                                <div class="price_item " style="pointer-events: none;">
-                                    <div style="font-size: 35px;"><i class="ri-copper-diamond-line"></i></div>
-
-                                    <div class="price_header">
-                                        <h6>Premium Plan</h6>
-                                        <p  style="margin-bottom: 20px; background: #373503; width: 180px; font-weight: 500px; border-radius: 5px;">1750 Users on this plan</p>
-                                    </div>
-                                    {% comment %} <div class="price">$25<sub>/month</sub></div> {% endcomment %}
-                                    <ul class="service_list list-unstyled" style="font-family: 'Poppins', sans-serif;">
-                                        <li style="font-family: 'Poppins', sans-serif;">Minimum: <span>$100</span></li>
-                                        <li style="font-family: 'Poppins', sans-serif;">Maximum: <span>$50,000</span></li>
-                                        <li style="font-family: 'Poppins', sans-serif;">Interest Rate: <span>2.3% Daily</span></li>
-                                        <li style="font-family: 'Poppins', sans-serif;">Referral Bonus: <span>10%</span></li>
-                                        <li style="font-family: 'Poppins', sans-serif;">Contract Agreement: <span>7 Days</span></li>
-                                    </ul>
-                                    <a href="" class=" theme-btn theme-btn-alt" style="background: #0050b2; color: #fff; cursor: pointer;">Activate Plan</a>
-                                </div>
-                            </div>
-                            <div class="col-xl-4 col-md-6">
-                                <div class="price_item " style="pointer-events: none; ">
-                                    <div style="font-size: 35px;"><i class="ri-copper-diamond-line"></i>
-                                    <div class="price_header">
-                                        <h6>Business Plan</h6>
-                                        <p style="margin-bottom: 20px; background: #373503; width: 180px; font-weight: 500px; border-radius: 5px;" class="example-comment">550 users on this plan</p>
-                                    </div>
-                                    {% comment %} <div class="price">$45<sub>/month</sub></div> {% endcomment %}
-                                    <ul class="service_list list-unstyled" style="font-family: 'Poppins', sans-serif;">
-                                        <li style="font-family: 'Poppins', sans-serif;" >Minimum: <span>$100</span></li>
-                                        <li style="font-family: 'Poppins', sans-serif;">Maximum: <span>$50,000</span></li>
-                                        <li style="font-family: 'Poppins', sans-serif;">Interest Rate: <span>2.3% Daily</span></li>
-                                        <li style="font-family: 'Poppins', sans-serif;">Referral Bonus: <span>10%</span></li>
-                                        <li style="font-family: 'Poppins', sans-serif;">Contract Agreement: <span>7 Days</span></li>
-                                    </ul>
-                                    <a href="" class=" theme-btn theme-btn-alt" style="background: #0050b2; color: #fff; cursor: pointer;">Activate Plan</a>
-                                </div>
-                            </div> -->
-                        </div>
-                    </div>
-
+                        {% endfor %}
                 </div>
             </div>
         </section>
@@ -683,7 +684,7 @@
             
             
         </section>
-        <section class="saas-faq-area mt-5" style="font-family: 'Poppins', sans-serif  !important;">
+        <section class="saas-faq-area mt-5" style="font-family: 'Poppins', sans-serif  !important; margin-bottom: 30px;">
             <div class="container">
             
                 <div class="saas-features-item row align-items-center flex-row-reverse">

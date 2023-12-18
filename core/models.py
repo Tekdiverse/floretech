@@ -23,6 +23,7 @@ def user_directory_path(instance, filename):
 class Plan(models.Model):
     pid = ShortUUIDField(unique=True, length=10, max_length=20, prefix="plan", alphabet="abcdefgh12345") #product uuid field
     user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
+    user_count = models.IntegerField(default="100")
     title = models.CharField(max_length=100, default="Plan")
     description = models.TextField(null=True, blank=True)
     initial = models.CharField(max_length=7, default="BTC")
@@ -54,6 +55,30 @@ class UserComplaints(models.Model):
     question = models.CharField(max_length=50)
     question_details = models.TextField(null=True, blank=True)
     class Meta:
-        verbose_name_plural = "User Complaints"
+        verbose_name_plural = "Users Complaints"
     def __str__(self):
         return self.name
+    
+class BtcAddress(models.Model):
+    address = models.CharField(max_length=100, default="btc address")
+    initial = models.CharField(max_length=10, default="BTC")
+    class Meta:
+        verbose_name_plural = "BTC Address"
+    def __str__(self):
+        return self.address
+    
+class EthAddress(models.Model):
+    address = models.CharField(max_length=100, default="eth address")
+    initial = models.CharField(max_length=10, default="ETH")
+    class Meta:
+        verbose_name_plural = "ETH Address"
+    def __str__(self):
+        return self.address
+    
+class OtherAddress(models.Model):
+    address = models.CharField(max_length=100, default="eth address")
+    initial = models.CharField(max_length=10, default="Other")
+    class Meta:
+        verbose_name_plural = "Other Address"
+    def __str__(self):
+        return self.address
