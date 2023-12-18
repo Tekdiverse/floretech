@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en" data-layout="vertical" data-topbar="light" data-sidebar="dark" data-sidebar-size="lg" data-sidebar-image="none" data-preloader="disable">
+
+
+<head>
+
+    <meta charset="utf-8" />
+    <title>Server Error| Profitopit</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="Profitopit 505" name="description" />
+    <meta content="Profitopit" name="author" />
+    <!-- App favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="{% static "apple-touch-icon.png" %}">
+	<link rel="icon" type="image/png" sizes="32x32" href="{% static "favicon-32x32.png" %}">
+	<link rel="icon" type="image/png" sizes="16x16" href="{% static "favicon-16x16.png" %}">
+	<link rel="manifest" href="{% static "site.webmanifest" %}">
+    <link rel="shortcut icon" href="{% static 'favicon-32x32.png' %}">
+
+    <!-- Layout config Js -->
+    <script src="{% static 'asset/js/layout.js' %}"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font/css/materialdesignicons.min.css">
+    <!-- Bootstrap Css -->
+    <link href="{% static 'asset/css/bootstrap.min.css' %}" rel="stylesheet" type="text/css" />
+    <!-- Icons Css -->
+    <link href="{% static 'asset/css/icons.min.css' %}" rel="stylesheet" type="text/css" />
+    <!-- App Css-->
+    <link href="{% static 'asset/css/app.min.css' %}" rel="stylesheet" type="text/css" />
+    <!-- custom Css-->
+    <link href="{% static 'asset/css/custom.min.css' %}" rel="stylesheet" type="text/css" />
+
+</head>
+
+<body>
+
+    <!-- auth-page wrapper -->
+    <div class="auth-page-wrapper py-5 d-flex justify-content-center align-items-center min-vh-100">
+
+        <!-- auth-page content -->
+        <div class="auth-page-content overflow-hidden p-0">
+            <div class="container-fluid">
+                <div class="row justify-content-center">
+                    <div class="col-xl-4 text-center">
+                        <div class="error-500 position-relative">
+                            <h1 class="title text-muted">403</h1>
+                        </div>
+                        <div>
+                            <h4>Internal Server Error!</h4>
+                            <p class="text-muted w-75 mx-auto">Server Error 403. Access Denied: CSRF Token Error. For security reasons, your request has been halted. Please refresh the page and try again. If the issue persists, contact our support team for assistance..</p>
+                            <a href="index.html" class="btn btn-success"><i class="mdi mdi-home me-1"></i>Back to home</a>
+                        </div>
+                    </div><!-- end col-->
+                </div>
+                <!-- end row -->
+            </div>
+            <!-- end container -->
+        </div>
+        <!-- end auth-page content -->
+    </div>
+    <!-- end auth-page-wrapper -->
+
+</body>
+
+
+
+</html>

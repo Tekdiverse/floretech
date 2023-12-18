@@ -9,7 +9,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <title>Profitopit </title>
+    <title>{% block title %}{% endblock title %} </title>
     <link rel="shortcut icon" href="img/favicon.png" type="image/x-icon">
 
     <!-- CSS here -->
@@ -72,13 +72,13 @@
                         aria-expanded="false" aria-label="Toggle navigation">
                         <span class="menu_toggle" style="color: #fff;">
                             <span class="hamburger" style="color: #fff;">
-                                <span style="background: #fff;"></span>
-                                <span style="background: #fff;"></span>
-                                <span style="background: #fff;"></span>
+                                <span style="background: #8085a9;"></span>
+                                <span style="background: #8085a9;"></span>
+                                <span style="background: #8085a9;"></span>
                             </span>
                             <span class="hamburger-cross" style="color: #fff;">
-                                <span style="background: #fff;"></span>
-                                <span style="background: #fff;"></span>
+                                <span style="background: #8085a9;"></span>
+                                <span style="background: #8085a9;"></span>
                             </span>
                         </span>
                     </button>
@@ -99,52 +99,31 @@
                     <div class="collapse navbar-collapse" id="navbarSupportedContent" >
                         <ul class="navbar-nav menu ms-5 me-auto">
                             <li class="nav-item dropdown submenu " >
-                                <a href="/" class="nav-link dropdown-toggle active" style="color: #8085a9;"
+                                <a href="/" class="nav-link dropdown-toggle" style="color: #8085a9;"
                                       >Home</a>
                               
                             
                             </li>
                             <li class="nav-item dropdown submenu">
-                                <a class="nav-link dropdown-toggle" style="color: #8085a9;" href="" role="button"
-                                    data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    Company
+                                <a class="nav-link dropdown-toggle" style="color: #8085a9;" href="{% url "core:contact" %}" role="button"
+                                     aria-haspopup="true" aria-expanded="false">
+                                    Contact
                                 </a>
-                                <i class="arrow_carrot-down_alt2 mobile_dropdown_icon" aria-hidden="false"
-                                    data-bs-toggle="dropdown"></i>
-
-                                <ul class="dropdown-menu">
-                                    <li class="nav-item"><a class="nav-link" href="">Invest</a></li>
-                                        
-                                    
-
-                                </ul>
+                            
                             </li>
                             <li class="nav-item dropdown submenu">
-                                <a class="nav-link dropdown-toggle" style="color: #8085a9;" href="" role="button"
-                                    data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <a class="nav-link dropdown-toggle" style="color: #8085a9;" href="{% url "core:faq" %}" role="button"
+                                     aria-haspopup="true" aria-expanded="false">
                                     FAQs
                                 </a>
-                                <i class="arrow_carrot-down_alt2 mobile_dropdown_icon" aria-hidden="false"
-                                    data-bs-toggle="dropdown"></i>
-                                <ul class="dropdown-menu">
-                                    <li class="nav-item"><a class="nav-link" href="career.html">Career</a></li>
-                               
-                                    </li>
-                                </ul>
+                                
                             </li>
                             <li class="nav-item dropdown submenu">
-                                <a class="nav-link dropdown-toggle" style="color: #8085a9;" href="#" role="button" data-bs-toggle="dropdown"
+                                <a class="nav-link dropdown-toggle" style="color: #8085a9;" href="{% url "core:about" %}" role="button" 
                                     aria-haspopup="true" aria-expanded="false">
-                                    Investment Plans
+                                    About Us
                                 </a>
-                                <i class="arrow_carrot-down_alt2 mobile_dropdown_icon" aria-hidden="false"
-                                    data-bs-toggle="dropdown"></i>
-                                <ul class="dropdown-menu ">
-                                    
-                                    <li class="nav-item"><a class="nav-link" href="">About Us</a></li>
-                                    <li class="nav-item"><a class="nav-link" href="">Contact Us</a></li>
-                                   
-                                </ul>
+                        
                             </li>
                             <li class="nav-item"> <span id="google_translate_element" class="google_t"></span></li>
 
@@ -243,34 +222,35 @@
 
 
 {% endblock content %}
-<footer class="saas-footer-area" style="background: #032251;">
+<footer class="saas-footer-area" style="background: #032251; margin-top: -110px;">
     <div class="saas-footer-top">
         <div class="container">
             <div class="row">
                 <div class="col-lg-4 col-sm-6">
                     <div class="f-widget about-widget">
                         <h4 class="f-widget-title" style="color: #fff;"><img src="{% static "img/logo-dark.png" %}" height="100" alt="logo"/></h4>
-                        <div class="d-flex">
-                            <div class="f-social" style="color: #fff;">
-                                <a href="#"><i class="social_facebook"></i></a>
-                                <a href="#"><i class="social_youtube"></i></a>
-                                <a href="#"><i class="social_instagram"></i></a>
-                            </div>
-                        </div>
+                        
                         <ul class="list-unstyled">
-                           <li>Let’s help you manage that portfolio with ease and a great profit return ..</li>
+                           <li style="font-family: 'Poppins', sans-serif  !important;">Let’s help you manage that portfolio with ease and a great profit return ..</li>
                         </ul>
+                    </div>
+                    <div class="d-flex">
+                        <div class="f-social" style="color: #fff;">
+                            <a href="#"><img src="{% static "img/facebook.png" %}" style="margin: 5px;" height="30" alt="logo"/></h4></a>
+                            <a href="#"><img src="{% static "img/linkedin.png" %}" style="margin: 5px;" height="30" alt="logo"/></h4></a>
+                            <a href="#"><img src="{% static "img/whatsapp.png" %}" style="margin: 5px;" height="30" alt="logo"/></h4></a>
+                        </div>
                     </div>
                 </div>
                 <div class="col-lg-4 col-sm-6">
                     <div class="f-widget link-widget">
                         <h4 class="f-widget-title" style="color: #fff;">Quick Links </h4>
-                        <ul class="footer-link">
-                            <li><a href="#">FAQs</a></li>
-                            <li><a href="{% url "userauths:sign-in" %}">Login</a></li>
-                            <li><a href="#">Contact Support</a></li>
-                            <li><a href="{% url "userauths:sign-up" %}">Create an account</a></li>
-                            <li><a href="#">Company Certification</a></li>
+                        <ul class="footer-link" >
+                            <li><a href="{% url "core:faq" %}" style="font-family: 'Poppins', sans-serif  !important;">FAQs</a></li>
+                            <li><a href="{% url "userauths:sign-in" %}" style="font-family: 'Poppins', sans-serif  !important;">Login</a></li>
+                            <li><a href="{% url "core:contact" %}" style="font-family: 'Poppins', sans-serif  !important;">Contact Support</a></li>
+                            <li><a href="{% url "userauths:sign-up" %}" style="font-family: 'Poppins', sans-serif  !important;">Create an account</a></li>
+                            <li><a href="#" style="font-family: 'Poppins', sans-serif  !important;">Company Certification</a></li>
                         </ul>
                     </div>
                 </div>
@@ -278,9 +258,9 @@
                     <div class="f-widget about-widget">
                         <h4 class="f-widget-title" style="color: #fff;">Contact Us</h4>
                         <ul class="list-unstyled">
-                            <li>214 Cleo Street Suite 832 <br>Botswana</li>
-                            <li><a href="tel:235684154">+23 572-904-6013</a></li>
-                            <li><a href="mailto:Profitopit.support@webmail.com">Profitopit.support@webmail.com</a></li>
+                            <li style="font-family: 'Poppins', sans-serif  !important;">214 Cleo Street Suite 832 <br>Botswana</li>
+                            <li><a href="tel:235684154" style="font-family: 'Poppins', sans-serif  !important;">+23 572-904-6013</a></li>
+                            <li><a href="mailto:Profitopit.support@webmail.com" style="font-family: 'Poppins', sans-serif  !important;">Profitopit.support@webmail.com</a></li>
                         </ul>
                     </div>
                 </div>
@@ -294,7 +274,7 @@
                 <div class="col-lg-7 col-md-6">
                     <div class="d-flex">
                         
-                        <p>2023 <a href="#" style="color: #fff;">Profitopit</a>. All rights reserved</p>
+                        <p style="font-family: 'Poppins', sans-serif  !important;">2023 <a href="#" style="color: #fff;">Profitopit</a>. All rights reserved</p>
                     </div>
                 </div>
             

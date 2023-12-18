@@ -3,13 +3,14 @@ import django
 from django.contrib import messages
 from .models import Plan, UserComplaints
 from core.forms import ContactForm
-from userauths.forms import TransactionForm, WithdrawForm
+from userauths.forms import TransactionForm, WithdrawForm, UserRegisterForm
 from userauths.models import Transaction, Deposit, Withdraw
 from decimal import Decimal
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.decorators import user_passes_test
 from django.contrib.auth import REDIRECT_FIELD_NAME
-
+from userauths.models import User
+from django.contrib.auth import login, authenticate
 
 def login_required(
     function=None, redirect_field_name=REDIRECT_FIELD_NAME, login_url='userauths:sign-in'
@@ -30,6 +31,8 @@ def login_required(
 
 def custom_error_page(request,exception):
     return render(request, 'errors/custom_error.html')
+def custom_error_page2(request,exception):
+    return render(request, 'errors/csrf_error.html')
 def custom_error_page1(request):
     return render(request, 'errors/500.html')
 def index(request):
@@ -39,8 +42,10 @@ def index(request):
     }
     return render(request, "core/index.html",context)
 
-
-
+def faq(request):
+    return render(request,"core/faq.html")
+def about(request):
+    return render(request,"core/about.html")
 def contact_view(request):
     if request.method == 'POST':
         form = ContactForm(request.POST)
@@ -76,8 +81,15 @@ def withdrawal_view(request):
     return render(request, "core/withdrawals.html", context)
 @login_required
 def profile_settings_view(request):
-
-    return render(request, "core/pages-profile-settings.html")
+    current_user = User.objects.get(id=request.user.id)
+    form = UserRegisterForm(request.POST or None, instance=current_user)
+    if form.is_valid():
+        form.save()
+        login(request, current_user)
+        messages.success(request, "Profile updated successfully ")
+        return redirect("core:dashboard")
+    
+    return render(request, "core/pages-profile-settings.html", {'form':form})
 
 
 @login_required

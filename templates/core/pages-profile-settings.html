@@ -61,22 +61,23 @@
                 <!-- Dark Logo-->
                 <a href="index.html" class="logo logo-dark">
                     <span class="logo-sm">
-                        <img src="{% static 'asset/images/logo-sm.png' %}" alt="" height="22">
+                        <img src="{% static 'img/logo-nice.png' %}" alt="" height="40">
                     </span>
                     <span class="logo-lg">
-                        <img src="{% static 'asset/images/logo-dark.png' %}" alt="" height="17">
+                        <img src="{% static 'img/logo-nice.png' %}" alt="" height="40">
                     </span>
                 </a>
                 <!-- Light Logo-->
                 <a href="/" class="logo logo-light">
                     <span class="logo-sm">
-                        <img src="{% static 'asset/images/logo-sm.png' %}" alt="" height="22">
+                        <img src="{% static 'img/logo-nice.png' %}" alt="" height="40">
                     </span>
                     <span class="logo-lg">
-                        <img src="{% static 'asset/images/site_icon.svg' %}" alt="" height="18">
+                        <img src="{% static 'img/logo-nice.png' %}" alt="" height="40">
                     </span>
                 </a>
-                <button type="button" class="btn btn-sm p-0 fs-20 header-item float-end btn-vertical-sm-hover" id="vertical-hover">
+                <button type="button" class="btn btn-sm p-0 fs-20 header-item float-end btn-vertical-sm-hover"
+                    id="vertical-hover">
                     <i class="ri-record-circle-line"></i>
                 </button>
             </div>
@@ -231,13 +232,15 @@
                                 <div class="card-body p-4">
                                     <div class="tab-content">
                                         <div class="tab-pane active" id="personalDetails" role="tabpanel">
-                       
-                                       
+                                         
+                                            <form id="registerForm" method="POST">
+                                                {% csrf_token %}
+
                                                 <div class="row">
                                                     <div class="col-lg-6">
                                                         <div class="mb-3">
-                                                            <label for="firstnameInput" class="form-label">First Name</label>
-                                                            <input type="text" class="form-control" id="firstnameInput" placeholder="Enter your firstname" value="{{user.username|capfirst}}" readonly>
+                                                            <label for="firstnameInput" class="form-label">Useraname</label>
+                                                            {{form.username}}
                                           
                                                         </div>
                                                     </div>
@@ -249,21 +252,34 @@
                                                     <div class="col-lg-6">
                                                         <div class="mb-3">
                                                             <label for="emailInput" class="form-label">Email Address</label>
-                                                            <input type="email" class="form-control" id="emailInput" placeholder="Enter your email" value="{{user.email}}" readonly>
+                                                            {{form.email}}
                                                         </div>
                                                     </div>
-                                                    <!--end col-->
-                                                    <!--end col-->
-                                     
-                                                    <!--end col-->
-                                                  
-                                                    <!--end col-->
-                                    
-                                                    <!--end col-->
+                                                    <div class="col-lg-6">
+                                                        <div class="mb-3">
+                                                            <label for="emailInput" class="form-label">Country</label>
+                                                            {{form.address}}
+                                                        </div>
+                                                    </div>
+
                                                     <div class="col-lg-4">
                                                         <div class="mb-3">
                                                             <label for="cityInput" class="form-label">Referral Code</label>
-                                                            <input type="text" class="form-control" id="cityInput" placeholder="City" value="user.re" readonly />
+                                                            <input type="text" class="form-control" id="cityInput" placeholder="City" value="{{user.referral_code}}" disabled />
+                                                       
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-4">
+                                                        <div class="mb-3">
+                                                            <label for="cityInput" class="form-label">Password</label>
+                                                            {{form.password1}}
+                                                       
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-4">
+                                                        <div class="mb-3">
+                                                            <label for="cityInput" class="form-label">Confirm Password</label>
+                                                            {{form.password2}}
                                                        
                                                         </div>
                                                     </div>
@@ -271,17 +287,13 @@
                                                     <div class="col-lg-4">
                                                         <div class="mb-3">
                                                             <label for="countryInput" class="form-label">Joining Date</label>
-                                                            <input type="text" class="form-control" id="countryInput" placeholder="Country" value="{{user.date_joined|date:"d M, Y"}}" readonly />
+                                                            <input type="text" class="form-control" id="countryInput" placeholder="Country" value="{{user.date_joined|date:"d M, Y"}}" disabled/>
                                                      
                                                         </div>
                                                     </div>
-                                                    <div class="col-lg-4">
-                                                        <div class="mb-3">
-                                                            <label for="countryInput" class="form-label">Country Code</label>
-                                                            <input type="text" class="form-control" id="countryInput" placeholder="Country" value="{{user.address}}" />
-                                                     
-                                                        </div>
-                                                    </div>
+                                                    <button class="btn rounded-2" style="background: #0050b2; color: #fff;" type="submit">Update Profile</button>
+                                                    
+                                                   
                                                     <!--end col-->
                                                     <!--end col-->
                                                     
@@ -289,6 +301,8 @@
                                                   
                                                     <!--end col-->
                                                 </div>
+                                                
+                                            </form>
                                                 <!--end row-->
                                         </div>
                                         <!--end tab-pane-->

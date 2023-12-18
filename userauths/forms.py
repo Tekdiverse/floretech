@@ -34,7 +34,7 @@ class UserRegisterForm(UserCreationForm):
     username = forms.CharField(widget=forms.TextInput(attrs={"placeholder": "Username","class": "form-control"}))
     email = forms.EmailField(widget=forms.EmailInput(attrs={"placeholder": "Email", "class": "form-control"}))
     address = forms.ChoiceField(choices=sorted_countries, widget=forms.Select(attrs={"placeholder": "Country", "class": "form-control"}))
-    referred = forms.CharField(widget=forms.TextInput(attrs={"placeholder": "*Optional","class": "form-control"}),validators=[validate_referral_code], required=True)
+    referred = forms.CharField(widget=forms.TextInput(attrs={"placeholder": "*Optional","class": "form-control"}),validators=[validate_referral_code], required=False)
     password1 = forms.CharField(widget=forms.PasswordInput(attrs={"placeholder": "Password", "class": "form-control","id":"password-field"}))
     password2 = forms.CharField(widget=forms.PasswordInput(attrs={"placeholder": "Confirm Password", "class": "form-control","id":"password-field"}))
     

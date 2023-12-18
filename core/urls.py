@@ -1,7 +1,7 @@
 from django.urls import path
 from .views import (index, contact_view, dashboard_view, profile_settings_view, 
                     profile_view, plan_detail_view, send_payment_review, 
-                    plans_view,deposit_view,send_deposit_review,transaction_view,deposits_view,search_view,withdraw_view,withdrawal_view)
+                    plans_view,deposit_view,send_deposit_review,transaction_view,deposits_view,search_view,withdraw_view,withdrawal_view,faq,about)
 
 app_name = "core"
 
@@ -9,6 +9,8 @@ urlpatterns = [
     path('', index, name='index'),
     path('home/', index, name='index'),
     path('contact', contact_view, name='contact'),
+    path('faq', faq, name='faq'),
+    path('about', about, name='about'),
     path('app/dashboard',dashboard_view, name='dashboard'),
     path('app/dashboard/',dashboard_view, name='dashboard'),
     path('app/deposit',deposit_view, name='deposit'),
@@ -24,5 +26,7 @@ urlpatterns = [
     path('app/withdrawals', withdrawal_view, name="withdrawals"),
     path("send-payment-review/<pid>/", send_payment_review, name="send-payment-review"),
     path('search/', search_view, name='search'),
+
+
 
 ]

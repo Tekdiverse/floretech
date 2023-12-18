@@ -1,6 +1,7 @@
 {% extends "partials/base.html" %}
 {% load static %}
 {% load humanize %}
+{% block title %}Profitopit - Home{% endblock title %}
 {% block content %}
     <main>
 
@@ -19,8 +20,13 @@
                                 class="wow fadeInUp theme-btn theme-btn-lg mt-50">Create Account
                                 <i class="arrow_right-up"></i>
                             </a>
+                            {% if user.is_authenticated %}
+                            <a href="{% url "core:dashboard" %}" style="background: transparent; color: #fff;"class="wow fadeInUp mt-50 theme-btn theme-btn-lg theme-btn-alt"
+                                data-wow-delay="0.2s">Dashboard</a>
+                            {% else %}
                             <a href="{% url "userauths:sign-in" %}" style="background: transparent; color: #fff;"class="wow fadeInUp mt-50 theme-btn theme-btn-lg theme-btn-alt"
                                 data-wow-delay="0.2s">Login</a>
+                            {% endif %}
                         </div>
                     </div>
                 </div>
@@ -56,7 +62,7 @@
             <div class="container" >
                 <div class="saas-section-title text-center mb-60">
                     <h2>Our <span>Services</span></h2>
-                    <p>We offer a range of services to help you manage your finance and investments with our<br> 21st century digital technology tools.</p>
+                    <p style="font-family: 'Poppins', sans-serif;">We offer a range of services to help you manage your finance and investments with our<br> 21st century digital technology tools.</p>
                 </div>
                 <style>
                     .hover-el{
@@ -72,9 +78,9 @@
                                 <i class="ri-briefcase-line" style="background: linear-gradient(to bottom, #000000, #0752C1); padding: 20px; border-radius: 50%; "></i>
                             </div>
                             <h4 style="color: #fff;">Manage Portfolio</h4>
-                            <p style="font-size: 12px; font-weight: 400; color: #fff;">At PROFITOPIT, we understand that managing your portfolio can be a daunting task and that’s why we have designed our platform to make it easy to track investments and make adjustments as needed. Whether you are just starting out or an experienced investor, our platform will help you stay on top of your portfolio.
+                            <p style="font-size: 12px; font-weight: 400; color: #fff; font-family: 'Poppins', sans-serif;" >At PROFITOPIT, we understand that managing your portfolio can be a daunting task and that’s why we have designed our platform to make it easy to track investments and make adjustments as needed. Whether you are just starting out or an experienced investor, our platform will help you stay on top of your portfolio.
                             </p>
-                            <a href="" style="border-radius: 30px; width: 220px; margin-top: 15px; background: grey; color: #fff;" class="price_btn theme-btn theme-btn-alt">Choose Plan</a>
+                            <a href="{% url "core:plans" %}" style="border-radius: 30px; width: 220px; margin-top: 15px; background: grey; color: #fff;" class="price_btn theme-btn theme-btn-alt">Choose Plan</a>
                         </div>
                     </div>
                     <div class="col-lg-4" style="margin-bottom: 70px;">
@@ -83,9 +89,9 @@
                                 <i class="ri-line-chart-line" style="background: linear-gradient(to bottom, #000000, #0752C1); padding: 20px; border-radius: 50%; "></i>
                             </div>
                             <h4 style="color: #fff;">Investment Decisions</h4>
-                            <p style="font-size: 12px; font-weight: 400; color: #fff;">Making investment decisions in the world of cryptocurrency can be challenging, but it can also be highly rewarding. With the right right approach and a clear understanding of the market, we will help you make smart decisions that will help you reach your financial goals and curate a very profitable portfolio record for you.
+                            <p style="font-size: 12px; font-weight: 400; color: #fff; font-family: 'Poppins', sans-serif;">Making investment decisions in the world of cryptocurrency can be challenging, but it can also be highly rewarding. With the right right approach and a clear understanding of the market, we will help you make smart decisions that will help you reach your financial goals and curate a very profitable portfolio record for you.
                             </p>
-                            <a href="" style="border-radius: 30px; width: 220px; margin-top: 15px; background: grey; color: #fff;" class="price_btn theme-btn theme-btn-alt">Choose Plan</a>
+                            <a href="{% url "core:plans" %}" style="border-radius: 30px; width: 220px; margin-top: 15px; background: grey; color: #fff;" class="price_btn theme-btn theme-btn-alt">Choose Plan</a>
                         </div>
                     </div>
                     <div class="col-lg-4">
@@ -94,9 +100,9 @@
                                 <i class="ri-wallet-3-line" style="background: linear-gradient(to bottom, #000000, #0752C1); padding: 20px; border-radius: 50%; "></i>
                             </div>
                             <h4 style="color: #fff;">Profit Making</h4>
-                            <p style="font-size: 12px; font-weight: 400; color: #fff;">After helping you make the right investment decision ad helping you understand the risks and rewards involved, We then set out on a profit making venture for you through our diverse investment plans that are well curated and optimised for full user satisfaction and a good ROI. PROFITOPIT is always here for you.
+                            <p style="font-size: 12px; font-weight: 400; color: #fff; font-family: 'Poppins', sans-serif;">After helping you make the right investment decision ad helping you understand the risks and rewards involved, We then set out on a profit making venture for you through our diverse investment plans that are well curated and optimised for full user satisfaction and a good ROI. PROFITOPIT is always here for you.
                             </p>
-                            <a href="" style="border-radius: 30px; width: 220px; margin-top: 15px; background: grey; color: #fff;" class="price_btn theme-btn theme-btn-alt">Choose Plan</a>
+                            <a href="{% url "core:plans" %}" style="border-radius: 30px; width: 220px; margin-top: 15px; background: grey; color: #fff;" class="price_btn theme-btn theme-btn-alt">Choose Plan</a>
                         </div>
                     </div>
                 </div>
@@ -108,7 +114,7 @@
             <div class="container">
                 <div class="saas-section-title text-center mb-60">
                     <h2>Our <span>Investment</span> plans</h2>
-                    <p>Our investment plans is specially curated and tailored to accommodate your budget <br> and make you enjoy the benefits of investment in a large scale.</p>
+                    <p style="font-family: 'Poppins', sans-serif  !important;">Our investment plans is specially curated and tailored to accommodate your budget <br> and make you enjoy the benefits of investment in a large scale.</p>
                 </div>
                 <style>
                     .price_item, .example-comment {
@@ -120,14 +126,15 @@
                     }
                     
                 </style>
-                <div class="pricing_inner" >
+                <div class="pricing_inner" style="font-family: 'Poppins', sans-serif  !important;">
                     <div class="price_items month" >
                         <div class="row justify-content-center" >
+                            {% for p in plan %}
                             <div class="col-xl-4 col-md-6" >
                                 <div class="price_item" >
                                     <div style="font-size: 35px;"><i class="ri-copper-diamond-line"></i></div>
                                     <div class="price_header">
-                                        <h6>Basic Plan</h6>
+                                        <h6>{{p.title}}</h6>
                                         <p  style="margin-bottom: 20px; background: #373503; width: 180px; font-weight: 500px; border-radius: 5px;">1210 Users on this plan</p>
                                     </div>
                                     {% comment %} <div class="price">$15<sub>/month</sub></div> {% endcomment %}
@@ -153,17 +160,18 @@
                                             transform: scale(0.9); /* Scale down to 80% of the original size */
                                         }
                                     </style>
-                                    <ul class="service_list list-unstyled">
-                                        <li>Minimum: <span>$100</span></li>
-                                        <li>Maximum: <span>$50,000</span></li>
-                                        <li>Interest Rate: <span>2.3% Daily</span></li>
-                                        <li>Referral Bonus: <span>10%</span></li>
-                                        <li>Contract Agreement: <span>7 Days</span></li>
+                                    <ul class="service_list list-unstyled" style="font-family: 'Poppins', sans-serif  !important;">
+                                        <li style="font-family: 'Poppins', sans-serif  !important;">Minimum: <span>$100</span></li>
+                                        <li style="font-family: 'Poppins', sans-serif  !important;">Maximum: <span>$50,000</span></li>
+                                        <li style="font-family: 'Poppins', sans-serif  !important;">Interest Rate: <span>2.3% Daily</span></li>
+                                        <li style="font-family: 'Poppins', sans-serif  !important;">Referral Bonus: <span>10%</span></li>
+                                        <li style="font-family: 'Poppins', sans-serif  !important;">Contract Agreement: <span>7 Days</span></li>
                                     </ul>
                                     <a href="" class="resize-button theme-btn theme-btn-alt" style="background: #0050b2; color: #fff; cursor: pointer;">Activate Plan</a>
                                 </div>
                             </div>
-                            <div class="col-xl-4 col-md-6">
+                            {% endfor %}
+                            <!-- <div class="col-xl-4 col-md-6">
                                 <div class="price_item " style="pointer-events: none;">
                                     <div style="font-size: 35px;"><i class="ri-copper-diamond-line"></i></div>
 
@@ -172,12 +180,12 @@
                                         <p  style="margin-bottom: 20px; background: #373503; width: 180px; font-weight: 500px; border-radius: 5px;">1750 Users on this plan</p>
                                     </div>
                                     {% comment %} <div class="price">$25<sub>/month</sub></div> {% endcomment %}
-                                    <ul class="service_list list-unstyled">
-                                        <li>Minimum: <span>$100</span></li>
-                                        <li>Maximum: <span>$50,000</span></li>
-                                        <li>Interest Rate: <span>2.3% Daily</span></li>
-                                        <li>Referral Bonus: <span>10%</span></li>
-                                        <li>Contract Agreement: <span>7 Days</span></li>
+                                    <ul class="service_list list-unstyled" style="font-family: 'Poppins', sans-serif;">
+                                        <li style="font-family: 'Poppins', sans-serif;">Minimum: <span>$100</span></li>
+                                        <li style="font-family: 'Poppins', sans-serif;">Maximum: <span>$50,000</span></li>
+                                        <li style="font-family: 'Poppins', sans-serif;">Interest Rate: <span>2.3% Daily</span></li>
+                                        <li style="font-family: 'Poppins', sans-serif;">Referral Bonus: <span>10%</span></li>
+                                        <li style="font-family: 'Poppins', sans-serif;">Contract Agreement: <span>7 Days</span></li>
                                     </ul>
                                     <a href="" class=" theme-btn theme-btn-alt" style="background: #0050b2; color: #fff; cursor: pointer;">Activate Plan</a>
                                 </div>
@@ -190,16 +198,16 @@
                                         <p style="margin-bottom: 20px; background: #373503; width: 180px; font-weight: 500px; border-radius: 5px;" class="example-comment">550 users on this plan</p>
                                     </div>
                                     {% comment %} <div class="price">$45<sub>/month</sub></div> {% endcomment %}
-                                    <ul class="service_list list-unstyled">
-                                        <li>Minimum: <span>$100</span></li>
-                                        <li>Maximum: <span>$50,000</span></li>
-                                        <li>Interest Rate: <span>2.3% Daily</span></li>
-                                        <li>Referral Bonus: <span>10%</span></li>
-                                        <li>Contract Agreement: <span>7 Days</span></li>
+                                    <ul class="service_list list-unstyled" style="font-family: 'Poppins', sans-serif;">
+                                        <li style="font-family: 'Poppins', sans-serif;" >Minimum: <span>$100</span></li>
+                                        <li style="font-family: 'Poppins', sans-serif;">Maximum: <span>$50,000</span></li>
+                                        <li style="font-family: 'Poppins', sans-serif;">Interest Rate: <span>2.3% Daily</span></li>
+                                        <li style="font-family: 'Poppins', sans-serif;">Referral Bonus: <span>10%</span></li>
+                                        <li style="font-family: 'Poppins', sans-serif;">Contract Agreement: <span>7 Days</span></li>
                                     </ul>
                                     <a href="" class=" theme-btn theme-btn-alt" style="background: #0050b2; color: #fff; cursor: pointer;">Activate Plan</a>
                                 </div>
-                            </div>
+                            </div> -->
                         </div>
                     </div>
 
@@ -270,7 +278,7 @@
             <div class="container">
                 <div class="saas-section-title text-center mb-60">
                     <h2>Why <span>Choose</span> Us</h2>
-                    <p>With a reputable force in the world of Investment portfolio management , Risk <br>management and Investment Decision, Here is why you must choose us...</p>
+                    <p style="font-family: 'Poppins', sans-serif  !important;">With a reputable force in the world of Investment portfolio management , Risk <br>management and Investment Decision, Here is why you must choose us...</p>
                 </div>
                 <style>
                     @media only screen and (max-width: 600px) {
@@ -317,13 +325,13 @@
                                 <div class="features-icon-box wow fadeInUp" data-wow-delay="0.2s" style="margin-bottom: -10px; margin-right: 10px;" >
                                     {% comment %} <div class="round_icon"><img src="{% static 'img/saas-app/hand.png' %}" alt=""></div> {% endcomment %}
                             
-                                        <a href="{% url "userauths:sign-up" %}" class="theme-btn theme-btn-lg" style="width: 100%;">Join Us Now</a>
+                                        <a href="{% url "userauths:sign-up" %}" class="theme-btn theme-btn-lg" style="width: 100%; font-family: 'Poppins', sans-serif  !important;">Join Us Now</a>
                                 
                                 </div>
                                 <div class="features-icon-box wow fadeInUp" data-wow-delay="0.4s" style="margin-top: -50px; " >
                                     {% comment %} <div class="round_icon"><img src="{% static 'img/saas-app/travel_explore.png' %}" alt=""></div> {% endcomment %}
                                 
-                                        <a class="theme-btn theme-btn-alt theme-btn-lg  mt-50" style="border: 1px solid #1d6bca; width: 100%;">Get Certificate</a>
+                                        <a class="theme-btn theme-btn-alt theme-btn-lg  mt-50" style="border: 1px solid #1d6bca; width: 100%; font-family: 'Poppins', sans-serif  !important;">Get Certificate</a>
         
                                 </div>
                             </div>
@@ -340,28 +348,36 @@
             <div class="container">
                 <div class="saas-section-title text-center mb-60" >
                     <h2><span>Customer’s </span>Testimonials</h2>
-                    <p>Check out some of the feedbacks we get from our esteemed users all over the world who <br>have entrusted their investment portfolio into our hands.</p>
+                    <p style="font-family: 'Poppins', sans-serif  !important;">Check out some of the feedbacks we get from our esteemed users all over the world who <br>have entrusted their investment portfolio into our hands.</p>
                 </div>
                 <div class="row">
                     <div class="col-lg-6">
                         <div class="app-showcase-item">
-                            <div class="round wow floatingBubbles"></div>
-                            
-                            <p class="" >PROFITOPIT is a very good and reputable company that upholds professionalism to the core . They handle all my investment portfolio and i have never been more happier. I highly recommend them to any entrepreneur that wants a well balanced and curated portfolio..</p>
+                            <img src="{% static "img/quote-1.png" %}" height="30" style="margin-bottom: 10px;"/>
+                            <div class="round wow floatingBubbles" data-wow-delay="0.3s"></div>
+                            <p class="" style="font-family: 'Poppins', sans-serif  !important;">PROFITOPIT is a very good and reputable company that upholds professionalism to the core . They handle all my investment portfolio and i have never been more happier. I highly recommend them to any entrepreneur that wants a well balanced and curated portfolio..</p>
                             <div style="text-align: center; color: #0752C1;">
-                                <p class=" mb-0" style="color: #0752C1;" data-wow-delay="0.6s">John Hopkins</p>
+                                <p class=" mb-0" style="color: #0752C1;" >John Hopkins</p>
                                 <p class="" style="margin-bottom: 10px; color: #0752C1;">(CEO) Pakins company</p><br>
+                                <div style="align-items: right; justify-content: right; text-align: right;">
+                                    <img src="{% static "img/quote-2.png" %}" height="40"/>
+                                </div>
                             </div>
+                            
                         </div>
                     </div>
                     <div class="col-lg-6">
                         <div class="app-showcase-item box-two">
-                            <div class="round wow floatingBubbles"></div>
+                            <img src="{% static "img/quote-1.png" %}" height="30" style="margin-bottom: 10px;"/>
+                            <div class="round wow floatingBubbles" data-wow-delay="0.5s"></div>
                             
-                            <p class="" >PROFITOPIT is a very good and reputable company that upholds professionalism to the core . They handle all my investment portfolio and i have never been more happier. I highly recommend them to any entrepreneur that wants a well balanced and curated portfolio..</p>
+                            <p class="" style="font-family: 'Poppins', sans-serif  !important;" >PROFITOPIT is a very good and reputable company that upholds professionalism to the core . They handle all my investment portfolio and i have never been more happier. I highly recommend them to any entrepreneur that wants a well balanced and curated portfolio..</p>
                             <div style="text-align: center; color: #0752C1;">
-                                <p class=" mb-0" style="color: #0752C1;" data-wow-delay="0.6s">John Hopkins</p>
+                                <p class=" mb-0" style="color: #0752C1;" >John Hopkins</p>
                                 <p class="" style="margin-bottom: 10px; color: #0752C1;">(CEO) Pakins company</p><br>
+                                <div style="align-items: right; justify-content: right; text-align: right;">
+                                    <img src="{% static "img/quote-2.png" %}" height="40"/>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -573,7 +589,7 @@
                 padding: 2px; /* Add some padding for spacing */
             }
         </style>
-        <section class="saas-subscribe-area cta-4" style="background-image: url(static/img/saas-app/bg-image.png); ">
+        <section class="saas-subscribe-area cta-4" style="background-image: url(static/img/saas-app/bg-image.png);">
             <div class="container" style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
                 <div class="cta-content">
                     <a href="#" id="playButton">
@@ -667,7 +683,7 @@
             
             
         </section>
-        <section class="saas-faq-area mt-5">
+        <section class="saas-faq-area mt-5" style="font-family: 'Poppins', sans-serif  !important;">
             <div class="container">
             
                 <div class="saas-features-item row align-items-center flex-row-reverse">
@@ -678,8 +694,8 @@
                             <div class="d-flex">
                                 <div class="features-icon-box feedback d-flex wow fadeInUp" >
                                     <div class="text">
-                                        <h4>$47.6M</h4>
-                                        <p>Revenue Generated</p>
+                                        <h4 style="font-family: 'Poppins', sans-serif  !important;">$47.6M</h4>
+                                        <p style="font-family: 'Poppins', sans-serif  !important;">Revenue Generated</p>
                                     </div>
                                 </div>
                               
@@ -693,8 +709,8 @@
                                 
                                 <div class="features-icon-box feedback d-flex wow fadeInUp" >
                                     <div class="text">
-                                        <h4>1.4k+</h4>
-                                        <p>Experienced Professional Investment Managers</p>
+                                        <h4 style="font-family: 'Poppins', sans-serif  !important;">1.4k+</h4>
+                                        <p style="font-family: 'Poppins', sans-serif  !important;">Experienced Professional Investment Managers</p>
                                     </div>
                                 </div>
                             </div>
@@ -706,8 +722,8 @@
                             <div class="d-flex">
                                 <div class="features-icon-box feedback d-flex wow fadeInUp">
                                     <div class="text">
-                                        <h4>13k+</h4>
-                                        <p>Happy Customers</p>
+                                        <h4 style="font-family: 'Poppins', sans-serif  !important;">13k+</h4>
+                                        <p style="font-family: 'Poppins', sans-serif  !important;">Happy Customers</p>
                                     </div>
                                 </div>
                         

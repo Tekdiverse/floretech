@@ -23,7 +23,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = "django-insecure-7kyz!r@nwyjxdq!*a%^wp(hg!yf=x2!rz9t@ho)%x*grxac4dn"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
@@ -161,4 +161,13 @@ AUTH_USER_MODEL = 'userauths.User'
 SESSION_COOKIE_AGE = 60 * 60
 
 
-DEBUG_PROPAGATE_EXCEPTIONS = True
+DEBUG_PROPAGATE_EXCEPTIONS = False
+
+
+# Email configuration
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.elasticemail.com'
+EMAIL_PORT = 2525  # Use the appropriate port for your SMTP server
+EMAIL_HOST_USER = 'info@profitopit.net'  # Your email address
+EMAIL_HOST_PASSWORD = '346AAEF1C6DD25D4A46BB2E6A0C371FD37EB'  # Your email password
+DEFAULT_FROM_EMAIL = 'support@profitopit.net'  # Default "from" address for automated emails

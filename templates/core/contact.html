@@ -1,0 +1,50 @@
+{% extends "partials/base.html" %}
+{% load static %}
+{% load humanize %}
+{% block title %}Profitopit - Contact Us{% endblock title %}
+{% block content %}
+    <main>
+
+
+
+        <section class="saas-faq-area bg-white"  >
+        <form  action="{% url "core:contact"%}" method="POST">
+            {% csrf_token %}
+            <style>
+                .form-control{
+                    font-family: 'Poppins', sans-serif  !important;
+                }
+            </style>
+            <div class="container" style="transform: translateY(90px); margin-bottom: 150px;">
+                <div class="saas-section-title text-center mb-60 wow fadeInUp" data-wow-delay="0.2s" >
+                    <h2 >Contact <span>Us</span></h2>
+                    <p style="font-family: 'Poppins', sans-serif  !important;">Contact Us: Providing You with Direct Access to Our Team for Assistance and Information</p>
+                </div>
+                <div class="mb-3">
+                    <label for="exampleFormControlInput1" class="form-label">Name</label>
+                    {{form.name}}
+                </div>
+                <div class="mb-3">
+                    <label for="exampleFormControlInput2" class="form-label">Email Address</label>
+                    {{form.email}}
+                </div>
+                <div class="mb-3">
+                    <label for="exampleFormControlInput2" class="form-label">Your Question Is About?</label>
+                    {{form.question}}
+                </div>
+                  <div class="mb-3">
+                    <label for="exampleFormControlTextarea1" class="form-label">More Details</label>
+                    {{form.question_details}}
+                  </div>
+
+                  <div class="d-grid gap-2">
+                    <button class="btn btn-primary" type="button">Submit</button>
+                  </div>
+            </div>
+            
+        </form>
+        </section>
+        <!-- footer start -->
+	</main>
+    <script src="https://cdn.jsdelivr.net/npm/lucide@0.295.0/dist/cjs/lucide.min.js"></script>
+    {% endblock content %}
