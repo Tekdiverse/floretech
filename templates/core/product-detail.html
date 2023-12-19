@@ -102,7 +102,7 @@
                 <li class="nav-item">
                     <a href="{% url "core:profile" %}" class="nav-link menu-link"  aria-controls="sidebarPages" >
                         <i class="ri-account-circle-line"></i>
-                        <span data-key="t-pages">My Account</span>
+                        <span data-key="t-pages" style="font-family: 'Poppins', sans-serif  !important;">My Account</span>
                     </a>
                   
                 </li>
@@ -110,56 +110,56 @@
                 <li class="nav-item">
                     <a href="{% url "core:deposit" %}" class="nav-link menu-link"  aria-controls="sidebarPages" >
                         <i class="ri-bank-fill"></i>
-                        <span data-key="t-pages">Deposit</span>
+                        <span data-key="t-pages" style="font-family: 'Poppins', sans-serif  !important;">Deposit</span>
                     </a>
                   
                 </li>
                 <li class="nav-item">
                     <a href="{% url "core:withdraw" %}" class="nav-link menu-link"  aria-controls="sidebarPages" >
                         <i class="ri-arrow-left-down-line"></i>
-                        <span data-key="t-pages">Withdraw</span>
+                        <span data-key="t-pages" style="font-family: 'Poppins', sans-serif  !important;">Withdraw</span>
                     </a>
                   
                 </li>
                 <li class="nav-item">
                     <a href="{% url "core:deposits" %}" class="nav-link menu-link"  aria-controls="sidebarPages" >
                         <i class="ri-exchange-fill"></i>
-                        <span data-key="t-pages">Deposits</span>
+                        <span data-key="t-pages" style="font-family: 'Poppins', sans-serif  !important;">Deposits</span>
                     </a>
                   
                 </li>
                 <li class="nav-item">
                     <a href="{% url "core:withdrawals" %}" class="nav-link menu-link"  aria-controls="sidebarPages" >
                         <i class="ri-money-dollar-circle-line"></i>
-                        <span data-key="t-pages">Withdrawals</span>
+                        <span data-key="t-pages" style="font-family: 'Poppins', sans-serif  !important;">Withdrawals</span>
                     </a>
                   
                 </li>
                 <li class="nav-item">
                     <a href="{% url "core:plans" %}" class="nav-link menu-link"  aria-controls="sidebarPages" >
                         <i class="ri-line-chart-fill"></i>
-                        <span data-key="t-pages">Investment Plans</span>
+                        <span data-key="t-pages" style="font-family: 'Poppins', sans-serif  !important;">Investment Plans</span>
                     </a>
                   
                 </li>
                 <li class="nav-item">
                     <a href="{% url "core:transactions" %}" class="nav-link menu-link"  aria-controls="sidebarPages" >
                         <i class="ri-history-fill"></i>
-                        <span data-key="t-pages">Transaction History</span>
+                        <span data-key="t-pages" style="font-family: 'Poppins', sans-serif  !important;">Transaction History</span>
                     </a>
                   
                 </li>
                 <li class="nav-item">
                     <a href="{% url "core:profile" %}" class="nav-link menu-link"  aria-controls="sidebarPages" >
                         <i class="ri-settings-3-fill"></i>
-                        <span data-key="t-pages">Settings</span>
+                        <span data-key="t-pages" style="font-family: 'Poppins', sans-serif  !important;">Settings</span>
                     </a>
                   
                 </li>
                 <li class="nav-item">
                     <a href="{% url "core:referrals" %}" class="nav-link menu-link"  aria-controls="sidebarPages" >
                         <i class="ri-login-circle-fill"></i>
-                        <span data-key="t-pages">Referrals</span>
+                        <span data-key="t-pages" style="font-family: 'Poppins', sans-serif  !important;">Referrals</span>
                     </a>
                   
                 </li>
@@ -167,7 +167,7 @@
                 <li class="nav-item">
                     <a href="{% url "userauths:lockscreen"%}" class="nav-link menu-link" aria-controls="sidebarPages" >
                         <i class="ri-lock-fill"></i>
-                        <span data-key="t-pages">Lock Screen</span>
+                        <span data-key="t-pages" style="font-family: 'Poppins', sans-serif  !important;">Lock Screen</span>
                     </a>
 
                 </li>
@@ -236,8 +236,8 @@
                                         {% csrf_token %}
                                         <div class="mb-3">
                                             {% comment %} <label for="card-holder-input" class="form-label">Account Holder</label> {% endcomment %}
-                                            <input type="text" class="form-control" name="name" id="card-holder-input"
-                                                value="{{user.username|capfirst}}" hidden />
+                                            <input type="text" class="form-control" name="interval" id="card-holder-input"
+                                                value="{{user.username}}" hidden />
                                         </div>
                                         <div class="mb-3">
                                             {% comment %} <label for="card-holder-input" class="form-label">Account Holder</label> {% endcomment %}

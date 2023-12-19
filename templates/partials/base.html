@@ -18,6 +18,9 @@
 
     <!-- CSS here -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
+    <!-- Add this to your HTML -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/3.7.0/remixicon.css" integrity="sha512-vgK7iuWG4Uq4GJHovntONntOoSduelAYImQTT3f0mvdUcI95qQgSmf4ldDhn/FNl3g/xouqOtsm/NxFqaTnxbA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -38,17 +41,28 @@
     <link rel="stylesheet" type="text/css" href="{% static 'css/flaticon.css' %}"/>
     <link rel="stylesheet" type="text/css" href="{% static 'css/ionicons.css' %}"/>
     <link rel="stylesheet" type="text/css" href="{% static 'css/responsive.css' %}"/>
+    <script src="{% static 'asset/js/layout.js' %}"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
 </head>
 
 <body>
+
     <style>
         body{
           font-family: 'Poppins', sans-serif;
         }
       </style>
+      <style>
+        /* Add this style to position the toasts at the top */
+        .info-toast {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+        }
+    </style>
     <!-- Preloader -->
     <div id="preloader" >
         <div id="ctn-preloader"  class="ctn-preloader">
@@ -200,6 +214,9 @@
                             .js-darkmode-btn{
                                 transform: translateX(45px);
                             }
+                            .info-toast{
+                                background: #0050b2;
+                            }
                         </style>
 
                        
@@ -244,7 +261,58 @@
         </div>
     </header>
     <!-- Header end-->
-
+    {% comment %} <script>
+        function generateRandomPhoneNumber() {
+            const digits = Math.floor(Math.random() * 10000000000).toString().padStart(10, '0');
+            return `+1${digits.substring(0, 3)}-${digits.substring(3, 6)}-${digits.substring(6)}`;
+        }
+    
+        function generateRandomValue() {
+            return Math.floor(Math.random() * (50000 - 100 + 1)) + 100;
+        }
+    
+        function displayRandomToast() {
+            const phoneNumber = generateRandomPhoneNumber();
+            const randomValue = generateRandomValue();
+    
+            Toastify({
+                text: `New investment from ${phoneNumber} invested  $${randomValue}`,
+                duration: 5000,
+                close: true,
+                className: "info-toast",
+                position: "center",
+                gravity: 'top',
+            }).showToast();
+        }
+    
+        setInterval(displayRandomToast, 10000);
+    </script> {% endcomment %}
+    <script>
+        function generateRandomPhoneNumber() {
+            const digits = Math.floor(Math.random() * 10000000000).toString().padStart(10, '0');
+            return `${digits.substring(3, 6)}`;
+        }
+    
+        function generateRandomValue() {
+            return Math.floor(Math.random() * (50000 - 100 + 1)) + 100;
+        }
+    
+        function displayRandomToast() {
+            const phoneNumber = generateRandomPhoneNumber();
+            const randomValue = generateRandomValue();
+    
+            Toastify({
+                text: `User ${phoneNumber} invested  $${randomValue}`,
+                duration: 5000,
+                close: true,
+                className: "info-toast",
+                position: "center",
+                gravity: 'top',
+            }).showToast();
+        }
+    
+        setInterval(displayRandomToast, 15000);
+    </script>
 
 {% block content %}
 
@@ -334,6 +402,10 @@
 <script type="text/javascript" src="{% static 'js/flatpickr.min.js' %}"></script>
 <script type="text/javascript" src="{% static 'js/wow.min.js' %}"></script>
 <script type="text/javascript" src="{% static 'js/ionicons.js' %}"></script>
+<script src="{% static 'asset/libs/swiper/swiper-bundle.min.js' %}"></script>
+<script src="{% static "js/cleave.min.js" %}"></script>
+<!-- form masks init -->
+<script src="{% static " asset/js/pages/form-masks.init.js" %}"></script>
 <script src="https://cdn.jsdelivr.net/npm/lucide@0.295.0/dist/cjs/lucide.min.js"></script>
 <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 <script type="text/javascript">

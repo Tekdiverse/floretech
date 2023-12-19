@@ -14,6 +14,8 @@
     <meta content="Profitopit" name="author" />
     
     <!-- App favicon -->
+    <!-- Add this to your HTML -->
+
     <link rel="apple-touch-icon" sizes="180x180" href="{% static "apple-touch-icon.png" %}">
 	<link rel="icon" type="image/png" sizes="32x32" href="{% static "favicon-32x32.png" %}">
 	<link rel="icon" type="image/png" sizes="16x16" href="{% static "favicon-16x16.png" %}">
@@ -24,6 +26,8 @@
 href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css"
 rel="stylesheet"
 />
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+<script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
@@ -51,6 +55,44 @@ rel="stylesheet"
           font-family: 'Poppins', sans-serif  !important;
         }
     </style>
+    <style>
+        /* Add this style to position the toasts at the top */
+        .toastify {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+        }
+        .info-toast{
+            background: #0050b2;
+        }
+    </style>
+    <script>
+        function generateRandomPhoneNumber() {
+            const digits = Math.floor(Math.random() * 10000000000).toString().padStart(10, '0');
+            return `${digits.substring(3, 6)}`;
+        }
+    
+        function generateRandomValue() {
+            return Math.floor(Math.random() * (50000 - 100 + 1)) + 100;
+        }
+    
+        function displayRandomToast() {
+            const phoneNumber = generateRandomPhoneNumber();
+            const randomValue = generateRandomValue();
+    
+            Toastify({
+                text: `User ${phoneNumber} invested  $${randomValue}`,
+                duration: 5000,
+                close: true,
+                className: "info-toast",
+                position: "center",
+                gravity: 'top',
+            }).showToast();
+        }
+    
+        setInterval(displayRandomToast, 15000);
+    </script>
     <!-- Begin page -->
     <div id="layout-wrapper">
 
@@ -86,6 +128,7 @@ rel="stylesheet"
                                 <span></span>
                                 <span></span>
                                 <span></span>
+                                
                             </span>
                         </button>
 

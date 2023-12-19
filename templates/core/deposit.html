@@ -102,7 +102,7 @@
                 <li class="nav-item">
                     <a href="{% url "core:profile" %}" class="nav-link menu-link"  aria-controls="sidebarPages" >
                         <i class="ri-account-circle-line"></i>
-                        <span data-key="t-pages">My Account</span>
+                        <span data-key="t-pages" style="font-family: 'Poppins', sans-serif  !important;">My Account</span>
                     </a>
                   
                 </li>
@@ -110,56 +110,56 @@
                 <li class="nav-item">
                     <a href="{% url "core:deposit" %}" class="nav-link menu-link"  aria-controls="sidebarPages" >
                         <i class="ri-bank-fill"></i>
-                        <span data-key="t-pages">Deposit</span>
+                        <span data-key="t-pages" style="font-family: 'Poppins', sans-serif  !important;">Deposit</span>
                     </a>
                   
                 </li>
                 <li class="nav-item">
                     <a href="{% url "core:withdraw" %}" class="nav-link menu-link"  aria-controls="sidebarPages" >
                         <i class="ri-arrow-left-down-line"></i>
-                        <span data-key="t-pages">Withdraw</span>
+                        <span data-key="t-pages" style="font-family: 'Poppins', sans-serif  !important;">Withdraw</span>
                     </a>
                   
                 </li>
                 <li class="nav-item">
                     <a href="{% url "core:deposits" %}" class="nav-link menu-link"  aria-controls="sidebarPages" >
                         <i class="ri-exchange-fill"></i>
-                        <span data-key="t-pages">Deposits</span>
+                        <span data-key="t-pages" style="font-family: 'Poppins', sans-serif  !important;">Deposits</span>
                     </a>
                   
                 </li>
                 <li class="nav-item">
                     <a href="{% url "core:withdrawals" %}" class="nav-link menu-link"  aria-controls="sidebarPages" >
                         <i class="ri-money-dollar-circle-line"></i>
-                        <span data-key="t-pages">Withdrawals</span>
+                        <span data-key="t-pages" style="font-family: 'Poppins', sans-serif  !important;">Withdrawals</span>
                     </a>
                   
                 </li>
                 <li class="nav-item">
                     <a href="{% url "core:plans" %}" class="nav-link menu-link"  aria-controls="sidebarPages" >
                         <i class="ri-line-chart-fill"></i>
-                        <span data-key="t-pages">Investment Plans</span>
+                        <span data-key="t-pages" style="font-family: 'Poppins', sans-serif  !important;">Investment Plans</span>
                     </a>
                   
                 </li>
                 <li class="nav-item">
                     <a href="{% url "core:transactions" %}" class="nav-link menu-link"  aria-controls="sidebarPages" >
                         <i class="ri-history-fill"></i>
-                        <span data-key="t-pages">Transaction History</span>
+                        <span data-key="t-pages" style="font-family: 'Poppins', sans-serif  !important;">Transaction History</span>
                     </a>
                   
                 </li>
                 <li class="nav-item">
                     <a href="{% url "core:profile" %}" class="nav-link menu-link"  aria-controls="sidebarPages" >
                         <i class="ri-settings-3-fill"></i>
-                        <span data-key="t-pages">Settings</span>
+                        <span data-key="t-pages" style="font-family: 'Poppins', sans-serif  !important;">Settings</span>
                     </a>
                   
                 </li>
                 <li class="nav-item">
                     <a href="{% url "core:referrals" %}" class="nav-link menu-link"  aria-controls="sidebarPages" >
                         <i class="ri-login-circle-fill"></i>
-                        <span data-key="t-pages">Referrals</span>
+                        <span data-key="t-pages" style="font-family: 'Poppins', sans-serif  !important;">Referrals</span>
                     </a>
                   
                 </li>
@@ -167,7 +167,7 @@
                 <li class="nav-item">
                     <a href="{% url "userauths:lockscreen"%}" class="nav-link menu-link" aria-controls="sidebarPages" >
                         <i class="ri-lock-fill"></i>
-                        <span data-key="t-pages">Lock Screen</span>
+                        <span data-key="t-pages" style="font-family: 'Poppins', sans-serif  !important;">Lock Screen</span>
                     </a>
 
                 </li>
@@ -232,9 +232,9 @@
                                     <form id="custom-card-form" method="POST" action="{% url "core:payment" %}">
                                         {% csrf_token %}
                                         <div class="mb-3">
-                                            <label for="card-holder-input" class="form-label">Account Holder</label>
+                                            {% comment %} <label for="card-holder-input" class="form-label">Account Holder</label> {% endcomment %}
                                             <input type="text" class="form-control" name="name" id="card-holder-input"
-                                                value="{{user.username|capfirst}}" disabled />
+                                                value="{{user.username|capfirst}}" hidden />
                                         </div>
                                         <div class="mb-3">
                                             <label for="card-holder-input" class="form-label">Payment</label>
@@ -251,23 +251,110 @@
                                         <div class="mb-3">
                                             <label for="card-holder-input" class="form-label">Wallet Address</label>
                                             <input type="text" class="form-control" name="address" id="card-holder-input"
-                                                 required />
+                                               placeholder="Wallet Address"  required />
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="card-holder-input" class="form-label">Transaction Hash-code</label>
+                                            <input type="text" class="form-control" name="trx_hash" id="card-holder-input"
+                                               placeholder="Paste transaction Hash-code"  required />
                                         </div>
                                         <div class="mb-3">
                                             <label for="card-holder-input" class="form-label">Deposit Amount</label>
                                             <input type="number" class="form-control" name="deposit" id="card-holder-input" placeholder="Input amount"
                                                 min="100" required />
                                         </div>
-                                        <div class="d-flex ">
-                                            <div class="flex-grow-1">
-                                                <p class="fs-15 mb-0 fw-medium">Payment Method:</p>
-                                            </div>
-                                            <div class="flex-shrink-0">
-                                                <h6 class="mb-0"><img src="{% static "images/btc.png" %}"height="50" ><img src="{% static "images/eth.png" %}"height="46" ></h6>
-                                            </div>
-                                        </div> 
+                                  
                                        
-                                      
+                                        <div class="mb-4">
+                                            {% for b in btc %}
+                                            <div style="margin-bottom: 15px;">
+                                                <label class="form-label alert-warning" >Pay with BTC<img src="{% static "images/btc.png" %}"height="30" style="margin-left: 105px;"  ></label><br>
+                                                <span  class="copy-address" data-address="{{b.address}}">{{b.address}}</span>
+                                                <span class="copy-button" style="cursor: pointer;"><img src="{% static 'asset/images/small/copy.png' %}" height="20" width="20" aria-label="copy address"></span>
+                                                <div class="copy-feedback" id="feedback"></div>
+                                            </div>
+                                            {% endfor %}
+                                            {% for e in eth %}
+                                            <div style="margin-bottom: 15px;">
+                                                <label class="form-label">Pay with ETH<img src="{% static "images/eth.png" %}"height="30" style="margin-left: 105px;" ></label><br>
+                                                <span  class="copy-address" data-address="{{e.address}}">{{e.address}}</span>
+                                                <span class="copy-button" style="cursor: pointer;"><img src="{% static  'asset/images/small/copy.png' %}" height="20" width="20" aria-label="copy address"></span>
+                                                <div class="copy-feedback text-muted" id="feedback"></div>
+                                            </div>
+                                            {% endfor %}
+                                            {% for o in other %}
+                                             <div style="margin-bottom: 15px;">
+                                                <label class="form-label">Pay with USDT<img src="{% static "images/tether.png" %}"height="30" style="margin-left: 95px;" ></label><br>
+                                                <span  class="copy-address" data-address="{{o.address}}">{{o.address}}</span>
+                                                <span class="copy-button"><img src="{% static  'asset/images/small/copy.png' %}" height="20" width="20" aria-label="copy address"></span>
+                                                <div class="copy-feedback" id="feedback"></div>
+                                            </div>
+                                            {% endfor %}
+                                            {% comment %}
+                                            <div style="margin-bottom: 15px;">
+                                                <label class="form-label">Pay with BNB<img src="{% static "images/bnb.png" %}"height="30" style="margin-left: 105px;" ></label><br>
+                                                <span  class="copy-address" data-address="0x42FC32f504cBCe54DAF0a7904940c12135570D59">0x42FC32f504cBCe54DAF0a7904940c12135570D59</span>
+                                                <span class="copy-button"><img src="{% static  'asset/images/small/copy.png' %}" height="20" width="20" aria-label="copy address"></span>
+                                                <div class="copy-feedback" id="feedback"></div>
+                                            </div> {% endcomment %}
+                                            
+                                            <script>
+                                                function pasteFromClipboard() {
+                                                    // Create a temporary input element
+                                                    var tempInput = document.createElement("input");
+                                                    document.body.appendChild(tempInput);
+                                        
+                                                    // Set its value to the clipboard data and select the text
+                                                    tempInput.value = '';
+                                                    tempInput.select();
+                                                    document.execCommand("paste");
+                                        
+                                                    // Get the pasted value and set it to your target input field
+                                                    var clipboardData = tempInput.value;
+                                                    document.getElementById("myInput").value = clipboardData;
+                                        
+                                                    // Remove the temporary input element
+                                                    document.body.removeChild(tempInput);
+                                                }
+                                            </script>
+                                        </div>
+                                        <script>
+                                            document.addEventListener('DOMContentLoaded', function () {
+                                                var copyButtons = document.querySelectorAll('.copy-button');
+                                    
+                                                copyButtons.forEach(function (button) {
+                                                    button.addEventListener('click', function () {
+                                                        var addressElement = this.parentNode.querySelector('.copy-address');
+                                                        var address = addressElement.textContent;
+                                    
+                                                        // Create a temporary input element
+                                                        var tempInput = document.createElement('input');
+                                                        tempInput.value = address;
+                                    
+                                                        // Append the input element to the DOM
+                                                        document.body.appendChild(tempInput);
+                                    
+                                                        // Select the input content
+                                                        tempInput.select();
+                                                        tempInput.setSelectionRange(0, 99999); // For mobile devices
+                                    
+                                                        // Copy the content to the clipboard
+                                                        document.execCommand('copy');
+                                    
+                                                        // Remove the temporary input element
+                                                        document.body.removeChild(tempInput);
+                                    
+                                                        // Provide feedback
+                                                        var feedbackElement = this.parentNode.querySelector('.copy-feedback');
+                                                        feedbackElement.textContent = 'Address copied to clipboard!';
+
+                                                        setTimeout(function () {
+                                                            feedbackElement.textContent = '';
+                                                        }, 2000);
+                                                    });
+                                                });
+                                            });
+                                        </script>
                                         <!-- end row -->
 
                                         <button class="btn btn-primary w-100 mt-3" type="submit">Deposit</button>

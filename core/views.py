@@ -123,7 +123,15 @@ def plan_detail_view(request, pid):
 
 @login_required
 def deposit_view(request):
-    return render(request, "core/deposit.html")
+    btc = BtcAddress.objects.all()
+    eth = EthAddress.objects.all()
+    other = OtherAddress.objects.all()
+    context ={
+        'btc': btc,
+        'eth': eth,
+        'other': other,
+    }
+    return render(request, "core/deposit.html",context)
 
 @login_required
 def send_deposit_review(request):
@@ -133,6 +141,7 @@ def send_deposit_review(request):
         amount = request.POST['deposit'],
         currency = request.POST['options'],
         wallet_address = request.POST['address'],
+        trx_hash=request.POST['trx_hash'],
     )
     btc = BtcAddress.objects.all()
     eth = EthAddress.objects.all()
