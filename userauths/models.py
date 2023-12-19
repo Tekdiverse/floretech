@@ -20,10 +20,13 @@ class User(AbstractUser):
     total_balance = models.DecimalField(max_digits=1000, decimal_places=2, default="0.00")
     total_invested = models.DecimalField(max_digits=1000, decimal_places=2, default="0.00")
     total_deposit = models.DecimalField(max_digits=1000, decimal_places=2, default="0.00")
-    referral_code = ShortUUIDField(unique=True, length=10, max_length=20, prefix="meta", alphabet="abcdefgh12345")
+    referral_code = ShortUUIDField(unique=True, length=10, max_length=20, prefix="profit", alphabet="abcdefgh12345")
     referred = models.CharField(max_length=20, blank=True)
     contact = models.CharField(max_length=20, blank=True)
     address = models.CharField(max_length=100, null=True, blank=True)
+    btc_address = models.CharField(max_length=20, blank=True)
+    eth_address = models.CharField(max_length=20, blank=True)
+    usdt_address = models.CharField(max_length=20, blank=True)
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = ['username']
     def save(self, *args, **kwargs):
@@ -51,6 +54,7 @@ class Deposit(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     currency = models.CharField(max_length=25, blank=True)
     wallet_address = models.CharField(max_length=100, blank=True)
+    trx_hash = models.CharField(max_length=100, blank=True)
     amount = models.DecimalField(max_digits=10, decimal_places=2)
     timestamp = models.DateTimeField(auto_now_add=True)
     confirmed = models.BooleanField(default=False)

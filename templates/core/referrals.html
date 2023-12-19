@@ -60,6 +60,7 @@
 </div><!-- /.modal -->
 <!-- ========== App Menu ========== -->
 <div class="app-menu navbar-menu">
+    <!-- LOGO -->
     <div class="navbar-brand-box">
         <!-- Dark Logo-->
         <a href="index.html" class="logo logo-dark">
@@ -207,7 +208,7 @@
                         <div class="page-title-right">
                             <ol class="breadcrumb m-0">
                                 <li class="breadcrumb-item"><a href="javascript: void(0);">Dashboard</a></li>
-                                <li class="breadcrumb-item active">deposits</li>
+                                <li class="breadcrumb-item active">Referrals</li>
                             </ol>
                         </div>
 
@@ -227,7 +228,7 @@
                                 <div class="card-header">
                                     <div class="row align-items-center g-3">
                                         <div class="col-md-3">
-                                            <h5 class="card-title mb-0">All Deposits</h5>
+                                            <h5 class="card-title mb-0">All Referrals</h5>
                                         </div>
                                         <!--end col-->
                                   
@@ -238,73 +239,58 @@
                                 <!--end card-header-->
                                 <div class="card-body">
                                     <div class="table-responsive table-card">
-                                        {% if user_deposits %}
+                                        {% if referred_users %}
                                         <table class="table align-middle table-nowrap" id="customerTable">
                                             <thead class="table-light text-muted">
                                                 <tr>
-                                                    <th  data-sort="name" scope="col" style="width: 60px;"></th>
+                                                    
                                                     <th  data-sort="date" scope="col">Timestamp</th>
                                                
                                   
+                                                    <th  data-sort="details" scope="col">Details</th>
+                                                    <th  data-sort="transaction_id" scope="col">Referral Bonus</th>
                                                 
-                                                    <th  data-sort="amount" scope="col">Amount</th>
-                                                    <th  data-sort="status" scope="col">Status</th>
+                                                 
                                                 </tr>
                                                 <!--end tr-->
                                             </thead>
                                             <tbody class="list form-check-all">
-                                                
-                                                {% for d in user_deposits %}
+                                                {% for r in referred_users %}
                                                 <tr>
-                                                    <td class="id" style="display:none;"><a href="javascript:void(0);" class="fw-medium link-primary">#VZ001</a></td>
-                                                    <td>
-                                                        <div class="avatar-xs">
-                                                            <div class="avatar-title bg-success-subtle text-success rounded-circle fs-16">
-                                                                <i class="ri-arrow-left-down-fill"></i>
-                                                            </div>
-                                                        </div>
-                                                    </td>
-                                                    <td class="date">{{d.timestamp|date:"d M, Y"}}</td>
+                                                    
+                                                    
+                                                    <td class="date">You referred</td>
                                                  
                                              
-                                               
+                                                    <td class="details">{{r.username}}</td>
+                                                    <td class="transaction_id">$10</td>
                                             
-                                                    <td>
-                                                        
-                                                        <p class="text-muted mb-0">${{d.amount}}</p>
-                                                    </td>
-                                                    {% if d.confirmed %}
-                                                    <td class="status">
-                                                        <span class="badge bg-success-subtle text-success fs-11"><i class="ri-time-line align-bottom"></i>Successful</span>
-                                                    </td>
-                                                    {% else %}
-                                                    <td class="status">
-                                                        <span class="badge bg-warning-subtle text-warning fs-11"><i class="ri-time-line align-bottom"></i>Pending</span>
-                                                    </td>
-                                                    {% endif %}
+                                                  
+                                                    
+                                                    
+
+                                                 
                                                 </tr>
                                                 {% endfor %}
                                                 <!--end tr-->
 
                                                 <!--end tr-->
-                                                
+
                                             </tbody>
                                         </table>
                                         <!--end table-->
                                         {% else %}
-                                        <div class="noresult" style="margin-bottom: 20px;">
+                                        <div class="noresult">
                                             <div class="text-center">
                                                 <script src="https://cdn.lordicon.com/lordicon.js"></script>
                                                 <lord-icon src="https://cdn.lordicon.com/msoeawqm.json" trigger="hover" colors="primary:#405189,secondary:#0ab39c" style="width:75px;height:75px"></lord-icon>
-                                                <h5 class="mt-2">No Deposits</h5>
-                                                <p class="text-muted mb-0" >You haven't made any deposit.</p><br>
-                                                <a href="{% url "core:deposit" %}" ><button
-                                                    type="submit"
-                                                    class="btn btn-primary">Deposit</button></a>
+                                                <h5 class="mt-2">No Referrals Found</h5>
+                                                <p class="text-muted mb-0">Refer users to gain 10% on any of their invested plans.</p>
                                             </div>
                                         </div>
                                         {% endif %}
                                     </div>
+                                   
                               
                                 </div>
                                 <!--end card-body-->

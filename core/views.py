@@ -100,22 +100,26 @@ def plans_view(request):
     }
     return render(request, "core/product-list.html", context)
 
-@login_required
+
 def plan_detail_view(request, pid):
-    form = TransactionForm()
-    product = Plan.objects.get(pid=pid)
-    products = Plan.objects.filter().exclude(pid=pid)
-    p_image = product.product_image()
+    if request.user.is_authenticated:
+        form = TransactionForm()
+        product = Plan.objects.get(pid=pid)
+        products = Plan.objects.filter().exclude(pid=pid)
+        p_image = product.product_image()
     
-    context = {
-        "form": form,
-        "p": product,
-        "p_image": p_image,
-        "products": products,
-        
-    }
+        context = {
+            "form": form,
+            "p": product,
+            "p_image": p_image,
+            "products": products,
+
+        }
     
-    return render(request, "core/product-detail.html", context)
+        return render(request, "core/product-detail.html", context)
+    else:
+        messages.warning(request, "Sign in to activate plan")
+        return redirect("userauths:sign-in")
 
 @login_required
 def deposit_view(request):
@@ -138,8 +142,29 @@ def send_deposit_review(request):
         'eth': eth,
         'other': other,
     }
+
     return render(request, "core/wallet-details.html", context)
 
+@login_required
+def referral_view(request):
+    current_user = request.user
+    current_user_referral_code = current_user.referral_code
+    current_user_referrer_code = current_user.referred
+
+    # Count the number of users with the same referral code
+    referred_users = User.objects.filter(referred=current_user_referral_code)
+    referred_users_count = User.objects.filter(referred=current_user_referral_code).count()
+
+    # Get the users who have the same referral code as the current user
+    user_referrer = User.objects.filter(referral_code=current_user_referrer_code)
+
+    context = {
+        'current_user': current_user,
+        'referred_users': referred_users,
+        'referred_users_count': referred_users_count,
+        'user_referrer': user_referrer,
+    }
+    return render(request, "core/referrals.html", context)
 @login_required
 def send_payment_review(request, pid):
     user = request.user

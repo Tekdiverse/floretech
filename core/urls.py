@@ -1,7 +1,7 @@
 from django.urls import path
 from .views import (index, contact_view, dashboard_view, profile_settings_view, 
                     profile_view, plan_detail_view, send_payment_review, 
-                    plans_view,deposit_view,send_deposit_review,transaction_view,deposits_view,search_view,withdraw_view,withdrawal_view,faq,about)
+                    plans_view,deposit_view,send_deposit_review,transaction_view,deposits_view,search_view,withdraw_view,withdrawal_view,faq,about,referral_view)
 
 app_name = "core"
 
@@ -22,6 +22,7 @@ urlpatterns = [
     path('app/plans', plans_view, name='plans'),
     path('app/transactions', transaction_view, name='transactions'),
     path('app/deposits', deposits_view, name='deposits'),
+    path('app/referrals', referral_view, name='referrals'),
     path('app/withdraw', withdraw_view, name="withdraw"),
     path('app/withdrawals', withdrawal_view, name="withdrawals"),
     path("send-payment-review/<pid>/", send_payment_review, name="send-payment-review"),

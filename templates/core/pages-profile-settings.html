@@ -153,9 +153,9 @@
                           
                         </li>
                         <li class="nav-item">
-                            <a href="{% url "core:profile-settings" %}" class="nav-link menu-link"  aria-controls="sidebarPages" >
-                                <i class="ri-user-fill"></i>
-                                <span data-key="t-pages">Personal Details</span>
+                            <a href="{% url "core:referrals" %}" class="nav-link menu-link"  aria-controls="sidebarPages" >
+                                <i class="ri-login-circle-fill"></i>
+                                <span data-key="t-pages">Referrals</span>
                             </a>
                           
                         </li>
@@ -238,7 +238,17 @@
                                 <div class="card-body p-4">
                                     <div class="tab-content">
                                         <div class="tab-pane active" id="personalDetails" role="tabpanel">
-                                         
+                                            {% if form.errors %}
+                                            <div class="alert alert-danger">
+                                                <strong style="font-size: 13px;">{{form.errors}}</strong>
+                                            </div>
+                                            {% endif %}
+                                        </div>
+                                        <script>
+                                            setTimeout (() => {
+                                                $(".alert").alert("close");
+                                            }, 4000)
+                                        </script>
                                             <form id="registerForm" method="POST">
                                                 {% csrf_token %}
 
@@ -268,7 +278,7 @@
                                                         </div>
                                                     </div>
 
-                                                    <div class="col-lg-4">
+                                                    <div class="col-lg-6">
                                                         <div class="mb-3">
                                                             <label for="cityInput" class="form-label">Referral Code</label>
                                                             <input type="text" class="form-control" id="cityInput" placeholder="City" value="{{user.referral_code}}" disabled />
@@ -297,7 +307,30 @@
                                                      
                                                         </div>
                                                     </div>
-                                                    <button class="btn rounded-2" style="background: #0050b2; color: #fff;" type="submit">Update Profile</button>
+
+                                                    <div class="col-lg-12" style="background: #0050b2; color: #fff; "><p class="mb-3 mt-3">Other informations</p></div>
+                                                    <div class="col-lg-4 mt-3" >
+                                                        <div class="mb-3">
+                                                            <label for="countryInput" class="form-label">BTC Wallet Address</label>
+                                                            {{form.btc_address}}
+                                                     
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-4 mt-3">
+                                                        <div class="mb-3">
+                                                            <label for="countryInput" class="form-label">ETH Wallet Address</label>
+                                                            {{form.eth_address}}
+                                                     
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-4 mt-3">
+                                                        <div class="mb-3">
+                                                            <label for="countryInput" class="form-label">USDT Wallet Address</label>
+                                                            {{form.usdt_address}}
+                                                     
+                                                        </div>
+                                                    </div>
+                                                    <button class="btn rounded-2" style="background: #0050b2; color: #fff; margin-top: 40px;" type="submit">Update Profile</button>
                                                     
                                                    
                                                     <!--end col-->

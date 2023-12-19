@@ -5797,8 +5797,7 @@ header .header-top .header-info-right ul li i {
   transition: all 0.3s ease-out;
 }
 .loan-slider .single-slide:hover {
-  background-color: #fff;
-  box-shadow: 0px 16px 60px 0px rgba(63, 93, 101, 0.2);
+
 }
 .loan-slider .single-slide .icon {
   margin: auto;

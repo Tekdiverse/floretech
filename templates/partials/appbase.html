@@ -12,6 +12,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta content="Profitopit the best platform to invest in Forex and Defi" name="description" />
     <meta content="Profitopit" name="author" />
+    
     <!-- App favicon -->
     <link rel="apple-touch-icon" sizes="180x180" href="{% static "apple-touch-icon.png" %}">
 	<link rel="icon" type="image/png" sizes="32x32" href="{% static "favicon-32x32.png" %}">
@@ -49,7 +50,7 @@ rel="stylesheet"
         body{
           font-family: 'Poppins', sans-serif  !important;
         }
-      </style>
+    </style>
     <!-- Begin page -->
     <div id="layout-wrapper">
 
@@ -263,10 +264,42 @@ rel="stylesheet"
                         </div>
 
                         <div class="ms-1 header-item d-sm-flex">
-                            <a href="{% url "core:deposit" %}"><button
-                                type="submit"
-                                class="btn btn-primary" style=" font-size: 11px;"><i class="ri-arrow-down-fill"></i> Deposit</button></a>
+                             <button style="border: none;"><span id="google_translate_element" class="google_t"></span></button>
                         </div>
+                      
+                        <style>
+                            @media only screen and (max-width: 600px) {
+                                .google_t {
+                                    transform: translateX(50px); 
+                                    
+                                }
+                                
+                            
+                               
+                            }
+                            .goog-te-combo{
+                                border: #fff;
+                            }
+                            .VIpgJd-ZVi9od-ORHb-OEVmcd{
+                                display: none;
+                            }
+                            .VIpgJd-ZVi9od-l4eHX-hSRGPd{
+                                display: none;
+                            }
+                            
+                            .VIpgJd-ZVi9od-ORHb-OEVmcd.skiptranslate{
+                                
+                            }
+                            .goog-te-combo {
+                              height: 25px; 
+                              border: 1px solid #0b244b;
+                              border-radius: 1px;
+                              font-family: 'Poppins', sans-serif;
+                            }
+                            .js-darkmode-btn{
+                                transform: translateX(45px);
+                            }
+                        </style>
 
 
                         <div class="ms-1 header-item d-none d-sm-flex">
@@ -1541,6 +1574,15 @@ rel="stylesheet"
     <!-- App js -->
     <script src="{% static 'asset/js/app.js' %}"></script>
     <script src="https://www.cryptohopper.com/widgets/js/script"></script>
+    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+    <script type="text/javascript">
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement(
+                {pageLanguage: 'en'},
+                'google_translate_element'
+            );
+        }
+    </script>
 </body>
 
 
