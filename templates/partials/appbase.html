@@ -77,12 +77,23 @@ rel="stylesheet"
             return Math.floor(Math.random() * (50000 - 100 + 1)) + 100;
         }
     
+        function getRandomToastMessage() {
+            const templates = [
+                `User ${generateRandomPhoneNumber()} invested $${generateRandomValue()}`,
+                `User ${generateRandomPhoneNumber()} deposited $${generateRandomValue()}`,
+                `User ${generateRandomPhoneNumber()} upgraded plan`,
+                // Add more templates as needed
+            ];
+    
+            const randomIndex = Math.floor(Math.random() * templates.length);
+            return templates[randomIndex];
+        }
+    
         function displayRandomToast() {
-            const phoneNumber = generateRandomPhoneNumber();
-            const randomValue = generateRandomValue();
+            const toastMessage = getRandomToastMessage();
     
             Toastify({
-                text: `User ${phoneNumber} invested  $${randomValue}`,
+                text: toastMessage,
                 duration: 5000,
                 close: true,
                 className: "info-toast",
@@ -1626,6 +1637,7 @@ rel="stylesheet"
             );
         }
     </script>
+    <script src="//code.tidio.co/f88exhgxnjhe4asnqdw8emk6telffzqi.js" async></script>
 </body>
 
 

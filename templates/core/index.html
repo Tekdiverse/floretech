@@ -30,8 +30,8 @@
             }
         </style>
         <section class="banner-saas-area" style="transform: translateY(-50px);">
-            <img class="shape_img" src="{% static 'img/globe.jpeg' %}" alt="">
-            <img class="shape_img" id="shape_img" src="{% static 'img/globe2.jpg' %}" alt="">
+            <img class="shape_img" src="{% static 'img/globe.jpg' %}" alt="">
+            <img class="shape_img" id="shape_img" src="{% static 'img/globe.jpg' %}" alt="">
             <div class="container">
                 <div class="row justify-content-center">
                     <div class="saas-banner-content text-center" style=" margin-bottom: 50px;">
@@ -167,7 +167,7 @@
             }
         </style>
 
-        <section class="loan-slider-area bg-white pb-130 pt-120">
+        <section class="loan-slider-area bg-white pb-130 pt-60">
             <div class="container">
                 <div class="saas-section-title text-center" style="margin-bottom: -20px;">
                     <h2>Our <span>Investment</span> plans</h2>
@@ -175,7 +175,7 @@
                 </div>
                 <div class="row pt-80">
                     {% for p in plan %}
-                            <div class="col-lg-4" style="margin-bottom: 30px; border: 1px solid #f7f9fa; background:#e5f1ff; " >
+                            <div class="col-lg-4" style="margin-bottom: 30px; border: 1px solid #f7f9fa; background:#e5f1ff; margin-right: 15px; width: 380px;" >
                                 <div class="price_item" >
                                     <div style="font-size: 35px;"><i class="ri-copper-diamond-line"></i></div>
                                     <div class="price_header">
@@ -206,9 +206,12 @@
                                     <ul class="service_list list-unstyled" style="font-family: 'Poppins', sans-serif  !important;">
                                         <li style="font-family: 'Poppins', sans-serif  !important; margin-bottom: 17px;">Minimum: <span>${{p.least_amount|floatformat:2|intcomma}}</span></li>
                                         <li style="font-family: 'Poppins', sans-serif  !important;  margin-bottom: 17px;">Maximum: <span>${{p.max_amount|floatformat:2|intcomma}}</span></li>
-                                        <li style="font-family: 'Poppins', sans-serif  !important;  margin-bottom: 17px;">Interest Rate: <span>{{p.percentage_return|floatformat:2}}% {{p.interval}}</span></li>
+                                        <li style="font-family: 'Poppins', sans-serif  !important;  margin-bottom: 17px;">Earn <span>{{p.percentage_return|floatformat:2}}% {{p.interval}} for a period of {{p.description|capfirst}}</span></li>
+                                        <li style="font-family: 'Poppins', sans-serif  !important;  margin-bottom: 17px;">Profit: <span>{{p.percentage_return|floatformat:2}}% {{p.interval}}</span></li>
                                         <li style="font-family: 'Poppins', sans-serif  !important;  margin-bottom: 17px;">Referral Bonus: <span>10%</span></li>
-                                        <li style="font-family: 'Poppins', sans-serif  !important;  margin-bottom: 17px;">Contract Agreement: <span>{{p.interval|capfirst}}</span></li>
+                                        <li style="font-family: 'Poppins', sans-serif  !important;  margin-bottom: 17px;">Contract Agreement: <span>{{p.description|capfirst}}</span></li>
+                                        <li style="font-family: 'Poppins', sans-serif  !important;  margin-bottom: 17px;">24/7 Support</span></li>
+                                        <li style="font-family: 'Poppins', sans-serif  !important;  margin-bottom: 17px;">Automatic Funds Release And Payout</span></li>
                                     </ul>
                                     <a href="{% url  "core:plan-detail" p.pid  %}" class="btn btn-lg rounded-2" style="background: #0050b2; color: #fff;  width: 100%; cursor: pointer; margin-bottom: 10px;">Activate Plan</a>
                                 </div>
@@ -277,9 +280,9 @@
         <!-- saas features card area  -->
 
         <!-- saas features area  -->
-        <section class="saas-features-area bg-white" style="transform: translateY(-100px);">
+        <section class="saas-features-area bg-white" style="transform: translateY(-100px); ">
             <div class="container">
-                <div class="saas-section-title text-center" style="margin-bottom: 20px;">
+                <div class="saas-section-title text-center" style="margin-bottom: 10px; margin-top: -110px;">
                     <h2>Why <span>Choose</span> Us</h2>
                     <p style="font-family: 'Poppins', sans-serif  !important;">With a reputable force in the world of Investment portfolio management , Risk <br>management and Investment Decision, Here is why you must choose us...</p>
                 </div>
@@ -318,23 +321,22 @@
                     </style>
                     <div class="col-lg-6">
                         <div class="saas-features-content">
-                            <div class="saas-section-title mb-20">
-                                <span style="margin-bottom: 3px;"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check-circle" style="color:#1d6bca; margin: 7px;"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></svg><h6 class="h5-inline fw-bold" style="margin-bottom: 1px;">SECURE STORAGE</h6><br>We store the vast majority of the digital assets in secure offline storage with experienced professionals monitoring it 24/7</span><br><br>
+                            <div class="saas-section-title mb-0 " style="margin-top: -30px;">
                                 <span  style="margin-bottom: 3px;"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check-circle svg-inline" style="color:#1d6bca;margin: 7px;"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></svg><h6 class="h5-inline fw-bold" style="margin-bottom: 1px;">INVESTMENTS SECURED BY INSURANCE</h6><br>Our customer’s investment funds are fully secured and covered by FDIC insurance, up to a maximum of $250,000.</span><br><br>
                                 <span  style="margin-bottom: 3px;"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check-circle svg-inline" style="color:#1d6bca; margin: 7px;"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></svg><h6 class="h5-inline fw-bold" style="margin-bottom: 1px;">INDUSTRY BEST PRACTICES</h6><br>PROFITOPIT offers the best industry practice when it comes to managing and safeguarding client’s investment portfolio</span><br><br>
-                                <span  style="margin-bottom: 3px;"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check-circle svg-inline" style="color: #1d6bca; margin: 7px;"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></svg><h6 class="h5-inline fw-bold" style="margin-bottom: 1px;">24/7 CUSTOMER SUPPORT</h6><br>Our customer representative are the best in handling customer complaints and making sure that our customers enjoy the best of servicess.</span><br><br>
+                                <span  style="margin-bottom: 3px;"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check-circle svg-inline" style="color: #1d6bca; margin: 7px;"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></svg><h6 class="h5-inline fw-bold" style="margin-bottom: 1px;">24/7 CUSTOMER SUPPORT</h6><br>Our customer support are the best handling customer complaints, making sure that our customers enjoy the best of services.</span><br><br>
                                 <span  style="margin-bottom: 3px;"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check-circle svg-inline" style="color: #1d6bca; margin: 7px;"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></svg><h6 class="h5-inline fw-bold" style="margin-bottom: 1px;">AUTOMATIC WITHDRAWAL</h6><br>Our withdrawal and payout system is automated using 21st century technology integrations and connections.</span><br><br>
-                                <span  style="margin-bottom: 3px;" ><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check-circle svg-inline" style="color: #1d6bca; margin: 7px;"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></svg><h6 class="h5-inline fw-bold" style="margin-bottom: 1px;">GREAT REFERRAL BONUS</h6><br>Our referral bonus is structured to give our esteemed users the benefits of being a part of our platform and other bonuses attached to it.</span>
+                                <span  style="margin-bottom: 3px;" ><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check-circle svg-inline" style="color: #1d6bca; margin: 7px;"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></svg><h6 class="h5-inline fw-bold" style="margin-bottom: 1px;">GREAT REFERRAL BONUS</h6><br>Our referral bonus is structured to give our users the benefits of being a part of our platform and other bonuses attached to it.</span><br><br>
                                 
                             </div>
-                            <div class="d-flex">
-                                <div class="features-icon-box wow fadeInUp" data-wow-delay="0.2s" style="margin-bottom: -10px; margin-right: 10px;" >
+                            <div class="d-flex p-1">
+                                <div class="features-icon-box"  style="margin-bottom: -10px; margin-right: 10px;" >
                                     {% comment %} <div class="round_icon"><img src="{% static 'img/saas-app/hand.png' %}" alt=""></div> {% endcomment %}
                             
                                         <a href="{% url "userauths:sign-up" %}" class="theme-btn theme-btn-lg" style="width: 100%; font-family: 'Poppins', sans-serif  !important;">Join Us Now</a>
                                 
                                 </div>
-                                <div class="features-icon-box wow fadeInUp" data-wow-delay="0.4s" style="margin-top: -50px; " >
+                                <div class="features-icon-box wow fadeInUp" data-wow-delay="0.2s" style="margin-top: -50px; " >
                                     {% comment %} <div class="round_icon"><img src="{% static 'img/saas-app/travel_explore.png' %}" alt=""></div> {% endcomment %}
                                 
                                         <a class="theme-btn theme-btn-alt theme-btn-lg  mt-50" id="test-btn" style="border: 1px solid #1d6bca; font-family: 'Poppins', sans-serif  !important;">Get Certificate</a>
@@ -367,20 +369,20 @@
         <!-- app showcase start -->
         <section class="app-showcase-area" style="pointer-events: none; transform: translateY(-100px);">
             <img class="shape_img" src="{% static 'img/saas-app/grid-two.png' %}" alt="">
-            <div class="container">
-                <div class="saas-section-title text-center" style="margin-bottom: -60px;">
+            <div class="container" style=" margin-top: -80px;">
+                <div class="saas-section-title text-center" >
                     <h2><span>Customer’s </span>Testimonials</h2>
                     <p style="font-family: 'Poppins', sans-serif  !important;">Check out some of the feedbacks we get from our esteemed users all over the world who <br>have entrusted their investment portfolio into our hands.</p>
                 </div>
-                <div class="loan-slider pt-80">
+                <div class="loan-slider pt-10">
                     <div class="single-slide">
                         <div class="app-showcase-item your-text">
                             <img src="{% static "img/quote-1.png" %}" height="30" style="margin-bottom: 10px;"/>
                             <div class="round wow floatingBubbles" data-wow-delay="0.3s"></div>
-                            <p class="" style="font-family: 'Poppins', sans-serif  !important; font-size: 16px; color: #808080;">PROFITOPIT is a very good and reputable company that upholds professionalism to the core . They handle all my investment portfolio and i have never been more happier. I highly recommend them to any entrepreneur that wants a well balanced and curated portfolio..</p>
+                            <p class="" style="font-family: 'Poppins', sans-serif  !important; font-size: 16px; color: #808080;">I've been using this investment platform for over a year now, and it has truly exceeded my expectations. The user-friendly interface, diverse investment options, and stellar customer support make it stand out in the crowded market. My portfolio has seen consistent growth, and I couldn't be happier with the results</p>
                             <div style="text-align: center; color: #0752C1;">
                                 <p class=" mb-0" style="color: #0752C1;" >John Hopkins</p>
-                                <p class="" style="margin-bottom: 10px; color: #0752C1;">(CEO) Pakins company</p><br>
+                                <p class="" style="margin-bottom: 10px; color: #0752C1;">Tech Entrepreneur</p><br>
                                 {% comment %} <div style="align-items: right; justify-content: right; text-align: right;">
                                     <img src="{% static "img/quote-2.png" %}" height="40"/>
                                 </div> {% endcomment %}
@@ -393,10 +395,10 @@
                             <img src="{% static "img/quote-1.png" %}" height="30" style="margin-bottom: 10px;"/>
                             <div class="round wow floatingBubbles" data-wow-delay="0.5s"></div>
                             
-                            <p class="" style="font-family: 'Poppins', sans-serif  !important; font-size: 16px;  color: #808080;" >PROFITOPIT is a very good and reputable company that upholds professionalism to the core . They handle all my investment portfolio and i have never been more happier. I highly recommend them to any entrepreneur that wants a well balanced and curated portfolio..</p>
+                            <p class="" style="font-family: 'Poppins', sans-serif  !important; font-size: 16px;  color: #808080;" >I was introduced to this company 2015 and I would say that it was the best decision I did because they managed my portfolio well enough and helped me make a lot of profit through their investments plans, if you are looking to grow your portfolio, profiopit is a good start.</p>
                             <div style="text-align: center; color: #0752C1;">
-                                <p class=" mb-0" style="color: #0752C1;" >John Hopkins</p>
-                                <p class="" style="margin-bottom: 10px; color: #0752C1;">(CEO) Pakins company</p><br>
+                                <p class=" mb-0" style="color: #0752C1;" >Mason Curry</p>
+                                <p class="" style="margin-bottom: 10px; color: #0752C1;">Entrepreneur and Investor</p><br>
                                 
                             </div>
                         </div>
@@ -407,10 +409,62 @@
                             <img src="{% static "img/quote-1.png" %}" height="30" style="margin-bottom: 10px;"/>
                             <div class="round wow floatingBubbles" data-wow-delay="0.5s"></div>
                             
-                            <p class="" style="font-family: 'Poppins', sans-serif  !important; font-size: 16px;  color: #808080;" >PROFITOPIT is a very good and reputable company that upholds professionalism to the core . They handle all my investment portfolio and i have never been more happier. I highly recommend them to any entrepreneur that wants a well balanced and curated portfolio..</p>
+                            <p class="" style="font-family: 'Poppins', sans-serif  !important; font-size: 16px;  color: #808080;" >Trust is crucial when it comes to investments, and this platform has earned mine. The robust security measures in place, coupled with a wide range of investment opportunities, have made my experience here both secure and profitable. It's reassuring to know that my financial future is in capable hands.</p>
                             <div style="text-align: center; color: #0752C1;">
-                                <p class=" mb-0" style="color: #0752C1;" >John Hopkins</p>
-                                <p class="" style="margin-bottom: 10px; color: #0752C1;">(CEO) Pakins company</p><br>
+                                <p class=" mb-0" style="color: #0752C1;" >Sarah M.</p>
+                                <p class="" style="margin-bottom: 10px; color: #0752C1;">Customer Support Manager</p><br>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="single-slide">
+                        <div class="app-showcase-item box-one your-text" >
+                            <img src="{% static "img/quote-1.png" %}" height="30" style="margin-bottom: 10px;"/>
+                            <div class="round wow floatingBubbles" data-wow-delay="0.5s"></div>
+                            
+                            <p class="" style="font-family: 'Poppins', sans-serif  !important; font-size: 16px;  color: #808080;" >I've been investing with this platform for over a year, and the results have been exceptional! The user-friendly interface, diverse investment options, and responsive customer support make it stand out. My portfolio has seen steady growth, and I appreciate the transparency in tracking my investments. Highly recommended!.</p>
+                            <div style="text-align: center; color: #0752C1;">
+                                <p class=" mb-0" style="color: #0752C1;" >Mike Larry </p>
+                                <p class="" style="margin-bottom: 10px; color: #0752C1;">Financial Analyst</p><br>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="single-slide">
+                        <div class="app-showcase-item box-one your-text" >
+                            <img src="{% static "img/quote-1.png" %}" height="30" style="margin-bottom: 10px;"/>
+                            <div class="round wow floatingBubbles" data-wow-delay="0.5s"></div>
+                            
+                            <p class="" style="font-family: 'Poppins', sans-serif  !important; font-size: 16px;  color: #808080;" >Navigating this investment platform is a breeze! The intuitive interface and well-designed dashboard make managing investments simple and efficient. Whether you're a seasoned investor or just starting, the platform provides the tools and information needed for success. A great choice for anyone serious about growing their wealth.</p>
+                            <div style="text-align: center; color: #0752C1;">
+                                <p class=" mb-0" style="color: #0752C1;" >Peter Barry</p>
+                                <p class="" style="margin-bottom: 10px; color: #0752C1;">CTO</p><br>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="single-slide">
+                        <div class="app-showcase-item box-one your-text" >
+                            <img src="{% static "img/quote-1.png" %}" height="30" style="margin-bottom: 10px;"/>
+                            <div class="round wow floatingBubbles" data-wow-delay="0.5s"></div>
+                            
+                            <p class="" style="font-family: 'Poppins', sans-serif  !important; font-size: 16px;  color: #808080;" >After retiring, I wanted a reliable platform to grow my savings. This investment platform not only offered a variety of investment options but also provided educational resources that helped me understand my choices better. I feel confident about my financial future, thanks to the platform's transparency and user-friendly features. </p>
+                            <div style="text-align: center; color: #0752C1;">
+                                <p class=" mb-0" style="color: #0752C1;" >Daniel Peters</p>
+                                <p class="" style="margin-bottom: 10px; color: #0752C1;">Salesman</p><br>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="single-slide">
+                        <div class="app-showcase-item box-one your-text" >
+                            <img src="{% static "img/quote-1.png" %}" height="30" style="margin-bottom: 10px;"/>
+                            <div class="round wow floatingBubbles" data-wow-delay="0.5s"></div>
+                            
+                            <p class="" style="font-family: 'Poppins', sans-serif  !important; font-size: 16px;  color: #808080;" >Trust is crucial when it comes to investments, and this platform has earned mine. The robust security measures in place, coupled with a wide range of investment opportunities, have made my experience here both secure and profitable. It's reassuring to know that my financial future is in capable hands.</p>
+                            <div style="text-align: center; color: #0752C1;">
+                                <p class=" mb-0" style="color: #0752C1;" >Emily Kory</p>
+                                <p class="" style="margin-bottom: 10px; color: #0752C1;">Full Time Investor</p><br>
 
                             </div>
                         </div>
@@ -625,8 +679,8 @@
             }
         </style>
         
-        <section class="saas-subscribe-area cta-4" style="background-image: url(static/img/saas-app/bg-image.png);">
-            <div class="container" style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
+        <section class="saas-subscribe-area cta-4" style="background-image: url(static/img/saas-app/bg-image.png); margin-top: -110px;">
+            <div class="container" style="display: flex; flex-direction: column; align-items: center; justify-content: center; " >
                 <div class="cta-content">
                     <a href="#" id="playButton">
                         <div style="color: #fff; background: red; border-radius: 50%; display: flex; align-items: center; justify-content: center; width: 130px;" >
