@@ -180,7 +180,7 @@
                                     <div style="font-size: 35px;"><i class="ri-copper-diamond-line"></i></div>
                                     <div class="price_header">
                                         <h6>{{p.title}}</h6>
-                                        <p  style="margin-bottom: 20px; font-size: 14px; background: #373503; width: 180px; font-weight: 500px; padding: 5px; border-radius: 5px; color: #fff;">{{p.user_count}} Users on this plan</p>
+                                        <p  style="margin-bottom: 20px; font-size: 14px; background: red; width: 180px; font-weight: 500px; padding: 5px; border-radius: 5px; color: #fff;">{{p.user_count}} Users on this plan</p>
                                     </div>
                             
                                     <style>
@@ -374,9 +374,9 @@
                     <h2><span>Customer’s </span>Testimonials</h2>
                     <p style="font-family: 'Poppins', sans-serif  !important;">Check out some of the feedbacks we get from our esteemed users all over the world who <br>have entrusted their investment portfolio into our hands.</p>
                 </div>
-                <div class="loan-slider pt-10">
-                    <div class="single-slide">
-                        <div class="app-showcase-item your-text">
+                <div class="loan-slide row pt-10">
+                    <div class="single-slide col-lg-4">
+                        <div class="app-showcase-item ">
                             <img src="{% static "img/quote-1.png" %}" height="30" style="margin-bottom: 10px;"/>
                             <div class="round wow floatingBubbles" data-wow-delay="0.3s"></div>
                             <p class="" style="font-family: 'Poppins', sans-serif  !important; font-size: 16px; color: #808080;">I've been using this investment platform for over a year now, and it has truly exceeded my expectations. The user-friendly interface, diverse investment options, and stellar customer support make it stand out in the crowded market. My portfolio has seen consistent growth, and I couldn't be happier with the results</p>
@@ -390,8 +390,8 @@
                             
                         </div>
                     </div>
-                    <div class="single-slide">
-                        <div class="app-showcase-item box-two your-text" >
+                    <div class="single-slide col-lg-4">
+                        <div class="app-showcase-item  " >
                             <img src="{% static "img/quote-1.png" %}" height="30" style="margin-bottom: 10px;"/>
                             <div class="round wow floatingBubbles" data-wow-delay="0.5s"></div>
                             
@@ -404,8 +404,8 @@
                         </div>
                     </div>
 
-                    <div class="single-slide">
-                        <div class="app-showcase-item box-one your-text" >
+                    <div class="single-slide col-lg-4">
+                        <div class="app-showcase-item  " >
                             <img src="{% static "img/quote-1.png" %}" height="30" style="margin-bottom: 10px;"/>
                             <div class="round wow floatingBubbles" data-wow-delay="0.5s"></div>
                             
@@ -417,8 +417,8 @@
                             </div>
                         </div>
                     </div>
-                    <div class="single-slide">
-                        <div class="app-showcase-item box-one your-text" >
+                    {% comment %} <div class="single-slide">
+                        <div class="app-showcase-item box-one " >
                             <img src="{% static "img/quote-1.png" %}" height="30" style="margin-bottom: 10px;"/>
                             <div class="round wow floatingBubbles" data-wow-delay="0.5s"></div>
                             
@@ -431,7 +431,7 @@
                         </div>
                     </div>
                     <div class="single-slide">
-                        <div class="app-showcase-item box-one your-text" >
+                        <div class="app-showcase-item box-one " >
                             <img src="{% static "img/quote-1.png" %}" height="30" style="margin-bottom: 10px;"/>
                             <div class="round wow floatingBubbles" data-wow-delay="0.5s"></div>
                             
@@ -444,7 +444,7 @@
                         </div>
                     </div>
                     <div class="single-slide">
-                        <div class="app-showcase-item box-one your-text" >
+                        <div class="app-showcase-item box-one " >
                             <img src="{% static "img/quote-1.png" %}" height="30" style="margin-bottom: 10px;"/>
                             <div class="round wow floatingBubbles" data-wow-delay="0.5s"></div>
                             
@@ -455,20 +455,8 @@
 
                             </div>
                         </div>
-                    </div>
-                    <div class="single-slide">
-                        <div class="app-showcase-item box-one your-text" >
-                            <img src="{% static "img/quote-1.png" %}" height="30" style="margin-bottom: 10px;"/>
-                            <div class="round wow floatingBubbles" data-wow-delay="0.5s"></div>
-                            
-                            <p class="" style="font-family: 'Poppins', sans-serif  !important; font-size: 16px;  color: #808080;" >Trust is crucial when it comes to investments, and this platform has earned mine. The robust security measures in place, coupled with a wide range of investment opportunities, have made my experience here both secure and profitable. It's reassuring to know that my financial future is in capable hands.</p>
-                            <div style="text-align: center; color: #0752C1;">
-                                <p class=" mb-0" style="color: #0752C1;" >Emily Kory</p>
-                                <p class="" style="margin-bottom: 10px; color: #0752C1;">Full Time Investor</p><br>
+                    </div> {% endcomment %}
 
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
         </section>
