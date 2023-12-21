@@ -38,20 +38,99 @@ def register_view(request):
             resend.api_key = "re_ZZYtkQ5f_BRYb61sidHksYWwnwrEmZzZt"
             html_message = render_to_string('core/email.html')
             plain_message = strip_tags(html_message)
-            # r = resend.Emails.send({
-            #     "from": "support@profitopit.net",
-            #     "to": f"{email}",
-            #     "subject": "Welcome to Profitopit",
-            #     "html": plain_message,
-            # })
-            message = EmailMultiAlternatives(
-                subject='Welcome to Profitopit',
-                body= plain_message,
-                from_email='profitopit@profitopit.net',
-                to=[email]
-            )
-            message.attach_alternative(html_message,"text/html")
-            message.send()
+
+            r = resend.Emails.send({
+                "from": "support@profitopit.net",
+                "to": email,
+                "subject": "Welcome to Profitopit",
+                "html": f"""
+                    <!DOCTYPE html>
+                    <html lang="en">
+                    <head>
+                        <meta charset="UTF-8">
+                        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+                        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                        <title>Welcome to Profitopit</title>
+                        <!-- Bootstrap CSS -->
+                        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+                        <link rel="preconnect" href="https://fonts.googleapis.com">
+                        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+                        <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+                        <style>
+                            body {{
+                                font-family: 'Poppins', sans-serif;
+                                background-color: #f5f5f5;
+                                margin: 0;
+                                padding: 0;
+                            }}
+                            .container {{
+                                max-width: 600px;
+                                margin: 20px auto;
+                                padding: 20px;
+                                background-color: #ffffff;
+                                border-radius: 8px;
+                                box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+                            }}
+                            h1, p {{
+                                color: #333333;
+                            }}
+                            .btn-primary {{
+                                background-color: #007bff;
+                                border-color: #007bff;
+                                padding: 10px 20px;
+                                 font-size: 16px;
+                                border-radius: 2px;
+                            }}
+                            .btn-primary:hover {{
+                                background-color: #0056b3;
+                                border-color: #0056b3;
+                            }}
+                            a {{
+                                color: #fff;
+                                text-decoration: none;
+                            }}
+                            a:hover {{
+                                color: #fff;
+                            }}
+                            .disclaimer {{
+                                margin-top: 20px;
+                                font-size: 12px;
+                                color: #666666;
+                            }}
+                        </style>
+                    </head>
+                    <body>
+                        <div class="container">
+                            <h1>Hi {username}, Thanks for signing up to Profitopit !</h1>
+                            <p>We're thrilled to have you join our investment community. Get ready to explore new opportunities and grow your portfolio.</p>
+                            <p>We can tell you're eager to jump into action. Why don't you take a look at our plans and get familiar with our platform.</p>
+                            <p>Take the first step by signing in to your account:</p><br><br>
+                            <div style="text-align: center; align-items: center;">
+                                <a href="https://profitopit.net/app/dashboard" class="btn btn-primary" target="_blank">Sign In</a><br><br>
+                            </div>
+                            <p class="disclaimer">
+                                Note: This email is sent as part of Profitopit communication. If you believe this is a mistake or received this email in error, please disregard it.
+                            </p>
+                        </div>
+
+                        <!-- Bootstrap JS (Optional, only if you need Bootstrap features) -->
+                        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+                        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+                        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+                    </body>
+                    </html>
+                """,
+            })
+
+
+            # message = EmailMultiAlternatives(
+            #     subject='Welcome to Profitopit',
+            #     body= plain_message,
+            #     from_email='profitopit@profitopit.net',
+            #     to=[email]
+            # )
+            # message.attach_alternative(html_message,"text/html")
+            # message.send()
 
             login(request, new_user)
             return redirect("core:dashboard")
