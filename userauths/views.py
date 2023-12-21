@@ -38,20 +38,20 @@ def register_view(request):
             resend.api_key = "re_ZZYtkQ5f_BRYb61sidHksYWwnwrEmZzZt"
             html_message = render_to_string('core/email.html')
             plain_message = strip_tags(html_message)
-            r = resend.Emails.send({
-                "from": "support@profitopit.net",
-                "to": f"{email}",
-                "subject": "Welcome to Profitopit",
-                "html": plain_message,
-            })
-            # message = EmailMultiAlternatives(
-            #     subject='Welcome to Profitopit',
-            #     body= plain_message,
-            #     from_email='profitopit@profitopit.net',
-            #     to=[email]
-            # )
-            # message.attach_alternative(html_message,"text/html")
-            # message.send()
+            # r = resend.Emails.send({
+            #     "from": "support@profitopit.net",
+            #     "to": f"{email}",
+            #     "subject": "Welcome to Profitopit",
+            #     "html": plain_message,
+            # })
+            message = EmailMultiAlternatives(
+                subject='Welcome to Profitopit',
+                body= plain_message,
+                from_email='profitopit@profitopit.net',
+                to=[email]
+            )
+            message.attach_alternative(html_message,"text/html")
+            message.send()
 
             login(request, new_user)
             return redirect("core:dashboard")
