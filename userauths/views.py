@@ -102,7 +102,7 @@ def register_view(request):
                     <body>
                         <div class="container">
                             <h1>Hi {username}, Thanks for signing up to Profitopit !</h1>
-                            <p>We're thrilled to have you join our investment community. Get ready to explore new opportunities and grow your portfolio.</p>
+                            <p>We're thrilled to have you join our investment platform. Get ready to explore new opportunities and grow your portfolio.</p>
                             <p>We can tell you're eager to jump into action. Why don't you take a look at our plans and get familiar with our platform.</p>
                             <p>Take the first step by signing in to your account:</p><br><br>
                             <div style="text-align: center; align-items: center;">
