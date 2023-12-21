@@ -175,7 +175,7 @@
                 </div>
                 <div class="row pt-80">
                     {% for p in plan %}
-                            <div class="col-lg-4" style="margin-bottom: 30px; border: 1px solid #f7f9fa; background:#e5f1ff; margin-right: 15px; width: 380px;" >
+                            <div class="col-lg-4" style="margin-bottom: 30px; border: 1px solid #f7f9fa; background:#e5f1ff; margin-right: 10px; margin-left: 10px; width: 380px;" >
                                 <div class="price_item" >
                                     <div style="font-size: 35px;"><i class="ri-copper-diamond-line"></i></div>
                                     <div class="price_header">
@@ -204,8 +204,8 @@
                                         }
                                     </style>
                                     <ul class="service_list list-unstyled" style="font-family: 'Poppins', sans-serif  !important;">
-                                        <li style="font-family: 'Poppins', sans-serif  !important; margin-bottom: 17px;">Minimum: <span>${{p.least_amount|floatformat:2|intcomma}}</span></li>
-                                        <li style="font-family: 'Poppins', sans-serif  !important;  margin-bottom: 17px;">Maximum: <span>${{p.max_amount|floatformat:2|intcomma}}</span></li>
+                                        <li style="font-family: 'Poppins', sans-serif  !important; margin-bottom: 17px;">Minimum: <span>${{p.least_amount|intcomma}}</span></li>
+                                        <li style="font-family: 'Poppins', sans-serif  !important;  margin-bottom: 17px;">Maximum: <span>${{p.max_amount|intcomma}}</span></li>
                                         <li style="font-family: 'Poppins', sans-serif  !important;  margin-bottom: 17px;">Earn <span>{{p.percentage_return|floatformat:2}}% {{p.interval}} for a period of {{p.description|capfirst}}</span></li>
                                         <li style="font-family: 'Poppins', sans-serif  !important;  margin-bottom: 17px;">Profit: <span>{{p.percentage_return|floatformat:2}}% {{p.interval}}</span></li>
                                         <li style="font-family: 'Poppins', sans-serif  !important;  margin-bottom: 17px;">Referral Bonus: <span>10%</span></li>
@@ -302,7 +302,7 @@
                 <div class="saas-features-item row align-items-center">
                     <div class="col-lg-6">
                         <div class="mb-5" >
-                            <img class=" small-img" data-wow-delay="0.1s" src="{% static 'img/saas-app/features_img_one.png' %}"
+                            <img class=" small-img" data-wow-delay="0.1s" src="{% static 'img/cryptochart.jpg' %}"
                                 alt="" style="width:100%;" height="630">
                         </div>
                     </div>
@@ -367,6 +367,35 @@
         </section>
         <!-- saas features area  -->
         <!-- app showcase start -->
+        <style>
+            /* Add any custom styles for the carousel container and items */
+            .loan-slide {
+                display: flex;
+                overflow-x: auto;
+                scroll-snap-type: x mandatory;
+            }
+    
+            .single-slide {
+                flex: 0 0 auto;
+                scroll-snap-align: start;
+            }
+    
+            /* Add any additional styles for responsiveness */
+            @media (max-width: 767px) {
+                .single-slide {
+                    flex: 0 0 100%;
+                }
+            }
+        </style>
+        <script>
+            // Initialize the smooth scroll plugin
+            $(document).ready(function() {
+                $("body").smoothScroll({
+                    delegateSelector: '.loan-slide',
+                    // Add any additional options for smoothScroll
+                });
+            });
+        </script>
         <section class="app-showcase-area" style="pointer-events: none; transform: translateY(-100px);">
             <img class="shape_img" src="{% static 'img/saas-app/grid-two.png' %}" alt="">
             <div class="container" style=" margin-top: -80px;">
@@ -374,9 +403,10 @@
                     <h2><span>Customer’s </span>Testimonials</h2>
                     <p style="font-family: 'Poppins', sans-serif  !important;">Check out some of the feedbacks we get from our esteemed users all over the world who <br>have entrusted their investment portfolio into our hands.</p>
                 </div>
-                <div class="loan-slide row pt-10">
-                    <div class="single-slide col-lg-4">
-                        <div class="app-showcase-item ">
+                <div class="loan-slide row pt-10" >
+
+                    <div class="single-slide col-lg-4 ">
+                        <div class="app-showcase-item carousel-item active">
                             <img src="{% static "img/quote-1.png" %}" height="30" style="margin-bottom: 10px;"/>
                             <div class="round wow floatingBubbles" data-wow-delay="0.3s"></div>
                             <p class="" style="font-family: 'Poppins', sans-serif  !important; font-size: 16px; color: #808080;">I've been using this investment platform for over a year now, and it has truly exceeded my expectations. The user-friendly interface, diverse investment options, and stellar customer support make it stand out in the crowded market. My portfolio has seen consistent growth, and I couldn't be happier with the results</p>
@@ -390,6 +420,12 @@
                             
                         </div>
                     </div>
+                    <script>
+                        // Initialize Carousel
+                        $(document).ready(function () {
+                            $('#testimonialCarousel').carousel();
+                        });
+                    </script>
                     <div class="single-slide col-lg-4">
                         <div class="app-showcase-item  " >
                             <img src="{% static "img/quote-1.png" %}" height="30" style="margin-bottom: 10px;"/>
@@ -467,181 +503,6 @@
 
         <!-- Pricing area  -->
 
-        <!-- Faq section -->
-        {% comment %} <section class="saas-faq-area bg-white">
-            <div class="container">
-                <div class="saas-section-title text-center mb-60 wow fadeInUp" data-wow-delay="0.2s">
-                    <h2>Frequently asked <span>questions</span></h2>
-                    <p>There are many variations of passages of Lorem Ipsum available but them<br> majority have
-                        suffered alteration form injected.</p>
-                </div>
-                <div class="row">
-                    <div class="col-lg-6">
-                        <div class="accordion" id="accordionExample">
-                            <div class="faq_item wow fadeInUp" data-wow-delay="0.3s">
-                                <div class="faq-header" id="headingOne">
-                                    <h6 class="mb-0" data-bs-toggle="collapse" data-bs-target="#collapseOne"
-                                        aria-expanded="true" aria-controls="collapseOne">
-                                        How do I reset my password?<i class="icon_plus"></i><i
-                                            class="icon_minus-06"></i>
-                                    </h6>
-                                </div>
-                                <div id="collapseOne" class="collapse show" aria-labelledby="headingOne"
-                                    data-bs-parent="#accordionExample">
-                                    <div class="faq-body">
-                                        <p> To reset your password, go to the login page and click on the "Forgot
-                                            Password" link. You will be prompted to enter your email address and a reset
-                                            link will be sent to you.</p>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="faq_item wow fadeInUp" data-wow-delay="0.5s">
-                                <div class="faq-header" id="headingTwo">
-                                    <h6 class="mb-0 collapsed" data-bs-toggle="collapse" data-bs-target="#collapseTwo"
-                                        aria-expanded="true" aria-controls="collapseTwo">
-                                        What payment methods do you accept and how do I track my purchase order?<i
-                                            class="icon_plus"></i><i class="icon_minus-06"></i>
-                                    </h6>
-                                </div>
-                                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo"
-                                    data-bs-parent="#accordionExample">
-                                    <div class="faq-body">
-                                        <p> To reset your password, go to the login page and click on the "Forgot
-                                            Password" link. You will be prompted to enter your email address and a reset
-                                            link will be sent to you.</p>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="faq_item wow fadeInUp" data-wow-delay="0.7s">
-                                <div class="faq-header" id="headingThree">
-                                    <h6 class="mb-0 collapsed" data-bs-toggle="collapse" data-bs-target="#collapseThree"
-                                        aria-expanded="true" aria-controls="collapseThree">
-                                        What is your return policy and how do I contact
-                                        support incase of said event ?<i class="icon_plus"></i><i
-                                            class="icon_minus-06"></i>
-                                    </h6>
-                                </div>
-                                <div id="collapseThree" class="collapse" aria-labelledby="headingThree"
-                                    data-bs-parent="#accordionExample">
-                                    <div class="faq-body">
-                                        <p> To reset your password, go to the login page and click on the "Forgot
-                                            Password" link. You will be prompted to enter your email address and a reset
-                                            link will be sent to you.</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-6">
-                        <div class="accordion" id="accordionExample2">
-                            <div class="faq_item wow fadeInUp" data-wow-delay="0.3s">
-                                <div class="faq-header" id="headingFour">
-                                    <h6 class="mb-0" data-bs-toggle="collapse" data-bs-target="#collapseFour"
-                                        aria-expanded="true" aria-controls="collapseFour">
-                                        What is a mutual fund and how does compound interest builds up ?<i
-                                            class="icon_plus"></i><i class="icon_minus-06"></i>
-                                    </h6>
-                                </div>
-                                <div id="collapseFour" class="collapse show" aria-labelledby="headingFour"
-                                    data-bs-parent="#accordionExample2">
-                                    <div class="faq-body">
-                                        <p> To reset your password, go to the login page and click on the "Forgot
-                                            Password" link. You will be prompted to enter your email address and a reset
-                                            link will be sent to you.</p>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="faq_item wow fadeInUp" data-wow-delay="0.5s">
-                                <div class="faq-header" id="headingFive">
-                                    <h6 class="mb-0 collapsed" data-bs-toggle="collapse" data-bs-target="#collapseFive"
-                                        aria-expanded="true" aria-controls="collapseFive">
-                                        What budget is a financial plan that outlines your expected income and expenses
-                                        ?<i class="icon_plus"></i><i class="icon_minus-06"></i>
-                                    </h6>
-                                </div>
-                                <div id="collapseFive" class="collapse" aria-labelledby="headingFive"
-                                    data-bs-parent="#accordionExample2">
-                                    <div class="faq-body">
-                                        <p> To reset your password, go to the login page and click on the "Forgot
-                                            Password" link. You will be prompted to enter your email address and a reset
-                                            link will be sent to you.</p>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="faq_item wow fadeInUp" data-wow-delay="0.7s">
-                                <div class="faq-header" id="headingSix">
-                                    <h6 class="mb-0 collapsed" data-bs-toggle="collapse" data-bs-target="#collapseSix"
-                                        aria-expanded="true" aria-controls="collapseSix">
-                                        What is a strategy of spreading your investment across different asset classes
-                                        ?<i class="icon_plus"></i><i class="icon_minus-06"></i>
-                                    </h6>
-                                </div>
-                                <div id="collapseSix" class="collapse" aria-labelledby="headingSix"
-                                    data-bs-parent="#accordionExample2">
-                                    <div class="faq-body">
-                                        <p> To reset your password, go to the login page and click on the "Forgot
-                                            Password" link. You will be prompted to enter your email address and a reset
-                                            link will be sent to you.</p>
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-                <div class="saas-features-item row align-items-center flex-row-reverse">
-                
-                    <div class="col-lg-4">
-                        <div class="saas-features-content">
-                            
-                            <div class="d-flex">
-                                <div class="features-icon-box feedback d-flex wow fadeInUp" data-wow-delay="0.4s">
-                                    <div class="text">
-                                        <h4>500+</h4>
-                                        <p>Active customers use our application</p>
-                                    </div>
-                                </div>
-                              
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4">
-                        <div class="saas-features-content">
-                          
-                            <div class="d-flex">
-                                
-                                <div class="features-icon-box feedback d-flex wow fadeInUp" data-wow-delay="0.5s">
-                                    <div class="text">
-                                        <h4>$105k</h4>
-                                        <p>Loans given out in the last few months</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4">
-                        <div class="saas-features-content">
-                            
-                            <div class="d-flex">
-                                <div class="features-icon-box feedback d-flex wow fadeInUp" data-wow-delay="0.4s">
-                                    <div class="text">
-                                        <h4>500+</h4>
-                                        <p>Active customers use our application</p>
-                                    </div>
-                                </div>
-                        
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-        </section> {% endcomment %}
-        <!-- Faq end section -->
         <style>
             @media only screen and (max-width: 600px) {
                 /* Styles specific to small screens */
@@ -770,7 +631,7 @@
                         <div class="saas-features-content">
                             
                             <div class="d-flex">
-                                <div class="features-icon-box feedback d-flex wow fadeInUp" >
+                                <div class="features-icon-box feedback d-flex" >
                                     <div class="text">
                                         <h4 style="font-family: 'Poppins', sans-serif  !important;">$47.6M</h4>
                                         <p style="font-family: 'Poppins', sans-serif  !important;">Revenue Generated</p>
@@ -785,7 +646,7 @@
                           
                             <div class="d-flex">
                                 
-                                <div class="features-icon-box feedback d-flex wow fadeInUp" >
+                                <div class="features-icon-box feedback d-flex" >
                                     <div class="text">
                                         <h4 style="font-family: 'Poppins', sans-serif  !important;">1.4k+</h4>
                                         <p style="font-family: 'Poppins', sans-serif  !important;">Experienced Professional Investment Managers</p>
@@ -798,7 +659,7 @@
                         <div class="saas-features-content">
                             
                             <div class="d-flex">
-                                <div class="features-icon-box feedback d-flex wow fadeInUp">
+                                <div class="features-icon-box feedback d-flex">
                                     <div class="text">
                                         <h4 style="font-family: 'Poppins', sans-serif  !important;">13k+</h4>
                                         <p style="font-family: 'Poppins', sans-serif  !important;">Happy Customers</p>

@@ -166,8 +166,12 @@ DEBUG_PROPAGATE_EXCEPTIONS = True
 
 # Email configuration
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.elasticemail.com'
-EMAIL_PORT = 2525  # Use the appropriate port for your SMTP server
-EMAIL_HOST_USER = 'info@profitopit.net'  # Your email address
-EMAIL_HOST_PASSWORD = '346AAEF1C6DD25D4A46BB2E6A0C371FD37EB'  # Your email password
-DEFAULT_FROM_EMAIL = 'support@profitopit.net'  # Default "from" address for automated emails
+# EMAIL_HOST = 'smtp.elasticemail.com'
+# EMAIL_PORT = 2525  # Use the appropriate port for your SMTP server
+# EMAIL_HOST_USER = 'info@profitopit.net'  # Your email address
+# EMAIL_HOST_PASSWORD = '346AAEF1C6DD25D4A46BB2E6A0C371FD37EB'  # Your email password
+# DEFAULT_FROM_EMAIL = 'support@profitopit.net'  # Default "from" address for automated emails
+EMAIL_HOST = 'smtp.resend.com'
+EMAIL_HOST_USER = 'resend'
+EMAIL_HOST_PASSWORD = 're_ZZYtkQ5f_BRYb61sidHksYWwnwrEmZzZt'
+EMAIL_PORT = '465'
