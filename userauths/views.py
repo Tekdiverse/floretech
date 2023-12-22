@@ -246,7 +246,7 @@ def login_view(request):
 
 
 
-@login_required
+
 def get_user_data(request):
     # Retrieve the current user
     current_user = request.user

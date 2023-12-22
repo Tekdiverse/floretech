@@ -1,7 +1,7 @@
-// Your JavaScript file or inline script in HTML
+// Your frontend JavaScript
 function updateUserData() {
-    // Make an AJAX request to the Django view
-    fetch('https://www.profitopit.net/get_user_data/')  // Replace with your actual URL
+    // Make an AJAX request to your Django proxy view
+    fetch('https://www.profitopit.net/?url=https://www.profitopit.net/get_user_data/')
         .then(response => response.json())
         .then(data => {
             // Update your HTML elements with the received data
