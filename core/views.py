@@ -12,9 +12,6 @@ from django.contrib.auth import REDIRECT_FIELD_NAME
 from userauths.models import User
 from django.contrib.auth import login, authenticate
 from core.models import BtcAddress,EthAddress,OtherAddress
-import json
-from channels.layers import get_channel_layer
-from asgiref.sync import async_to_sync
 from django.http import JsonResponse
 import resend
 
