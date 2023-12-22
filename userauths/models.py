@@ -6,6 +6,7 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 from datetime import timedelta
 from django.utils import timezone
+
 # Create your models here.
 STATUS = (
     ("daily", "daily"),
@@ -34,7 +35,9 @@ class User(AbstractUser):
         super().save(*args, **kwargs)
     def __str__(self):
         return self.username
-
+    def calculate_updated_balance(self, deposit_instance):
+        self.total_balance = Decimal(self.total_deposit) + Decimal(self.total_invested)
+        return self.total_balance
         
 
 
@@ -61,12 +64,15 @@ class Deposit(models.Model):
 
     def confirm_deposit(self):
         if not self.confirmed:
+            # Update user's balance first
+            self.user.total_deposit += self.amount
+            self.user.save()  # Save the user instance first
+
+            # Update deposit confirmation status
             self.confirmed = True
             self.save()
 
-            # Update user's balance
-            self.user.total_deposit += self.amount
-            self.user.save()
+
 
 class Withdraw(models.Model):
     user = models.CharField(max_length=100)

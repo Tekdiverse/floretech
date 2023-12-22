@@ -172,3 +172,5 @@ EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'support@profitopit.net'
 EMAIL_HOST_PASSWORD = 'Profitopit1234?'
 DEFAULT_FROM_EMAIL = 'support@profitopit.net'
+
+

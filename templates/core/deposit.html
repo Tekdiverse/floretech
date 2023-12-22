@@ -226,7 +226,7 @@
                                     <div class="mb-4">
                                         {% for b in btc %}
                                         <div style="margin-bottom: 15px;">
-                                            <label class="form-label alert-warning" >Pay with BTC</label><br><br>
+                                            <label class="form-label alert-warning" >Pay with BTC</label><br>
                                             <span  class="copy-address" data-address="{{b.address}}"><img src="{% static "images/btc.png" %}"height="30"  >  {{b.address}}</span>
                                             <span class="copy-button" style="cursor: pointer;"><img src="{% static 'asset/images/small/copy.png' %}" height="20" width="20" aria-label="copy address"></span>
                                             <div class="copy-feedback" id="feedback"></div>
@@ -234,7 +234,7 @@
                                         {% endfor %}
                                         {% for e in eth %}
                                         <div style="margin-bottom: 15px;">
-                                            <label class="form-label">Pay with ETH</label><br><br>
+                                            <label class="form-label">Pay with ETH</label><br>
                                             <span  class="copy-address" data-address="{{e.address}}"><img src="{% static "images/eth.png" %}"height="30" >  {{e.address}}</span>
                                             <span class="copy-button" style="cursor: pointer;"><img src="{% static  'asset/images/small/copy.png' %}" height="20" width="20" aria-label="copy address"></span>
                                             <div class="copy-feedback text-muted" id="feedback"></div>

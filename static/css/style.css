@@ -4101,9 +4101,8 @@ header .header-top .header-info-right ul li i {
   width: 100%;
   padding: 50px 0 30px 40px;
   text-align: left;
-  visibility: hidden;
-  opacity: 0;
-  transition: all 0.3s ease-in-out;
+  visibility: visible;
+  opacity: 1;
   background-image: linear-gradient(to bottom, rgba(51, 62, 72, 0), rgba(27, 34, 45, 0.8));
 }
 .single-leadership-widget a .leader-info h5 {

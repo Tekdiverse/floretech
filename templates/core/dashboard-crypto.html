@@ -305,7 +305,7 @@
                                             <div class="flex-grow-1 ms-3">
                                                 <p class="text-uppercase fw-semibold fs-12 text-muted mb-1">Total Deposit
                                                 </p>
-                                                <h4 class=" mb-0">$<span 
+                                                <h4 id="total-balance" class=" mb-0">$<span 
                                                         >{{request.user.total_balance|floatformat:2|intcomma}}</span></h4>
                                             </div>
                                             <div class="flex-shrink-0 align-item-center">
@@ -318,7 +318,27 @@
                                 </div><!-- end card -->
                             </div><!-- end col -->
                         </div><!-- end row -->
+                        <script>
+                            // client-side code (using WebSocket in JavaScript)
+                            const socket = new WebSocket('ws://' + window.location.host + '/ws/dashboard/');
 
+                            socket.onmessage = function (event) {
+                                const data = JSON.parse(event.data);
+
+                                // Update the total balance if the message is related to deposit confirmation
+                                if (data.message === 'Your deposit has been confirmed!') {
+                                    // Assuming data contains the updated total balance
+                                    const updatedBalance = data.updatedBalance;
+
+                                    // Update the content of the total balance element
+                                    const totalBalanceElement = document.getElementById('total-balance');
+                                    if (totalBalanceElement) {
+                                        totalBalanceElement.innerHTML = `$<span>${updatedBalance}</span>`;
+                                    }
+                                }
+                            };
+
+                        </script>
 
                         {% if request.user.is_authenticated %}
                         <div class="row">
