@@ -243,6 +243,9 @@ def login_view(request):
 
     return render(request, 'userauths/sign-in.html' )
 
+
+
+
 @login_required
 def get_user_data(request):
     # Retrieve the current user
