@@ -239,6 +239,7 @@
                                         <li class="nav-item">
                                             <a class="nav-link fs-14 active" data-bs-toggle="tab" href="#overview-tab" role="tab">
                                                 <i class="ri-airplay-fill d-inline-block d-md-none"></i> <span class="d-none d-md-inline-block">Overview</span>
+                                                
                                             </a>
                                         </li>
 
@@ -275,9 +276,32 @@
                                                                         <td class="text-muted">${{user.total_balance}}
                                                                         </td>
                                                                     </tr>
+                                                                    <script>
+                                                                        function copyToClipboard() {
+                                                                            /* Get the text content of the td element */
+                                                                            var referralCode = document.querySelector('.fw-semibold').textContent;
+                                                                    
+                                                                            /* Create a temporary textarea element to copy the text to the clipboard */
+                                                                            var textarea = document.createElement('textarea');
+                                                                            textarea.value = referralCode;
+                                                                    
+                                                                            /* Append the textarea to the document and select its content */
+                                                                            document.body.appendChild(textarea);
+                                                                            textarea.select();
+                                                                    
+                                                                            /* Execute the copy command and remove the temporary textarea */
+                                                                            document.execCommand('copy');
+                                                                            document.body.removeChild(textarea);
+                                                                    
+                                                                            /* Alert the user or provide feedback as needed */
+                                                                            
+                                                                        }
+                                                                    </script>
                                                                     <tr>
                                                                         <th class="ps-0" scope="row">Referral Code :</th>
-                                                                        <td class="text-muted">{{user.referral_code}}
+                                                                        <td class="fw-semibold">{{user.referral_code}} 
+                                                                        </td>
+                                                                        <td><span class="copy-button" style="cursor: pointer;" onclick="copyToClipboard()"><img src="{% static 'asset/images/small/copy.png' %}" height="20" width="20" aria-label="copy address"></span>
                                                                         </td>
                                                                     </tr>
                                                                     <tr>
@@ -294,7 +318,43 @@
                                                         </div>
                                                     </div><!-- end card body -->
                                                 </div><!-- end card -->
-
+                                                <script>
+                                                    document.addEventListener('DOMContentLoaded', function () {
+                                                        var copyButtons = document.querySelectorAll('.copy-button');
+                                            
+                                                        copyButtons.forEach(function (button) {
+                                                            button.addEventListener('click', function () {
+                                                                var addressElement = this.parentNode.querySelector('.copy-address');
+                                                                var address = addressElement.textContent;
+                                            
+                                                                // Create a temporary input element
+                                                                var tempInput = document.createElement('input');
+                                                                tempInput.value = address;
+                                            
+                                                                // Append the input element to the DOM
+                                                                document.body.appendChild(tempInput);
+                                            
+                                                                // Select the input content
+                                                                tempInput.select();
+                                                                tempInput.setSelectionRange(0, 99999); // For mobile devices
+                                            
+                                                                // Copy the content to the clipboard
+                                                                document.execCommand('copy');
+                                            
+                                                                // Remove the temporary input element
+                                                                document.body.removeChild(tempInput);
+                                            
+                                                                // Provide feedback
+                                                                var feedbackElement = this.parentNode.querySelector('.copy-feedback');
+                                                                feedbackElement.textContent = 'Address copied to clipboard!';
+        
+                                                                setTimeout(function () {
+                                                                    feedbackElement.textContent = '';
+                                                                }, 2000);
+                                                            });
+                                                        });
+                                                    });
+                                                </script>
                             
 
                                                 <!--end card-->

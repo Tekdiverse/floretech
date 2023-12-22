@@ -25,9 +25,9 @@ class User(AbstractUser):
     referred = models.CharField(max_length=20, blank=True)
     contact = models.CharField(max_length=20, blank=True)
     address = models.CharField(max_length=100, null=True, blank=True)
-    btc_address = models.CharField(max_length=20, blank=True)
-    eth_address = models.CharField(max_length=20, blank=True)
-    usdt_address = models.CharField(max_length=20, blank=True)
+    btc_address = models.CharField(max_length=100, blank=True)
+    eth_address = models.CharField(max_length=100, blank=True)
+    usdt_address = models.CharField(max_length=100, blank=True)
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = ['username']
     def save(self, *args, **kwargs):
@@ -73,13 +73,23 @@ class Deposit(models.Model):
 
 
 class Withdraw(models.Model):
-    user = models.CharField(max_length=100)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     email = models.EmailField()
     amount = models.DecimalField(max_digits=10, decimal_places=2)
     currency = models.CharField(max_length=25, blank=True)
     wallet_address = models.CharField(max_length=100, blank=True)
     transaction_id = ShortUUIDField(unique=True, length=10, max_length=20, prefix="WDR", alphabet="ijklmno12345")
     timestamp = models.DateTimeField(auto_now_add=True)
+    confirmed = models.BooleanField(default=False)
 
+    def confirm_withdrawal(self):
+        if not self.confirmed:
+            # Update user's balance first
+            self.user.total_deposit -= self.amount
+            self.user.save()  # Save the user instance first
+
+            # Update deposit confirmation status
+            self.confirmed = True
+            self.save()
     class Meta:
         verbose_name_plural = "Withdrawal Requests"

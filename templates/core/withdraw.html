@@ -234,8 +234,8 @@
                                         {% csrf_token %}
                                         <div class="mb-3">
                                             {% comment %} <label for="card-holder-input" class="form-label">Account Holder</label> {% endcomment %}
-                                            <input type="text" class="form-control" name="user" id="card-holder-input"
-                                                value="{{request.user.username}}" hidden />
+                                            {% comment %} <input type="text" class="form-control" name="user" id="card-holder-input"
+                                                value="{{request.user.username}}" hidden /> {% endcomment %}
                                         </div>
 
                                         <div class="mb-3">
@@ -284,7 +284,7 @@
                                       
                                         <!-- end row -->
 
-                                        <button class="btn btn-primary w-100 mt-3" type="submit">Pay Now</button>
+                                        <button class="btn btn-primary w-100 mt-3" type="submit">Withdraw</button>
                                     </form>
                                     <!-- end card form elem -->
                                 </div>

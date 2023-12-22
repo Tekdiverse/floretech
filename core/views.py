@@ -322,9 +322,10 @@ def withdraw_view(request):
     user = request.user
     email = request.user.email
     if request.method == 'POST':
+        form = WithdrawForm(request.POST)
         if float(request.POST['amount']) <= user.total_balance:
             amount = request.POST['amount']
-            form = WithdrawForm(request.POST)
+            form.instance.user = user
             if form.is_valid():
                 form.save()
                 messages.success(request,"Withdrawal placement pending")
@@ -412,7 +413,7 @@ def withdraw_view(request):
     
                 return redirect('core:dashboard')
             else:
-                messages.warning(request,"Invalid Address")
+                messages.warning(request,"something went wrong")
                 return redirect('core:withdraw')
         else:
             messages.warning(request,"Insufficient Balance")

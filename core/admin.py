@@ -29,8 +29,10 @@ def confirm_selected_transactions(modeladmin, request, queryset):
 
 confirm_selected_transactions.short_description = "Confirm selected deposits"
 
+
 class DepositAdmin(admin.ModelAdmin):
     list_display = ('user','currency', 'amount','wallet_address','timestamp','confirmed')
     list_filter = ('confirmed',)
     actions = [confirm_selected_transactions]
 admin.site.register(Deposit, DepositAdmin)
+

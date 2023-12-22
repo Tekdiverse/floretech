@@ -79,6 +79,6 @@ class OtherAddress(models.Model):
     address = models.CharField(max_length=100, default="eth address")
     initial = models.CharField(max_length=10, default="Other")
     class Meta:
-        verbose_name_plural = "Other Address"
+        verbose_name_plural = "USDT Address"
     def __str__(self):
         return self.address

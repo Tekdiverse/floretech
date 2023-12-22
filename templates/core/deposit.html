@@ -283,7 +283,7 @@
                                         <div class="mb-3">
                                             {% comment %} <label for="card-holder-input" class="form-label">Account Holder</label> {% endcomment %}
                                             <input type="text" class="form-control" name="name" id="card-holder-input"
-                                                value="{{user.username|capfirst}}" hidden />
+                                                value="{{user.username}}" hidden />
                                         </div>
                                         <div class="mb-3">
                                             {% comment %} <label for="card-holder-input" class="form-label">Payment</label> {% endcomment %}
@@ -295,6 +295,7 @@
                                             <select class="form-control" id="card-holder-input" name="options">
                                                 <option value="Bitcoin">Bitcoin (BTC)</option>
                                                 <option value="Ethereum">Ethereum (ETH)</option>
+                                                <option value="Tether">Tether (USDT)</option>
                                             </select>
                                         </div>
                                         <div class="mb-3">

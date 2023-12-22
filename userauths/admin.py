@@ -18,7 +18,15 @@ class TransactionAdmin(admin.ModelAdmin):
 admin.site.register(Transaction, TransactionAdmin)
 
 
-class WithdrawAdmin(admin.ModelAdmin):
-    list_display = ('user', 'amount', 'wallet_address', 'currency')
+def confirm_selected_withdrawals(modeladmin, request, queryset):
+    for withdrawal in queryset:
+        withdrawal.confirm_deposit()
 
-admin.site.register(Withdraw, WithdrawAdmin)
+confirm_selected_withdrawals.short_description = "Confirm selected withdrawals"
+
+
+class WithdrawalAdmin(admin.ModelAdmin):
+    list_display = ('user','currency', 'amount','wallet_address','timestamp','confirmed')
+    list_filter = ('confirmed',)
+    actions = [confirm_selected_withdrawals]
+admin.site.register(Withdraw, WithdrawalAdmin)

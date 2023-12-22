@@ -11,7 +11,6 @@ CURRENCY = (
     ("Bitcoin (BTC)", "Bitcoin (BTC)"),
     ("Ethereum (ETH)", "Ethereum (ETH)"),
     ("Tether (USDT)", "Tether (USDT)"),
-    ("Binance Coin (BNB)", "Binance Coin (BNB)"),
 )
 
 
