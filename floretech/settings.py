@@ -177,3 +177,17 @@ EMAIL_HOST_PASSWORD = 'Profitopit1234?'
 DEFAULT_FROM_EMAIL = 'support@profitopit.net'
 
 
+CORS_ALLOW_HEADERS = [
+    'access-control-allow-origin',
+    'authorization',
+    'content-type',
+]
+
+CORS_ALLOW_METHODS = [
+    'DELETE',
+    'GET',
+    'OPTIONS',
+    'PATCH',
+    'POST',
+    'PUT',
+]
