@@ -367,7 +367,7 @@ def withdraw_view(request):
                                 background-color: #007bff;
                                 border-color: #007bff;
                                 padding: 10px 20px;
-                                 font-size: 16px;
+                                font-size: 16px;
                                 border-radius: 2px;
                             }}
                             .btn-primary:hover {{

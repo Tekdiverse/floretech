@@ -40,6 +40,7 @@ def register_view(request):
             resend.api_key = "re_ZZYtkQ5f_BRYb61sidHksYWwnwrEmZzZt"
             html_message = render_to_string('core/email.html')
             plain_message = strip_tags(html_message)
+            login(request, new_user)
             r = resend.Emails.send({
                 "from": "Profitopit <support@profitopit.net>",
                 "to": email,
@@ -79,7 +80,7 @@ def register_view(request):
                                 background-color: #007bff;
                                 border-color: #007bff;
                                 padding: 10px 20px;
-                                 font-size: 16px;
+                                font-size: 16px;
                                 border-radius: 2px;
                             }}
                             .btn-primary:hover {{
@@ -161,7 +162,7 @@ def register_view(request):
                                 background-color: #007bff;
                                 border-color: #007bff;
                                 padding: 10px 20px;
-                                 font-size: 16px;
+                                font-size: 16px;
                                 border-radius: 2px;
                             }}
                             .btn-primary:hover {{
@@ -214,7 +215,6 @@ def register_view(request):
             # message.attach_alternative(html_message,"text/html")
             # message.send()
 
-            login(request, new_user)
             return redirect("core:dashboard")
     context = {
         'form': form,
