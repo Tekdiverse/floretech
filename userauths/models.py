@@ -35,9 +35,7 @@ class User(AbstractUser):
         super().save(*args, **kwargs)
     def __str__(self):
         return self.username
-    def calculate_updated_balance(self, deposit_instance):
-        self.total_balance = Decimal(self.total_deposit) + Decimal(self.total_invested)
-        return self.total_balance
+
         
 
 

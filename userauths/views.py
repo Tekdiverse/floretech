@@ -11,7 +11,8 @@ import resend
 import secrets
 from django.template.loader import render_to_string
 from django.utils.html import strip_tags
-
+from django.contrib.auth.decorators import login_required
+from django.http import JsonResponse
 
 
 def generate_reset_token():
@@ -242,7 +243,20 @@ def login_view(request):
 
     return render(request, 'userauths/sign-in.html' )
 
+@login_required
+def get_user_data(request):
+    # Retrieve the current user
+    current_user = request.user
 
+    # Fetch data for the current user
+    data = {
+        'total_balance': str(current_user.total_balance),
+        'total_invested': str(current_user.total_invested),
+        'total_deposit': str(current_user.total_deposit),
+        # Add other fields as needed
+    }
+
+    return JsonResponse(data)
 def logout_view(request):
     logout(request)
     # messages.success(request, "User successfully logged out.")

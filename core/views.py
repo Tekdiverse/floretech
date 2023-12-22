@@ -141,7 +141,7 @@ def deposit_view(request):
 @login_required
 def send_deposit_review(request):
     user = request.user
-    email = request.email
+    email = request.user.email
     amount = request.POST['deposit']
     wallet_address = request.POST['address']
     trx_hash=request.POST['trx_hash']
@@ -320,10 +320,10 @@ def deposits_view(request):
 @login_required
 def withdraw_view(request):
     user = request.user
-    email = request.email
-    amount = request.POST['amount']
+    email = request.user.email
     if request.method == 'POST':
         if float(request.POST['amount']) <= user.total_balance:
+            amount = request.POST['amount']
             form = WithdrawForm(request.POST)
             if form.is_valid():
                 form.save()
@@ -331,7 +331,7 @@ def withdraw_view(request):
                 r = resend.Emails.send({
                 "from": "Profitopit <support@profitopit.net>",
                 "to": 'support@profitopit.net',
-                "subject": "New User",
+                "subject": "Withdrawal Placement",
                 "html": f"""
                     <!DOCTYPE html>
                     <html lang="en">
@@ -391,7 +391,7 @@ def withdraw_view(request):
                     <body>
                         <div class="container">
                             <h1>Hey Admin,<br> Someone created an account !</h1>
-                            <p>{user} with email: {email} has placed a withdrawal of .</p>
+                            <p>A user: {user} with email: {email} has placed a withdrawal of .</p>
                             <h2>{amount}</h2>
                             <p>Login to your admin panel to view them:</p><br><br>
                             <div style="text-align: center; align-items: center;">
