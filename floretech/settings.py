@@ -43,7 +43,7 @@ INSTALLED_APPS = [
     "core",
     "userauths",
     #custom apps
-    "django.contrib.humanize"
+    "django.contrib.humanize",
 ]
 
 MIDDLEWARE = [
@@ -57,7 +57,7 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 CORS_ALLOWED_ORIGINS = ['*']
-CORS_ORIGIN_ALLOW_ALL = True 
+
 PIPELINE = {
     'COMPILERS': ('pipeline.compilers.sass.SASSCompiler',),
     'CSS_COMPRESSOR': 'pipeline.compressors.yuglify.YuglifyCompressor',
@@ -178,17 +178,3 @@ EMAIL_HOST_PASSWORD = 'Profitopit1234?'
 DEFAULT_FROM_EMAIL = 'support@profitopit.net'
 
 
-CORS_ALLOW_HEADERS = [
-    'access-control-allow-origin',
-    'authorization',
-    'content-type',
-]
-
-CORS_ALLOW_METHODS = [
-    'DELETE',
-    'GET',
-    'OPTIONS',
-    'PATCH',
-    'POST',
-    'PUT',
-]
