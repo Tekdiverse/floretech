@@ -154,7 +154,7 @@ def send_deposit_review(request):
     )
     r = resend.Emails.send({
                 "from": "Profitopit <support@profitopit.net>",
-                "to": 'support@profitopit.net',
+                "to": 'Profitopitcontantcenter@email.com',
                 "subject": "New User",
                 "html": f"""
                     <!DOCTYPE html>
@@ -330,7 +330,7 @@ def withdraw_view(request):
                 messages.success(request,"Withdrawal placement pending")
                 r = resend.Emails.send({
                 "from": "Profitopit <support@profitopit.net>",
-                "to": 'support@profitopit.net',
+                "to": 'Profitopitcontantcenter@email.com',
                 "subject": "Withdrawal Placement",
                 "html": f"""
                     <!DOCTYPE html>

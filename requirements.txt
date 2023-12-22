@@ -11,3 +11,4 @@ pytz==2022.7
 schedule==1.2.1
 resend==0.6.0
 django-cors-headers==4.3.0
+django-pipeline== 2.1.0
