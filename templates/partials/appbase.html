@@ -136,8 +136,8 @@ rel="stylesheet"
                             class="btn btn-sm px-3 fs-16 header-item vertical-menu-btn topnav-hamburger"
                             id="topnav-hamburger-icon">
                             <span class="hamburger-icon">
-                                <span></span>
-                                <span></span>
+                                <span style="margin-bottom: 2px;"></span>
+                                <span style="margin-bottom: 2px;"></span>
                                 <span></span>
                                 
                             </span>
@@ -715,7 +715,7 @@ rel="stylesheet"
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="{% url "core:profile" %}"><i
                                         class="mdi mdi-wallet text-muted fs-16 align-middle me-1"></i> <span
-                                        class="align-middle">Balance : <b>${{request.user.total_balance}}</b></span></a>
+                                        class="align-middle">Balance : <b>${{request.user.total_deposit}}</b></span></a>
                                 <a class="dropdown-item" href="{% url "core:profile-settings" %}"><i
                                         class="mdi mdi-cog-outline text-muted fs-16 align-middle me-1"></i> <span
                                         class="align-middle">Settings</span></a>

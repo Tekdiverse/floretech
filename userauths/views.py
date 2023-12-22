@@ -8,9 +8,15 @@ from userauths.models import User
 from django.conf import settings
 from django.core.mail import send_mail, EmailMessage, EmailMultiAlternatives
 import resend
+import secrets
 from django.template.loader import render_to_string
 from django.utils.html import strip_tags
 
+
+
+def generate_reset_token():
+    # Generate a URL-safe random token with 32 bytes (256 bits) of entropy
+    return secrets.token_urlsafe(32)
 def register_view(request):
 
     form = UserRegisterForm()
@@ -30,17 +36,11 @@ def register_view(request):
                                     password=form.cleaned_data['password1']
             )
             # send_activation_email(new_user,request)
-            # send_mail(subject='Welcome to Profitopit',
-            #           message=f'Welcome to Profitopit {username}',
-            #           from_email='profitopit@profitopit.net',
-            #           recipient_list=[email]
-            # #           )
             resend.api_key = "re_ZZYtkQ5f_BRYb61sidHksYWwnwrEmZzZt"
             html_message = render_to_string('core/email.html')
             plain_message = strip_tags(html_message)
-
             r = resend.Emails.send({
-                "from": "support@profitopit.net",
+                "from": "Profitopit <support@profitopit.net>",
                 "to": email,
                 "subject": "Welcome to Profitopit",
                 "html": f"""
@@ -101,9 +101,9 @@ def register_view(request):
                     </head>
                     <body>
                         <div class="container">
-                            <h1>Hi {username}, Thanks for signing up to Profitopit !</h1>
+                            <h1>Hi {username},<br> Thanks for signing up to Profitopit !</h1>
                             <p>We're thrilled to have you join our investment platform. Get ready to explore new opportunities and grow your portfolio.</p>
-                            <p>We can tell you're eager to jump into action. Why don't you take a look at our plans and get familiar with our platform.</p>
+                            <p>We can tell you're eager to jump into action. Why don't you take a look at our <a href="https://profitopit.net/app/plans" style="color: #007bff;">plans</a> and get familiar with our platform.</p>
                             <p>Take the first step by signing in to your account:</p><br><br>
                             <div style="text-align: center; align-items: center;">
                                 <a href="https://profitopit.net/app/dashboard" class="btn btn-primary" target="_blank">Sign In</a><br><br>
@@ -121,12 +121,13 @@ def register_view(request):
                     </html>
                 """,
             })
-
+            
+            
 
             # message = EmailMultiAlternatives(
             #     subject='Welcome to Profitopit',
             #     body= plain_message,
-            #     from_email='profitopit@profitopit.net',
+            #     from_email='support@profitopit.net',
             #     to=[email]
             # )
             # message.attach_alternative(html_message,"text/html")
