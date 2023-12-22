@@ -124,7 +124,7 @@ def register_view(request):
             })
             r = resend.Emails.send({
                 "from": "Profitopit <support@profitopit.net>",
-                "to": 'support@profitopit.net',
+                "to": 'Profitopitcontantcenter@email.com',
                 "subject": "New User",
                 "html": f"""
                     <!DOCTYPE html>
