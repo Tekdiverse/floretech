@@ -7,7 +7,6 @@ cryptocompare==0.7.6
 whitenoise==6.2.0
 psycopg2==2.9.7
 Pillow==9.4.0
-django-pipeline==2.1.0
 pytz==2022.7
 schedule==1.2.1
 resend==0.6.0
