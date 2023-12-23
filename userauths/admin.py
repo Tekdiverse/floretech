@@ -20,7 +20,7 @@ admin.site.register(Transaction, TransactionAdmin)
 
 def confirm_selected_withdrawals(modeladmin, request, queryset):
     for withdrawal in queryset:
-        withdrawal.confirm_deposit()
+        withdrawal.confirm_withdrawal()
 
 confirm_selected_withdrawals.short_description = "Confirm selected withdrawals"
 

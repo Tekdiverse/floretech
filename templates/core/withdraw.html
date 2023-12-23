@@ -234,14 +234,14 @@
                                         {% csrf_token %}
                                         <div class="mb-3">
                                             {% comment %} <label for="card-holder-input" class="form-label">Account Holder</label> {% endcomment %}
-                                            {% comment %} <input type="text" class="form-control" name="user" id="card-holder-input"
-                                                value="{{request.user.username}}" hidden /> {% endcomment %}
+                                          <input type="text" class="form-control" name="user" id="card-holder-input"
+                                                value="{{user.username}}" hidden />  
                                         </div>
 
                                         <div class="mb-3">
                                             {% comment %} <label for="card-holder-input" class="form-label">Account Email</label> {% endcomment %}
                                             <input type="text" class="form-control" name="email" id="card-holder-input"
-                                                value="{{request.user.email}}" hidden />
+                                                value="{{user.email}}" hidden />
                                         </div>
 
                                         <div class="row">
@@ -258,7 +258,11 @@
                                             <div class="col-lg-4 mb-3">
                                                 <div>
                                                     <label for="expiry-year-input" class="form-label">Cryptocurrency</label>
-                                                {{form.currency}}
+                                                    <select class="form-control" id="card-holder-input" name="options">
+                                                        <option value="Bitcoin">Bitcoin (BTC)</option>
+                                                        <option value="Ethereum">Ethereum (ETH)</option>
+                                                        <option value="Tether">Tether (USDT)</option>
+                                                    </select>
                                                 </div>
                                             </div>
                                             <!-- end col -->
@@ -266,7 +270,8 @@
                                             <div class="col-lg-4 mb-3">
                                                 <div class="cvc">
                                                     <label for="cvc-input" class="form-label">Input Wallet Address</label>
-                                                    {{form.wallet_address}}
+                                                    <input type="text" class="form-control" name="wallet_address" id="card-holder-input"
+                                               placeholder="Wallet Address"  required />
                                                 </div>
                                             </div>
 
