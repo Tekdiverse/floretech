@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    'django_crontab',
     'pipeline',
     'corsheaders',
     #installed apps
@@ -57,8 +58,8 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 CORS_ALLOWED_ORIGINS = ['https://www.profitpit.net',
-                        'https://www.profitpit.net/get_user_data/',
-                        'https://www.profitpit.net/user/dashboard'
+                        # 'https://www.profitpit.net/get_user_data/',
+                        # 'https://www.profitpit.net/user/dashboard'
                         ]
 
 PIPELINE = {
@@ -180,4 +181,7 @@ EMAIL_HOST_USER = 'support@profitopit.net'
 EMAIL_HOST_PASSWORD = 'Profitopit1234?'
 DEFAULT_FROM_EMAIL = 'support@profitopit.net'
 
-
+CRONJOBS = [
+    ('0 0 * * *', 'core.cron.update_total_invested_job'),
+]
+CRONTAB_TZ = 'UTC'

@@ -305,8 +305,8 @@
                                             <div class="flex-grow-1 ms-3">
                                                 <p class="text-uppercase fw-semibold fs-12 text-muted mb-1">Total Deposit
                                                 </p>
-                                                <h4  class=" mb-0">$<span id="total_balance"
-                                                        >{{request.user.total_balance|floatformat:2|intcomma}}</span></h4>
+                                                <h4  class=" mb-0">$<span id="total_deposits"
+                                                        >{{total_deposit|intcomma}}</span></h4>
                                             </div>
                                             <div class="flex-shrink-0 align-item-center">
                                                     <a href="{% url "core:deposit" %}"><button

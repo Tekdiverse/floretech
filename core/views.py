@@ -14,7 +14,7 @@ from django.contrib.auth import login, authenticate
 from core.models import BtcAddress,EthAddress,OtherAddress
 from django.http import JsonResponse
 import resend
-
+from django.db.models import Sum
 
 
 def login_required(
@@ -64,12 +64,17 @@ def contact_view(request):
     return render(request, 'core/contact.html', {'form': form})
 
 resend.api_key = "re_ZZYtkQ5f_BRYb61sidHksYWwnwrEmZzZt"
+
 @login_required
 def dashboard_view(request):
+    user = request.user
+    confirmed_deposits = Deposit.objects.filter(user=user, confirmed=True)
+    total_deposit = confirmed_deposits.aggregate(total_amount=Sum('amount'))['total_amount'] or 0
     plans = Plan.objects.all()
     
     context = {
-        "plans": plans
+        "plans": plans,
+        "total_deposit": total_deposit,
     }
     
     return render(request, "core/dashboard-crypto.html", context)

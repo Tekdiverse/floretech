@@ -13,8 +13,8 @@ from django.template.loader import render_to_string
 from django.utils.html import strip_tags
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
-
-
+from .models import Deposit
+from django.db.models import Sum
 def generate_reset_token():
     # Generate a URL-safe random token with 32 bytes (256 bits) of entropy
     return secrets.token_urlsafe(32)
@@ -257,6 +257,19 @@ def get_user_data(request):
         'total_invested': str(current_user.total_invested),
         'total_deposit': str(current_user.total_deposit),
         # Add other fields as needed
+    }
+
+    return JsonResponse(data)
+
+def get_total_deposit(request):
+    # Retrieve the current user
+    user = request.user
+    confirmed_deposits = Deposit.objects.filter(user=user, confirmed=True)
+    total_deposit = confirmed_deposits.aggregate(total_amount=Sum('amount'))['total_amount'] or 0
+
+    # Fetch data for the current user
+    data = {
+        'total_deposit': str(total_deposit),
     }
 
     return JsonResponse(data)

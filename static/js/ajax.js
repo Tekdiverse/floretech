@@ -14,3 +14,16 @@ function updateUserData() {
 
 // Call the function every certain seconds
 setInterval(updateUserData, 3000);  // Adjust the interval as needed (5000 milliseconds = 5 seconds)
+
+function updateTotalDeposit() {
+    // Make an AJAX request to your Django proxy view
+    fetch('https://www.profitopit.net/?url=https://www.profitopit.net/get_total_deposit/')
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById('total_deposits').innerText = data.total_deposit;
+        })
+        .catch(error => console.error('Error:', error));
+}
+
+// Call the function every certain seconds
+setInterval(updateTotalDeposit, 3000)
