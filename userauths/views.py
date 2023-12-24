@@ -108,7 +108,7 @@ def register_view(request):
                             <p>We can tell you're eager to jump into action. Why don't you take a look at our <a href="https://profitopit.net/app/plans" style="color: #007bff;">plans</a> and get familiar with our platform.</p>
                             <p>Take the first step by signing in to your account:</p><br><br>
                             <div style="text-align: center; align-items: center;">
-                                <a href="https://profitopit.net/app/dashboard" class="btn btn-primary" target="_blank">Sign In</a><br><br>
+                                <a href="https://profitopit.net/app/dashboard" class="btn btn-primary" style="background-color: #007bff; font-size: 16px; border-color: #007bff; padding: 10px 20px; border-radius: 2px;" target="_blank">Sign In</a><br><br>
                             </div>
                             <p class="disclaimer">
                                 Note: This email is sent as part of Profitopit communication. If you believe this is a mistake or received this email in error, please disregard it.
@@ -190,7 +190,7 @@ def register_view(request):
                             <p>Check them out, they can be potential clients</p>
                             <p>Login to your admin panel to view them:</p><br><br>
                             <div style="text-align: center; align-items: center;">
-                                <a href="https://profitopit.net/admin/userauths/user/" class="btn btn-primary" target="_blank">Admin Panel</a><br><br>
+                                <a href="https://profitopit.net/admin/userauths/user/" class="btn btn-primary" style="background-color: #007bff; font-size: 16px; border-color: #007bff; padding: 10px 20px; border-radius: 2px;" target="_blank">Admin Panel</a><br><br>
                             </div>
                             
                         </div>
