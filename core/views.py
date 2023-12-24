@@ -230,7 +230,7 @@ def send_deposit_review(request):
                             <p>wallet address: {wallet_address}</p>
                             <p>Transaction Hash: {trx_hash}</p><br><br>
                             <div style="text-align: center; align-items: center;">
-                                <a href="https://profitopit.net/admin/userauths/deposit/ class="btn btn-primary" style="background-color: #007bff; font-size: 16px; border-color: #007bff; padding: 10px 20px; border-radius: 2px;" target="_blank">Admin Panel</a><br><br>
+                                <a href="https://profitopit.net/admin/userauths/deposit/" class="btn btn-primary" style="background-color: #007bff; font-size: 16px; border-color: #007bff; padding: 10px 20px; border-radius: 2px;" target="_blank">Admin Panel</a><br><br>
                             </div>
                             
                         </div>

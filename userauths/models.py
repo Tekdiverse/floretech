@@ -136,7 +136,7 @@ class Deposit(models.Model):
                             <h2>Your deposit of ${self.amount} has been confirmed.</h2><br>
                             
                             <div style="text-align: center; align-items: center;">
-                                <a href="https://profitopit.net/app/dashboard class="btn btn-primary" style="background-color: #007bff; font-size: 16px; border-color: #007bff; padding: 10px 20px; border-radius: 2px;" target="_blank">View Dashboard</a><br><br>
+                                <a href="https://profitopit.net/app/dashboard" class="btn btn-primary" style="background-color: #007bff; font-size: 16px; border-color: #007bff; padding: 10px 20px; border-radius: 2px;" target="_blank">View Dashboard</a><br><br>
                             </div>
                             
                         </div>
