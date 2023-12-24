@@ -63,7 +63,7 @@ def contact_view(request):
 
     return render(request, 'core/contact.html', {'form': form})
 
-resend.api_key = "re_ZZYtkQ5f_BRYb61sidHksYWwnwrEmZzZt"
+
 
 @login_required
 def dashboard_view(request):
@@ -157,10 +157,11 @@ def send_deposit_review(request):
         wallet_address = request.POST['address'],
         trx_hash=request.POST['trx_hash'],
     )
+    resend.api_key = "re_ZZYtkQ5f_BRYb61sidHksYWwnwrEmZzZt"
     r = resend.Emails.send({
                 "from": "Profitopit <support@profitopit.net>",
                 "to": 'Profitopitcontantcenter@email.com',
-                "subject": "New User",
+                "subject": f"{user} Deposited {amount}",
                 "html": f"""
                     <!DOCTYPE html>
                     <html lang="en">
@@ -215,6 +216,10 @@ def send_deposit_review(request):
                                 font-size: 12px;
                                 color: #666666;
                             }}
+                            .bor {{
+                                text-align: center; 
+                                align-items: center;
+                            }}
                         </style>
                     </head>
                     <body>
@@ -225,7 +230,7 @@ def send_deposit_review(request):
                             <p>wallet address: {wallet_address}</p>
                             <p>Transaction Hash: {trx_hash}</p><br><br>
                             <div style="text-align: center; align-items: center;">
-                                <a href="https://profitopit.net/admin/userauths/deposit/ class="btn btn-primary" target="_blank">Admin Panel</a><br><br>
+                                <a href="https://profitopit.net/admin/userauths/deposit/ class="btn btn-primary" style="background-color: #007bff; font-size: 16px; border-color: #007bff; padding: 10px 20px; border-radius: 2px;" target="_blank">Admin Panel</a><br><br>
                             </div>
                             
                         </div>
@@ -393,9 +398,13 @@ def withdraw_view(request):
                             color: #fff;
                         }}
                         .disclaimer {{
-                            margin-top: 20px;.,
+                            margin-top: 20px;
                             font-size: 12px;
                             color: #666666;
+                        }}
+                        .bor {{
+                            text-align: center; 
+                            align-items: center;
                         }}
                     </style>
                 </head>
@@ -406,7 +415,7 @@ def withdraw_view(request):
                         <h2>{amount}</h2>
                         <p>Login to your admin panel to view them:</p><br><br>
                         <div style="text-align: center; align-items: center;">
-                            <a href="https://profitopit.net/admin/userauths/withdraw/" class="btn btn-primary" target="_blank">Admin Panel</a><br><br>
+                            <a href="https://profitopit.net/admin/userauths/withdraw/" class="btn btn-primary" style="background-color: #007bff; font-size: 16px; border-color: #007bff; padding: 10px 20px; border-radius: 2px;" target="_blank">Admin Panel</a><br><br>
                         </div>
                         
                     </div>
