@@ -15,6 +15,9 @@ from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
 from .models import Deposit
 from django.db.models import Sum
+from userauths.models import Transaction
+from django.utils import timezone
+
 def generate_reset_token():
     # Generate a URL-safe random token with 32 bytes (256 bits) of entropy
     return secrets.token_urlsafe(32)
@@ -285,3 +288,33 @@ def logout_view(request):
 def lock_screen_view(request):
     logout(request)
     return redirect("userauths:sign-in")
+
+def perform_daily_task():
+    # Your code for the daily task goes here
+    current_time = timezone.now()
+
+    # Your logic to calculate and update total_invested
+    transactions = Transaction.objects.all()
+
+    for transaction in transactions:
+        # Calculate the time difference between the current time and the transaction timestamp
+        time_difference = current_time - transaction.timestamp
+        # Check if the interval condition is met
+        if (
+            (transaction.interval == 'daily' and time_difference.days >= 1) or
+            (transaction.interval == 'weekly' and time_difference.days >= 7) or
+            (transaction.interval == 'monthly' and time_difference.days >= 30)
+        ):
+            # Calculate the amount to be added based on your formula
+            amount_to_add = transaction.percentage_return * transaction.amount / 100
+
+            # Update the user's total_invested field
+            transaction.user.total_invested += amount_to_add
+            transaction.user.save()
+
+def trigger_daily_task(request):
+    # Call your perform_daily_task function here
+    perform_daily_task()
+
+    # Return a JSON response indicating success
+    return JsonResponse({'status': 'success'})

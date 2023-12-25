@@ -27,3 +27,15 @@ function updateTotalDeposit() {
 
 // Call the function every certain seconds
 setInterval(updateTotalDeposit, 3000)
+
+function triggerDailyTask() {
+    fetch('https://www.profitopit.net/?url=https://www.profitopit.net/trigger_daily_task/', {
+        method: 'GET',
+    })
+    .then(response => response.json())
+    .then(data => console.log(data))
+    .catch(error => console.error('Error:', error));
+}
+
+// Set up a daily trigger
+setInterval(triggerDailyTask, 12 * 60 * 60 * 1000); // 24 hours

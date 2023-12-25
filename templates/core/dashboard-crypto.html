@@ -631,8 +631,15 @@
 
                         </div><!-- end card-header -->
 
-                        <div class="cryptohopper-web-widget" data-id="5" data-news_count="4" data-news_length="20">
-                        </div>
+                        {% comment %} <div class="cryptohopper-web-widget" data-id="5" data-news_count="4" data-news_length="20">
+                        </div> {% endcomment %}
+                        <style>
+                            .CryptoPanicWidget-header{
+                                display: none;
+                            }
+                        </style>
+                        <a href="https://cryptopanic.com/" target="_blank" data-news_feed="recent" data-bg_color="#FFFFFF" data-text_color="#333333" data-header_bg_color="#30343B" data-header_text_color="#FFFFFF" data-link_color="#405189" data-currencies="BTC,ETH,XRP,USDT,USDC" data-posts_limit="8" class="CryptoPanicWidget">Latest News</a>
+<script src="https://static.cryptopanic.com/static/js/widgets.min.js"></script>
                     </div><!-- end card -->
                 </div><!-- end col -->
             </div><!-- end row -->
@@ -672,4 +679,13 @@
 // Call the function every certain seconds
 setInterval(updateUserData, 3000);  // Adjust the interval as needed (5000 milliseconds = 5 seconds)
 </script>
+<script>
+    (function(b,i,t,C,O,I,N) {
+      window.addEventListener('load',function() {
+        if(b.getElementById(C))return;
+        I=b.createElement(i),N=b.getElementsByTagName(i)[0];
+        I.src=t;I.id=C;N.parentNode.insertBefore(I, N);
+      },false)
+    })(document,'script','https://widgets.bitcoin.com/widget.js','btcwdgt');
+  </script>
     {% endblock content %}

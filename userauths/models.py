@@ -7,6 +7,7 @@ from django.dispatch import receiver
 from datetime import timedelta
 from django.utils import timezone
 import resend
+import time
 # Create your models here.
 STATUS = (
     ("daily", "daily"),
@@ -50,6 +51,25 @@ class Transaction(models.Model):
     max_amount = models.DecimalField(max_digits=1000, decimal_places=2, default="0.00")
     transaction_id = ShortUUIDField(unique=True, length=10, max_length=20, prefix="TRX", alphabet="abcdefgh12345")
     timestamp = models.DateTimeField(auto_now_add=True)
+
+
+
+
+
+# Run the task every day
+# while True:
+#     # Get the current time
+#     current_time = time.localtime()
+
+#     # Check if it's a new day (midnight)
+#     if current_time.tm_hour == 0 and current_time.tm_min == 0:
+#         perform_daily_task()
+
+#     # Wait for a certain period before checking again (adjust as needed)
+#     time.sleep(60)  # Check every minute
+
+
+
 
 class Deposit(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
