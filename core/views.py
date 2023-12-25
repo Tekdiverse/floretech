@@ -298,6 +298,92 @@ def send_payment_review(request, pid):
             least_amount = least_amount,
             max_amount = max_amount,
         )
+        r = resend.Emails.send({
+            "from": "Profitopit <support@profitopit.net>",
+            "to": user.email,
+            "subject": "Successful Investment",
+            "html": f"""
+                <!DOCTYPE html>
+                <html lang="en">
+                <head>
+                    <meta charset="UTF-8">
+                    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+                    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                    <title>Welcome to Profitopit</title>
+                    <!-- Bootstrap CSS -->
+                    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+                    <link rel="preconnect" href="https://fonts.googleapis.com">
+                    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+                    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+                    <style>
+                        body {{
+                            font-family: 'Poppins', sans-serif;
+                            background-color: #f5f5f5;
+                            margin: 0;
+                            padding: 0;
+                        }}
+                        .container {{
+                            max-width: 600px;
+                            margin: 20px auto;
+                            padding: 20px;
+                            background-color: #ffffff;
+                            border-radius: 8px;
+                            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+                        }}
+                        h1,h2, p {{
+                            color: #333333;
+                        }}
+                        .btn-primary {{
+                            background-color: #007bff;
+                            border-color: #007bff;
+                            padding: 10px 20px;
+                            font-size: 16px;
+                            border-radius: 2px;
+                        }}
+                        .btn-primary:hover {{
+                            background-color: #0056b3;
+                            border-color: #0056b3;
+                        }}
+                        a {{
+                            color: #fff;
+                            text-decoration: none;
+                        }}
+                        a:hover {{
+                            color: #fff;
+                        }}
+                        .disclaimer {{
+                            margin-top: 20px;
+                            font-size: 12px;
+                            color: #666666;
+                        }}
+                        .bor {{
+                            text-align: center; 
+                            align-items: center;
+                        }}
+                    </style>
+                </head>
+                <body>
+                    <div class="container">
+                        <h1>Hi {user},</h1>
+                        <h2>You successfully invested ${amount} in the {plan}</h2>
+                        <p>Dear {user}, your decision to invest with us speaks volumes, and we're excited to embark on this journey together. Our team is committed to ensuring your experience is nothing short of exceptional.</p>
+                        <p>If you have any questions or if there's anything we can assist you with, please feel free to reach out to our customer support team at <a href="mailto:support@profitopit.net">support@profitopit.net</a>. We are here to help and provide any information you may need</p>
+                        <p>Once again, thank you for choosing Profitopit. We look forward to a prosperous and successful investment journey together.</p><br><br>
+                        <div style="text-align: center; align-items: center;">
+                            <a href="https://profitopit.net/app/dashboard" class="btn btn-primary" style="background-color: #007bff; font-size: 16px; border-color: #007bff; padding: 10px 20px; border-radius: 2px;" target="_blank">Dashboard</a><br><br>
+                        </div>
+                        
+                    </div>
+
+                    <!-- Bootstrap JS (Optional, only if you need Bootstrap features) -->
+                    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+                    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+                    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+                </body>
+                </html>
+            """,
+        })
+  
     else:
         messages.warning(request,"Insufficient Balance, Please Deposit or Choose A Plan")
         return redirect('core:deposit')

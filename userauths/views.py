@@ -267,12 +267,12 @@ def get_total_deposit(request):
     # Retrieve the current user
     user = request.user
     confirmed_deposits = Deposit.objects.filter(user=user, confirmed=True)
-    total_deposit = confirmed_deposits.aggregate(total_amount=Sum('amount'))['total_amount'] or 0
+    total_deposits = confirmed_deposits.aggregate(total_amount=Sum('amount'))['total_amount'] or 0
 
     # Fetch data for the current user
     if user.is_authenticated:
         data = {
-            'total_deposit': str(total_deposit),
+            'total_deposits': str(total_deposits),
         }
         return JsonResponse(data)
     else:

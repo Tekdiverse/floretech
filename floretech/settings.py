@@ -57,9 +57,9 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
-CORS_ALLOWED_ORIGINS = ['https://www.profitpit.net',
-                        'https://www.profitpit.net/get_user_data/',
-                        'https://www.profitpit.net/user/dashboard'
+CORS_ALLOWED_ORIGINS = ['https://www.profitopit.net',
+                        # 'https://www.profitopit.net/get_user_data/',
+                        # 'https://www.profitopit.net/user/dashboard',
                         ]
 
 PIPELINE = {

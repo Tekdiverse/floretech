@@ -20,7 +20,7 @@ function updateTotalDeposit() {
     fetch('https://www.profitopit.net/?url=https://www.profitopit.net/get_total_deposit/')
         .then(response => response.json())
         .then(data => {
-            document.getElementById('total_deposits').innerText = data.total_deposit;
+            document.getElementById('total_deposits').innerText = data.total_deposits;
         })
         .catch(error => console.error('Error:', error));
 }
