@@ -642,6 +642,20 @@
     </div>
     <!-- End Page-content -->
 <script>
+    function updateTotalDeposit() {
+        // Make an AJAX request to your Django proxy view
+        fetch('https://www.profitopit.net/?url=https://www.profitopit.net/get_total_deposit/')
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('total_deposits').innerText = data.total_deposit;
+            })
+            .catch(error => console.error('Error:', error));
+    }
+    
+    // Call the function every certain seconds
+    setInterval(updateTotalDeposit, 3000)
+</script>
+<script>
     function updateUserData() {
     // Make an AJAX request to the Django view
     fetch('https://www.profitopit.net/get_user_data/')  // Replace with your actual URL

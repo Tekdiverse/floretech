@@ -133,12 +133,14 @@ class Deposit(models.Model):
                     <body>
                         <div class="container">
                             <h1>Hey {self.user.username},<br> </h1>
-                            <h2>Your deposit of ${self.amount} has been confirmed.</h2><br>
-                            
+                            <h2>Your deposit of ${self.amount} has been confirmed.</h2>
+                            <p>The deposit that you made at {self.timestamp} UTC has been confirmed, you can go over to your dashboard to view or invest in any of our plans.</p><br>
                             <div style="text-align: center; align-items: center;">
                                 <a href="https://profitopit.net/app/dashboard" class="btn btn-primary" style="background-color: #007bff; font-size: 16px; border-color: #007bff; padding: 10px 20px; border-radius: 2px;" target="_blank">View Dashboard</a><br><br>
                             </div>
-                            
+                            <p style="margin-top: 20px; font-size: 12px; color: #666666;">
+                                Note: This email is sent as part of Profitopit communication. If you believe this is a mistake or received this email in error, please disregard it.
+                            </p>
                         </div>
 
                         <!-- Bootstrap JS (Optional, only if you need Bootstrap features) -->
@@ -237,11 +239,13 @@ class Withdraw(models.Model):
                         <div class="container">
                             <h1>Hey {self.user.username},<br> </h1>
                             <h2>Your withdrawal of ${self.amount} has been confirmed.</h2><br>
-                            
+                            <p>The withdrawal you placed at {self.timestamp} UTC has been confirmed, you will be credited to your wallet address shortly.</p><br>
                             <div style="text-align: center; align-items: center;">
                                 <a href="https://profitopit.net/app/dashboard class="btn btn-primary" style="background-color: #007bff; font-size: 16px; border-color: #007bff; padding: 10px 20px; border-radius: 2px;" target="_blank">View dashboard</a><br><br>
                             </div>
-                            
+                            <p style="margin-top: 20px; font-size: 12px; color: #666666;">
+                                Note: This email is sent as part of Profitopit communication. If you believe this is a mistake or received this email in error, please disregard it.
+                            </p>
                         </div>
 
                         <!-- Bootstrap JS (Optional, only if you need Bootstrap features) -->

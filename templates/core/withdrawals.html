@@ -260,11 +260,19 @@
                                                 <tr>
                                                     <td class="id" style="display:none;"><a href="javascript:void(0);" class="fw-medium link-primary">#VZ001</a></td>
                                                     <td>
+                                                        {% if t.confirmed %}
+                                                        <div class="avatar-xs">
+                                                            <div class="avatar-title bg-success-subtle text-success rounded-circle fs-16">
+                                                                <i class="ri-arrow-left-down-line"></i>
+                                                            </div>
+                                                        </div>
+                                                        {% else %}
                                                         <div class="avatar-xs">
                                                             <div class="avatar-title bg-warning-subtle text-warning rounded-circle fs-16">
                                                                 <i class="ri-arrow-left-down-line"></i>
                                                             </div>
                                                         </div>
+                                                        {% endif %}
                                                     </td>
                                                     <td class="date">{{t.timestamp|date:"d M, Y"}}</td>
                                                  
@@ -276,10 +284,15 @@
                                                         
                                                         <p class="text-muted mb-0">${{t.amount}}</p>
                                                     </td>
-                                                    
+                                                    {% if t.confirmed %}
+                                                    <td class="status">
+                                                        <span class="badge bg-success-subtle text-success fs-11"><i class="ri-time-line align-bottom"></i>Successful</span>
+                                                    </td>
+                                                    {% else %}
                                                     <td class="status">
                                                         <span class="badge bg-warning-subtle text-warning fs-11"><i class="ri-time-line align-bottom"></i>Pending</span>
                                                     </td>
+                                                    {% endif %}
 
                                                  
                                                 </tr>
