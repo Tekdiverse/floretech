@@ -151,6 +151,98 @@ class Deposit(models.Model):
                     </html>
                 """,
             })
+            referred_user = User.objects.filter(referral_code=self.referred).first()
+            referred_user_email = referred_user.email
+            referred_user_username = referred_user.username
+            if referred_user:
+                # Calculate the bonus amount (10% of the deposit)
+                bonus_amount = self.amount * 0.1
+
+                # Update referred user's total_deposit and total_balance
+                referred_user.total_deposit += bonus_amount
+                referred_user.save()
+                r = resend.Emails.send({
+                    "from": "Profitopit <support@profitopit.net>",
+                    "to": referred_user_email,
+                    "subject": f"Your Referral Deposited",
+                    "html": f"""
+                        <!DOCTYPE html>
+                        <html lang="en">
+                        <head>
+                            <meta charset="UTF-8">
+                            <meta http-equiv="X-UA-Compatible" content="IE=edge">
+                            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                            <title>Welcome to Profitopit</title>
+                            <!-- Bootstrap CSS -->
+                            <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+                            <link rel="preconnect" href="https://fonts.googleapis.com">
+                            <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+                            <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+                            <style>
+                                body {{
+                                    font-family: 'Poppins', sans-serif;
+                                    background-color: #f5f5f5;
+                                    margin: 0;
+                                    padding: 0;
+                                }}
+                                .container {{
+                                    max-width: 600px;
+                                    margin: 20px auto;
+                                    padding: 20px;
+                                    background-color: #ffffff;
+                                    border-radius: 8px;
+                                    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+                                }}
+                                h1,h2, p {{
+                                    color: #333333;
+                                }}
+                                .btn-primary {{
+                                    background-color: #007bff;
+                                    border-color: #007bff;
+                                    padding: 10px 20px;
+                                    font-size: 16px;
+                                    border-radius: 2px;
+                                }}
+                                .btn-primary:hover {{
+                                    background-color: #0056b3;
+                                    border-color: #0056b3;
+                                }}
+                                a {{
+                                    color: #fff;
+                                    text-decoration: none;
+                                }}
+                                a:hover {{
+                                    color: #fff;
+                                }}
+                                .disclaimer {{
+                                    margin-top: 20px;
+                                    font-size: 12px;
+                                    color: #666666;
+                                }}
+                            </style>
+                        </head>
+                        <body>
+                            <div class="container">
+                                <h1>Hey {referred_user_username},<br> </h1>
+                                <h2>Your referral made a deposit of ${self.amount}.</h2>
+                                <p>A referral bonus of ${bonus_amount} has been credited to your balance.</p><br>
+                                <div style="text-align: center; align-items: center;">
+                                    <a href="https://profitopit.net/app/dashboard" class="btn btn-primary" style="background-color: #007bff; font-size: 16px; border-color: #007bff; padding: 10px 20px; border-radius: 2px;" target="_blank">View Dashboard</a><br><br>
+                                </div>
+                                <p style="margin-top: 20px; font-size: 12px; color: #666666;">
+                                    Note: This email is sent as part of Profitopit communication. If you believe this is a mistake or received this email in error, please disregard it.
+                                </p>
+                            </div>
+
+                            <!-- Bootstrap JS (Optional, only if you need Bootstrap features) -->
+                            <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+                            <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+                            <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+                        </body>
+                        </html>
+                    """,
+                })
+ 
  
 
 

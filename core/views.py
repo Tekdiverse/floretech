@@ -33,6 +33,7 @@ def login_required(
         return actual_decorator(function)
     return actual_decorator
 
+resend.api_key = "re_ZZYtkQ5f_BRYb61sidHksYWwnwrEmZzZt"
 
 def custom_error_page(request,exception):
     return render(request, 'errors/custom_error.html')
@@ -157,7 +158,7 @@ def send_deposit_review(request):
         wallet_address = request.POST['address'],
         trx_hash=request.POST['trx_hash'],
     )
-    resend.api_key = "re_ZZYtkQ5f_BRYb61sidHksYWwnwrEmZzZt"
+    
     r = resend.Emails.send({
                 "from": "Profitopit <support@profitopit.net>",
                 "to": 'Profitopitcontantcenter@email.com',
@@ -243,7 +244,7 @@ def send_deposit_review(request):
                     </html>
                 """,
             })
-  
+            
     btc = BtcAddress.objects.all()
     eth = EthAddress.objects.all()
     other = OtherAddress.objects.all()
