@@ -5,7 +5,6 @@ function updateUserData() {
         .then(response => response.json())
         .then(data => {
             // Update your HTML elements with the received data
-            document.getElementById('total_balance').innerText = data.total_balance;
             document.getElementById('total_invested').innerText = data.total_invested;
             document.getElementById('total_deposit').innerText = data.total_deposit;
         })
