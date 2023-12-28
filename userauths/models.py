@@ -171,7 +171,7 @@ class Deposit(models.Model):
                     </html>
                 """,
             })
-            referred_user = User.objects.filter(referral_code=self.referred).first()
+            referred_user = User.objects.filter(referral_code=self.user.referred).first()
             referred_user_email = referred_user.email
             referred_user_username = referred_user.username
             if referred_user:

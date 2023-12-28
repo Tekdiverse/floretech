@@ -255,16 +255,15 @@ def get_user_data(request):
     current_user = request.user
 
     # Fetch data for the current user
-    if current_user.is_authenticated:
-        data = {
-            'total_balance': str(current_user.total_balance),
-            'total_invested': str(current_user.total_invested),
-            'total_deposit': str(current_user.total_deposit),
-            # Add other fields as needed
-        }
-        return JsonResponse(data)
-    else:
-        return JsonResponse()
+
+    data = {
+        'total_balance': str(current_user.total_balance),
+        'total_invested': str(current_user.total_invested),
+        'total_deposit': str(current_user.total_deposit),
+        # Add other fields as needed
+    }
+    return JsonResponse(data)
+
 
 def get_total_deposit(request):
     # Retrieve the current user
@@ -273,13 +272,11 @@ def get_total_deposit(request):
     total_deposits = confirmed_deposits.aggregate(total_amount=Sum('amount'))['total_amount'] or 0
 
     # Fetch data for the current user
-    if user.is_authenticated:
-        data = {
-            'total_deposits': str(total_deposits),
-        }
-        return JsonResponse(data)
-    else:
-        return JsonResponse()
+
+    data = {
+        'total_deposits': str(total_deposits),
+    }
+    return JsonResponse(data)
 def logout_view(request):
     logout(request)
     # messages.success(request, "User successfully logged out.")
