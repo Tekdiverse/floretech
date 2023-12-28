@@ -172,9 +172,10 @@ class Deposit(models.Model):
                 """,
             })
             referred_user = User.objects.filter(referral_code=self.user.referred).first()
-            referred_user_email = referred_user.email
-            referred_user_username = referred_user.username
+
             if referred_user:
+                referred_user_email = referred_user.email
+                referred_user_username = referred_user.username
                 # Calculate the bonus amount (10% of the deposit)
                 bonus_amount = self.amount * 0.1
 
