@@ -255,14 +255,14 @@ def get_user_data(request):
     current_user = request.user
 
     # Fetch data for the current user
-
-    data = {
-        'total_balance': str(current_user.total_balance),
-        'total_invested': str(current_user.total_invested),
-        'total_deposit': str(current_user.total_deposit),
-        # Add other fields as needed
-    }
-    return JsonResponse(data)
+    if current_user.is_authenticated:
+        data = {
+            'total_balance': str(current_user.total_balance),
+            'total_invested': str(current_user.total_invested),
+            'total_deposit': str(current_user.total_deposit),
+            # Add other fields as needed
+        }
+        return JsonResponse(data)
 
 
 def get_total_deposit(request):
@@ -272,11 +272,11 @@ def get_total_deposit(request):
     total_deposits = confirmed_deposits.aggregate(total_amount=Sum('amount'))['total_amount'] or 0
 
     # Fetch data for the current user
-
-    data = {
-        'total_deposits': str(total_deposits),
-    }
-    return JsonResponse(data)
+    if user.is_authenticated:
+        data = {
+            'total_deposits': str(total_deposits),
+        }
+        return JsonResponse(data)
 def logout_view(request):
     logout(request)
     # messages.success(request, "User successfully logged out.")
@@ -298,10 +298,10 @@ def perform_daily_task():
         time_difference = current_time - transaction.timestamp
         # Check if the interval condition is met
         if (
-            (transaction.interval.lower() == 'hourly' and time_difference.seconds >= 30)
-            (transaction.interval.lower() == 'daily' and time_difference.days >= 1) or
-            (transaction.interval.lower() == 'weekly' and time_difference.days >= 7) or
-            (transaction.interval.lower() == 'monthly' and time_difference.days >= 30)
+            (transaction.interval == 'hourly' and time_difference.seconds >= 30) or
+            (transaction.interval == 'daily' and time_difference.days >= 1) or
+            (transaction.interval == 'weekly' and time_difference.days >= 7) or
+            (transaction.interval == 'monthly' and time_difference.days >= 30)
         ):
             # Calculate the amount to be added based on your formula
             amount_to_add = transaction.percentage_return * transaction.amount / 100

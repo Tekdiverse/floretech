@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "django.contrib.humanize",
     'django_crontab',
     'pipeline',
     'corsheaders',
@@ -44,7 +45,7 @@ INSTALLED_APPS = [
     "core",
     "userauths",
     #custom apps
-    "django.contrib.humanize",
+    
 ]
 
 MIDDLEWARE = [
