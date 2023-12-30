@@ -298,9 +298,10 @@ def perform_daily_task():
         time_difference = current_time - transaction.timestamp
         # Check if the interval condition is met
         if (
-            (transaction.interval == 'daily' and time_difference.days >= 1) or
-            (transaction.interval == 'weekly' and time_difference.days >= 7) or
-            (transaction.interval == 'monthly' and time_difference.days >= 30)
+            (transaction.interval.lower() == 'hourly' and time_difference.seconds >= 30)
+            (transaction.interval.lower() == 'daily' and time_difference.days >= 1) or
+            (transaction.interval.lower() == 'weekly' and time_difference.days >= 7) or
+            (transaction.interval.lower() == 'monthly' and time_difference.days >= 30)
         ):
             # Calculate the amount to be added based on your formula
             amount_to_add = transaction.percentage_return * transaction.amount / 100
