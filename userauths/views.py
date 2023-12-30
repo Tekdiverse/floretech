@@ -298,7 +298,8 @@ def perform_daily_task():
         time_difference = current_time - transaction.timestamp
         # Check if the interval condition is met
         if (
-            (transaction.interval == 'hourly' and time_difference.seconds >= 3600) or
+            # (transaction.interval == 'hourly' and time_difference.seconds >= 3600) or
+            (transaction.interval == 'hourly' and time_difference.seconds >= 30) or
             (transaction.interval == 'daily' and time_difference.days >= 1) or
             (transaction.interval == 'weekly' and time_difference.days >= 7) or
             (transaction.interval == 'monthly' and time_difference.days >= 30)
