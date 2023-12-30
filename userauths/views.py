@@ -309,10 +309,8 @@ def perform_daily_task():
 
             # Update the user's total_invested field
             transaction.user.total_invested += amount_to_add
-            transaction.user.save()
             transaction.user.total_deposit += transaction.user.total_invested
-            transaction.user.save()
-            transaction.user.total_invested -= transaction.user.total_invested
+            transaction.user.total_invested = 0
             transaction.user.save()
             transaction.plan_interval_processed = True
             transaction.save()
