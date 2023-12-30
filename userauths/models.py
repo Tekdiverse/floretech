@@ -51,7 +51,7 @@ class Transaction(models.Model):
     max_amount = models.DecimalField(max_digits=1000, decimal_places=2, default="0.00")
     transaction_id = ShortUUIDField(unique=True, length=10, max_length=20, prefix="TRX", alphabet="abcdefgh12345")
     timestamp = models.DateTimeField(auto_now_add=True)
-
+    plan_interval_processed = models.BooleanField(default=False)
 
 
 
