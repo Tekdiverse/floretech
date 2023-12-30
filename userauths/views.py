@@ -308,7 +308,11 @@ def perform_daily_task():
             amount_to_add = transaction.percentage_return * transaction.amount / 100
 
             # Update the user's total_invested field
-            transaction.user.total_deposit += amount_to_add
+            transaction.user.total_invested += amount_to_add
+            transaction.user.save()
+            transaction.user.total_deposit += transaction.user.total_invested
+            transaction.user.save()
+            transaction.user.total_invested -= transaction.user.total_invested
             transaction.user.save()
             transaction.plan_interval_processed = True
             transaction.save()
