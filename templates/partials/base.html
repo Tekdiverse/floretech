@@ -19,7 +19,7 @@
     <!-- CSS here -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <!-- Add this to your HTML -->
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js" defer></script>
 <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
@@ -288,7 +288,7 @@
     
         setInterval(displayRandomToast, 10000);
     </script> {% endcomment %}
-    <script>
+    <script defer>
         function generateRandomPhoneNumber() {
             const digits = Math.floor(Math.random() * 10000000000).toString().padStart(10, '0');
             return `${digits.substring(3, 6)}`;
@@ -433,7 +433,7 @@
 
 
 <script type="text/javascript" src="{% static 'js/custom.js' %}"></script>
-<script src="//code.tidio.co/f88exhgxnjhe4asnqdw8emk6telffzqi.js" async></script>
+<script src="//code.tidio.co/f88exhgxnjhe4asnqdw8emk6telffzqi.js" async defer></script>
 </body>
 
 
