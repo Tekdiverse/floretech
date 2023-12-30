@@ -167,7 +167,7 @@ else:
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 AUTH_USER_MODEL = 'userauths.User'
-SESSION_COOKIE_AGE = 60 * 60 * 12
+SESSION_COOKIE_AGE = 60 * 60 * 24 * 2
 
 
 DEBUG_PROPAGATE_EXCEPTIONS = True
