@@ -5,8 +5,6 @@ from django.contrib import messages
 from django.conf import settings
 from django.contrib.auth import logout
 from userauths.models import User
-from django.conf import settings
-from django.core.mail import send_mail, EmailMessage, EmailMultiAlternatives
 import resend
 import secrets
 from django.template.loader import render_to_string
@@ -17,10 +15,10 @@ from .models import Deposit
 from django.db.models import Sum
 from userauths.models import Transaction
 from django.utils import timezone
+import re
+from datetime import timedelta
 
-def generate_reset_token():
-    # Generate a URL-safe random token with 32 bytes (256 bits) of entropy
-    return secrets.token_urlsafe(32)
+
 def register_view(request):
 
     form = UserRegisterForm()
@@ -286,6 +284,17 @@ def lock_screen_view(request):
     logout(request)
     return redirect("userauths:sign-in")
 
+
+def parse_description(description):
+    # Use regular expressions to extract weeks and days from the description
+    weeks_match = re.search(r'(\d+) weeks', description)
+    days_match = re.search(r'(\d+) days', description)
+
+    weeks = int(weeks_match.group(1)) if weeks_match else 0
+    days = int(days_match.group(1)) if days_match else 0
+
+    return timedelta(weeks=weeks, days=days)
+
 def perform_daily_task():
     # Your code for the daily task goes here
     current_time = timezone.now()
@@ -297,18 +306,22 @@ def perform_daily_task():
         # Calculate the time difference between the current time and the transaction timestamp
         time_difference = current_time - transaction.timestamp
         # Check if the interval condition is met
-        if (
-            # (transaction.interval == 'hourly' and time_difference.seconds >= 3600) or
-            (transaction.interval == 'hourly' and time_difference.seconds >= 30) or
-            (transaction.interval == 'daily' and time_difference.days >= 1) or
-            (transaction.interval == 'weekly' and time_difference.days >= 7) or
-            (transaction.interval == 'monthly' and time_difference.days >= 30)
-        )  and not transaction.plan_interval_processed:
-            # Calculate the amount to be added based on your formula
-            amount_to_add = transaction.percentage_return * transaction.amount / 100
+        interval_timedelta = parse_description(transaction.description)
+        expiration_time = transaction.timestamp + interval_timedelta
+        if (current_time <= expiration_time) and not transaction.plan_interval_processed:
+            if (
+                (transaction.interval == 'hourly' and time_difference.seconds >= 3600) or
+                (transaction.interval == 'daily' and time_difference.days >= 1) or
+                (transaction.interval == 'weekly' and time_difference.days >= 7) or
+                (transaction.interval == 'monthly' and time_difference.days >= 30)
+            ):
+                # Calculate the amount to be added based on your formula
+                amount_to_add = transaction.percentage_return * transaction.amount / 100
 
-            # Update the user's total_invested field
-            transaction.user.total_invested += amount_to_add
+                # Update the user's total_invested field
+                transaction.user.total_invested += amount_to_add
+                transaction.user.save()
+        else:
             transaction.user.total_deposit += transaction.user.total_invested
             transaction.user.total_invested = 0
             transaction.user.save()
