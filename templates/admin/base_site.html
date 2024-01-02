@@ -7,6 +7,37 @@
     <link rel="apple-touch-icon" sizes="180x180" href="{% static "apple-touch-icon.png" %}">
 	<link rel="icon" type="image/png" sizes="32x32" href="{% static "favicon-32x32.png" %}">
 	<link rel="icon" type="image/png" sizes="16x16" href="{% static "favicon-16x16.png" %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
     <link rel="manifest" href="{% static "site.webmanifest" %}">
     <link rel="shortcut icon" href="{% static 'favicon-32x32.png' %}">
+    <style>
+        #header{
+            background: #0050b2;
+            font-family: 'Poppins', sans-serif;
+        }
+        input[type="submit"]{
+            background: #0050b2;
+            font-family: 'Poppins', sans-serif;
+        }
+        input[type="submit"]:hover{
+            background: #0050b2;
+            width: 100px;
+            font-family: 'Poppins', sans-serif;
+        }
+        caption{
+            background: #0050b2 !important;
+            font-family: 'Poppins', sans-serif !important;
+        }
+        th a, .changelink, .deletelink, .content, input,select{
+            font-family: 'Poppins', sans-serif !important;
+        }
+        td a, th, td{
+            font-family: 'Poppins', sans-serif !important;
+        }
+        h1{
+            font-family: 'Poppins', sans-serif !important;
+        }
+    </style>
 {% endblock %}

@@ -36,7 +36,8 @@ class User(AbstractUser):
         super().save(*args, **kwargs)
     def __str__(self):
         return self.username
-
+    class Meta:
+        verbose_name = "Profitopit User"
         
 
 
@@ -52,7 +53,8 @@ class Transaction(models.Model):
     transaction_id = ShortUUIDField(unique=True, length=10, max_length=20, prefix="TRX", alphabet="abcdefgh12345")
     timestamp = models.DateTimeField(auto_now_add=True)
     plan_interval_processed = models.BooleanField(default=False)
-
+    class Meta:
+        verbose_name_plural = "Users that invested"
 
 
 
@@ -79,7 +81,8 @@ class Deposit(models.Model):
     amount = models.DecimalField(max_digits=10, decimal_places=2)
     timestamp = models.DateTimeField(auto_now_add=True)
     confirmed = models.BooleanField(default=False)
-
+    class Meta:
+        verbose_name = "Users Deposit"
     def confirm_deposit(self):
         if not self.confirmed:
             # Update user's balance first
@@ -263,7 +266,7 @@ class Deposit(models.Model):
                         </html>
                     """,
                 })
- 
+
  
 
 
