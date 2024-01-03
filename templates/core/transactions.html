@@ -236,6 +236,27 @@
                                     </div>
                                     <!--end row-->
                                 </div>
+                                <script>
+                                    var userTimezone;
+                                    try {
+                                        userTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+                                    } catch (e) {
+                                        console.error("Error detecting timezone:", e);
+                                        userTimezone = 'UTC';  // Replace with your default timezone
+                                    }
+                                    
+                                    // Function to convert server-side timestamp to user's local time
+                                    function convertToUserLocalTime(serverTimestamp) {
+                                        var serverTime = new Date(serverTimestamp);
+                                        return serverTime.toLocaleString('en-US', { timeZone: userTimezone });
+                                    }
+                                </script>
+                                <script>
+                                    var serverTimestamp = "{{ request.user.last_login }}";
+                                    var userLocalTime = convertToUserLocalTime(serverTimestamp);
+                                    console.log("User's local time:", userLocalTime);
+                                    // You can use userLocalTime in your template as needed
+                                </script>
                                 <!--end card-header-->
                                 <div class="card-body">
                                     <div class="table-responsive table-card">
