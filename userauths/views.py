@@ -285,15 +285,24 @@ def lock_screen_view(request):
     return redirect("userauths:sign-in")
 
 
-def parse_description(description):
-    # Use regular expressions to extract weeks and days from the description
-    weeks_match = re.search(r'(\d+) weeks', description)
-    days_match = re.search(r'(\d+) days', description)
+def convert_description_to_days(description):
+    # Regular expression to extract weeks and days from the description
+    match = re.match(r'(\d+) weeks? and (\d+) days?', description)
 
-    weeks = int(weeks_match.group(1)) if weeks_match else 0
-    days = int(days_match.group(1)) if days_match else 0
+    if match:
+        weeks, days = map(int, match.groups())
+        total_days = weeks * 7 + days
+        return total_days
+    else:
+        # Try to match days only
+        match = re.match(r'(\d+) days?', description)
+        if match:
+            days = int(match.group(1))
+            return days
+        else:
+            # Handle other formats or raise an exception if needed
+            return 0  # Or any other default value you prefer
 
-    return timedelta(weeks=weeks, days=days)
 
 def perform_daily_task():
     # Your code for the daily task goes here
@@ -305,10 +314,9 @@ def perform_daily_task():
     for transaction in transactions:
         # Calculate the time difference between the current time and the transaction timestamp
         time_difference = current_time - transaction.timestamp
+        plan_duration = convert_description_to_days(transaction.description)
         # Check if the interval condition is met
-        interval_timedelta = parse_description(transaction.description)
-        expiration_time = transaction.timestamp + interval_timedelta
-        if (current_time <= expiration_time) and not transaction.plan_interval_processed:
+        if transaction.interval_count <= plan_duration:
             if (
                 (transaction.interval == 'hourly' and time_difference.seconds >= 3600) or
                 (transaction.interval == 'daily' and time_difference.days >= 1) or
@@ -320,13 +328,12 @@ def perform_daily_task():
 
                 # Update the user's total_invested field
                 transaction.user.total_invested += amount_to_add
+                transaction.user.total_deposit += transaction.user.total_invested
+                transaction.user.total_invested = 0
                 transaction.user.save()
-        else:
-            transaction.user.total_deposit += transaction.user.total_invested
-            transaction.user.total_invested = 0
-            transaction.user.save()
-            transaction.plan_interval_processed = True
-            transaction.save()
+                transaction.interval_count += 1
+                transaction.save()
+
 def trigger_daily_task(request):
     # Call your perform_daily_task function here
     perform_daily_task()

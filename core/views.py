@@ -294,6 +294,7 @@ def send_payment_review(request, pid):
             user = user,
             title = plan.title,
             interval = plan.interval,
+            description = plan.description,
             percentage_return = plan.percentage_return,
             amount = request.POST['amount'],
             least_amount = least_amount,
