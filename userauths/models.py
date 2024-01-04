@@ -74,6 +74,23 @@ class Transaction(models.Model):
     class Meta:
         verbose_name_plural = "Users that invested"
 
+def convert_description_to_days(description):
+    if not description:
+        return 0
+
+    match = re.match(r'(\d+) weeks? and (\d+) days?', description)
+    if match:
+        weeks, days = map(int, match.groups())
+        total_days = weeks * 7 + days
+        return total_days
+    else:
+        match = re.match(r'(\d+) days?', description)
+        if match:
+            days = int(match.group(1))
+            return days
+        else:
+            return 0
+
 
 
 # Run the task every day

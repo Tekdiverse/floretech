@@ -11,7 +11,7 @@ from django.template.loader import render_to_string
 from django.utils.html import strip_tags
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
-from .models import Deposit
+from .models import Deposit, convert_description_to_days
 from django.db.models import Sum
 from userauths.models import Transaction
 from django.utils import timezone
