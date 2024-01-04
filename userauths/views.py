@@ -314,7 +314,7 @@ def perform_daily_task():
     for transaction in transactions:
         # Calculate the time difference between the current time and the transaction timestamp
         time_difference = current_time - transaction.timestamp
-        if transaction.interval_count <= transaction.convert_description_to_days():
+        if int(transaction.interval_count) <= int(transaction.convert_description_to_days()):
             if (
                 (transaction.interval == 'hourly' and time_difference.seconds >= 30) or
                 (transaction.interval == 'daily' and time_difference.days >= 1) or
