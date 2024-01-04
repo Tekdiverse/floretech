@@ -314,6 +314,7 @@ def perform_daily_task():
                 transaction.save()
         else: 
             transaction.user.total_deposit += transaction.user.total_invested
+            transaction.user.save()
             transaction.user.total_invested = 0
             transaction.user.save()
 
