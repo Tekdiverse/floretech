@@ -14,6 +14,23 @@ admin.site.site_header = 'Profitopit Administration'
 
 class TransactionAdmin(admin.ModelAdmin):
     list_display = ('user', 'amount', 'transaction_id','interval_count', 'timestamp')
+    actions = ['confirm_transactions']
+    def confirm_transactions(modeladmin, request, queryset):
+        for transaction in queryset:
+            # Update related user's fields
+            transaction.user.total_deposit += transaction.user.total_invested
+            transaction.user.total_invested = 0
+
+            # Set plan_interval_processed to True
+            transaction.plan_interval_processed = True
+
+            # Save the changes
+            transaction.user.save()
+            transaction.save()
+            
+        modeladmin.message_user(request, f'{queryset.count()} transactions confirmed.')
+
+    confirm_transactions.short_description = "Confirm selected transactions"
 
 admin.site.register(Transaction, TransactionAdmin)
 
