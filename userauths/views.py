@@ -314,25 +314,25 @@ def perform_daily_task():
     for transaction in transactions:
         # Calculate the time difference between the current time and the transaction timestamp
         time_difference = current_time - transaction.timestamp
-        plan_duration = convert_description_to_days(transaction.description)
-        # Check if the interval condition is met
-        if transaction.interval_count <= plan_duration:
-            if (
-                (transaction.interval == 'hourly' and time_difference.seconds >= 3600) or
-                (transaction.interval == 'daily' and time_difference.days >= 1) or
-                (transaction.interval == 'weekly' and time_difference.days >= 7) or
-                (transaction.interval == 'monthly' and time_difference.days >= 30)
-            ):
-                # Calculate the amount to be added based on your formula
-                amount_to_add = transaction.percentage_return * transaction.amount / 100
+        # plan_duration = convert_description_to_days(transaction.description)
+        # # Check if the interval condition is met
+        # if transaction.interval_count <= plan_duration:
+        if (
+            (transaction.interval == 'hourly' and time_difference.seconds >= 30) or
+            (transaction.interval == 'daily' and time_difference.days >= 1) or
+            (transaction.interval == 'weekly' and time_difference.days >= 7) or
+            (transaction.interval == 'monthly' and time_difference.days >= 30)
+        ):
+            # Calculate the amount to be added based on your formula
+            amount_to_add = transaction.percentage_return * transaction.amount / 100
 
-                # Update the user's total_invested field
-                transaction.user.total_invested += amount_to_add
-                transaction.user.total_deposit += transaction.user.total_invested
-                transaction.user.total_invested = 0
-                transaction.user.save()
-                transaction.interval_count += 1
-                transaction.save()
+            # Update the user's total_invested field
+            transaction.user.total_invested += amount_to_add
+            # transaction.user.total_deposit += transaction.user.total_invested
+            # transaction.user.total_invested = 0
+            transaction.user.save()
+            transaction.interval_count += 1
+            transaction.save()
 
 def trigger_daily_task(request):
     # Call your perform_daily_task function here
