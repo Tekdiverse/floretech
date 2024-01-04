@@ -334,7 +334,7 @@ def perform_daily_task():
                 transaction.user.save()
                 transaction.interval_count += 1
                 transaction.save()
-            else:
+            elif int(transaction.interval_count) >= int(plan_duration):
                 transaction.user.total_deposit += transaction.user.total_invested
                 transaction.user.total_invested = 0
                 transaction.user.save()
