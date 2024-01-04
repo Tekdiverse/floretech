@@ -13,7 +13,7 @@ admin.site.register(User, UserAdmin)
 admin.site.site_header = 'Profitopit Administration'
 
 class TransactionAdmin(admin.ModelAdmin):
-    list_display = ('user', 'amount', 'transaction_id', 'timestamp')
+    list_display = ('user', 'amount', 'transaction_id','interval_count', 'timestamp')
 
 admin.site.register(Transaction, TransactionAdmin)
 
