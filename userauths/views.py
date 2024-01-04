@@ -285,23 +285,6 @@ def lock_screen_view(request):
     return redirect("userauths:sign-in")
 
 
-def convert_description_to_days(description):
-    # Regular expression to extract weeks and days from the description
-    match = re.match(r'(\d+) weeks? and (\d+) days?', description)
-
-    if match:
-        weeks, days = map(int, match.groups())
-        total_days = weeks * 7 + days
-        return total_days
-    else:
-        # Try to match days only
-        match = re.match(r'(\d+) days?', description)
-        if match:
-            days = int(match.group(1))
-            return days
-        else:
-            # Handle other formats or raise an exception if needed
-            return 0  # Or any other default value you prefer
 
 
 def perform_daily_task():
@@ -314,7 +297,7 @@ def perform_daily_task():
     for transaction in transactions:
         # Calculate the time difference between the current time and the transaction timestamp
         time_difference = current_time - transaction.timestamp
-        if int(transaction.interval_count) < int(transaction.convert_description_to_days()) and not transaction.plan_interval_processed:
+        if int(transaction.interval_count) <= int(transaction.convert_description_to_days()) and not transaction.plan_interval_processed:
             if (
                 (transaction.interval == 'hourly' and time_difference.seconds >= 30) or
                 (transaction.interval == 'daily' and time_difference.days >= 1) or
