@@ -13,7 +13,7 @@ admin.site.register(User, UserAdmin)
 admin.site.site_header = 'Profitopit Administration'
 
 class TransactionAdmin(admin.ModelAdmin):
-    list_display = ('user', 'amount', 'transaction_id','interval_count', 'timestamp')
+    list_display = ('user', 'amount', 'transaction_id','interval_count','converted_days', 'timestamp')
     actions = ['confirm_transactions']
     def confirm_transactions(modeladmin, request, queryset):
         for transaction in queryset:
@@ -31,6 +31,11 @@ class TransactionAdmin(admin.ModelAdmin):
         modeladmin.message_user(request, f'{queryset.count()} transactions confirmed.')
 
     confirm_transactions.short_description = "Confirm selected transactions"
+    def converted_days(self, obj):
+        # Call the convert_description_to_days method on the Transaction instance
+        return obj.convert_description_to_days()
+
+    converted_days.short_description = 'Days till expire'
 
 admin.site.register(Transaction, TransactionAdmin)
 

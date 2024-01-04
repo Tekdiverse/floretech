@@ -8,6 +8,7 @@ from datetime import timedelta
 from django.utils import timezone
 import resend
 import time
+import re
 # Create your models here.
 STATUS = (
     ("daily", "daily"),
@@ -55,6 +56,21 @@ class Transaction(models.Model):
     timestamp = models.DateTimeField(auto_now_add=True)
     plan_interval_processed = models.BooleanField(default=False)
     interval_count = models.IntegerField(default=0)
+    def convert_description_to_days(self):
+        match = re.match(r'(\d+) weeks? and (\d+) days?', self.description)
+
+        if match:
+            weeks, days = map(int, match.groups())
+            total_days = weeks * 7 + days
+            return total_days
+        else:
+            match = re.match(r'(\d+) days?', self.description)
+            if match:
+                days = int(match.group(1))
+                return days
+            else:
+                return 0
+
     class Meta:
         verbose_name_plural = "Users that invested"
 
