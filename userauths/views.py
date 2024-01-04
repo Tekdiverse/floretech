@@ -297,7 +297,7 @@ def perform_daily_task():
     for transaction in transactions:
         # Calculate the time difference between the current time and the transaction timestamp
         time_difference = current_time - transaction.timestamp
-        if int(transaction.interval_count) <= int(transaction.convert_description_to_days()) and not transaction.plan_interval_processed:
+        if int(transaction.interval_count) < int(transaction.convert_description_to_days()) and not transaction.plan_interval_processed:
             if (
                 (transaction.interval == 'hourly' and time_difference.seconds >= 30) or
                 (transaction.interval == 'daily' and time_difference.days >= 1) or
@@ -315,13 +315,14 @@ def perform_daily_task():
         else: 
             transaction.user.total_deposit += transaction.user.total_invested
             transaction.user.total_invested = 0
+            transaction.user.save()
 
             # Set plan_interval_processed to True
             transaction.plan_interval_processed = True
-
+            transaction.save()  
             # Save the changes
-            transaction.user.save()
-            transaction.save()
+            
+            
 
 
 def trigger_daily_task(request):
