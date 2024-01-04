@@ -69,7 +69,7 @@ class Transaction(models.Model):
                 days = int(match.group(1))
                 return days
             else:
-                return 0
+                return 7
 
     class Meta:
         verbose_name_plural = "Users that invested"
