@@ -267,7 +267,7 @@
                                                     <th  data-sort="name" scope="col" style="width: 60px;"></th>
                                                     <th  data-sort="date" scope="col">Timestamp</th>
                                                
-                                  
+                                                    <th  data-sort="expire_date" scope="col">Plan Expiry</th>
                                                     <th  data-sort="details" scope="col">Details</th>
                                                     <th  data-sort="transaction_id" scope="col">Transaction ID</th>
                                                 
@@ -288,7 +288,7 @@
                                                         </div>
                                                     </td>
                                                     <td class="date">{{t.timestamp|date:"d M, Y"}}</td>
-                                                 
+                                                    <td class="expire_date">{{t.expiry_date|date:"d M, Y"}}</td>
                                              
                                                     <td class="details">{{t.title}}</td>
                                                     <td class="transaction_id">{{t.transaction_id}}</td>

@@ -293,6 +293,7 @@ def perform_daily_task():
 
     # Your logic to calculate and update total_invested
     transactions = Transaction.objects.all()
+    
 
     for transaction in transactions:
         # Calculate the time difference between the current time and the transaction timestamp

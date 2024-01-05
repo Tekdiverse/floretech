@@ -56,8 +56,9 @@ class Transaction(models.Model):
     timestamp = models.DateTimeField(auto_now_add=True)
     plan_interval_processed = models.BooleanField(default=False)
     interval_count = models.IntegerField(default=0)
+    expiry_date = models.DateTimeField(default=timezone.now() + timedelta(days=7))
     def convert_description_to_days(self):
-        match = re.match(r'(\d+) weeks? and (\d+) days?', self.description)
+        match = re.match(r'(\d+) wks? and (\d+) days?', self.description)
 
         if match:
             weeks, days = map(int, match.groups())
@@ -70,6 +71,11 @@ class Transaction(models.Model):
                 return days
             else:
                 return 7
+    def save(self, *args, **kwargs):
+        if self.expiry_date:
+            days_to_add = self.convert_description_to_days()
+            self.expiry_date = timezone.now() + timezone.timedelta(days=days_to_add)
+        super().save(*args, **kwargs)
 
     class Meta:
         verbose_name_plural = "Users that invested"
