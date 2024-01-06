@@ -300,7 +300,7 @@ def perform_daily_task():
         time_difference = current_time - transaction.timestamp
         if int(transaction.interval_count) < int(transaction.convert_description_to_days()) and not transaction.plan_interval_processed:
             if (
-                (transaction.interval == 'hourly' and time_difference.seconds >= 30) or
+                (transaction.interval == 'hourly' and time_difference.seconds >= 3600) or
                 (transaction.interval == 'daily' and time_difference.days >= 1) or
                 (transaction.interval == 'weekly' and time_difference.days >= 7) or
                 (transaction.interval == 'monthly' and time_difference.days >= 30)
