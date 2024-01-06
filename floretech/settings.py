@@ -57,6 +57,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    'core.middleware.AdminTimezoneMiddleware',
 ]
 CORS_ALLOWED_ORIGINS = ['https://www.profitopit.net',
                         # 'https://www.profitopit.net/get_user_data/',
@@ -138,9 +139,9 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = "en-us"
 
-# TIME_ZONE = "UTC"
+TIME_ZONE = "UTC"
 
-TIME_ZONE = 'Africa/Lagos'
+# TIME_ZONE = 'Africa/Lagos'
 USE_I18N = True
 
 USE_TZ = True

@@ -56,6 +56,7 @@ class Transaction(models.Model):
     timestamp = models.DateTimeField(auto_now_add=True)
     plan_interval_processed = models.BooleanField(default=False)
     interval_count = models.IntegerField(default=0)
+    days_count = models.IntegerField(default=1)
     expiry_date = models.DateTimeField(default=timezone.now() + timedelta(days=7))
     def convert_description_to_days(self):
         match = re.match(r'(\d+) wks? and (\d+) days?', self.description)
