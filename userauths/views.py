@@ -18,7 +18,40 @@ from django.utils import timezone
 import re
 from datetime import timedelta
 
+def perform_daily_task():
+    # Your code for the daily task goes here
+    current_time = timezone.now()
 
+    # Your logic to calculate and update total_invested
+    transactions = Transaction.objects.all()
+    
+
+    for transaction in transactions:
+        # Calculate the time difference between the current time and the transaction timestamp
+        time_difference = current_time - transaction.timestamp
+        if int(transaction.interval_count) < int(transaction.convert_description_to_days()) and not transaction.plan_interval_processed:
+            if (
+                (transaction.interval == 'daily' and time_difference.days >= transaction.days_count)
+            ) :
+                # Calculate the amount to be added based on your formula
+                amount_to_add = transaction.percentage_return * transaction.amount / 100
+
+                # Update the user's total_invested field
+                transaction.user.total_invested += amount_to_add
+                transaction.user.save()
+                transaction.interval_count += 1
+                transaction.days_count += 1
+                transaction.save()
+        else: 
+            transaction.user.total_deposit += transaction.user.total_invested
+            transaction.user.save()
+            transaction.user.total_invested = 0
+            transaction.user.save()
+
+            # Set plan_interval_processed to True
+            transaction.plan_interval_processed = True
+            transaction.save()  
+            # Save the changes
 def register_view(request):
 
     form = UserRegisterForm()
@@ -234,6 +267,7 @@ def login_view(request):
             user = authenticate(request, email=email, password=password)
             if user is not None:
                 login(request, user)
+                perform_daily_task()
                 messages.success(request, "Successfully logged in.")
                 return redirect("core:dashboard")
             else:
@@ -268,6 +302,7 @@ def get_total_deposit(request):
     user = request.user
     confirmed_deposits = Deposit.objects.filter(user=user, confirmed=True)
     total_deposits = confirmed_deposits.aggregate(total_amount=Sum('amount'))['total_amount'] or 0
+    perform_daily_task()
 
     # Fetch data for the current user
     if user.is_authenticated:
@@ -287,40 +322,7 @@ def lock_screen_view(request):
 
 
 
-def perform_daily_task():
-    # Your code for the daily task goes here
-    current_time = timezone.now()
 
-    # Your logic to calculate and update total_invested
-    transactions = Transaction.objects.all()
-    
-
-    for transaction in transactions:
-        # Calculate the time difference between the current time and the transaction timestamp
-        time_difference = current_time - transaction.timestamp
-        if int(transaction.interval_count) < int(transaction.convert_description_to_days()) and not transaction.plan_interval_processed:
-            if (
-                (transaction.interval == 'daily' and time_difference.days >= transaction.days_count)
-            ) :
-                # Calculate the amount to be added based on your formula
-                amount_to_add = transaction.percentage_return * transaction.amount / 100
-
-                # Update the user's total_invested field
-                transaction.user.total_invested += amount_to_add
-                transaction.user.save()
-                transaction.interval_count += 1
-                transaction.days_count += 1
-                transaction.save()
-        else: 
-            transaction.user.total_deposit += transaction.user.total_invested
-            transaction.user.save()
-            transaction.user.total_invested = 0
-            transaction.user.save()
-
-            # Set plan_interval_processed to True
-            transaction.plan_interval_processed = True
-            transaction.save()  
-            # Save the changes
             
             
 
