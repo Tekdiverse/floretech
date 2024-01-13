@@ -20,6 +20,7 @@ function updateTotalDeposit() {
         .then(response => response.json())
         .then(data => {
             document.getElementById('total_deposits').innerText = data.total_deposits;
+            document.getElementById('total_transactions').innerText = data.total_transactions;
         })
         .catch(error => console.error('Error:', error));
 }

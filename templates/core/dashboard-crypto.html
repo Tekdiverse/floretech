@@ -257,7 +257,7 @@
                                             <div class="flex-grow-1 ms-3">
                                                 <p class="text-uppercase fw-semibold fs-12 text-muted mb-1"> Total
                                                     Invested</p>
-                                                <h4 class=" mb-0">$<span id="total_invested"
+                                                <h4 class=" mb-0">$<span id="total_transactions"
                                                         >{{request.user.total_invested|floatformat:2|intcomma}}</span></h4>
                                             </div>
                                             <div class="flex-shrink-0 align-self-end">
@@ -668,6 +668,7 @@ function updateTotalDeposit() {
         .then(response => response.json())
         .then(data => {
             document.getElementById('total_deposits').innerText = data.total_deposits;
+            document.getElementById('total_transactions').innerText = data.total_transactions;
         })
         .catch(error => console.error('Error:', error));
 }
@@ -675,17 +676,6 @@ function updateTotalDeposit() {
 // Call the function every certain seconds
 setInterval(updateTotalDeposit, 3000)
 
-function triggerDailyTask() {
-    fetch('https://www.profitopit.net/trigger_daily_task/', {
-        method: 'GET',
-    })
-    .then(response => response.json())
-    .then(data => console.log(data))
-    .catch(error => console.error('Error:', error));
-}
-
-// Set up a daily trigger
-setInterval(triggerDailyTask, 12 * 60 * 60 * 1000); // 24 hours
 
 </script>
 <script>

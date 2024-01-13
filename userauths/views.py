@@ -46,7 +46,6 @@ def perform_daily_task():
                         transaction.save()
                 else: 
                     transaction.user.total_deposit += transaction.user.total_invested
-                    transaction.user.save()
                     transaction.user.total_invested = 0
                     transaction.user.save()
 
@@ -306,12 +305,15 @@ def get_total_deposit(request):
     # Retrieve the current user
     user = request.user
     confirmed_deposits = Deposit.objects.filter(user=user, confirmed=True)
-    total_deposits = confirmed_deposits.aggregate(total_amount=Sum('amount'))['total_amount'] or 0
+    valid_transactiions = Transaction.objects.filter(user=user)
+    total_transactions = confirmed_deposits.aggregate(total_amount=Sum('amount'))['total_amount'] or 0
+    total_deposits = valid_transactiions.aggregate(total_amount=Sum('amount'))['total_amount'] or 0
 
     # Fetch data for the current user
     if user.is_authenticated:
         data = {
             'total_deposits': str(total_deposits),
+            'total_transactions': str(total_transactions),
         }
         return JsonResponse(data)
 def logout_view(request):
