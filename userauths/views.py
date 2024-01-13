@@ -20,13 +20,12 @@ from datetime import timedelta
 from django.db import transaction as ts
 def perform_daily_task():
     try:
-    # Your code for the daily task goes here
+        # Your code for the daily task goes here
         with ts.atomic():
             current_time = timezone.now()
 
             # Your logic to calculate and update total_invested
             transactions = Transaction.objects.all()
-            
 
             for transaction in transactions:
                 # Calculate the time difference between the current time and the transaction timestamp
@@ -34,7 +33,7 @@ def perform_daily_task():
                 if int(transaction.interval_count) < int(transaction.convert_description_to_days()) and not transaction.plan_interval_processed:
                     if (
                         (transaction.interval == 'daily' and time_difference.days >= transaction.days_count)
-                    ) :
+                    ):
                         # Calculate the amount to be added based on your formula
                         amount_to_add = transaction.percentage_return * transaction.amount / 100
 
@@ -51,10 +50,11 @@ def perform_daily_task():
 
                     # Set plan_interval_processed to True
                     transaction.plan_interval_processed = True
-                    transaction.save()  
+                    transaction.save()
                     # Save the changes
     except Exception as e:
         print(f"Error in perform_daily_task: {e}")
+
 
 def register_view(request):
 
