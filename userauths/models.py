@@ -32,6 +32,9 @@ class User(AbstractUser):
     usdt_address = models.CharField(max_length=100, blank=True)
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = ['username']
+    def save(self, *args, **kwargs):
+        self.total_balance = Decimal(self.total_deposit) + Decimal(self.total_invested)
+        super().save(*args, **kwargs)
     def __str__(self):
         return self.username
     class Meta:
@@ -78,6 +81,22 @@ class Transaction(models.Model):
     class Meta:
         verbose_name_plural = "Users that invested"
 
+def convert_description_to_days(description):
+    if not description:
+        return 0
+
+    match = re.match(r'(\d+) weeks? and (\d+) days?', description)
+    if match:
+        weeks, days = map(int, match.groups())
+        total_days = weeks * 7 + days
+        return total_days
+    else:
+        match = re.match(r'(\d+) days?', description)
+        if match:
+            days = int(match.group(1))
+            return days
+        else:
+            return 0
 
 
 
