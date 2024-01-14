@@ -17,7 +17,7 @@ from userauths.models import Transaction
 from django.utils import timezone
 import re
 from datetime import timedelta
-from django.db import transaction as ts, models, F
+from django.db import transaction as ts, models
 
 def perform_daily_task():
     try:
