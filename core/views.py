@@ -389,8 +389,8 @@ def send_payment_review(request, pid):
                     """,
                 })
         except Exception as e:
-            messages.error(request, f"An error occurred")
-            return redirect('core:send_payment_review', pid=pid)
+            messages.error(request, f"An error occurred: {e}")
+            return redirect('core:send-payment-review', pid=pid)
     else:
         messages.warning(request,"Insufficient Balance, Please Deposit or Choose A Plan")
         return redirect('core:deposit')
