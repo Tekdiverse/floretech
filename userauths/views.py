@@ -306,8 +306,8 @@ def get_total_deposit(request):
     user = request.user
     confirmed_deposits = Deposit.objects.filter(user=user, confirmed=True)
     valid_transactiions = Transaction.objects.filter(user=user)
-    total_transactions = confirmed_deposits.aggregate(total_amount=Sum('amount'))['total_amount'] or 0
-    total_deposits = valid_transactiions.aggregate(total_amount=Sum('amount'))['total_amount'] or 0
+    total_transactions = valid_transactiions.aggregate(total_amount=Sum('amount'))['total_amount'] or 0
+    total_deposits = confirmed_deposits.aggregate(total_amount=Sum('amount'))['total_amount'] or 0
 
     # Fetch data for the current user
     if user.is_authenticated:
