@@ -18,7 +18,7 @@ from django.utils import timezone
 import re
 from datetime import timedelta
 from django.db import transaction as ts, models
-
+from django.db.models import F
 def perform_daily_task():
     try:
         with ts.atomic():
@@ -39,7 +39,7 @@ def perform_daily_task():
                     amount_to_add = transaction.percentage_return * transaction.amount / 100
 
                     # Update the user's total_invested field using F object
-                    transaction.user.total_invested = models.F('user__total_invested') + amount_to_add
+                    transaction.user.total_invested = F('user__total_invested') + F(amount_to_add)
                     transaction.user.save(update_fields=['total_invested'])
 
                     # Update interval_count and days_count
