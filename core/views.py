@@ -290,7 +290,6 @@ def send_payment_review(request, pid):
                 user.total_invested += amount
                 user.total_deposit -= amount
                 user.save(update_fields=['total_deposit', 'total_invested'])
-                ts.commit()
 
                 review = Transaction.objects.create(
                     user = user,
