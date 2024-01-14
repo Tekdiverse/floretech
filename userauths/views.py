@@ -11,7 +11,7 @@ from django.template.loader import render_to_string
 from django.utils.html import strip_tags
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
-from .models import Deposit, convert_description_to_days
+from .models import Deposit
 from django.db.models import Sum
 from userauths.models import Transaction
 from django.utils import timezone
@@ -31,7 +31,7 @@ def perform_daily_task():
             time_difference = current_time - transaction.timestamp
             if int(transaction.interval_count) < int(transaction.convert_description_to_days()) and not transaction.plan_interval_processed:
                 if (
-                    (transaction.interval == 'daily' and time_difference.days >= transaction.days_count)
+                    (transaction.interval == 'daily' and (time_difference.days >= transaction.days_count))
                 ):
                     # Calculate the amount to be added based on your formula
                     amount_to_add = transaction.percentage_return * transaction.amount / 100
