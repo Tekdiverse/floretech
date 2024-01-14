@@ -29,29 +29,28 @@ def perform_daily_task():
         for transaction in transactions:
             # Calculate the time difference between the current time and the transaction timestamp
             time_difference = current_time - transaction.timestamp
-            with ts.atomic():
-                if int(transaction.interval_count) < int(transaction.convert_description_to_days()) and not transaction.plan_interval_processed:
-                    if (
-                        (transaction.interval == 'daily' and time_difference.days >= transaction.days_count)
-                    ):
-                        # Calculate the amount to be added based on your formula
-                        amount_to_add = transaction.percentage_return * transaction.amount / 100
+            if int(transaction.interval_count) < int(transaction.convert_description_to_days()) and not transaction.plan_interval_processed:
+                if (
+                    (transaction.interval == 'daily' and time_difference.days >= transaction.days_count)
+                ):
+                    # Calculate the amount to be added based on your formula
+                    amount_to_add = transaction.percentage_return * transaction.amount / 100
 
-                        # Update the user's total_invested field
-                        transaction.user.total_invested += amount_to_add
-                        transaction.user.save()
-                        transaction.interval_count += 1
-                        transaction.days_count += 1
-                        transaction.save(update_fields=['interval_count', 'days_count'])
-                else: 
-                    transaction.user.total_deposit += transaction.user.total_invested
-                    transaction.user.total_invested = 0
-                    transaction.user.save(update_fields=['total_deposit', 'total_invested'])
+                    # Update the user's total_invested field
+                    transaction.user.total_invested += amount_to_add
+                    transaction.user.save()
+                    transaction.interval_count += 1
+                    transaction.days_count += 1
+                    transaction.save(update_fields=['interval_count', 'days_count'])
+            else: 
+                transaction.user.total_deposit += transaction.user.total_invested
+                transaction.user.total_invested = 0
+                transaction.user.save(update_fields=['total_deposit', 'total_invested'])
 
-                    # Set plan_interval_processed to True
-                    transaction.plan_interval_processed = True
-                    transaction.save()
-                        # Save the changes
+                # Set plan_interval_processed to True
+                transaction.plan_interval_processed = True
+                transaction.save()
+                    # Save the changes
     except Exception as e:
         print(f"Error in perform_daily_task: {e}")
 
