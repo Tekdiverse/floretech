@@ -284,12 +284,11 @@ def send_payment_review(request, pid):
     least_amount = plan.least_amount
     max_amount = plan.max_amount
     amount = Decimal(request.POST['amount'])
-    main_amount = float(request.POST['amount']) 
-    if main_amount <= user.total_deposit:
+    if float(request.POST['amount'])  <= user.total_deposit:
         try:
             with ts.atomic():
-                user.total_deposit = F('total_deposit') - amount
                 user.total_invested += amount
+                user.total_deposit -= amount
                 user.save(update_fields=['total_deposit', 'total_invested'])
 
 
@@ -389,8 +388,8 @@ def send_payment_review(request, pid):
                     """,
                 })
         except Exception as e:
-            messages.error(request, f"An error occurred: {e}")
-            return redirect('core:send-payment-review', pid=pid)
+            messages.error(request, f"An error occurred {e}")
+            return redirect('core:dashboard')
     else:
         messages.warning(request,"Insufficient Balance, Please Deposit or Choose A Plan")
         return redirect('core:deposit')

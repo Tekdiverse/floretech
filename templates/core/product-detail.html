@@ -260,7 +260,7 @@
                                             <div class="col-lg-4 mb-3">
                                                 <div>
                                                     <label for="expiry-month-input" class="form-label">Amount to invest</label>
-                                                    <input type="number" max="{{p.max_amount}}" min="{{p.least_amount}}" class="form-control" placeholder="${{p.least_amount}}" name="amount" id="card-holder-input"
+                                                    <input type="number" name="amount" max="{{p.max_amount}}" min="{{p.least_amount}}" class="form-control" placeholder="${{p.least_amount}} - ${{p.max_amount}}"  id="card-holder-input"
                                                 value="{{p.amount}}" required/>
                                 
                                                 </div>
@@ -271,7 +271,7 @@
                                                 <div>
                                                     <label for="expiry-year-input" class="form-label">Least Amount</label>
                                                     <input type="text" class="form-control" name="least_amount" id="card-holder-input"
-                                                    value="${{p.least_amount|floatformat:2|intcomma}}" disabled />
+                                                    value="${{p.least_amount}}" disabled />
                                                 </div>
                                             </div>
                                             <!-- end col -->
@@ -279,7 +279,7 @@
                                             <div class="col-lg-4 mb-3">
                                                 <div class="cvc">
                                                     <label for="cvc-input" class="form-label">Max Amount</label>
-                                                    <input type="text" value="${{p.max_amount|floatformat:2|intcomma}}" name="max_amount" id="cvc-input" class="form-control"
+                                                    <input type="text" value="${{p.max_amount}}" name="max_amount" id="cvc-input" class="form-control"
                                                         disabled />
                                                 </div>
                                             </div>
