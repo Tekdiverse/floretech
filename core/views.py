@@ -16,6 +16,7 @@ from django.http import JsonResponse
 import resend
 from django.db.models import Sum
 from django.db import transaction as ts
+from django.db.models import F
 
 def login_required(
     function=None, redirect_field_name=REDIRECT_FIELD_NAME, login_url='userauths:sign-in'
@@ -287,9 +288,9 @@ def send_payment_review(request, pid):
     if main_amount <= user.total_deposit:
         try:
             with ts.atomic():
-                user.total_deposit -= amount
+                user.total_deposit = F('total_deposit') - amount
                 user.total_invested += amount
-                user.save()
+                user.save(update_fields=['total_deposit', 'total_invested'])
 
 
                 review = Transaction.objects.create(
