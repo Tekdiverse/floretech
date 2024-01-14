@@ -51,6 +51,7 @@ def perform_daily_task():
                 transaction.plan_interval_processed = True
                 transaction.save()
                     # Save the changes
+            ts.commit()
     except Exception as e:
         print(f"Error in perform_daily_task: {e}")
 
