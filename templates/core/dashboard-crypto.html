@@ -101,7 +101,7 @@
                   
                 </li>
                 <li class="nav-item">
-                    <a href="{% url "core:profile" %}" class="nav-link menu-link"  aria-controls="sidebarPages" >
+                    <a href="{% url "core:dashboard" %}" class="nav-link menu-link"  aria-controls="sidebarPages" >
                         <i class="ri-account-circle-line"></i>
                         <span data-key="t-pages" style="font-family: 'Poppins', sans-serif  !important;">My Account</span>
                     </a>
@@ -147,13 +147,6 @@
                     <a href="{% url "core:transactions" %}" class="nav-link menu-link"  aria-controls="sidebarPages" >
                         <i class="ri-history-fill"></i>
                         <span data-key="t-pages" style="font-family: 'Poppins', sans-serif  !important;">Transaction History</span>
-                    </a>
-                  
-                </li>
-                <li class="nav-item">
-                    <a href="{% url "core:profile" %}" class="nav-link menu-link"  aria-controls="sidebarPages" >
-                        <i class="ri-settings-3-fill"></i>
-                        <span data-key="t-pages" style="font-family: 'Poppins', sans-serif  !important;">Settings</span>
                     </a>
                   
                 </li>
@@ -311,7 +304,7 @@
                                             <div class="flex-shrink-0 align-item-center">
                                                     <a href="{% url "core:deposit" %}"><button
                                                         type="submit"
-                                                        class="btn rounded-2" style=" font-size: 9px; background: #405189; color: #fff;">Fund Account</button></a>
+                                                        class="btn rounded-2" style=" font-size: 9px; background: #405189; color: #fff;">Deposit</button></a>
                                             </div>
                                         </div>
                                     </div><!-- end card body -->
@@ -369,7 +362,7 @@
                                                             </td>
                                                             {% endif %}
                                                             
-                                                            </td>
+                                                            
 
                                                         </tr>
                                                     </tbody>
@@ -379,6 +372,88 @@
                                         </div>
                                     </div>
                                     <!-- end card body -->
+                                    <div class="card-body">
+                                        <div class="table-responsive table-card">
+                                            {% if user_transactions %}
+                                            <table class="table align-middle table-nowrap" id="customerTable">
+                                                <thead class="table-light text-muted">
+                                                    <tr>
+                                                        <th  data-sort="name" scope="col" style="width: 60px;"></th>
+                                                        <th  data-sort="date" scope="col">Timestamp</th>
+                                                   
+                                                        <th  data-sort="expire_date" scope="col">Plan Expiry</th>
+                                                        <th  data-sort="details" scope="col">Details</th>
+                                                        <th  data-sort="transaction_id" scope="col">Transaction ID</th>
+                                                    
+                                                        <th  data-sort="amount" scope="col">Amount</th>
+                                                        <th  data-sort="status" scope="col">Status</th>
+                                                    </tr>
+                                                    <!--end tr-->
+                                                </thead>
+                                                <tbody class="list form-check-all">
+                                                    {% for t in user_transactions %}
+                                                    <tr>
+                                                        <td class="id" style="display:none;"><a href="javascript:void(0);" class="fw-medium link-primary">#VZ001</a></td>
+                                                        <td>
+                                                            <div class="avatar-xs">
+                                                                {% if t.plan_interval_processed %}
+                                                                <div class="avatar-title bg-success-subtle text-success rounded-circle fs-16">
+                                                                    <i class="ri-arrow-right-up-fill"></i>
+                                                                </div>
+                                                                {% elif t.confirmed %}
+                                                                <div class="avatar-title bg-success-subtle text-success rounded-circle fs-16">
+                                                                    <i class="ri-arrow-right-up-fill"></i>
+                                                                </div>
+                                                                {% elif not t.confirmed %}
+                                                                <div class="avatar-title bg-warning-subtle text-warning rounded-circle fs-16">
+                                                                    <i class="ri-arrow-right-up-fill"></i>
+                                                                </div>
+                                                                {% endif %}
+                                                            </div>
+                                                        </td>
+                                                        <td class="date">{{t.timestamp|date:"d M, Y H:i"}}</td>
+                                                        <td class="expire_date">{{t.expiry_date|date:"d M, Y H:i"}}</td>
+                                                 
+                                                        <td class="details">{{t.title}}</td>
+                                                        <td class="transaction_id">{{t.transaction_id}}</td>
+                                                
+                                                        <td>
+                                                            
+                                                            <p class="text-muted mb-0">${{t.amount}}</p>
+                                                        </td>
+                                                        
+                                                        <td class="status">
+                                                            {% if t.plan_interval_processed %}
+                                                            <span class="badge bg-success-subtle text-success fs-11"><i class="ri-time-line align-bottom"></i>Completed</span>
+                                                            {% elif t.confirmed %}
+                                                            <span class="badge bg-success-subtle text-success fs-11"><i class="ri-time-line align-bottom"></i>Ongoing</span>
+                                                            {% elif not t.confirmed %}
+                                                            <span class="badge bg-warning-subtle text-warning fs-11"><i class="ri-time-line align-bottom"></i>Pending</span>
+                                                            {% endif %}
+                                                        </td>
+    
+                                                     
+                                                    </tr>
+                                                    {% endfor %}
+                                                    <!--end tr-->
+    
+                                                    <!--end tr-->
+    
+                                                </tbody>
+                                            </table>
+                                            <!--end table-->
+                                            {% else %}
+                                            <div class="noresult">
+                                                <div class="text-center">
+                                                    <script src="https://cdn.lordicon.com/lordicon.js"></script>
+                                                    <lord-icon src="https://cdn.lordicon.com/msoeawqm.json" trigger="hover" colors="primary:#405189,secondary:#0ab39c" style="width:75px;height:75px"></lord-icon>
+                                                    <h5 class="mt-2">No Transaction Found</h5>
+                                                </div>
+                                            </div>
+                                            {% endif %}
+                                        </div>
+                                  
+                                    </div>
                                 </div>
                                 <!-- end card -->
                             </div>

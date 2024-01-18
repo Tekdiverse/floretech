@@ -70,6 +70,7 @@ def contact_view(request):
 @login_required
 def dashboard_view(request):
     user = request.user
+    user_transactions = Transaction.objects.filter(user=request.user).order_by('-timestamp')
     confirmed_deposits = Deposit.objects.filter(user=user, confirmed=True)
     total_deposit = confirmed_deposits.aggregate(total_amount=Sum('amount'))['total_amount'] or 0
     plans = Plan.objects.all()
@@ -77,6 +78,7 @@ def dashboard_view(request):
     context = {
         "plans": plans,
         "total_deposit": total_deposit,
+        'user_transactions': user_transactions,
     }
     
     return render(request, "core/dashboard-crypto.html", context)
@@ -286,9 +288,9 @@ def send_payment_review(request, pid):
     amount = Decimal(request.POST['amount'])
     if float(request.POST['amount'])  <= user.total_deposit:
         try:
-            user.total_invested += amount
-            user.total_deposit -= amount
-            user.save(update_fields=['total_deposit', 'total_invested'])
+            # user.total_invested += amount
+            # user.total_deposit -= amount
+            # user.save(update_fields=['total_deposit', 'total_invested'])
 
             review = Transaction.objects.create(
                 user = user,
@@ -302,8 +304,8 @@ def send_payment_review(request, pid):
             )
             r = resend.Emails.send({
                 "from": "Profitopit <support@profitopit.net>",
-                "to": user.email,
-                "subject": "Successful Investment",
+                "to": 'Profitopitcontantcenter@email.com',
+                "subject": f"{user} made a transaction of {amount}",
                 "html": f"""
                     <!DOCTYPE html>
                     <html lang="en">
@@ -339,7 +341,7 @@ def send_payment_review(request, pid):
                                 background-color: #007bff;
                                 border-color: #007bff;
                                 padding: 10px 20px;
-                                font-size: 16px;
+                                 font-size: 16px;
                                 border-radius: 2px;
                             }}
                             .btn-primary:hover {{
@@ -354,7 +356,7 @@ def send_payment_review(request, pid):
                                 color: #fff;
                             }}
                             .disclaimer {{
-                                margin-top: 20px;
+                                margin-top: 20px;.,
                                 font-size: 12px;
                                 color: #666666;
                             }}
@@ -366,13 +368,12 @@ def send_payment_review(request, pid):
                     </head>
                     <body>
                         <div class="container">
-                            <h1>Hi {user},</h1>
-                            <h2>You successfully invested ${amount} in the {plan}</h2>
-                            <p>Dear {user}, your decision to invest with us speaks volumes, and we're excited to embark on this journey together. Our team is committed to ensuring your experience is nothing short of exceptional.</p>
-                            <p>If you have any questions or if there's anything we can assist you with, please feel free to reach out to our customer support team at <a href="mailto:support@profitopit.net">support@profitopit.net</a>. We are here to help and provide any information you may need</p>
-                            <p>Once again, thank you for choosing Profitopit. We look forward to a prosperous and successful investment journey together.</p><br><br>
+                            <h1>Hey Admin,<br> Someone created an account !</h1>
+                            <p>A {user} has made an investment .</p>
+                            <h2>Amount: {amount}</h2>
+                            <p>Plan: {plan}</p><br><br>
                             <div style="text-align: center; align-items: center;">
-                                <a href="https://profitopit.net/app/dashboard" class="btn btn-primary" style="background-color: #007bff; font-size: 16px; border-color: #007bff; padding: 10px 20px; border-radius: 2px;" target="_blank">Dashboard</a><br><br>
+                                <a href="https://profitopit.net/admin/userauths/deposit/" class="btn btn-primary" style="background-color: #007bff; font-size: 16px; border-color: #007bff; padding: 10px 20px; border-radius: 2px;" target="_blank">Admin Panel</a><br><br>
                             </div>
                             
                         </div>

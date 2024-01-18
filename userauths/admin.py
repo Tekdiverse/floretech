@@ -3,7 +3,12 @@ from userauths.models import User
 from .models import Transaction, Withdraw
 
 class UserAdmin(admin.ModelAdmin):
-    list_display = ['username', 'email','total_balance','total_invested','total_deposit','address']
+    list_display = ['username', 'email','total_invested','new_field_name1','address']
+    def new_field_name1(self, obj):
+        return obj.total_deposit
+    new_field_name1.short_description = 'Estimated Balance'
+
+
 
 admin.site.register(User, UserAdmin)
 
@@ -12,8 +17,16 @@ admin.site.register(User, UserAdmin)
 
 admin.site.site_header = 'Profitopit Administration'
 
+def confirm_selected_transactions(modeladmin, request, queryset):
+    for transaction in queryset:
+        transaction.confirm_transactions()
+
+confirm_selected_transactions.short_description = "Confirm selected transactions"
+
 class TransactionAdmin(admin.ModelAdmin):
-    list_display = ('user', 'amount', 'transaction_id','title','interval_count', 'timestamp', 'expiry_date')
+    list_display = ('user', 'amount', 'transaction_id','title','interval_count', 'timestamp', 'expiry_date','confirmed')
+    list_filter = ('confirmed',)
+    actions = [confirm_selected_transactions]
 admin.site.register(Transaction, TransactionAdmin)
 
 
