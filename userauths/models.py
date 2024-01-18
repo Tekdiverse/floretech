@@ -78,7 +78,7 @@ class Transaction(models.Model):
             # Update user's balance first
             self.user.total_invested += self.amount
             self.user.total_deposit -= self.amount
-            self.user.save()  # Save the user instance first
+            self.user.save(update_fields=['total_deposit', 'total_invested'])  # Save the user instance first
 
             # Update transaction confirmation status
             self.confirmed = True

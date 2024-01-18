@@ -320,57 +320,7 @@
                                     <div class="card-header d-flex align-items-center">
 
                                     </div>
-                                    <div class="card-body">
-                                        <div>
-                                            <div class="table-responsive table-card mb-3">
-                                                <table class="table align-middle table-nowrap mb-0">
-                                                    <thead class="table-light">
-                                                        <tr>
-
-                                                            <th data-sort="name" scope="col">Name</th>
-                                                           
-                                        
-                                                           
-                                                            <th data-sort="apikey" scope="col">Deposit</th>
-                                                           
-                                                            <th data-sort="status" scope="col">Status</th>
-                                                            
-
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody class="list form-check-all">
-                                                        <tr>
-
-
-                                                            <td class="name">{{user.username|capfirst|truncatechars:15}}</td>
-                                                        
-                                                    
-                                                           
-                                                            <td class="btckey">
-                                                                <a href="{% url "core:deposit" %}"><button
-                                                                    type="submit"
-                                                                    class="btn rounded-2" style=" font-size: 11px; background:#405189 ; color: #fff;"><i class="ri-arrow-down-fill"></i> Deposit</button></a>
-                                                            </td>
-                                        
-                                                            {% if user.total_deposit >= 100 %}
-                                                            <td class="status"><span
-                                                                    class="badge bg-success-subtle text-success">Active</span>
-                                                            </td>
-                                                            {% else %}
-                                                            <td class="status"><span
-                                                                    class="badge bg-danger-subtle text-danger">Deposit</span>
-                                                            </td>
-                                                            {% endif %}
-                                                            
-                                                            
-
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
-                                            </div>
-
-                                        </div>
-                                    </div>
+                                   
                                     <!-- end card body -->
                                     <div class="card-body">
                                         <div class="table-responsive table-card">
