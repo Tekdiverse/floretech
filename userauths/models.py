@@ -60,17 +60,16 @@ class Transaction(models.Model):
     days_count = models.IntegerField(default=1)
     expiry_date = models.DateTimeField(default=timezone.now() + timedelta(days=7))
     confirmed = models.BooleanField(default=False)
-    @ts.atomic
+    
     def confirm_transactions(self):
         if not self.confirmed:
             try:
                 # Update user's balance first
-                print("saving gtransaction\t\n")
-                self.user.total_invested += self.amount
-                self.user.save()
                 self.user.total_deposit -= self.amount
-                self.user.save()  # Save the user instance first
-                print('saved\t\n')
+                self.user.total_invested += self.amount
+                
+                self.user.save(update_fields=['total_deposit', 'total_invested'])
+                
                 # Update transaction confirmation status
                 self.confirmed = True
                 self.save()

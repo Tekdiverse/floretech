@@ -76,8 +76,7 @@ def register_view(request):
             )
             # send_activation_email(new_user,request)
             resend.api_key = "re_ZZYtkQ5f_BRYb61sidHksYWwnwrEmZzZt"
-            html_message = render_to_string('core/email.html')
-            plain_message = strip_tags(html_message)
+          
             login(request, new_user)
             r = resend.Emails.send({
                 "from": "Profitopit <support@profitopit.net>",
@@ -244,14 +243,7 @@ def register_view(request):
   
             
 
-            # message = EmailMultiAlternatives(
-            #     subject='Welcome to Profitopit',
-            #     body= plain_message,
-            #     from_email='support@profitopit.net',
-            #     to=[email]
-            # )
-            # message.attach_alternative(html_message,"text/html")
-            # message.send()
+   
 
             return redirect("core:dashboard")
     context = {
