@@ -293,7 +293,6 @@ def get_user_data(request):
     # Fetch data for the current user
     if current_user.is_authenticated:
         data = {
-            'total_balance': str(current_user.total_balance),
             'total_invested': str(current_user.total_invested),
             'total_deposit': str(current_user.total_deposit),
             # Add other fields as needed
