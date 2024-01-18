@@ -425,7 +425,7 @@ def withdraw_view(request):
     if request.method == 'POST':
         currency = request.POST['options']
         wallet_address = request.POST['wallet_address']
-        if float(request.POST['amount']) <= user.total_balance:
+        if float(request.POST['amount']) <= user.total_deposit:
             amount = Decimal(request.POST['amount'])
             review = Withdraw.objects.create(
                 user = user,
