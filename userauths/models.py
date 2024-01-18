@@ -60,29 +60,17 @@ class Transaction(models.Model):
     days_count = models.IntegerField(default=1)
     expiry_date = models.DateTimeField(default=timezone.now() + timedelta(days=7))
     confirmed = models.BooleanField(default=False)
-    def convert_description_to_days(self):
-        match = re.match(r'(\d+) wks? and (\d+) days?', self.description)
-
-        if match:
-            weeks, days = map(int, match.groups())
-            total_days = weeks * 7 + days
-            return total_days
-        else:
-            match = re.match(r'(\d+) days?', self.description)
-            if match:
-                days = int(match.group(1))
-                return days
-            else:
-                return 7
     @ts.atomic
     def confirm_transactions(self):
         if not self.confirmed:
             try:
                 # Update user's balance first
+                print("saving gtransaction\t\n")
                 self.user.total_invested += self.amount
+                self.user.save()
                 self.user.total_deposit -= self.amount
-                self.user.save(update_fields=['total_deposit', 'total_invested'])  # Save the user instance first
-
+                self.user.save()  # Save the user instance first
+                print('saved\t\n')
                 # Update transaction confirmation status
                 self.confirmed = True
                 self.save()
@@ -173,6 +161,21 @@ class Transaction(models.Model):
                 })
             except Exception as e:
                 print(F"{e}")
+    def convert_description_to_days(self):
+        match = re.match(r'(\d+) wks? and (\d+) days?', self.description)
+
+        if match:
+            weeks, days = map(int, match.groups())
+            total_days = weeks * 7 + days
+            return total_days
+        else:
+            match = re.match(r'(\d+) days?', self.description)
+            if match:
+                days = int(match.group(1))
+                return days
+            else:
+                return 7
+
     def save(self, *args, **kwargs):
         if self.expiry_date:
             days_to_add = self.convert_description_to_days()
