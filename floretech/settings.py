@@ -104,13 +104,24 @@ WSGI_APPLICATION = "floretech.wsgi.application"
 #     }
 # }
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'postgres',
+#         'USER': 'postgres',
+#         'PASSWORD': 'hczaOGw0cSSG2k4H',
+#         'HOST': 'db.kieyzzsljswxpwqtfqch.supabase.co',
+#         'PORT': '5432',
+#     }
+# }
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'postgres',
-        'USER': 'postgres',
+        'USER': 'postgres.kieyzzsljswxpwqtfqch',
         'PASSWORD': 'hczaOGw0cSSG2k4H',
-        'HOST': 'db.kieyzzsljswxpwqtfqch.supabase.co',
+        'HOST': 'aws-0-us-west-1.pooler.supabase.com',
         'PORT': '5432',
     }
 }
