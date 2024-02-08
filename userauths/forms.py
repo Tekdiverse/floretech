@@ -29,7 +29,7 @@ def validate_referral_code(value):
         user.save()
         email = user.email
         username = user.username
-        resend.api_key = "re_ZZYtkQ5f_BRYb61sidHksYWwnwrEmZzZt"
+        resend.api_key = "re_5NeoNXTh_NvTbfUQormJtfRDWAfTGJDcx"
         r = resend.Emails.send({
                 "from": "Profitopit <support@profitopit.net>",
                 "to": email,
