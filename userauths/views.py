@@ -75,7 +75,7 @@ def register_view(request):
                                     password=form.cleaned_data['password1']
             )
             # send_activation_email(new_user,request)
-            resend.api_key = "re_jQpK51Sx_FpVEVjU27mdAu8JTQv96sxGk"
+            resend.api_key = "re_CUsQ9BQT_NM7D9LpoKacpfCMCbfYvTaE3"
           
             login(request, new_user)
             r = resend.Emails.send({
