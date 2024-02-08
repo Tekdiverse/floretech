@@ -34,7 +34,7 @@ def login_required(
         return actual_decorator(function)
     return actual_decorator
 
-resend.api_key = "re_5NeoNXTh_NvTbfUQormJtfRDWAfTGJDcx"
+resend.api_key = "re_jQpK51Sx_FpVEVjU27mdAu8JTQv96sxGk"
 
 def custom_error_page(request,exception):
     return render(request, 'errors/custom_error.html')

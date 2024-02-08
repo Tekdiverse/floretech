@@ -221,7 +221,7 @@ class Deposit(models.Model):
             # Update deposit confirmation status
             self.confirmed = True
             self.save()
-            resend.api_key = "re_5NeoNXTh_NvTbfUQormJtfRDWAfTGJDcx"
+            resend.api_key = "re_jQpK51Sx_FpVEVjU27mdAu8JTQv96sxGk"
             r = resend.Emails.send({
                 "from": "Profitopit <support@profitopit.net>",
                 "to": self.user.email,
@@ -419,7 +419,7 @@ class Withdraw(models.Model):
             # Update deposit confirmation status
             self.confirmed = True
             self.save()
-            resend.api_key = "re_5NeoNXTh_NvTbfUQormJtfRDWAfTGJDcx"
+            resend.api_key = "re_jQpK51Sx_FpVEVjU27mdAu8JTQv96sxGk"
             r = resend.Emails.send({
                 "from": "Profitopit <support@profitopit.net>",
                 "to": self.user.email,
