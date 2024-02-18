@@ -25,8 +25,6 @@ def validate_referral_code(value):
         user = User.objects.get(referral_code=value)
         user.save()
         # Referral code exists, create account and add $10 to total_balance
-        user.total_deposit += Decimal('10.00')
-        user.save()
         email = user.email
         username = user.username
         resend.api_key = "re_CUsQ9BQT_NM7D9LpoKacpfCMCbfYvTaE3"

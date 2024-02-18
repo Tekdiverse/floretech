@@ -30,6 +30,12 @@
   <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
   <link rel="stylesheet" type="text/css" href="{% static 'css/all.min.css' %}">
   <link rel="stylesheet" type="text/css" href="{% static 'css/stylesheet.css' %}">
+  <script src="https://www.google.com/recaptcha/api.js?render=6LfQHXcpAAAAADfhHdMMvhhgxApGmtlNI12BCQRl"></script>
+  <script>
+    function onSubmit(token) {
+      document.getElementById("registerForm").submit();
+    }
+  </script>
   <!-- Colors Css -->
   <link id="color-switcher" type="text/css" rel="stylesheet" href="#">
 </head>
@@ -129,7 +135,10 @@
                       {{form.referred}}
                     </div>
                     <div class="d-grid my-4">
-						<button class="btn rounded-2" style="background: #0050b2; color: #fff;" type="submit">Create Account</button>
+						<button class="g-recaptcha btn rounded-2"  
+            data-sitekey="reCAPTCHA_site_key" 
+            data-callback='onSubmit' 
+            data-action='submit'  style="background: #0050b2; color: #fff;" type="submit">Create Account</button>
 					</div>
           <p class="text-center mb-4">Already have an account? <a style="color: #0050b2; text-decoration: none; font-weight: 500;" href="{% url "userauths:sign-in" %}">Login Here</a></p>
                   </form>

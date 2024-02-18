@@ -264,6 +264,7 @@ def referral_view(request):
     current_user = request.user
     current_user_referral_code = current_user.referral_code
     current_user_referrer_code = current_user.referred
+    current_user_total_ref = current_user.ref_bonus
 
     # Count the number of users with the same referral code
     referred_users = User.objects.filter(referred=current_user_referral_code)
@@ -272,11 +273,14 @@ def referral_view(request):
     # Get the users who have the same referral code as the current user
     user_referrer = User.objects.filter(referral_code=current_user_referrer_code)
 
+    
+
     context = {
         'current_user': current_user,
         'referred_users': referred_users,
         'referred_users_count': referred_users_count,
         'user_referrer': user_referrer,
+        'current_user_total_ref': current_user_total_ref,
     }
     return render(request, "core/referrals.html", context)
 @login_required

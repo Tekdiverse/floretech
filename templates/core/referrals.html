@@ -243,10 +243,11 @@
                                                
                                   
                                                     <th  data-sort="details" scope="col">Details</th>
-                                                    <th  data-sort="transaction_id" scope="col">Referral Bonus</th>
+                                                    
                                                 
                                                  
                                                 </tr>
+                                                
                                                 <!--end tr-->
                                             </thead>
                                             <tbody class="list form-check-all">
@@ -258,8 +259,7 @@
                                                  
                                              
                                                     <td class="details">{{r.username}}</td>
-                                                    <td class="transaction_id">$10</td>
-                                            
+                                                   
                                                   
                                                     
                                                     
@@ -273,6 +273,9 @@
 
                                             </tbody>
                                         </table>
+                                        <div class="p-3 mb-2 bg-light text-dark fw-semibold">
+                                            <p>Total referral bonus: {{current_user_total_ref}}</p>
+                                        </div>
                                         <!--end table-->
                                         {% else %}
                                         <div class="noresult">

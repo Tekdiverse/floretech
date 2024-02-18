@@ -1,4 +1,5 @@
 COUNTRIES = (
+    ('', ('Select country')),
     ('Andorra', ('Andorra')),
     ('UAE', ('United Arab Emirates')),
     ('Afghanistan', ('Afghanistan')),

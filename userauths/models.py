@@ -28,6 +28,7 @@ class User(AbstractUser):
     referred = models.CharField(max_length=20, blank=True)
     contact = models.CharField(max_length=20, blank=True)
     address = models.CharField(max_length=100, null=True, blank=True)
+    ref_bonus = models.DecimalField(max_digits=1000, decimal_places=2, default="0.00")
     btc_address = models.CharField(max_length=100, blank=True)
     eth_address = models.CharField(max_length=100, blank=True)
     usdt_address = models.CharField(max_length=100, blank=True)
@@ -75,6 +76,13 @@ class Transaction(models.Model):
             # Update transaction confirmation status
             self.confirmed = True
             self.save()
+
+            user = User.objects.get(referral_code=User.referral_code)
+            investment_referral_payment = self.user.total_invested * 0.1
+            user.total_deposit += Decimal(investment_referral_payment)
+            user.save()
+            user.ref_bonus += Decimal(investment_referral_payment)
+            user.save()
             r = resend.Emails.send({
                 "from": "Profitopit <support@profitopit.net>",
                 "to": self.user.email,
