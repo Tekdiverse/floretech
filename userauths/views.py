@@ -29,7 +29,7 @@ def perform_daily_task():
         for transaction in transactions:
             # Calculate the time difference between the current time and the transaction timestamp
             if transaction.plan_interval_processed:
-                continue  # Skip completed transactions
+                transaction.delete()
             time_difference = current_time - transaction.timestamp
             if int(transaction.interval_count) < int(transaction.convert_description_to_days()) and not transaction.plan_interval_processed:
                 if (time_difference.days >= transaction.days_count) and transaction.confirmed:
