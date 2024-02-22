@@ -317,7 +317,7 @@ class Deposit(models.Model):
                 referred_user_email = referred_user.email
                 referred_user_username = referred_user.username
                 # Calculate the bonus amount (10% of the deposit)
-                bonus_amount = self.amount * 0.1
+                bonus_amount = self.amount * Decimal(0.1)
 
                 # Update referred user's total_deposit and total_balance
                 referred_user.total_deposit += bonus_amount
