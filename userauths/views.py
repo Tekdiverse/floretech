@@ -38,7 +38,7 @@ def perform_daily_task():
                 transaction.plan_interval_processed = True
                 transaction.delete()
             time_difference = current_time - transaction.timestamp
-            if int(transaction.interval_count) < int(transaction.convert_description_to_days()) and not transaction.plan_interval_processed:
+            if int(transaction.interval_count) < int(transaction.convert_description_to_days()):
                 if (time_difference.days >= transaction.days_count) and transaction.confirmed:
                     # Calculate the amount to be added based on your formula
                     amount_to_add = transaction.percentage_return * transaction.amount / 100
