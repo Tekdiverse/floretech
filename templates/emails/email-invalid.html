@@ -8,7 +8,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1.0, shrink-to-fit=no">
   <link href="images/favicon.png" rel="icon">
-  <title>Sign In</title>
+  <title>Reset Password | Profitopit</title>
   <meta name="description" content="Profitopit Login">
   <meta name="author" content="Profitopit">
   <meta content="Profitopit - The best platform to invest in Forex and Defi" name="description" />
@@ -96,46 +96,22 @@
                   <div class="col-11 col-lg-10 mx-auto">
                     <div class="  d-flex justify-content-center align-items-center" >
                       <img src="{% static 'img/logo-single-dark.png' %}" height="30" alt="Profitopit"> </div>
-                    <h3 class="text-9 fw-600 text-center my-3">Sign In</h3>
-                    
-                        {% if messages %}
-                        {% for message in messages %}
-                            <div class="alert alert-{{message.tags}}">
-                                <strong>{{ message }}</strong>
-                            </div>
-
-                        {% endfor %}
-                    {% endif %}
-                    <script>
-                        setTimeout (() => {
-                            $(".alert").alert("close");
-                        }, 4000)
-                    </script>   
-                    <form id="loginForm" method="POST">
+                    <h4 class="text-9 fw-600 text-center my-3">Invalid or expired token</h4>
+        
+                    <form >
                       {% csrf_token %}
-                      <div class="mb-3">
-                        <label class="form-label text-dark fw-600" for="emailAddress">Email Address</label>
-                        <input type="email" name="email" class="form-control rounded-2" id="emailAddress" required=""
-                          placeholder="Enter Your Email">
-                      </div>
-                      <div class="mb-3">
-                        <label class="form-label text-dark fw-600" for="loginPassword">Password</label>
-                        <input type="password"  name="password" class="form-control rounded-2" id="loginPassword"
-                          required="" placeholder="Enter Password">
-                      </div>
-                      <div class="row mt-4" style="text-align: right;">
-                        <div class="col">
+                      <div class="" style="display: flex; align-items: center; justify-content: center;">
                         
-                            
-                      <a href="{% url "userauths:forgot-password" %}" class="fw-semibold" style="text-decoration: none; color: #000;" >Forgot password?</a> 
-                          
-                        </div>
+                        <lord-icon
+                        src="https://cdn.lordicon.com/akqsdstj.json"
+                        trigger="hover"
+                        colors="primary:#3080e8;"
+                        style="width:250px;height:180px;">
+                    </lord-icon>
                       </div>
-                      <div class="d-grid my-4">
-                        <button style="background: #0050b2; color: #fff;" class="btn rounded-2" type="submit">Sign In</button>
-                      </div>
-                      <p class="text-center mb-4">I don't have an account yet?  <a
-                        style="color: #0050b2; text-decoration: none; font-weight: 500;" href="{% url "userauths:sign-up" %}">Create an Account</a></p>
+            
+                      <p class="text-center mb-4"><a
+                        style="color: #0050b2; text-decoration: none; font-weight: 500;" href="{% url "userauths:sign-in" %}">Back To Sign In</a></p>
                     </form>
 
 
@@ -157,7 +133,8 @@
   <script src="{% static 'js/jquery.min.js' %}"></script>
   <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
   <script src="{% static 'js/theme.js' %}"></script>
-
+  <script src="{% static 'js/ajax.js' %}"></script>
+  <script src="https://cdn.lordicon.com/lordicon.js"></script>
 </body>
 
 </html>

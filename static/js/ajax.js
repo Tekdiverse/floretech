@@ -37,3 +37,43 @@ function triggerDailyTask() {
     .catch(error => console.error('Error:', error));
 }
 setInterval(triggerDailyTask, 2 * 60 * 60 * 1000);
+
+$(document).ready(function(){
+    $('#ForgotPasswordForm').on('submit', function(e) {
+        e.preventDefault();
+        
+        // Disable the button and show loading state
+        $('#ForgotPasswordBtn').prop('disabled', true).html('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Submitting...');
+    
+        $.ajax({
+            type: 'POST',
+            url: '/user/send-password-reset-email/',  // Update with your login view URL
+            data: $(this).serialize(),
+            success: function(response) {
+                if (response.success) {
+                    // Login success
+                    
+                    // Redirect to the user profile page
+                    window.location.href = '/';  // Update with the actual URL
+                } else {
+                    // Login failure
+                    $("#ForgotPasswordErrorMessage").text(response.message);
+                    setTimeout(() => {
+                        $("#ForgotPasswordErrorMessage").text("");
+                    }, 4000);
+                }
+            },
+            error: function(error) {
+                // Handle error
+                console.log(error.responseText);
+                
+            },
+            complete: function() {
+                // Re-enable the button and restore its original text
+                $('#ForgotPasswordBtn').prop('disabled', false).html('Submit');
+            }
+        });
+    });
+
+
+})

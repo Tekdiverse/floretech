@@ -512,3 +512,31 @@ class Withdraw(models.Model):
  
     class Meta:
         verbose_name_plural = "Withdrawal Requests"
+
+
+class UserToken(models.Model):
+    TOKEN_TYPES = (
+        ('email_confirmation', 'Email Confirmation'),
+        ('password_reset', 'Password Reset'),
+        ('refresh_token', 'Refresh token'),
+        ('other', 'Other'),
+    )
+
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    token = models.CharField(max_length=255)
+    token_type = models.CharField(max_length=20, choices=TOKEN_TYPES)
+    created_at = models.DateTimeField(default=timezone.now)
+    expires_at = models.DateTimeField()
+    used = models.BooleanField(default=False)
+
+    class Meta:
+        verbose_name = 'User Token'
+        verbose_name_plural = 'User Tokens'
+
+    def __str__(self):
+        return f'Token: {self.token} - Type: {self.token_type}'
+
+    def save(self, *args, **kwargs):
+        # Set expiration time to 30 minutes from the current time
+        self.expires_at = self.created_at + timezone.timedelta(days=1)
+        super().save(*args, **kwargs)

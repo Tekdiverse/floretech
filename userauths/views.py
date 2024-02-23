@@ -18,6 +18,10 @@ from django.utils import timezone
 import re
 from datetime import timedelta
 from django.db import transaction as ts
+from .models import UserToken
+from .utils import reset_password
+from django.contrib.auth.hashers import make_password
+
 def perform_daily_task():
     try:
         # Your code for the daily task goes here
@@ -518,7 +522,8 @@ def lock_screen_view(request):
     return redirect("userauths:sign-in")
 
 
-
+def forgot_password(request):
+    return render(request, "userauths/forgot-password.html")
 
 
             
@@ -532,3 +537,64 @@ def trigger_daily_task(request):
 
     # Return a JSON response indicating success
     return JsonResponse({'status': 'success'})
+
+
+def send_password_reset(request):
+    if request.method == 'POST' and request.META.get('HTTP_X_REQUESTED_WITH') == 'XMLHttpRequest':
+        email = request.POST.get('email')
+        user = User.objects.filter(email=email).first()
+        try:
+            if user:
+                reset_password(request, user)
+                return JsonResponse({'success': True, 'message': "A password reset email has been sent to your email"})
+            else:
+                return JsonResponse({'success': False, 'message': "User with this email does not exist."})
+        except Exception as e:
+            print(e)
+    else:
+        return JsonResponse({'success': False, 'message': "Invalid request"})
+
+def password_reset_form(request, token):
+    try:
+        user_token = UserToken.objects.get(token=token, token_type='password_reset', used=False)
+    except UserToken.DoesNotExist:
+            # Token not found or already used
+            return redirect('userauths:invalid_token')
+    return render(request, 'password/password_reset_form.html', {'token': token})
+
+def process_password_reset(request):
+    if request.method == 'POST':
+        token = request.POST.get('token')
+        password = request.POST.get('password')
+        
+        try:
+            user_token = UserToken.objects.get(token=token, token_type='password_reset', used=False)
+        except UserToken.DoesNotExist:
+            # Token not found or already used
+            return redirect('userauths:invalid_token')
+        
+        # Check if the token has expired
+        if user_token.expires_at < timezone.now():
+            # Token has expired
+            return redirect('userauths:invalid_token')
+        
+        # Mark the token as used
+        user_token.used = True
+        user_token.save()
+        
+        # Update the user's password
+        user = user_token.user
+        user.password = make_password(password)
+        user.save()
+        user_token.delete()
+        
+        return redirect('userauths:password-reset-success')  # Redirect to a page indicating that the password has been reset
+    
+    return redirect('home')  # Redirect to home page if the request method is not POST
+
+
+def email_invalid(request):
+    return render(request, "emails/email-invalid.html")
+
+def password_reset_success(request):
+    return render(request, "password/password-reset-success.html")
