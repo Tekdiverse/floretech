@@ -3,13 +3,6 @@ from userauths.models import User
 from .models import Transaction, Withdraw
 from django.contrib.admin import AdminSite
 
-class NoCacheAdminSite(AdminSite):
-    def each_context(self, request):
-        context = super().each_context(request)
-        context.pop('cache', None)  # Remove 'cache' key from context
-        return context
-
-admin.site = NoCacheAdminSite()
 
 class UserAdmin(admin.ModelAdmin):
     list_display = ['username', 'email','total_invested','new_field_name1','address']
