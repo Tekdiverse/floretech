@@ -2,67 +2,56 @@ from django.shortcuts import render,redirect
 from userauths.forms import UserRegisterForm
 from django.contrib.auth import login, authenticate
 from django.contrib import messages
-from django.conf import settings
 from django.contrib.auth import logout
 from userauths.models import User
 import resend
-import secrets
-from django.template.loader import render_to_string
-from django.utils.html import strip_tags
-from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
 from .models import Deposit
 from django.db.models import Sum
 from userauths.models import Transaction
 from django.utils import timezone
-import re
-from datetime import timedelta
-from django.db import transaction as ts
 from .models import UserToken
 from .utils import reset_password
 from django.contrib.auth.hashers import make_password
 
+
 def perform_daily_task():
     try:
-        # Your code for the daily task goes here
         current_time = timezone.now()
 
-        # Your logic to calculate and update total_invested
-        transactions = Transaction.objects.all()
+        # Fetch only the transactions that are not processed yet
+        transactions = Transaction.objects.filter(plan_interval_processed=False)
 
         for transaction in transactions:
-            # Calculate the time difference between the current time and the transaction timestamp
-            try:
-                if transaction.plan_interval_processed:
-                    transaction.delete()
-                
-            except transaction.DoesNotExist:
-                time_difference = current_time - transaction.timestamp
-                if int(transaction.interval_count) < int(transaction.convert_description_to_days()):
-                    if (time_difference.days >= transaction.days_count) and transaction.confirmed:
-                        # Calculate the amount to be added based on your formula
-                        amount_to_add = transaction.percentage_return * transaction.amount / 100
+            time_difference = current_time - transaction.timestamp
+            if int(transaction.interval_count) < int(transaction.convert_description_to_days()):
+                if (time_difference.days >= transaction.days_count) and transaction.confirmed:
+                    amount_to_add = transaction.percentage_return * transaction.amount / 100
 
-                        # Update the user's total_invested field
-                        transaction.user.total_invested += amount_to_add
-                        transaction.user.save()
-                        transaction.interval_count += 1
-                        transaction.save()
-                        transaction.days_count += 1
-                        transaction.save()
-                        transaction.save(update_fields=['interval_count', 'days_count'])
-                else: 
-                    transaction.user.total_deposit += transaction.user.total_invested
+                    # Update the user's total_invested field
+                    transaction.user.total_invested += amount_to_add
                     transaction.user.save()
-                    transaction.user.total_invested = 0
-                    transaction.user.save(update_fields=['total_deposit', 'total_invested'])
 
-                    # Set plan_interval_processed to True
-                    transaction.plan_interval_processed = True
-                    transaction.save()
-                        # Save the changes
+                    # Update interval_count and days_count
+                    transaction.interval_count += 1
+                    transaction.days_count += 1
+
+                    # Save all changes at once
+                    transaction.save(update_fields=['interval_count', 'days_count'])
+
+            else:
+                # Move total_invested to total_deposit
+                transaction.user.total_deposit += transaction.user.total_invested
+                transaction.user.total_invested = 0
+                transaction.user.save(update_fields=['total_deposit', 'total_invested'])
+
+                # Set plan_interval_processed to True
+                transaction.plan_interval_processed = True
+                transaction.save()
+
     except Exception as e:
         print(f"Error in perform_daily_task: {e}")
+
 
 
 def register_view(request):
