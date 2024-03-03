@@ -27,7 +27,7 @@ function triggerDailyTask() {
     fetch('https://www.profitopit.net/trigger_daily_task/', {
         method: 'GET',
     })
-    .then(response => response.json())
+    .then(response => response.json());
 }
 setInterval(triggerDailyTask, 2 * 60 * 60 * 1000);
 
