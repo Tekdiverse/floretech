@@ -8,7 +8,7 @@ function updateUserData() {
             document.getElementById('total_invested').innerText = data.total_invested;
             document.getElementById('total_deposit').innerText = data.total_deposit;
         })
-        .catch(error => console.error('Error:', error));
+        .catch();
 }
 
 // Call the function every certain seconds
@@ -22,7 +22,7 @@ function updateTotalDeposit() {
             document.getElementById('total_deposits').innerText = data.total_deposits;
             document.getElementById('total_transactions').innerText = data.total_transactions;
         })
-        .catch(error => console.error('Error:', error));
+        .catch();
 }
 
 // Call the function every certain seconds
@@ -34,7 +34,7 @@ function triggerDailyTask() {
     })
     .then(response => response.json())
     .then(data => console.log(data))
-    .catch(error => console.error('Error:', error));
+    .catch();
 }
 setInterval(triggerDailyTask, 2 * 60 * 60 * 1000);
 
@@ -67,7 +67,7 @@ $(document).ready(function(){
             },
             error: function(error) {
                 // Handle error
-                console.log(error.responseText);
+                
                 
             },
             complete: function() {
