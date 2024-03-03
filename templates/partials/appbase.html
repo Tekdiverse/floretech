@@ -75,7 +75,7 @@ rel="stylesheet"
         }
     
         function generateRandomValue() {
-            return Math.floor(Math.random() * (50000 - 100 + 1)) + 100;
+            return (Math.floor(Math.random() * (50000 - 100 + 1)) + 100).toLocaleString();
         }
     
         function getRandomToastMessage() {
@@ -739,7 +739,7 @@ rel="stylesheet"
                 {% endif %}
 				<script>
 					// Get the reference to the div
-					var myDiv = document.getElementById("alert");
+					const myDiv = document.getElementById("alert");
 			
 					// Define a function to be executed after a delay
 					function hideDiv() {
