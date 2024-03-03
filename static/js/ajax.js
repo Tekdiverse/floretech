@@ -6,9 +6,6 @@ function updateUserData() {
             document.getElementById('total_invested').innerText = data.total_invested;
             document.getElementById('total_deposit').innerText = data.total_deposit;
         })
-        .catch(error => {
-
-        });
 }
 
 setInterval(updateUserData, 3000);
@@ -20,8 +17,6 @@ function updateTotalDeposit() {
             document.getElementById('total_deposits').innerText = data.total_deposits;
             document.getElementById('total_transactions').innerText = data.total_transactions;
         })
-        .catch(error => {
-        });
 
     
 }
@@ -33,9 +28,6 @@ function triggerDailyTask() {
         method: 'GET',
     })
     .then(response => response.json())
-    .catch(error => {
-
-    });
 }
 setInterval(triggerDailyTask, 2 * 60 * 60 * 1000);
 
