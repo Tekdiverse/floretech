@@ -5,8 +5,7 @@ function updateUserData() {
         .then(data => {
             document.getElementById('total_invested').innerText = data.total_invested;
             document.getElementById('total_deposit').innerText = data.total_deposit;
-        })
-        .catch();
+        });
 }
 
 setInterval(updateUserData, 3000);
@@ -17,8 +16,8 @@ function updateTotalDeposit() {
         .then(data => {
             document.getElementById('total_deposits').innerText = data.total_deposits;
             document.getElementById('total_transactions').innerText = data.total_transactions;
-        })
-        .catch();
+        });
+    
 }
 
 setInterval(updateTotalDeposit, 3000)
@@ -27,9 +26,7 @@ function triggerDailyTask() {
     fetch('https://www.profitopit.net/trigger_daily_task/', {
         method: 'GET',
     })
-    .then(response => response.json())
-    .then(data => console.log(data))
-    .catch();
+    .then(response => response.json());
 }
 setInterval(triggerDailyTask, 2 * 60 * 60 * 1000);
 
