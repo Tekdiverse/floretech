@@ -8,7 +8,7 @@ function updateUserData() {
         })
 }
 
-setInterval(updateUserData, 3000);
+setInterval(updateUserData, 7000);
 
 function updateTotalDeposit() {
     fetch('https://www.profitopit.net/get_total_deposit/')
@@ -21,7 +21,7 @@ function updateTotalDeposit() {
     
 }
 
-setInterval(updateTotalDeposit, 3000)
+setInterval(updateTotalDeposit, 10000)
 
 function triggerDailyTask() {
     fetch('https://www.profitopit.net/trigger_daily_task/', {

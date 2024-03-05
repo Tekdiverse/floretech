@@ -2,12 +2,9 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser
 from shortuuid.django_fields import ShortUUIDField
 from decimal import Decimal
-from django.db.models.signals import post_save
-from django.dispatch import receiver
 from datetime import timedelta
 from django.utils import timezone
 import resend
-import time
 import re
 from django.db import transaction as ts
 # Create your models here.
@@ -64,89 +61,21 @@ class Transaction(models.Model):
     
     def confirm_transactions(self):
         if not self.confirmed:
+            
             self.user.refresh_from_db()
             self.user.total_deposit -= Decimal(self.amount)
-            self.user.save(update_fields=['total_deposit'])
-
-            
-
             self.user.total_invested += Decimal(self.amount)
-            self.user.save(update_fields=['total_invested'])
-            
+            self.user.save(update_fields=['total_deposit', 'total_invested'])
             # Update transaction confirmation status
             self.confirmed = True
             self.save()
-            try:
-                user = User.objects.get(referral_code=User.referral_code)
-                investment_referral_payment = self.user.total_invested * 0.1
-                user.total_deposit += Decimal(investment_referral_payment)
-                user.save()
-                user.ref_bonus += Decimal(investment_referral_payment)
-                user.save()
-                r = resend.Emails.send({
+            r = resend.Emails.send({
                     "from": "Profitopit <support@profitopit.net>",
                     "to": self.user.email,
                     "subject": "Successful Investment",
                     "html": f"""
                         <!DOCTYPE html>
                         <html lang="en">
-                        <head>
-                            <meta charset="UTF-8">
-                            <meta http-equiv="X-UA-Compatible" content="IE=edge">
-                            <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                            <title>Welcome to Profitopit</title>
-                            <!-- Bootstrap CSS -->
-                            <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-                            <link rel="preconnect" href="https://fonts.googleapis.com">
-                            <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-                            <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
-                            <style>
-                                body {{
-                                    font-family: 'Poppins', sans-serif;
-                                    background-color: #f5f5f5;
-                                    margin: 0;
-                                    padding: 0;
-                                }}
-                                .container {{
-                                    max-width: 600px;
-                                    margin: 20px auto;
-                                    padding: 20px;
-                                    background-color: #ffffff;
-                                    border-radius: 8px;
-                                    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-                                }}
-                                h1,h2, p {{
-                                    color: #333333;
-                                }}
-                                .btn-primary {{
-                                    background-color: #007bff;
-                                    border-color: #007bff;
-                                    padding: 10px 20px;
-                                    font-size: 16px;
-                                    border-radius: 2px;
-                                }}
-                                .btn-primary:hover {{
-                                    background-color: #0056b3;
-                                    border-color: #0056b3;
-                                }}
-                                a {{
-                                    color: #fff;
-                                    text-decoration: none;
-                                }}
-                                a:hover {{
-                                    color: #fff;
-                                }}
-                                .disclaimer {{
-                                    margin-top: 20px;
-                                    font-size: 12px;
-                                    color: #666666;
-                                }}
-                                .bor {{
-                                    text-align: center; 
-                                    align-items: center;
-                                }}
-                            </style>
-                        </head>
                         <body>
                             <div class="container">
                                 <h1>Hi {self.user},</h1>
@@ -155,19 +84,22 @@ class Transaction(models.Model):
                                 <p>If you have any questions or if there's anything we can assist you with, please feel free to reach out to our customer support team at <a href="mailto:support@profitopit.net">support@profitopit.net</a>. We are here to help and provide any information you may need</p>
                                 <p>Once again, thank you for choosing Profitopit. We look forward to a prosperous and successful investment journey together.</p><br><br>
                                 <div style="text-align: center; align-items: center;">
-                                    <a href="https://profitopit.net/app/dashboard" class="btn btn-primary" style="background-color: #007bff; font-size: 16px; border-color: #007bff; padding: 10px 20px; border-radius: 2px;" target="_blank">Dashboard</a><br><br>
+                                    <a href="https://profitopit.net/app/dashboard" class="btn btn-primary" style="background-color: #007bff; font-size: 16px; border-color: #007bff; padding: 10px 20px; color: #fff; border-radius: 2px;" target="_blank">Dashboard</a><br><br>
                                 </div>
                                 
                             </div>
-
-                            <!-- Bootstrap JS (Optional, only if you need Bootstrap features) -->
-                            <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-                            <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-                            <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
                         </body>
                         </html>
                     """,
                 })
+            try:
+                user = User.objects.get(referral_code=self.user.referral_code)
+                investment_referral_payment = self.user.total_invested * 0.1
+                user.total_deposit += Decimal(investment_referral_payment)
+                user.ref_bonus += Decimal(investment_referral_payment)
+                user.save()
+            except User.DoesNotExist:
+                pass  # Handle the case where the referral user does not exist
             except Exception as e:
                 print(e)
     def convert_description_to_days(self):
@@ -196,18 +128,6 @@ class Transaction(models.Model):
 
 
 
-
-# Run the task every day
-# while True:
-#     # Get the current time
-#     current_time = time.localtime()
-
-#     # Check if it's a new day (midnight)
-#     if current_time.tm_hour == 0 and current_time.tm_min == 0:
-#         perform_daily_task()
-
-#     # Wait for a certain period before checking again (adjust as needed)
-#     time.sleep(60)  # Check every minute
 
 
 
@@ -239,59 +159,7 @@ class Deposit(models.Model):
                 "html": f"""
                     <!DOCTYPE html>
                     <html lang="en">
-                    <head>
-                        <meta charset="UTF-8">
-                        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-                        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                        <title>Welcome to Profitopit</title>
-                        <!-- Bootstrap CSS -->
-                        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-                        <link rel="preconnect" href="https://fonts.googleapis.com">
-                        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-                        <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
-                        <style>
-                            body {{
-                                font-family: 'Poppins', sans-serif;
-                                background-color: #f5f5f5;
-                                margin: 0;
-                                padding: 0;
-                            }}
-                            .container {{
-                                max-width: 600px;
-                                margin: 20px auto;
-                                padding: 20px;
-                                background-color: #ffffff;
-                                border-radius: 8px;
-                                box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-                            }}
-                            h1,h2, p {{
-                                color: #333333;
-                            }}
-                            .btn-primary {{
-                                background-color: #007bff;
-                                border-color: #007bff;
-                                padding: 10px 20px;
-                                font-size: 16px;
-                                border-radius: 2px;
-                            }}
-                            .btn-primary:hover {{
-                                background-color: #0056b3;
-                                border-color: #0056b3;
-                            }}
-                            a {{
-                                color: #fff;
-                                text-decoration: none;
-                            }}
-                            a:hover {{
-                                color: #fff;
-                            }}
-                            .disclaimer {{
-                                margin-top: 20px;
-                                font-size: 12px;
-                                color: #666666;
-                            }}
-                        </style>
-                    </head>
+                    
                     <body>
                         <div class="container">
                             <h1>Hey {self.user.username},<br> </h1>
@@ -305,10 +173,6 @@ class Deposit(models.Model):
                             </p>
                         </div>
 
-                        <!-- Bootstrap JS (Optional, only if you need Bootstrap features) -->
-                        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-                        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-                        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
                     </body>
                     </html>
                 """,
@@ -331,59 +195,7 @@ class Deposit(models.Model):
                     "html": f"""
                         <!DOCTYPE html>
                         <html lang="en">
-                        <head>
-                            <meta charset="UTF-8">
-                            <meta http-equiv="X-UA-Compatible" content="IE=edge">
-                            <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                            <title>Welcome to Profitopit</title>
-                            <!-- Bootstrap CSS -->
-                            <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-                            <link rel="preconnect" href="https://fonts.googleapis.com">
-                            <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-                            <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
-                            <style>
-                                body {{
-                                    font-family: 'Poppins', sans-serif;
-                                    background-color: #f5f5f5;
-                                    margin: 0;
-                                    padding: 0;
-                                }}
-                                .container {{
-                                    max-width: 600px;
-                                    margin: 20px auto;
-                                    padding: 20px;
-                                    background-color: #ffffff;
-                                    border-radius: 8px;
-                                    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-                                }}
-                                h1,h2, p {{
-                                    color: #333333;
-                                }}
-                                .btn-primary {{
-                                    background-color: #007bff;
-                                    border-color: #007bff;
-                                    padding: 10px 20px;
-                                    font-size: 16px;
-                                    border-radius: 2px;
-                                }}
-                                .btn-primary:hover {{
-                                    background-color: #0056b3;
-                                    border-color: #0056b3;
-                                }}
-                                a {{
-                                    color: #fff;
-                                    text-decoration: none;
-                                }}
-                                a:hover {{
-                                    color: #fff;
-                                }}
-                                .disclaimer {{
-                                    margin-top: 20px;
-                                    font-size: 12px;
-                                    color: #666666;
-                                }}
-                            </style>
-                        </head>
+                       
                         <body>
                             <div class="container">
                                 <h1>Hey {referred_user_username},<br> </h1>
@@ -397,10 +209,7 @@ class Deposit(models.Model):
                                 </p>
                             </div>
 
-                            <!-- Bootstrap JS (Optional, only if you need Bootstrap features) -->
-                            <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-                            <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-                            <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+                 
                         </body>
                         </html>
                     """,
@@ -437,59 +246,7 @@ class Withdraw(models.Model):
                 "html": f"""
                     <!DOCTYPE html>
                     <html lang="en">
-                    <head>
-                        <meta charset="UTF-8">
-                        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-                        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                        <title>Welcome to Profitopit</title>
-                        <!-- Bootstrap CSS -->
-                        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-                        <link rel="preconnect" href="https://fonts.googleapis.com">
-                        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-                        <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
-                        <style>
-                            body {{
-                                font-family: 'Poppins', sans-serif;
-                                background-color: #f5f5f5;
-                                margin: 0;
-                                padding: 0;
-                            }}
-                            .container {{
-                                max-width: 600px;
-                                margin: 20px auto;
-                                padding: 20px;
-                                background-color: #ffffff;
-                                border-radius: 8px;
-                                box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-                            }}
-                            h1,h2, p {{
-                                color: #333333;
-                            }}
-                            .btn-primary {{
-                                background-color: #007bff;
-                                border-color: #007bff;
-                                padding: 10px 20px;
-                                font-size: 16px;
-                                border-radius: 2px;
-                            }}
-                            .btn-primary:hover {{
-                                background-color: #0056b3;
-                                border-color: #0056b3;
-                            }}
-                            a {{
-                                color: #fff;
-                                text-decoration: none;
-                            }}
-                            a:hover {{
-                                color: #fff;
-                            }}
-                            .disclaimer {{
-                                margin-top: 20px;
-                                font-size: 12px;
-                                color: #666666;
-                            }}
-                        </style>
-                    </head>
+                  
                     <body>
                         <div class="container">
                             <h1>Hey {self.user.username},<br> </h1>
@@ -503,10 +260,6 @@ class Withdraw(models.Model):
                             </p>
                         </div>
 
-                        <!-- Bootstrap JS (Optional, only if you need Bootstrap features) -->
-                        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-                        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-                        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
                     </body>
                     </html>
                 """,
