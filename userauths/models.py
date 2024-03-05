@@ -47,10 +47,10 @@ class Transaction(models.Model):
     amount = models.DecimalField(max_digits=100, decimal_places=2, default="0.00")
     title = models.CharField(max_length=50, blank=True)
     interval = models.CharField(choices=STATUS, max_length=16, default="daily")
-    percentage_return = models.DecimalField(max_digits=1000, decimal_places=2, default="0.00")
+    percentage_return = models.DecimalField(max_digits=100, decimal_places=2, default="0.00")
     least_amount = models.DecimalField(max_digits=1000, decimal_places=2, default="0.00")
     description = models.TextField(null=True, blank=True)
-    max_amount = models.DecimalField(max_digits=1000, decimal_places=2, default="0.00")
+    max_amount = models.DecimalField(max_digits=100, decimal_places=2, default="0.00")
     transaction_id = ShortUUIDField(unique=True, length=20, max_length=30, prefix="TRX", alphabet="abcdefgh12345")
     timestamp = models.DateTimeField(auto_now_add=True)
     plan_interval_processed = models.BooleanField(default=False)
@@ -64,8 +64,13 @@ class Transaction(models.Model):
             
             self.user.refresh_from_db()
             self.user.total_deposit -= Decimal(self.amount)
+            self.user.save(update_fields=['total_deposit'])
+
+            
+
             self.user.total_invested += Decimal(self.amount)
-            self.user.save(update_fields=['total_deposit', 'total_invested'])
+            self.user.save(update_fields=['total_invested'])
+            
             # Update transaction confirmation status
             self.confirmed = True
             self.save()
@@ -93,8 +98,8 @@ class Transaction(models.Model):
                     """,
                 })
             try:
-                user = User.objects.get(referral_code=self.user.referral_code)
-                investment_referral_payment = self.user.total_invested * 0.1
+                user = User.objects.get(referral_code=self.user.referred)
+                investment_referral_payment = self.user.total_invested * Decimal(0.1)
                 user.total_deposit += Decimal(investment_referral_payment)
                 user.ref_bonus += Decimal(investment_referral_payment)
                 user.save()
