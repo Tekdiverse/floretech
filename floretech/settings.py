@@ -195,8 +195,4 @@ EMAIL_HOST_USER = 'support@profitopit.net'
 EMAIL_HOST_PASSWORD = 'Profitopit1234?'
 DEFAULT_FROM_EMAIL = 'support@profitopit.net'
 
-CRONJOBS = [
-    ('0 0 * * *', 'core.cron.update_total_invested_job'),
-]
-CRONTAB_TZ = 'UTC'
 USE_THOUSAND_SEPARATOR = True

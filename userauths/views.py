@@ -13,6 +13,7 @@ from django.utils import timezone
 from .models import UserToken
 from .utils import reset_password
 from django.contrib.auth.hashers import make_password
+from django.db import transaction as ts
 
 
 def perform_daily_task():
@@ -20,34 +21,35 @@ def perform_daily_task():
         current_time = timezone.now()
 
         # Fetch only the transactions that are not processed yet
-        transactions = Transaction.objects.filter(plan_interval_processed=False)
+        transactions = Transaction.objects.filter(plan_interval_processed=False, confirmed=True)
 
         for transaction in transactions:
             time_difference = current_time - transaction.timestamp
-            if int(transaction.interval_count) < int(transaction.convert_description_to_days()):
-                if (time_difference.days >= transaction.days_count) and transaction.confirmed:
+            if (int(transaction.interval_count) < int(transaction.convert_description_to_days()) 
+                and time_difference.days >= transaction.days_count):
                     amount_to_add = transaction.percentage_return * transaction.amount / 100
-
+                    with ts.atomic():
                     # Update the user's total_invested field
-                    transaction.user.total_invested += amount_to_add
-                    transaction.user.save()
+                        transaction.user.total_invested += amount_to_add
+                        transaction.user.save()
 
-                    # Update interval_count and days_count
-                    transaction.interval_count += 1
-                    transaction.days_count += 1
+                        # Update interval_count and days_count
+                        transaction.interval_count += 1
+                        transaction.days_count += 1
 
-                    # Save all changes at once
-                    transaction.save(update_fields=['interval_count', 'days_count'])
+                        # Save all changes at once
+                        transaction.save(update_fields=['interval_count', 'days_count'])
 
             else:
-                # Move total_invested to total_deposit
-                transaction.user.total_deposit += transaction.user.total_invested
-                transaction.user.total_invested = 0
-                transaction.user.save(update_fields=['total_deposit', 'total_invested'])
+                with ts.atomic():
+                    # Move total_invested to total_deposit
+                    transaction.user.total_deposit += transaction.user.total_invested
+                    transaction.user.total_invested = 0
+                    transaction.user.save(update_fields=['total_deposit', 'total_invested'])
 
-                # Set plan_interval_processed to True
-                transaction.plan_interval_processed = True
-                transaction.save()
+                    # Set plan_interval_processed to True
+                    transaction.plan_interval_processed = True
+                    transaction.save()
 
     except Exception as e:
         print(f"Error in perform_daily_task: {e}")

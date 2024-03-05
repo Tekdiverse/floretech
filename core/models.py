@@ -25,7 +25,7 @@ class Plan(models.Model):
     user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
     user_count = models.IntegerField(default="100")
     title = models.CharField(max_length=100, default="Plan")
-    description = models.TextField(null=True, blank=True)
+    desdcscription = models.TextField(null=True, blank=True)
     initial = models.CharField(max_length=7, default="BTC")
     image = models.ImageField(upload_to=user_directory_path, default="product.jpg")
     least_amount = models.IntegerField(default="100")
