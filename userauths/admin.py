@@ -26,7 +26,7 @@ def confirm_selected_transactions(modeladmin, request, queryset):
 confirm_selected_transactions.short_description = "Confirm selected transactions"
 
 class TransactionAdmin(admin.ModelAdmin):
-    list_display = ('user', 'amount', 'transaction_id','title','interval_count', 'timestamp', 'expiry_date','confirmed')
+    list_display = ('user', 'amount', 'transaction_id','title','timestamp', 'expiry_date','confirmed')
     list_filter = ('confirmed',)
     actions = [confirm_selected_transactions]
 admin.site.register(Transaction, TransactionAdmin)

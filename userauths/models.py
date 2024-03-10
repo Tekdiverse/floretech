@@ -7,6 +7,7 @@ from django.utils import timezone
 import resend
 import re
 from django.db import transaction as ts
+from django.utils.text import slugify
 # Create your models here.
 STATUS = (
     ("daily", "daily"),
@@ -18,10 +19,9 @@ class User(AbstractUser):
     is_email_verified = models.BooleanField(default=False)
     email = models.EmailField(unique=True, null=False)
     username = models.CharField(max_length=100)
-    # total_balance = models.DecimalField(max_digits=1000, decimal_places=2, default="0.00")
     total_invested = models.DecimalField(max_digits=1000, decimal_places=2, default="0.00")
     total_deposit = models.DecimalField(max_digits=1000, decimal_places=2, default="0.00")
-    referral_code = ShortUUIDField(unique=True, length=10, max_length=20, prefix="profit", alphabet="abcdefgh12345")
+    referral_code = ShortUUIDField(unique=True, length=10, max_length=50, prefix="", alphabet="abcdefgh12345")
     referred = models.CharField(max_length=20, blank=True)
     contact = models.CharField(max_length=20, blank=True)
     address = models.CharField(max_length=100, null=True, blank=True)
@@ -32,7 +32,9 @@ class User(AbstractUser):
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = ['username']
     def save(self, *args, **kwargs):
-        # self.total_balance = Decimal(self.total_deposit) + Decimal(self.total_invested)
+        person_name = self.username
+        slug = slugify(person_name)
+        self.referral_code = f"{slug}"
         super().save(*args, **kwargs)
     def __str__(self):
         return self.username
@@ -192,7 +194,11 @@ class Deposit(models.Model):
 
                 # Update referred user's total_deposit and total_balance
                 referred_user.total_deposit += bonus_amount
-                referred_user.save()
+                referred_user.save(update_fields=['total_deposit'])
+                referred_user.ref_bonus += bonus_amount
+                referred_user.save(update_fields=['ref_bonus'])
+                amount_added = round(bonus_amount, 2)
+                
                 r = resend.Emails.send({
                     "from": "Profitopit <support@profitopit.net>",
                     "to": referred_user_email,
@@ -205,9 +211,9 @@ class Deposit(models.Model):
                             <div class="container">
                                 <h1>Hey {referred_user_username},<br> </h1>
                                 <h2>Your referral made a deposit of ${self.amount}.</h2>
-                                <p>A referral bonus of ${bonus_amount} has been credited to your balance.</p><br>
+                                <p>A referral bonus of ${amount_added} has been credited to your balance.</p><br>
                                 <div style="text-align: center; align-items: center;">
-                                    <a href="https://profitopit.net/app/dashboard" class="btn btn-primary" style="background-color: #007bff; font-size: 16px; border-color: #007bff; padding: 10px 20px; border-radius: 2px;" target="_blank">View Dashboard</a><br><br>
+                                    <a href="https://profitopit.net/app/dashboard" class="btn btn-primary" style="background-color: #007bff; font-size: 16px; border-color: #007bff; padding: 10px 20px; border-radius: 2px; color: #fff;" target="_blank" >View Dashboard</a><br><br>
                                 </div>
                                 <p style="margin-top: 20px; font-size: 12px; color: #666666;">
                                     Note: This email is sent as part of Profitopit communication. If you believe this is a mistake or received this email in error, please disregard it.
@@ -258,7 +264,7 @@ class Withdraw(models.Model):
                             <h2>Your withdrawal of ${self.amount} has been confirmed.</h2><br>
                             <p>The withdrawal you placed at {self.timestamp} UTC has been confirmed, you will be credited to your wallet address shortly.</p><br>
                             <div style="text-align: center; align-items: center;">
-                                <a href="https://profitopit.net/app/dashboard class="btn btn-primary" style="background-color: #007bff; font-size: 16px; border-color: #007bff; padding: 10px 20px; border-radius: 2px;" target="_blank">View dashboard</a><br><br>
+                                <a href="https://profitopit.net/app/dashboard class="btn btn-primary" style="background-color: #007bff; font-size: 16px; border-color: #007bff; padding: 10px 20px; border-radius: 2px; color: #fff;" target="_blank" >View dashboard</a><br><br>
                             </div>
                             <p style="margin-top: 20px; font-size: 12px; color: #666666;">
                                 Note: This email is sent as part of Profitopit communication. If you believe this is a mistake or received this email in error, please disregard it.
