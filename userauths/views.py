@@ -32,7 +32,7 @@ def perform_daily_task():
                     # Update the user's total_invested field
                     transaction.user.total_invested += amount_to_add
                     transaction.user.save()
-
+ 
                     # Update interval_count and days_count
                     transaction.interval_count += 1
                     transaction.days_count += 1
