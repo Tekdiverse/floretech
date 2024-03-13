@@ -261,33 +261,7 @@
 				</script>
         </div>
     </header>
-    <!-- Header end-->
-    {% comment %} <script>
-        function generateRandomPhoneNumber() {
-            const digits = Math.floor(Math.random() * 10000000000).toString().padStart(10, '0');
-            return `+1${digits.substring(0, 3)}-${digits.substring(3, 6)}-${digits.substring(6)}`;
-        }
-    
-        function generateRandomValue() {
-            return Math.floor(Math.random() * (50000 - 100 + 1)) + 100;
-        }
-    
-        function displayRandomToast() {
-            const phoneNumber = generateRandomPhoneNumber();
-            const randomValue = generateRandomValue();
-    
-            Toastify({
-                text: `New investment from ${phoneNumber} invested  $${randomValue}`,
-                duration: 5000,
-                close: true,
-                className: "info-toast",
-                position: "center",
-                gravity: 'top',
-            }).showToast();
-        }
-    
-        setInterval(displayRandomToast, 10000);
-    </script> {% endcomment %}
+   
     <script>
         function generateRandomPhoneNumber() {
             const digits = Math.floor(Math.random() * 10000000000).toString().padStart(10, '0');
