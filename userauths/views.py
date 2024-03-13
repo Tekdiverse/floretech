@@ -25,8 +25,9 @@ def perform_daily_task():
 
         for transaction in transactions:
             time_difference = current_time - transaction.timestamp
-            if (int(transaction.interval_count) < int(transaction.convert_description_to_days()) 
-                and (time_difference.days >= transaction.days_count)):
+            if int(transaction.interval_count) < int(transaction.convert_description_to_days()) and (time_difference.days >= transaction.days_count):
+               
+                 
                     amount_to_add = transaction.percentage_return * transaction.amount / 100
                 
                     # Update the user's total_invested field
@@ -40,7 +41,7 @@ def perform_daily_task():
                     # Save all changes at once
                     transaction.save(update_fields=['interval_count', 'days_count'])
 
-            elif transaction.days_count >= 7:
+            elif transaction.interval_count >= 7:
                 
                 # Move total_invested to total_deposit
                 transaction.user.total_deposit += transaction.user.total_invested
