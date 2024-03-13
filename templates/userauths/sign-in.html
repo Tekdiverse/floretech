@@ -120,9 +120,32 @@
                       </div>
                       <div class="mb-3">
                         <label class="form-label text-dark fw-600" for="loginPassword">Password</label>
-                        <input type="password"  name="password" class="form-control rounded-2" id="loginPassword"
-                          required="" placeholder="Enter Password">
-                      </div>
+                        <div class="input-group">
+                            <input type="password" name="password" class="form-control rounded-2" id="loginPassword" required="" placeholder="Enter Password">
+                            <button type="button" class="btn btn-outline-secondary" style="border: 1px solid silver; " id="togglePassword">
+                                <i class="fas fa-eye" id="eye-icon"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <script>
+                      const passwordInput = document.getElementById('loginPassword');
+                      const toggleButton = document.getElementById('togglePassword');
+                      const eyeIcon = document.getElementById('eye-icon');
+                  
+                      toggleButton.addEventListener('click', function () {
+                          if (passwordInput.type === 'password') {
+                              passwordInput.type = 'text';
+                              eyeIcon.classList.remove('fa-eye');
+                              eyeIcon.classList.add('fa-eye-slash');
+                          } else {
+                              passwordInput.type = 'password';
+                              eyeIcon.classList.remove('fa-eye-slash');
+                              eyeIcon.classList.add('fa-eye');
+                          }
+                      });
+                  </script>
+                  
+                    
                       <div class="row mt-4" style="text-align: right;">
                         <div class="col">
                         

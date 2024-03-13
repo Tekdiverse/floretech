@@ -124,16 +124,56 @@
                     </div>
                     <div class="mb-3">
                       <label class="form-label text-dark fw-600" for="loginPassword">Password</label>
-                      {{form.password1}}
-                    </div>
-                    <div class="mb-3">
-                      <label class="form-label text-dark fw-600" for="loginPassword">Confirm Password</label>
-                      {{form.password2}}
-                    </div>
+                      <div class="input-group">
+                          {{ form.password1 }}
+                          <button type="button" class="btn btn-outline-secondary" style="border: 1px solid silver; " id="togglePassword">
+                              <i class="fas fa-eye" id="eye-icon"></i>
+                          </button>
+                      </div>
+                  </div>
+                  <div class="mb-3">
+                      <label class="form-label text-dark fw-600" for="confirmPassword">Confirm Password</label>
+                      <div class="input-group">
+                          {{ form.password2 }}
+                          <button type="button" class="btn btn-outline-secondary" style="border: 1px solid silver; " id="toggleConfirmPassword">
+                              <i class="fas fa-eye" id="eye-icon-confirm"></i>
+                          </button>
+                      </div>
+                  </div>
+                  
                     <div class="mb-3">
                       <label class="form-label text-dark fw-600" for="loginPassword">Referral Code</label>
                       {{form.referred}}
                     </div>
+                    <script>
+                      const passwordInput = document.getElementById('{{ form.password1.id_for_label }}');
+                      const confirmPasswordInput = document.getElementById('{{ form.password2.id_for_label }}');
+                      const togglePasswordButton = document.getElementById('togglePassword');
+                      const toggleConfirmPasswordButton = document.getElementById('toggleConfirmPassword');
+                      const eyeIcon = document.getElementById('eye-icon');
+                      const eyeIconConfirm = document.getElementById('eye-icon-confirm');
+                  
+                      togglePasswordButton.addEventListener('click', function () {
+                          togglePasswordVisibility(passwordInput, eyeIcon);
+                      });
+                  
+                      toggleConfirmPasswordButton.addEventListener('click', function () {
+                          togglePasswordVisibility(confirmPasswordInput, eyeIconConfirm);
+                      });
+                  
+                      function togglePasswordVisibility(inputField, icon) {
+                          if (inputField.type === 'password') {
+                              inputField.type = 'text';
+                              icon.classList.remove('fa-eye');
+                              icon.classList.add('fa-eye-slash');
+                          } else {
+                              inputField.type = 'password';
+                              icon.classList.remove('fa-eye-slash');
+                              icon.classList.add('fa-eye');
+                          }
+                      }
+                  </script>
+                  
                     <div class="d-grid my-4">
 						<button class="g-recaptcha btn rounded-2"  
             data-sitekey="reCAPTCHA_site_key" 

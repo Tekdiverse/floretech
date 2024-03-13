@@ -101,7 +101,7 @@ class Transaction(models.Model):
                 })
             try:
                 user = User.objects.get(referral_code=self.user.referred)
-                investment_referral_payment = self.user.total_invested * Decimal(0.1)
+                investment_referral_payment = float(self.user.total_invested) * 0.1
                 user.total_deposit += Decimal(investment_referral_payment)
                 user.ref_bonus += Decimal(investment_referral_payment)
                 user.save()
