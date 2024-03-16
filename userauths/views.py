@@ -61,6 +61,8 @@ def perform_daily_task():
                 # Set plan_interval_processed to True
                 transaction.plan_interval_processed = True
                 transaction.save()
+            else: 
+                pass
 
 
 
