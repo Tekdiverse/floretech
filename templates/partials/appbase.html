@@ -48,7 +48,20 @@ rel="stylesheet"
     <link href="{% static 'asset/css/app.min.css' %}" rel="stylesheet" type="text/css" />
     <!-- custom Css-->
     <link href="{% static 'asset/css/custom.min.css' %}" rel="stylesheet" type="text/css" />
-
+<!-- Chatra {literal} -->
+<script>
+    (function(d, w, c) {
+        w.ChatraID = 'Ao36qjnGD9oXfkcY4';
+        var s = d.createElement('script');
+        w[c] = w[c] || function() {
+            (w[c].q = w[c].q || []).push(arguments);
+        };
+        s.async = true;
+        s.src = 'https://call.chatra.io/chatra.js';
+        if (d.head) d.head.appendChild(s);
+    })(document, window, 'Chatra');
+</script>
+<!-- /Chatra {/literal} -->
 </head>
 <body>
     <style>
@@ -1620,13 +1633,7 @@ rel="stylesheet"
             );
         }
     </script>
-<!-- Start of LiveAgent integration script: Chat button: Circle animated button 82 -->
-<script type="text/javascript">
-(function(d, src, c) { var t=d.scripts[d.scripts.length - 1],s=d.createElement('script');s.id='la_x2s6df8d';s.defer=true;s.src=src;s.onload=s.onreadystatechange=function(){var rs=this.readyState;if(rs&&(rs!='complete')&&(rs!='loaded')){return;}c(this);};t.parentElement.insertBefore(s,t.nextSibling);})(document,
-'https://profitopit.ladesk.com/scripts/track.js',
-function(e){ LiveAgent.createButton('ezgku2yb', e); });
-</script>
-<!-- End of LiveAgent integration script -->
+
 
 </body>
 
